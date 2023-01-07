@@ -7,12 +7,12 @@ Deodata Delanga Unit Test
 
 # >-----------------------------------------------------------------------------
 
-def iprnt( *t_param ) :
+def iprnt( *args, **kwargs ) :
     """ Non delayed prints """
 
     import sys
 
-    ret_item = print( *t_param )
+    ret_item = print( *args, **kwargs )
     sys.stdout.flush()
     sys.stderr.flush()
 
@@ -57,14 +57,14 @@ def UnitTest():
     sys.stdout.flush()
     sys.stderr.flush()
 
-
     test_thresh_list = [1, 2, 3]
 
     test_elem = -1
     test_result = deodel.Working.GetElemIdxInOrderList(test_elem, test_thresh_list)
-    iprnt ("- - - - test_result:", test_result)
 
     test_expect = 0
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
 
     set_eval = ( test_result == test_expect )
     iprnt ("- - - utest_test_no:", utest_test_no)
@@ -76,7 +76,7 @@ def UnitTest():
         utest_fail_counter += 1
         iprnt ("- - -  invalid test_result")
         iprnt ("Unit test failure !")
-        traceback.iprnt_stack(file=sys.stdout)
+        traceback.print_stack(file=sys.stdout)
 
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -85,9 +85,10 @@ def UnitTest():
 
     test_elem = 0
     test_result = deodel.Working.GetElemIdxInOrderList(test_elem, test_thresh_list)
-    iprnt ("- - - - test_result:", test_result)
 
     test_expect = 0
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
 
     set_eval = ( test_result == test_expect )
     iprnt ("- - - utest_test_no:", utest_test_no)
@@ -99,7 +100,7 @@ def UnitTest():
         utest_fail_counter += 1
         iprnt ("- - -  invalid test_result")
         iprnt ("Unit test failure !")
-        traceback.iprnt_stack(file=sys.stdout)
+        traceback.print_stack(file=sys.stdout)
 
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -108,9 +109,10 @@ def UnitTest():
 
     test_elem = 1
     test_result = deodel.Working.GetElemIdxInOrderList(test_elem, test_thresh_list)
-    iprnt ("- - - - test_result:", test_result)
 
     test_expect = 1
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
 
     set_eval = ( test_result == test_expect )
     iprnt ("- - - utest_test_no:", utest_test_no)
@@ -123,7 +125,7 @@ def UnitTest():
         iprnt ("- - -  invalid test_result")
 
         iprnt ("Unit test failure !")
-        traceback.iprnt_stack(file=sys.stdout)
+        traceback.print_stack(file=sys.stdout)
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
@@ -131,9 +133,10 @@ def UnitTest():
 
     test_elem = 1.0
     test_result = deodel.Working.GetElemIdxInOrderList(test_elem, test_thresh_list)
-    iprnt ("- - - - test_result:", test_result)
 
     test_expect = 1
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
 
     set_eval = ( test_result == test_expect )
     iprnt ("- - - utest_test_no:", utest_test_no)
@@ -146,7 +149,7 @@ def UnitTest():
         iprnt ("- - -  invalid test_result")
 
         iprnt ("Unit test failure !")
-        traceback.iprnt_stack(file=sys.stdout)
+        traceback.print_stack(file=sys.stdout)
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
@@ -154,9 +157,10 @@ def UnitTest():
 
     test_elem = 1.5
     test_result = deodel.Working.GetElemIdxInOrderList(test_elem, test_thresh_list)
-    iprnt ("- - - - test_result:", test_result)
 
     test_expect = 1
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
 
     set_eval = ( test_result == test_expect )
     iprnt ("- - - utest_test_no:", utest_test_no)
@@ -169,7 +173,7 @@ def UnitTest():
         iprnt ("- - -  invalid test_result")
 
         iprnt ("Unit test failure !")
-        traceback.iprnt_stack(file=sys.stdout)
+        traceback.print_stack(file=sys.stdout)
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
@@ -177,9 +181,10 @@ def UnitTest():
 
     test_elem = 2
     test_result = deodel.Working.GetElemIdxInOrderList(test_elem, test_thresh_list)
-    iprnt ("- - - - test_result:", test_result)
 
     test_expect = 2
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
 
     set_eval = ( test_result == test_expect )
     iprnt ("- - - utest_test_no:", utest_test_no)
@@ -192,7 +197,7 @@ def UnitTest():
         iprnt ("- - -  invalid test_result")
 
         iprnt ("Unit test failure !")
-        traceback.iprnt_stack(file=sys.stdout)
+        traceback.print_stack(file=sys.stdout)
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
@@ -200,9 +205,10 @@ def UnitTest():
 
     test_elem = 2.1
     test_result = deodel.Working.GetElemIdxInOrderList(test_elem, test_thresh_list)
-    iprnt ("- - - - test_result:", test_result)
 
     test_expect = 2
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
 
     set_eval = ( test_result == test_expect )
     iprnt ("- - - utest_test_no:", utest_test_no)
@@ -215,7 +221,7 @@ def UnitTest():
         iprnt ("- - -  invalid test_result")
 
         iprnt ("Unit test failure !")
-        traceback.iprnt_stack(file=sys.stdout)
+        traceback.print_stack(file=sys.stdout)
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
@@ -223,9 +229,10 @@ def UnitTest():
 
     test_elem = 1.5
     test_result = deodel.Working.GetElemIdxInOrderList(test_elem, test_thresh_list)
-    iprnt ("- - - - test_result:", test_result)
 
     test_expect = 1
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
 
     set_eval = ( test_result == test_expect )
     iprnt ("- - - utest_test_no:", utest_test_no)
@@ -238,7 +245,7 @@ def UnitTest():
         iprnt ("- - -  invalid test_result")
 
         iprnt ("Unit test failure !")
-        traceback.iprnt_stack(file=sys.stdout)
+        traceback.print_stack(file=sys.stdout)
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
@@ -246,9 +253,10 @@ def UnitTest():
 
     test_elem = 2.0
     test_result = deodel.Working.GetElemIdxInOrderList(test_elem, test_thresh_list)
-    iprnt ("- - - - test_result:", test_result)
 
     test_expect = 2
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
 
     set_eval = ( test_result == test_expect )
     iprnt ("- - - utest_test_no:", utest_test_no)
@@ -261,7 +269,7 @@ def UnitTest():
         iprnt ("- - -  invalid test_result")
 
         iprnt ("Unit test failure !")
-        traceback.iprnt_stack(file=sys.stdout)
+        traceback.print_stack(file=sys.stdout)
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
@@ -269,9 +277,10 @@ def UnitTest():
 
     test_elem = 3.0
     test_result = deodel.Working.GetElemIdxInOrderList(test_elem, test_thresh_list)
-    iprnt ("- - - - test_result:", test_result)
 
     test_expect = 3
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
 
     set_eval = ( test_result == test_expect )
     iprnt ("- - - utest_test_no:", utest_test_no)
@@ -284,7 +293,7 @@ def UnitTest():
         iprnt ("- - -  invalid test_result")
 
         iprnt ("Unit test failure !")
-        traceback.iprnt_stack(file=sys.stdout)
+        traceback.print_stack(file=sys.stdout)
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
@@ -293,9 +302,10 @@ def UnitTest():
     test_thresh_list = [3.01, 4.005]
     test_elem = 3
     test_result = deodel.Working.GetElemIdxInOrderList(test_elem, test_thresh_list)
-    iprnt ("- - - - test_result:", test_result)
 
     test_expect = 0
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
 
     set_eval = ( test_result == test_expect )
     iprnt ("- - - utest_test_no:", utest_test_no)
@@ -308,7 +318,7 @@ def UnitTest():
         iprnt ("- - -  invalid test_result")
 
         iprnt ("Unit test failure !")
-        traceback.iprnt_stack(file=sys.stdout)
+        traceback.print_stack(file=sys.stdout)
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
@@ -317,9 +327,10 @@ def UnitTest():
     test_thresh_list = [3.01, 4.005]
     test_elem = 3.01
     test_result = deodel.Working.GetElemIdxInOrderList(test_elem, test_thresh_list)
-    iprnt ("- - - - test_result:", test_result)
 
     test_expect = 1
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
 
     set_eval = ( test_result == test_expect )
     iprnt ("- - - utest_test_no:", utest_test_no)
@@ -332,7 +343,7 @@ def UnitTest():
         iprnt ("- - -  invalid test_result")
 
         iprnt ("Unit test failure !")
-        traceback.iprnt_stack(file=sys.stdout)
+        traceback.print_stack(file=sys.stdout)
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
@@ -340,9 +351,10 @@ def UnitTest():
 
     test_elem = 3.5
     test_result = deodel.Working.GetElemIdxInOrderList(test_elem, test_thresh_list)
-    iprnt ("- - - - test_result:", test_result)
 
     test_expect = 1
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
 
     set_eval = ( test_result == test_expect )
     iprnt ("- - - utest_test_no:", utest_test_no)
@@ -355,7 +367,7 @@ def UnitTest():
         iprnt ("- - -  invalid test_result")
 
         iprnt ("Unit test failure !")
-        traceback.iprnt_stack(file=sys.stdout)
+        traceback.print_stack(file=sys.stdout)
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
@@ -363,9 +375,10 @@ def UnitTest():
 
     test_elem = 5
     test_result = deodel.Working.GetElemIdxInOrderList(test_elem, test_thresh_list)
-    iprnt ("- - - - test_result:", test_result)
 
     test_expect = 2
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
 
     set_eval = ( test_result == test_expect )
     iprnt ("- - - utest_test_no:", utest_test_no)
@@ -378,7 +391,7 @@ def UnitTest():
         iprnt ("- - -  invalid test_result")
 
         iprnt ("Unit test failure !")
-        traceback.iprnt_stack(file=sys.stdout)
+        traceback.print_stack(file=sys.stdout)
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
@@ -415,7 +428,7 @@ def UnitTest():
         iprnt ("- - -  invalid test_result")
 
         iprnt ("Unit test failure !")
-        traceback.iprnt_stack(file=sys.stdout)
+        traceback.print_stack(file=sys.stdout)
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
@@ -450,7 +463,7 @@ def UnitTest():
         iprnt ("- - -  invalid test_result")
 
         iprnt ("Unit test failure !")
-        traceback.iprnt_stack(file=sys.stdout)
+        traceback.print_stack(file=sys.stdout)
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
@@ -479,7 +492,7 @@ def UnitTest():
         iprnt ("- - -  invalid test_result")
 
         iprnt ("Unit test failure !")
-        traceback.iprnt_stack(file=sys.stdout)
+        traceback.print_stack(file=sys.stdout)
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
@@ -510,7 +523,7 @@ def UnitTest():
         iprnt ("- - -  invalid test_result")
 
         iprnt ("Unit test failure !")
-        traceback.iprnt_stack(file=sys.stdout)
+        traceback.print_stack(file=sys.stdout)
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
@@ -543,7 +556,7 @@ def UnitTest():
         iprnt ("- - -  invalid test_result")
 
         iprnt ("Unit test failure !")
-        traceback.iprnt_stack(file=sys.stdout)
+        traceback.print_stack(file=sys.stdout)
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
@@ -574,7 +587,7 @@ def UnitTest():
         iprnt ("- - -  invalid test_result")
 
         iprnt ("Unit test failure !")
-        traceback.iprnt_stack(file=sys.stdout)
+        traceback.print_stack(file=sys.stdout)
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
@@ -607,7 +620,7 @@ def UnitTest():
         iprnt ("- - -  invalid test_result")
 
         iprnt ("Unit test failure !")
-        traceback.iprnt_stack(file=sys.stdout)
+        traceback.print_stack(file=sys.stdout)
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
@@ -632,7 +645,7 @@ def UnitTest():
         iprnt ("- - -  invalid test_result")
 
         iprnt ("Unit test failure !")
-        traceback.iprnt_stack(file=sys.stdout)
+        traceback.print_stack(file=sys.stdout)
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
@@ -644,10 +657,11 @@ def UnitTest():
     iprnt ("- - - - split_no", split_no)
 
     test_result = deodel.Working.NumSplit(tv1, split_no, False)
-    iprnt ("- - - - test_result", test_result)
     expect_result = [2.5]
 
     test_expect = expect_result
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
 
     set_eval = ( test_result == test_expect )
     iprnt ("- - - utest_test_no:", utest_test_no)
@@ -660,7 +674,7 @@ def UnitTest():
         iprnt ("- - -  invalid test_result")
 
         iprnt ("Unit test failure !")
-        traceback.iprnt_stack(file=sys.stdout)
+        traceback.print_stack(file=sys.stdout)
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
@@ -672,10 +686,11 @@ def UnitTest():
     iprnt ("- - - - split_no", split_no)
 
     test_result = deodel.Working.NumSplit(tv1, split_no, False)
-    iprnt ("- - - - test_result", test_result)
     expect_result = [1.5, 2.5, 3.5]
 
     test_expect = expect_result
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
 
     set_eval = ( test_result == test_expect )
     iprnt ("- - - utest_test_no:", utest_test_no)
@@ -688,7 +703,7 @@ def UnitTest():
         iprnt ("- - -  invalid test_result")
 
         iprnt ("Unit test failure !")
-        traceback.iprnt_stack(file=sys.stdout)
+        traceback.print_stack(file=sys.stdout)
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
@@ -700,10 +715,11 @@ def UnitTest():
     iprnt ("- - - - split_no", split_no)
 
     test_result = deodel.Working.NumSplit(tv1, split_no, False)
-    iprnt ("- - - - test_result", test_result)
     expect_result = [1.5, 2.5]
 
     test_expect = expect_result
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
 
     set_eval = ( test_result == test_expect )
     iprnt ("- - - utest_test_no:", utest_test_no)
@@ -716,7 +732,7 @@ def UnitTest():
         iprnt ("- - -  invalid test_result")
 
         iprnt ("Unit test failure !")
-        traceback.iprnt_stack(file=sys.stdout)
+        traceback.print_stack(file=sys.stdout)
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
@@ -728,10 +744,11 @@ def UnitTest():
     iprnt ("- - - - split_no", split_no)
 
     test_result = deodel.Working.NumSplit(tv1, split_no, False)
-    iprnt ("- - - - test_result", test_result)
     expect_result = [2.5, 4.5]
 
     test_expect = expect_result
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
 
     set_eval = ( test_result == test_expect )
     iprnt ("- - - utest_test_no:", utest_test_no)
@@ -744,7 +761,7 @@ def UnitTest():
         iprnt ("- - -  invalid test_result")
 
         iprnt ("Unit test failure !")
-        traceback.iprnt_stack(file=sys.stdout)
+        traceback.print_stack(file=sys.stdout)
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
@@ -756,10 +773,11 @@ def UnitTest():
     iprnt ("- - - - split_no", split_no)
 
     test_result = deodel.Working.NumSplit(tv1, split_no, False)
-    iprnt ("- - - - test_result", test_result)
     expect_result = [3.5]
 
     test_expect = expect_result
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
 
     set_eval = ( test_result == test_expect )
     iprnt ("- - - utest_test_no:", utest_test_no)
@@ -772,7 +790,7 @@ def UnitTest():
         iprnt ("- - -  invalid test_result")
 
         iprnt ("Unit test failure !")
-        traceback.iprnt_stack(file=sys.stdout)
+        traceback.print_stack(file=sys.stdout)
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
@@ -784,10 +802,11 @@ def UnitTest():
     iprnt ("- - - - split_no", split_no)
 
     test_result = deodel.Working.NumSplit(tv1, split_no, False)
-    iprnt ("- - - - test_result", test_result)
     expect_result = [2 - 1.0/6, 3 + 1.0/6]
 
     test_expect = expect_result
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
 
     set_eval = ( test_result == test_expect )
     iprnt ("- - - utest_test_no:", utest_test_no)
@@ -800,7 +819,7 @@ def UnitTest():
         iprnt ("- - -  invalid test_result")
 
         iprnt ("Unit test failure !")
-        traceback.iprnt_stack(file=sys.stdout)
+        traceback.print_stack(file=sys.stdout)
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
@@ -812,10 +831,11 @@ def UnitTest():
     iprnt ("- - - - split_no", split_no)
 
     test_result = deodel.Working.NumSplit(tv1, split_no, False)
-    iprnt ("- - - - test_result", test_result)
     expect_result = [1.5, 2.5, 3.5]
 
     test_expect = expect_result
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
 
     set_eval = ( test_result == test_expect )
     iprnt ("- - - utest_test_no:", utest_test_no)
@@ -828,7 +848,7 @@ def UnitTest():
         iprnt ("- - -  invalid test_result")
 
         iprnt ("Unit test failure !")
-        traceback.iprnt_stack(file=sys.stdout)
+        traceback.print_stack(file=sys.stdout)
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
@@ -840,10 +860,11 @@ def UnitTest():
     iprnt ("- - - - split_no", split_no)
 
     test_result = deodel.Working.NumSplit(tv1, split_no, False)
-    iprnt ("- - - - test_result", test_result)
     expect_result = [3.5]
 
     test_expect = expect_result
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
 
     set_eval = ( test_result == test_expect )
     iprnt ("- - - utest_test_no:", utest_test_no)
@@ -856,7 +877,7 @@ def UnitTest():
         iprnt ("- - -  invalid test_result")
 
         iprnt ("Unit test failure !")
-        traceback.iprnt_stack(file=sys.stdout)
+        traceback.print_stack(file=sys.stdout)
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
@@ -868,10 +889,11 @@ def UnitTest():
     iprnt ("- - - - split_no", split_no)
 
     test_result = deodel.Working.NumSplit(tv1, split_no, False)
-    iprnt ("- - - - test_result", test_result)
     expect_result = [2.5, 4.5, 6.5]
 
     test_expect = expect_result
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
 
     set_eval = ( test_result == test_expect )
     iprnt ("- - - utest_test_no:", utest_test_no)
@@ -884,7 +906,7 @@ def UnitTest():
         iprnt ("- - -  invalid test_result")
 
         iprnt ("Unit test failure !")
-        traceback.iprnt_stack(file=sys.stdout)
+        traceback.print_stack(file=sys.stdout)
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
@@ -896,10 +918,11 @@ def UnitTest():
     iprnt ("- - - - split_no", split_no)
 
     test_result = deodel.Working.NumSplit(tv1, split_no, False)
-    iprnt ("- - - - test_result", test_result)
     expect_result = [2.5, 4.5]
 
     test_expect = expect_result
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
 
     set_eval = ( test_result == test_expect )
     iprnt ("- - - utest_test_no:", utest_test_no)
@@ -912,7 +935,7 @@ def UnitTest():
         iprnt ("- - -  invalid test_result")
 
         iprnt ("Unit test failure !")
-        traceback.iprnt_stack(file=sys.stdout)
+        traceback.print_stack(file=sys.stdout)
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
@@ -924,10 +947,11 @@ def UnitTest():
     iprnt ("- - - - split_no", split_no)
 
     test_result = deodel.Working.NumSplit(tv1, split_no)
-    iprnt ("- - - - test_result", test_result)
     expect_result = [4.5]
 
     test_expect = expect_result
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
 
     set_eval = ( test_result == test_expect )
     iprnt ("- - - utest_test_no:", utest_test_no)
@@ -940,7 +964,7 @@ def UnitTest():
         iprnt ("- - -  invalid test_result")
 
         iprnt ("Unit test failure !")
-        traceback.iprnt_stack(file=sys.stdout)
+        traceback.print_stack(file=sys.stdout)
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
@@ -952,10 +976,11 @@ def UnitTest():
     iprnt ("- - - - split_no", split_no)
 
     test_result = deodel.Working.NumSplit(tv1, split_no, False)
-    iprnt ("- - - - test_result", test_result)
     expect_result = [1.5, 2.5, 3.5, 4.5, 5.5, 6.5, 7.5]
 
     test_expect = expect_result
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
 
     set_eval = ( test_result == test_expect )
     iprnt ("- - - utest_test_no:", utest_test_no)
@@ -968,7 +993,7 @@ def UnitTest():
         iprnt ("- - -  invalid test_result")
 
         iprnt ("Unit test failure !")
-        traceback.iprnt_stack(file=sys.stdout)
+        traceback.print_stack(file=sys.stdout)
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
@@ -980,11 +1005,12 @@ def UnitTest():
     iprnt ("- - - - split_no", split_no)
 
     test_result = deodel.Working.NumSplit(tv1, split_no, False)
-    iprnt ("- - - - test_result", test_result)
     #t expect_result = [1.5, 1.5, 2.5, 2.5, 3.5, 3.5, 4.5, 4.5, 5.5, 5.5, 6.5, 6.5, 7.5, 7.5]
     expect_result = [1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8]
 
     test_expect = expect_result
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
 
     set_eval = ( test_result == test_expect )
     iprnt ("- - - utest_test_no:", utest_test_no)
@@ -997,7 +1023,7 @@ def UnitTest():
         iprnt ("- - -  invalid test_result")
 
         iprnt ("Unit test failure !")
-        traceback.iprnt_stack(file=sys.stdout)
+        traceback.print_stack(file=sys.stdout)
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
@@ -1009,10 +1035,11 @@ def UnitTest():
     iprnt ("- - - - split_no", split_no)
 
     test_result = deodel.Working.NumSplit(tv1, split_no, False)
-    iprnt ("- - - - test_result", test_result)
     expect_result = [ 2.5, 4.5, 6.5, 8.5 ]
 
     test_expect = expect_result
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
 
     set_eval = ( test_result == test_expect )
     iprnt ("- - - utest_test_no:", utest_test_no)
@@ -1025,7 +1052,7 @@ def UnitTest():
         iprnt ("- - -  invalid test_result")
 
         iprnt ("Unit test failure !")
-        traceback.iprnt_stack(file=sys.stdout)
+        traceback.print_stack(file=sys.stdout)
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
@@ -1037,10 +1064,11 @@ def UnitTest():
     iprnt ("- - - - split_no", split_no)
 
     test_result = deodel.Working.NumSplit(tv1, split_no, False)
-    iprnt ("- - - - test_result", test_result)
     expect_result = [2.5]
 
     test_expect = expect_result
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
 
     set_eval = ( test_result == test_expect )
     iprnt ("- - - utest_test_no:", utest_test_no)
@@ -1053,7 +1081,7 @@ def UnitTest():
         iprnt ("- - -  invalid test_result")
 
         iprnt ("Unit test failure !")
-        traceback.iprnt_stack(file=sys.stdout)
+        traceback.print_stack(file=sys.stdout)
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
@@ -1065,10 +1093,11 @@ def UnitTest():
     iprnt ("- - - - split_no", split_no)
 
     test_result = deodel.Working.NumSplit(tv1, split_no, False)
-    iprnt ("- - - - test_result", test_result)
     expect_result = [1.5, 2.5, 3.5]
 
     test_expect = expect_result
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
 
     set_eval = ( test_result == test_expect )
     iprnt ("- - - utest_test_no:", utest_test_no)
@@ -1081,7 +1110,7 @@ def UnitTest():
         iprnt ("- - -  invalid test_result")
 
         iprnt ("Unit test failure !")
-        traceback.iprnt_stack(file=sys.stdout)
+        traceback.print_stack(file=sys.stdout)
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
@@ -1093,10 +1122,11 @@ def UnitTest():
     iprnt ("- - - - split_no", split_no)
 
     test_result = deodel.Working.NumSplit(tv1, split_no, False)
-    iprnt ("- - - - test_result", test_result)
     expect_result = [3.0, 3.0, 3.5]
 
     test_expect = expect_result
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
 
     set_eval = ( test_result == test_expect )
     iprnt ("- - - utest_test_no:", utest_test_no)
@@ -1109,7 +1139,7 @@ def UnitTest():
         iprnt ("- - -  invalid test_result")
 
         iprnt ("Unit test failure !")
-        traceback.iprnt_stack(file=sys.stdout)
+        traceback.print_stack(file=sys.stdout)
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
@@ -1121,10 +1151,12 @@ def UnitTest():
     iprnt ("- - - - split_no", split_no)
 
     test_result = deodel.Working.NumSplit(tv1, split_no, True)
-    iprnt ("- - - - test_result", test_result)
-    expect_result = [3.0, 3.5]
+    # expect_result = [4]
+    expect_result = [3, 4]
 
     test_expect = expect_result
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
 
     set_eval = ( test_result == test_expect )
     iprnt ("- - - utest_test_no:", utest_test_no)
@@ -1137,7 +1169,7 @@ def UnitTest():
         iprnt ("- - -  invalid test_result")
 
         iprnt ("Unit test failure !")
-        traceback.iprnt_stack(file=sys.stdout)
+        traceback.print_stack(file=sys.stdout)
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
@@ -1149,10 +1181,12 @@ def UnitTest():
     iprnt ("- - - - split_no", split_no)
 
     test_result = deodel.Working.NumSplit(tv1, split_no, False)
-    iprnt ("- - - - test_result", test_result)
+    # expect_result = [4]
     expect_result = [3]
 
     test_expect = expect_result
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
 
     set_eval = ( test_result == test_expect )
     iprnt ("- - - utest_test_no:", utest_test_no)
@@ -1165,7 +1199,7 @@ def UnitTest():
         iprnt ("- - -  invalid test_result")
 
         iprnt ("Unit test failure !")
-        traceback.iprnt_stack(file=sys.stdout)
+        traceback.print_stack(file=sys.stdout)
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
@@ -1177,10 +1211,11 @@ def UnitTest():
     iprnt ("- - - - split_no", split_no)
 
     test_result = deodel.Working.NumSplit(tv1, split_no)
-    iprnt ("- - - - test_result", test_result)
     expect_result = [-2]
 
     test_expect = expect_result
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
 
     set_eval = ( test_result == test_expect )
     iprnt ("- - - utest_test_no:", utest_test_no)
@@ -1193,7 +1228,7 @@ def UnitTest():
         iprnt ("- - -  invalid test_result")
 
         iprnt ("Unit test failure !")
-        traceback.iprnt_stack(file=sys.stdout)
+        traceback.print_stack(file=sys.stdout)
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
@@ -1205,11 +1240,12 @@ def UnitTest():
     iprnt ("- - - - split_no", split_no)
 
     test_result = deodel.Working.NumSplit(tv1, split_no, False)
-    iprnt ("- - - - test_result", test_result)
     expect_result = []
     expect_result = [-2, -2, -2]
 
     test_expect = expect_result
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
 
     set_eval = ( test_result == test_expect )
     iprnt ("- - - utest_test_no:", utest_test_no)
@@ -1222,7 +1258,7 @@ def UnitTest():
         iprnt ("- - -  invalid test_result")
 
         iprnt ("Unit test failure !")
-        traceback.iprnt_stack(file=sys.stdout)
+        traceback.print_stack(file=sys.stdout)
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
@@ -1234,10 +1270,11 @@ def UnitTest():
     iprnt ("- - - - split_no", split_no)
 
     test_result = deodel.Working.NumSplit(tv1, split_no, False)
-    iprnt ("- - - - test_result", test_result)
     expect_result = []
 
     test_expect = expect_result
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
 
     set_eval = ( test_result == test_expect )
     iprnt ("- - - utest_test_no:", utest_test_no)
@@ -1250,7 +1287,7 @@ def UnitTest():
         iprnt ("- - -  invalid test_result")
 
         iprnt ("Unit test failure !")
-        traceback.iprnt_stack(file=sys.stdout)
+        traceback.print_stack(file=sys.stdout)
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
@@ -1262,10 +1299,11 @@ def UnitTest():
     iprnt ("- - - - split_no", split_no)
 
     test_result = deodel.Working.NumSplit(tv1, split_no, True)
-    iprnt ("- - - - test_result", test_result)
     expect_result = []
 
     test_expect = expect_result
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
 
     set_eval = ( test_result == test_expect )
     iprnt ("- - - utest_test_no:", utest_test_no)
@@ -1278,7 +1316,7 @@ def UnitTest():
         iprnt ("- - -  invalid test_result")
 
         iprnt ("Unit test failure !")
-        traceback.iprnt_stack(file=sys.stdout)
+        traceback.print_stack(file=sys.stdout)
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
@@ -1290,10 +1328,11 @@ def UnitTest():
     iprnt ("- - - - split_no", split_no)
 
     test_result = deodel.Working.NumSplit(tv1, split_no, False)
-    iprnt ("- - - - test_result", test_result)
     expect_result = [10, 15, 20, 25, 30]
 
     test_expect = expect_result
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
 
     set_eval = ( test_result == test_expect )
     iprnt ("- - - utest_test_no:", utest_test_no)
@@ -1306,7 +1345,7 @@ def UnitTest():
         iprnt ("- - -  invalid test_result")
 
         iprnt ("Unit test failure !")
-        traceback.iprnt_stack(file=sys.stdout)
+        traceback.print_stack(file=sys.stdout)
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
@@ -1338,7 +1377,7 @@ def UnitTest():
         iprnt ("- - -  invalid test_result")
 
         iprnt ("Unit test failure !")
-        traceback.iprnt_stack(file=sys.stdout)
+        traceback.print_stack(file=sys.stdout)
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
@@ -1370,7 +1409,7 @@ def UnitTest():
         iprnt ("- - -  invalid test_result")
 
         iprnt ("Unit test failure !")
-        traceback.iprnt_stack(file=sys.stdout)
+        traceback.print_stack(file=sys.stdout)
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
@@ -1402,7 +1441,7 @@ def UnitTest():
         iprnt ("- - -  invalid test_result")
 
         iprnt ("Unit test failure !")
-        traceback.iprnt_stack(file=sys.stdout)
+        traceback.print_stack(file=sys.stdout)
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
@@ -1415,7 +1454,7 @@ def UnitTest():
 
     ret_val = deodel.Working.NumSplit(tv1, split_no, True)
     iprnt ("- - - - ret_val", ret_val)
-    expect_result = [3, 4]
+    expect_result = [5]
 
     test_result = ret_val
     test_expect = expect_result
@@ -1434,7 +1473,331 @@ def UnitTest():
         iprnt ("- - -  invalid test_result")
 
         iprnt ("Unit test failure !")
-        traceback.iprnt_stack(file=sys.stdout)
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    tv1 = [0, 0, 1]
+    iprnt ("- - - - tv1", tv1)
+    split_no = 2
+    iprnt ("- - - - split_no", split_no)
+
+    ret_val = deodel.Working.NumSplit(tv1, split_no, no_dupl_flag = False)
+    iprnt ("- - - - ret_val", ret_val)
+    # expect_result = [0]
+    expect_result = [1.6653345369377348e-16]
+
+    test_result = ret_val
+    test_expect = expect_result
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+    
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    tv1 = [0, 0, 1]
+    iprnt ("- - - - tv1", tv1)
+    split_no = 2
+    iprnt ("- - - - split_no", split_no)
+
+    ret_val = deodel.Working.NumSplit(tv1, split_no, no_dupl_flag = True)
+    iprnt ("- - - - ret_val", ret_val)
+    # expect_result = [1]
+    expect_result = [1.6653345369377348e-16]
+
+    test_result = ret_val
+    test_expect = expect_result
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+    
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    tv1 = [0, 0, 0, 0, 1]
+    iprnt ("- - - - tv1", tv1)
+    split_no = 2
+    iprnt ("- - - - split_no", split_no)
+
+    ret_val = deodel.Working.NumSplit(tv1, split_no, no_dupl_flag = True)
+    iprnt ("- - - - ret_val", ret_val)
+    # expect_result = [0.6666666666666665]
+    expect_result = [1]
+
+    test_result = ret_val
+    test_expect = expect_result
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+    
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    tv1 = [0, 0, 0, 0, 1]
+    iprnt ("- - - - tv1", tv1)
+    split_no = 3
+    iprnt ("- - - - split_no", split_no)
+
+    ret_val = deodel.Working.NumSplit(tv1, split_no, no_dupl_flag = True)
+    iprnt ("- - - - ret_val", ret_val)
+    # expect_result = [1]
+    expect_result = [0.6666666666666665]
+
+    test_result = ret_val
+    test_expect = expect_result
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+    
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    tv1 = [0, 0, 0, 0, 1]
+    iprnt ("- - - - tv1", tv1)
+    split_no = 4
+    iprnt ("- - - - split_no", split_no)
+
+    ret_val = deodel.Working.NumSplit(tv1, split_no, no_dupl_flag = True)
+    iprnt ("- - - - ret_val", ret_val)
+    expect_result = [1]
+
+    test_result = ret_val
+    test_expect = expect_result
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+    
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    tv1 = [0, 0, 0, 0, 1]
+    iprnt ("- - - - tv1", tv1)
+    split_no = 5
+    iprnt ("- - - - split_no", split_no)
+
+    ret_val = deodel.Working.NumSplit(tv1, split_no, no_dupl_flag = True)
+    iprnt ("- - - - ret_val", ret_val)
+    expect_result = [1]
+
+    test_result = ret_val
+    test_expect = expect_result
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+    
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    tv1 = [0, 0, 0, 0, 1]
+    iprnt ("- - - - tv1", tv1)
+    split_no = 6
+    iprnt ("- - - - split_no", split_no)
+
+    ret_val = deodel.Working.NumSplit(tv1, split_no, no_dupl_flag = True)
+    iprnt ("- - - - ret_val", ret_val)
+    expect_result = [0.8333333333333331, 1]
+
+    test_result = ret_val
+    test_expect = expect_result
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+    
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    tv1 = [0, 0, 0, 0, 1]
+    iprnt ("- - - - tv1", tv1)
+    split_no = 7
+    iprnt ("- - - - split_no", split_no)
+
+    ret_val = deodel.Working.NumSplit(tv1, split_no, no_dupl_flag = True)
+    iprnt ("- - - - ret_val", ret_val)
+    expect_result = [0.714285714285714, 1]
+
+    test_result = ret_val
+    test_expect = expect_result
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+    
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    tv1 = [0, 0, 0, 0, 1]
+    iprnt ("- - - - tv1", tv1)
+    split_no = 8
+    iprnt ("- - - - split_no", split_no)
+
+    ret_val = deodel.Working.NumSplit(tv1, split_no, no_dupl_flag = True)
+    iprnt ("- - - - ret_val", ret_val)
+    expect_result = [0.625, 1]
+
+    test_result = ret_val
+    test_expect = expect_result
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+    
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    tv1 = [0, 0, 0, 0, 1]
+    iprnt ("- - - - tv1", tv1)
+    split_no = 9
+    iprnt ("- - - - split_no", split_no)
+
+    ret_val = deodel.Working.NumSplit(tv1, split_no, no_dupl_flag = True)
+    iprnt ("- - - - ret_val", ret_val)
+    expect_result = [0.5555555555555558, 1]
+
+    test_result = ret_val
+    test_expect = expect_result
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+    
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
@@ -1462,7 +1825,8 @@ def UnitTest():
 
     test_result = tt_o.attr_X.tolist()
 
-    ref_item = [[1, 2, 3, 2, 4], [3, 1, 2, 5, 1], [1, 3, 4, 3, 1], [1, 2, 2, 3, 1]]
+    ref_item = [[1, 2, 3, 2, 4], [3, 1, 2, 5, 1], [1, 2, 3, 2, 1], [1, 2, 2, 3, 1]]
+
     test_expect = deodel.Working.MatrixTranspose(ref_item)
 
     iprnt ("- - - - - - - - test_result:", test_result)
@@ -1482,7 +1846,7 @@ def UnitTest():
         iprnt ("- - -  invalid test_result")
 
         iprnt ("Unit test failure !")
-        traceback.iprnt_stack(file=sys.stdout)
+        traceback.print_stack(file=sys.stdout)
 
     iprnt ("- - - - tt_o.__dict__ :", tt_o.__dict__ )
     iprnt ()
@@ -1512,7 +1876,7 @@ def UnitTest():
         iprnt ("- - -  invalid test_result")
 
         iprnt ("Unit test failure !")
-        traceback.iprnt_stack(file=sys.stdout)
+        traceback.print_stack(file=sys.stdout)
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
@@ -1568,7 +1932,7 @@ def UnitTest():
         iprnt ("- - -  invalid test_result")
 
         iprnt ("Unit test failure !")
-        traceback.iprnt_stack(file=sys.stdout)
+        traceback.print_stack(file=sys.stdout)
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
@@ -1625,7 +1989,7 @@ def UnitTest():
         iprnt ("- - -  invalid test_result")
 
         iprnt ("Unit test failure !")
-        traceback.iprnt_stack(file=sys.stdout)
+        traceback.print_stack(file=sys.stdout)
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
@@ -1683,15 +2047,39 @@ def UnitTest():
         iprnt ("- - -  invalid test_result")
 
         iprnt ("Unit test failure !")
-        traceback.iprnt_stack(file=sys.stdout)
+        traceback.print_stack(file=sys.stdout)
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    iprnt ("check version")
+    iprnt ("behaviour when no tie break")
     iprnt ()
 
+    tt_X = [['a',   None,  'a'],
+            ['a',   None,  'b'], 
+            ['c',   'c',   'c'], 
+            ['d',   'c',   'c'], 
+            ['e',   'd',   'd'], 
+            ['e',   'e',   'd']]
+
+    tt_y = [
+            'X',
+            'X',
+            'Y',
+            'Y',
+            'Y',
+            'Z',
+           ]
+
+    tt_test= [
+            ['c',   None,  'c'],
+            ['a',   'c',   'd']]
+
+    tt_exp = [
+            'Y',
+            'Y',
+           ]
 
     aux_param = {'tbreak_depth': 1}
     tt_o = deodel.DeodataDelangaClassifier(aux_param)
@@ -1699,8 +2087,8 @@ def UnitTest():
     tt_predict = tt_o.predict(tt_test)
     iprnt ()
 
-    test_result = deodel.DeodataDelangaClassifier.version
-    test_expect = 1.01
+    test_result = tt_predict
+    test_expect = tt_exp
 
     iprnt ("- - - - test_result:", test_result)
     iprnt ("- - - - test_expect:", test_expect)
@@ -1716,7 +2104,117 @@ def UnitTest():
         iprnt ("- - -  invalid test_result")
 
         iprnt ("Unit test failure !")
-        traceback.iprnt_stack(file=sys.stdout)
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("check version")
+    iprnt ()
+
+    aux_param = {'tbreak_depth': 1}
+    tt_o = deodel.DeodataDelangaClassifier(aux_param)
+    tt_o.fit(tt_X, tt_y)
+    tt_predict = tt_o.predict(tt_test)
+    iprnt ()
+
+    test_result = deodel.DeodataDelangaClassifier.version
+    test_expect = 1.05
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+    
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("test PreprocTbl")
+    iprnt ()
+
+    test_csv_lst =  [
+                        ['', '', '', '', ''],
+                        ['', 'a', '   1.01', '   az', ''],
+                        ['', 'b', '3.01', "  ' 3.01' ", ' '],
+                        ['', 'd', '4', '    5', ' '],
+                        ['', 'b', '   2', '      3.01', ' '],
+                        ['', 'c', '33', ' az', ''],
+                        ['', 'a', '   ', '    az  z ', ''],
+                        ['', 'b', '2.01', 7.01, ''],
+                        ['', 'd', '4', '5', ''],
+                        ['', 'b', '   2', "      33.013 '", ''],
+                        ['', 'c', '3.01', " az ' sd", ''],
+                        ['', 'a', '   1.01', '   az \' "gd" \'uiou uo\' ds', ''],
+                        ['', 'b', '', '22 qqw  9.03', ''],
+                        ['', 'd', {1, 2, 1}, "6'    5", ''],
+                        ['', 'b', '   2.2424', '      44.013', ''],
+                        ['', 'c', '  "53.01"  ', '77 " az" 2\' sd 89', ''],
+                        ['', 'd', '', "''", '8'],
+                        ['', 'e', ' ', '``', '9'],
+                        ['', '', None, "", '']
+                    ]
+
+    iprnt ("- - - - test_csv_lst:", test_csv_lst)
+
+    expect_result = [
+                        [None, None, None, None, None],
+                        [None, 'a', 1.01, '   az', None],
+                        [None, 'b', 3.01, ' 3.01', ' '],
+                        [None, 'd', 4, 5, ' '],
+                        [None, 'b', 2, 3.01, ' '],
+                        [None, 'c', 33, ' az', None],
+                        [None, 'a', '   ', '    az  z ', None],
+                        [None, 'b', 2.01, 7.01, None],
+                        [None, 'd', 4, 5, None],
+                        [None, 'b', 2, "      33.013 '", None],
+                        [None, 'c', 3.01, " az ' sd", None],
+                        [None, 'a', 1.01, '   az \' "gd" \'uiou uo\' ds', None],
+                        [None, 'b', None, '22 qqw  9.03', None],
+                        [None, 'd', None, "6'    5", None],
+                        [None, 'b', 2.2424, 44.013, None],
+                        [None, 'c', "53.01", '77 " az" 2\' sd 89', None],
+                        [None, 'd', None, '', 8],
+                        [None, 'e', ' ', '``', 9],
+                        [None, None, None, None, None]
+                    ]
+
+    iprnt ("- - - - PreprocTbl - begin")
+    proc_tbl = deodel.CasetDeodel.PreprocTbl(test_csv_lst)
+    iprnt ("- - - - PreprocTbl - end")
+
+    test_result = proc_tbl
+    test_expect = expect_result
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+    
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
@@ -1726,9 +2224,10 @@ def UnitTest():
     SepLine()
     iprnt ("- - - utest_fail_counter:", utest_fail_counter)
     if utest_fail_counter == 0:
-        iprnt ("- - -   Test succes")
+        iprnt ("- - -   UnitTest succes")
     else:
-        iprnt ("- - -   Test errors:", utest_fail_counter)
+        iprnt ("- - -   UnitTest failed !")
+        iprnt ("- - -       errorrs:", utest_fail_counter)
     SepLine()
     # >- - - - - - - - - - -
 
@@ -1744,6 +2243,8 @@ def UnitTest():
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+    return utest_fail_counter
+
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     # Unit Tests - end
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -1751,6 +2252,16 @@ def UnitTest():
 # >-----------------------------------------------------------------------------
 
 if __name__ == "__main__":   
-    UnitTest()
+
+    print()
+    print("- - - - - - - - - ")
+
+    ret_data = UnitTest()
+
+    print()
+    print("- - - - - - - - - ")
+    print("- - - - ret_data:", ret_data)
+    print("- - - - - - - - - ")
+    print()
 
 # >-----------------------------------------------------------------------------

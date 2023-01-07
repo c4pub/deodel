@@ -55,7 +55,7 @@ class DeodataDelangaClassifier:
         else :
             self.aux_param = aux_param
 
-    version = 1.01
+    version = 1.05
 
     def __repr__(self):
         '''Returns representation of the object'''
@@ -154,7 +154,6 @@ class Working:
             attr_X.append(conv_v)
         
         # Replace numerical values with threshold
-
         for crt_idx_1 in range(attr_no) :
             crt_attr_list = attr_X[crt_idx_1]
             for crt_idx_2 in range(entry_no) :
@@ -291,7 +290,6 @@ class Working:
                     break
 
             # After iterations completed interval is one or zero and the appropiate position is in offset_idx
-
             fn_ret_status = True
             fn_ret_insert_idx = offset_idx
 
@@ -365,8 +363,9 @@ class Working:
             return []
         ord_num_list = sorted(in_num_list)
 
-        if in_split_no > 2 * num_len :
-            split_no = 2 * num_len
+        max_split_factor = 2
+        if in_split_no > max_split_factor * num_len :
+            split_no = max_split_factor * num_len
         else :
             split_no = int(in_split_no)
 
@@ -377,8 +376,12 @@ class Working:
         period_split = 1.0/split_no
         period_ordrd = 1.0/num_len
         sample_point_uscale = -period_ordrd / 2.0
-        for crt_idx in range(split_no - 1) :
-            sample_point_uscale += period_split
+        sample_point_uscale += period_split
+        crt_split_len = 0
+        thresh_prev = None
+
+        while ((sample_point_uscale < (1 - period_ordrd/4.0))
+                and (crt_split_len <= (split_no - 2))) :
             num_near_offset = (sample_point_uscale) / period_ordrd
             num_near_idx = int(num_near_offset)
             if num_near_idx == num_near_offset :
@@ -393,21 +396,45 @@ class Working:
                 #         ^
                 #   a   (b-a)*0.25         b
                 #
-                x_interp = delta_fract
-                y_a = ord_num_list[num_near_idx]
-                y_b = ord_num_list[num_near_idx + 1]
-                y_interp = y_a + (y_b - y_a) * x_interp
-                new_thresh = y_interp
-
-            if no_dupl_flag :
-                if crt_idx > 0 :
-                    prev_thresh = threshold_list[-1]
-                    if not prev_thresh == new_thresh :
-                        threshold_list.append(new_thresh)
+                if num_near_idx + 1 < num_len :
+                    x_interp = delta_fract
+                    y_a = ord_num_list[num_near_idx]
+                    y_b = ord_num_list[num_near_idx + 1]
+                    y_interp = y_a + (y_b - y_a) * x_interp
+                    new_thresh = y_interp
                 else :
-                    threshold_list.append(new_thresh)
+                    new_thresh = ord_num_list[num_near_idx]
+
+            sampling_add = period_split
+            if no_dupl_flag :
+                if num_near_idx < num_len - 1 :
+                    thresh_next = ord_num_list[num_near_idx + 1]
+                    if not thresh_next == new_thresh :
+                        threshold_list.append(new_thresh)
+                        crt_split_len += 1
+                        thresh_prev = new_thresh
+                    else :
+                        # skip append
+                        sample_point_uscale = (num_near_idx + 1) * period_ordrd
+                else :
+                    if not new_thresh == thresh_prev :
+                        threshold_list.append(new_thresh)
+                        crt_split_len += 1
+                        thresh_prev = new_thresh
+                    else :
+                        # skip append
+                        pass
+
             else :
                 threshold_list.append(new_thresh)
+                crt_split_len += 1
+                thresh_prev = new_thresh
+            sample_point_uscale += sampling_add
+
+        if threshold_list == [] :
+            # at least add the last of ordered list
+            last_elem = ord_num_list[-1]
+            threshold_list = [last_elem]
 
         return threshold_list
 
@@ -427,7 +454,6 @@ class Working:
         fn_ret = revrt_v
         return fn_ret
 
-
 # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # > Working - End
 # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -439,7 +465,6 @@ class Working:
 class CasetDeodel:
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
     @staticmethod
     def OrderedFreqCount(in_symbol_sequence_list):
         """
@@ -482,8 +507,8 @@ class CasetDeodel:
         out_list.sort(key=itemgetter(1), reverse=True)
 
         return out_list
-    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     @staticmethod
     def SummaryFreqCount(in_symbol_sequence_list):
         """
@@ -507,8 +532,8 @@ class CasetDeodel:
         distinct_elem_no, elem_list, count_list = CasetDeodel.CountDataToFreqLists(count_data)
 
         return distinct_elem_no, elem_list, count_list
-    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     @staticmethod
     def CountDataToFreqLists(in_freq_count_data):
         """
@@ -678,6 +703,85 @@ class CasetDeodel:
 
         ret_tuple = fn_ret_status, fn_tbreak_status, fn_ret_outcome_id, fn_ret_outcome_count
         return ret_tuple
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    @staticmethod
+    def StrToFloat(in_str) :
+        if not isinstance(in_str, str) :
+            return None
+        try :
+            number = float(in_str)
+            return number 
+        except ValueError:
+            return None
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    @staticmethod
+    def StrToSubstr(in_str) :
+        import re
+
+        if not isinstance(in_str, str) :
+            return None
+        substr_flag = False
+        sub_str = None
+        cpy_instr = in_str
+        trim_str = cpy_instr.strip()
+        ret_reg = re.search(r"^[\"](?P<tmptag>.*)[\"]$", trim_str)
+        if ret_reg != None :
+            substr_flag = True
+            sub_str = ret_reg.group('tmptag')
+        else :
+            ret_reg = re.search(r"^[\'](?P<tmptag>.*)[\']$", trim_str)
+            if ret_reg != None :
+                substr_flag = True
+                sub_str = ret_reg.group('tmptag')
+        return sub_str
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    @staticmethod
+    def PreprocTbl(in_raw_tbl) :
+        row_no = len(in_raw_tbl)
+        col_no = len(in_raw_tbl[0])
+        tbl_csv = []
+
+        # convert fields
+        for crt_row_idx in range(row_no) :
+            row = in_raw_tbl[crt_row_idx]
+            new = []
+            for crt_col_idx in range(col_no) :
+                crt_elem = in_raw_tbl[crt_row_idx][crt_col_idx]
+                if isinstance(crt_elem, float) :
+                    new_elem = crt_elem
+                elif not isinstance(crt_elem, str) :
+                    new_elem = None
+                elif crt_elem == '' :
+                    new_elem = None
+                else :
+                    num_elem = CasetDeodel.StrToFloat(crt_elem)
+                    if num_elem == None :
+                        substr_elem = CasetDeodel.StrToSubstr(crt_elem)
+                        if substr_elem == None :
+                            new_elem = crt_elem
+                        else :
+                            new_elem = substr_elem
+                    else :
+                        new_elem = num_elem
+                new.append(new_elem)
+            tbl_csv.append(new)
+        return tbl_csv
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    @staticmethod
+    def ImportCsvToTbl(in_csv_file_path) :
+        import csv
+
+        file_d = open(in_csv_file_path, 'r')
+        csv_read = csv.reader(file_d)
+        list_of_csv = list(csv_read)
+        tbl_csv = CasetDeodel.PreprocTbl(list_of_csv)
+        return tbl_csv
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
