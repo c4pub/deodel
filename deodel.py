@@ -169,7 +169,7 @@ class Working:
                         new_id = start_no_id + upper_idx
                     attr_X[crt_idx_1][crt_idx_2] = new_id
                     
-        object.attr_X = np.array(attr_X)
+        object.attr_X = np.array(attr_X, dtype='int')
         object.attr_X = object.attr_X.transpose()
         object.attr_num_thresh = attr_num_thresh
         object.attr_dict_list = attr_dict_list
@@ -193,7 +193,6 @@ class Working:
         for row in query_req :
             crt_result = Working.PredictOne(object, row)
             result_lst.append(crt_result)
-
         return result_lst
 
 # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -224,7 +223,7 @@ class Working:
                     else :
                         new_id = 0
             translated_query.append(new_id)
-        ret_item = np.array(translated_query)
+        ret_item = np.array(translated_query, dtype='int')
         return ret_item
 
 # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -238,8 +237,8 @@ class Working:
 
         for crt_idx in range(train_no) :
             crt_train_attr = object.attr_X[crt_idx]
-            compare_vect = ( crt_train_attr == query_req ).astype(int)
-            entry_match_score = sum(compare_vect)
+            compare_vect = (np.equal(crt_train_attr, query_req)).astype(int)
+            entry_match_score = int(np.count_nonzero(compare_vect))
             match_score_list[entry_match_score].append(object.data_y[crt_idx])
 
         aux_data = {'top_first': False}

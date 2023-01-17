@@ -7,6 +7,7 @@ deodel - demo
 
 import datetime
 import random
+import deodel
 
 # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -69,10 +70,9 @@ def Demo() :
 
     X = [[0], [1], [2], [3]]
     y = [0, 0, 1, 1]
-    from deodel import DeodataDelangaClassifier
-    deodel = DeodataDelangaClassifier()
-    deodel.fit(X, y)
-    print(deodel.predict([[1.1]]))
+    dd_classif = deodel.DeodataDelangaClassifier()
+    dd_classif.fit(X, y)
+    print(dd_classif.predict([[1.1]]))
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     #   Example of using data formated as list of list tables. 
@@ -82,8 +82,6 @@ def Demo() :
     print("- - - - - - - - - ")
     print("- - - - Usage woth mixed attributes as lists of lists")
     print()
-
-    import deodel
 
     train_X = [ ['a',   1.01,   'az',   'e' ],
                 ['b',   "3.01", 3,      'd' ], 
@@ -134,8 +132,6 @@ def Demo() :
 
     from sklearn import neighbors
     from sklearn import tree
-
-    import deodel
 
     print("- - - - - - - - - ")
     print()
