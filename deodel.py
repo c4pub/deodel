@@ -55,7 +55,7 @@ class DeodataDelangaClassifier:
         else :
             self.aux_param = aux_param
 
-    version = 1.05
+    version = 1.11
 
     def __repr__(self):
         '''Returns representation of the object'''
@@ -112,37 +112,48 @@ class Working:
     def WorkFit(object, in_X, in_y):
 
         if (isinstance(in_y, np.ndarray)) :
-            object.data_y = in_y.tolist()
+            data_y = in_y.tolist()
         else :
-            object.data_y = in_y.copy()
+            data_y = in_y.copy()
 
         if (isinstance(in_X, np.ndarray)) :
-            object.data_X = in_X.tolist()
+            data_X = in_X.tolist()
         else :
-            object.data_X = in_X.copy()
-
-        entry_no = len(object.data_X)
-        attr_no = len(object.data_X[0])
-
-        ret_tuple = Working.ProcessVector(object.data_y, False)
-        (conv_v, shadow_dict, shadrev_dict, numerical_list) = ret_tuple
-
-        attr_X = []
-        attr_dict_list = []
-        attr_num_thresh = []
+            data_X = in_X.copy()
 
         if 'split_no' in object.aux_param :
             num_split = object.aux_param['split_no']
         else :
             num_split = 3
 
+        ret_item = Working.DicretizeTable( data_X, num_split )
+        (ret_tbl, ret_attr_num_thresh, ret_attr_dict_list) = ret_item
+
+        object.attr_X = np.array(ret_tbl, dtype='int')
+        object.attr_num_thresh = ret_attr_num_thresh
+        object.attr_dict_list = ret_attr_dict_list
+        object.out_y = data_y
+
+# >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    @staticmethod
+    def DicretizeTable(in_tbl, in_split_no):
+
+        data_tbl = in_tbl
+        entry_no = len(data_tbl)
+        attr_no = len(data_tbl[0])
+
+        attr_tbl = []
+        attr_dict_list = []
+        attr_num_thresh = []
+        num_split = in_split_no
+
         for crt_idx in range(attr_no) :
 
-            crt_col = Working.GetCol( object.data_X, crt_idx )
+            crt_col = Working.GetCol( data_tbl, crt_idx )
             ret_tuple = Working.ProcessVector(crt_col)
             (conv_v, shadow_dict, shadrev_dict, numerical_list) = ret_tuple
             
-            # process numerical elements if present
+            # create numerical thresholds if numerical elements are present
             if len(numerical_list) > 0 :
                 next_id = len(shadow_dict) + 1
                 crt_attr_thresh = Working.NumSplit(numerical_list, num_split)
@@ -151,11 +162,11 @@ class Working:
 
             attr_num_thresh.append(crt_attr_thresh)
             attr_dict_list.append(shadow_dict)
-            attr_X.append(conv_v)
+            attr_tbl.append(conv_v)
         
         # Replace numerical values with threshold
         for crt_idx_1 in range(attr_no) :
-            crt_attr_list = attr_X[crt_idx_1]
+            crt_attr_list = attr_tbl[crt_idx_1]
             for crt_idx_2 in range(entry_no) :
                 crt_elem = crt_attr_list[crt_idx_2]
                 if isinstance(crt_elem, float) :
@@ -167,13 +178,15 @@ class Working:
                     else :
                         upper_idx = Working.GetElemIdxInOrderList(crt_elem, crt_thresh_list)
                         new_id = start_no_id + upper_idx
-                    attr_X[crt_idx_1][crt_idx_2] = new_id
-                    
-        object.attr_X = np.array(attr_X, dtype='int')
-        object.attr_X = object.attr_X.transpose()
-        object.attr_num_thresh = attr_num_thresh
-        object.attr_dict_list = attr_dict_list
-        
+                    attr_tbl[crt_idx_1][crt_idx_2] = new_id
+
+        ret_tbl = Working.MatrixTranspose(attr_tbl)
+        ret_attr_num_thresh = attr_num_thresh
+        ret_attr_dict_list = attr_dict_list
+
+        ret_tuple = (ret_tbl, ret_attr_num_thresh, ret_attr_dict_list)
+        return ret_tuple
+
 # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     @staticmethod
     def WorkPredict(object, in_query):
@@ -183,8 +196,8 @@ class Working:
         else :
             query_req = in_query[:]
         
-        entry_no = len(object.data_X)
-        attr_no = len(object.data_X[0])
+        entry_no = len(object.attr_X)
+        attr_no = len(object.attr_X[0])
 
         if attr_no != len( object.attr_num_thresh ) :
             raise ValueError( "Mismatch in the number of attributes" )
@@ -222,7 +235,7 @@ class Working:
                         new_id = crt_dict[crt_attr]
                     else :
                         new_id = 0
-            translated_query.append(new_id)
+            translated_query.append(int(new_id))
         ret_item = np.array(translated_query, dtype='int')
         return ret_item
 
@@ -239,7 +252,7 @@ class Working:
             crt_train_attr = object.attr_X[crt_idx]
             compare_vect = (np.equal(crt_train_attr, query_req)).astype(int)
             entry_match_score = int(np.count_nonzero(compare_vect))
-            match_score_list[entry_match_score].append(object.data_y[crt_idx])
+            match_score_list[entry_match_score].append(object.out_y[crt_idx])
 
         aux_data = {'top_first': False}
         if 'tbreak_depth' in object.aux_param :
@@ -315,16 +328,16 @@ class Working:
 # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     @staticmethod
     def MatrixTranspose( in_array ) :
-        ret_item = []
-        row_no = len(in_array)
+        if in_array == [] : return []
         if not isinstance(in_array[0], list) :
-            ret_item = in_array.copy()
+            transp_data = list(in_array)
         else : 
-            ret_item = []
+            transp_data = []
             col_no = len(in_array[0])
             for crt_idx_col in range(col_no) :
                 crt_vect = Working.GetCol( in_array, crt_idx_col )
-                ret_item.append(crt_vect)
+                transp_data.append(crt_vect)
+        ret_item = transp_data
         return(ret_item)
 
 # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
