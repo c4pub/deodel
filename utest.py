@@ -2120,7 +2120,7 @@ def UnitTest():
     iprnt ()
 
     test_result = deodel.DeodataDelangaClassifier.version
-    test_expect = 1.05
+    test_expect = 1.11
 
     iprnt ("- - - - test_result:", test_result)
     iprnt ("- - - - test_expect:", test_expect)
