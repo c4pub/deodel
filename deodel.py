@@ -55,7 +55,7 @@ class DeodataDelangaClassifier:
         else :
             self.aux_param = aux_param
 
-    version = 1.11
+    version = 1.51
 
     def __repr__(self):
         '''Returns representation of the object'''
@@ -126,7 +126,12 @@ class Working:
         else :
             num_split = 3
 
-        ret_item = Working.DicretizeTable( data_X, num_split )
+        if 'split_mode' in object.aux_param :
+            split_mode = object.aux_param['split_mode']
+        else :
+            split_mode = 'eq_width'
+
+        ret_item = Working.DicretizeTable( data_X, num_split, split_mode )
         (ret_tbl, ret_attr_num_thresh, ret_attr_dict_list) = ret_item
 
         object.attr_X = np.array(ret_tbl, dtype='int')
@@ -136,7 +141,7 @@ class Working:
 
 # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     @staticmethod
-    def DicretizeTable(in_tbl, in_split_no):
+    def DicretizeTable(in_tbl, in_split_no, in_split_mode):
 
         data_tbl = in_tbl
         entry_no = len(data_tbl)
@@ -156,7 +161,7 @@ class Working:
             # create numerical thresholds if numerical elements are present
             if len(numerical_list) > 0 :
                 next_id = len(shadow_dict) + 1
-                crt_attr_thresh = Working.NumSplit(numerical_list, num_split)
+                crt_attr_thresh = Working.NumSplit(numerical_list, num_split, in_split_mode)
             else :
                 crt_attr_thresh = []
 
@@ -368,13 +373,42 @@ class Working:
 
 # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     @staticmethod
-    def NumSplit( in_num_list, in_split_no = 2, no_dupl_flag = True ) :
+    def NumSplit( in_num_list, in_split_no = 2, in_split_mode = 'eq_width', no_dupl_flag = True ) :
+        if in_split_no <= 1 :
+            return []
+        num_len = len(in_num_list)
+        if num_len == 0 :
+            threshold_list = []
+            return threshold_list
+        elif num_len == 1 :
+            if no_dupl_flag :
+                threshold_list = [in_num_list[0]]
+            else :
+                threshold_list = [in_num_list[0]] * (in_split_no - 1)
+            return threshold_list
+        if in_split_mode == 'eq_freq' :
+            ret_item = Working.NumSplitFreq( in_num_list, in_split_no, no_dupl_flag )
+        elif in_split_mode == 'eq_width' :
+            ret_item = Working.NumSplitWidth( in_num_list, in_split_no, no_dupl_flag )
+        else :
+            # invalid
+            ret_item = None
+        return ret_item
+
+# >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    @staticmethod
+    def NumSplitFreq( in_num_list, in_split_no = 2, no_dupl_flag = True ) :
         threshold_list = []
         num_len = len(in_num_list)
-        if num_len <= 1 :
-            return []
+        if num_len == 0 :
+            return threshold_list
+        elif num_len == 1 :
+            if no_dupl_flag :
+                threshold_list = [in_num_list[0]]
+            else :
+                threshold_list = [in_num_list[0]] * (in_split_no - 1)
+            return threshold_list
         ord_num_list = sorted(in_num_list)
-
         max_split_factor = 2
         if in_split_no > max_split_factor * num_len :
             split_no = max_split_factor * num_len
@@ -448,6 +482,38 @@ class Working:
             last_elem = ord_num_list[-1]
             threshold_list = [last_elem]
 
+        return threshold_list
+
+# >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    @staticmethod
+    def NumSplitWidth( in_num_list, in_split_no = 2, no_dupl_flag = True ) :
+        threshold_list = []
+        num_len = len(in_num_list)
+        if num_len == 0 :
+            return threshold_list
+        elif num_len == 1 :
+            if no_dupl_flag :
+                threshold_list = [in_num_list[0]]
+            else :
+                threshold_list = [in_num_list[0]] * (in_split_no - 1)
+            return threshold_list
+        if num_len <= 1 :
+            return []
+        ord_num_list = sorted(in_num_list)
+        num_min = ord_num_list[0]
+        num_max = ord_num_list[-1]
+        width = (num_max - num_min)/(in_split_no * 1.0)
+        if width == 0 :
+            if no_dupl_flag :
+                threshold_list = [num_min]
+            else :
+                threshold_list = [num_min] * (in_split_no - 1)
+        else :
+            threshold_list = []
+            crt_thresh = num_min
+            for crt_idx in range(in_split_no - 1) :
+                crt_thresh += width
+                threshold_list.append(crt_thresh)
         return threshold_list
 
 # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
