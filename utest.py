@@ -102,7 +102,6 @@ def UnitTest():
         iprnt ("Unit test failure !")
         traceback.print_stack(file=sys.stdout)
 
-
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -654,9 +653,38 @@ def UnitTest():
     tv1 = [1, 2, 3, 4]
     iprnt ("- - - - tv1", tv1)
     split_no = 2
-    iprnt ("- - - - split_no", split_no)
+    iprnt ("- - - - eq_freq - split_no:", split_no)
 
-    test_result = deodel.Working.NumSplit(tv1, split_no, False)
+    test_result = deodel.Working.NumSplit(tv1, split_no, 'eq_freq', False)
+    expect_result = [2.5]
+
+    test_expect = expect_result
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    tv1 = [1, 2, 3, 4]
+    iprnt ("- - - - tv1", tv1)
+    split_no = 2
+    iprnt ("- - - - eq_width - split_no:", split_no)
+
+    test_result = deodel.Working.NumSplit(tv1, split_no, 'eq_width', False)
     expect_result = [2.5]
 
     test_expect = expect_result
@@ -683,10 +711,39 @@ def UnitTest():
     tv1 = [1, 2, 3, 4]
     iprnt ("- - - - tv1", tv1)
     split_no = 4
-    iprnt ("- - - - split_no", split_no)
+    iprnt ("- - - - eq_freq - split_no:", split_no)
 
-    test_result = deodel.Working.NumSplit(tv1, split_no, False)
+    test_result = deodel.Working.NumSplit(tv1, split_no, 'eq_freq', False)
     expect_result = [1.5, 2.5, 3.5]
+
+    test_expect = expect_result
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    tv1 = [5, 1, 2, 3, 4]
+    iprnt ("- - - - tv1", tv1)
+    split_no = 4
+    iprnt ("- - - - eq_width - split_no:", split_no)
+
+    test_result = deodel.Working.NumSplit(tv1, split_no, 'eq_width', False)
+    expect_result = [2, 3, 4]
 
     test_expect = expect_result
     iprnt ("- - - - test_result:", test_result)
@@ -712,9 +769,9 @@ def UnitTest():
     tv1 = [1, 2, 3]
     iprnt ("- - - - tv1", tv1)
     split_no = 3
-    iprnt ("- - - - split_no", split_no)
+    iprnt ("- - - - eq_freq - split_no:", split_no)
 
-    test_result = deodel.Working.NumSplit(tv1, split_no, False)
+    test_result = deodel.Working.NumSplit(tv1, split_no, 'eq_freq', False)
     expect_result = [1.5, 2.5]
 
     test_expect = expect_result
@@ -741,10 +798,39 @@ def UnitTest():
     tv1 = [1, 2, 3, 4, 5, 6]
     iprnt ("- - - - tv1", tv1)
     split_no = 3
-    iprnt ("- - - - split_no", split_no)
+    iprnt ("- - - - eq_freq - split_no:", split_no)
 
-    test_result = deodel.Working.NumSplit(tv1, split_no, False)
+    test_result = deodel.Working.NumSplit(tv1, split_no, 'eq_freq', False)
     expect_result = [2.5, 4.5]
+
+    test_expect = expect_result
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    tv1 = [0, 2, 3, 4, 5, 6]
+    iprnt ("- - - - tv1", tv1)
+    split_no = 3
+    iprnt ("- - - - eq_width - split_no:", split_no)
+
+    test_result = deodel.Working.NumSplit(tv1, split_no, 'eq_width', False)
+    expect_result = [2, 4]
 
     test_expect = expect_result
     iprnt ("- - - - test_result:", test_result)
@@ -770,9 +856,9 @@ def UnitTest():
     tv1 = [1, 2, 3, 4, 5, 6]
     iprnt ("- - - - tv1", tv1)
     split_no = 2
-    iprnt ("- - - - split_no", split_no)
+    iprnt ("- - - - eq_freq - split_no:", split_no)
 
-    test_result = deodel.Working.NumSplit(tv1, split_no, False)
+    test_result = deodel.Working.NumSplit(tv1, split_no, 'eq_freq', False)
     expect_result = [3.5]
 
     test_expect = expect_result
@@ -799,9 +885,9 @@ def UnitTest():
     tv1 = [1, 2, 3, 4]
     iprnt ("- - - - tv1", tv1)
     split_no = 3
-    iprnt ("- - - - split_no", split_no)
+    iprnt ("- - - - eq_freq - split_no:", split_no)
 
-    test_result = deodel.Working.NumSplit(tv1, split_no, False)
+    test_result = deodel.Working.NumSplit(tv1, split_no, 'eq_freq', False)
     expect_result = [2 - 1.0/6, 3 + 1.0/6]
 
     test_expect = expect_result
@@ -828,9 +914,9 @@ def UnitTest():
     tv1 = [1, 2, 3, 4]
     iprnt ("- - - - tv1", tv1)
     split_no = 4
-    iprnt ("- - - - split_no", split_no)
+    iprnt ("- - - - eq_freq - split_no:", split_no)
 
-    test_result = deodel.Working.NumSplit(tv1, split_no, False)
+    test_result = deodel.Working.NumSplit(tv1, split_no, 'eq_freq', False)
     expect_result = [1.5, 2.5, 3.5]
 
     test_expect = expect_result
@@ -857,9 +943,9 @@ def UnitTest():
     tv1 = [1, 2, 3, 4, 5, 6]
     iprnt ("- - - - tv1", tv1)
     split_no = 2
-    iprnt ("- - - - split_no", split_no)
+    iprnt ("- - - - eq_freq - split_no:", split_no)
 
-    test_result = deodel.Working.NumSplit(tv1, split_no, False)
+    test_result = deodel.Working.NumSplit(tv1, split_no, 'eq_freq', False)
     expect_result = [3.5]
 
     test_expect = expect_result
@@ -886,9 +972,9 @@ def UnitTest():
     tv1 = [4, 3, 1, 2, 8, 5, 7, 6]
     iprnt ("- - - - tv1", tv1)
     split_no = 4
-    iprnt ("- - - - split_no", split_no)
+    iprnt ("- - - - eq_freq - split_no:", split_no)
 
-    test_result = deodel.Working.NumSplit(tv1, split_no, False)
+    test_result = deodel.Working.NumSplit(tv1, split_no, 'eq_freq', False)
     expect_result = [2.5, 4.5, 6.5]
 
     test_expect = expect_result
@@ -915,9 +1001,9 @@ def UnitTest():
     tv1 = [4, 3, 1, 2, 5, 6]
     iprnt ("- - - - tv1", tv1)
     split_no = 3
-    iprnt ("- - - - split_no", split_no)
+    iprnt ("- - - - eq_freq - split_no:", split_no)
 
-    test_result = deodel.Working.NumSplit(tv1, split_no, False)
+    test_result = deodel.Working.NumSplit(tv1, split_no, 'eq_freq', False)
     expect_result = [2.5, 4.5]
 
     test_expect = expect_result
@@ -944,7 +1030,7 @@ def UnitTest():
     tv1 = [4, 3, 1, 2, 8, 5, 7, 6]
     iprnt ("- - - - tv1", tv1)
     split_no = 2
-    iprnt ("- - - - split_no", split_no)
+    iprnt ("- - - - eq_freq - split_no:", split_no)
 
     test_result = deodel.Working.NumSplit(tv1, split_no)
     expect_result = [4.5]
@@ -973,9 +1059,9 @@ def UnitTest():
     tv1 = [4, 3, 1, 2, 8, 5, 7, 6]
     iprnt ("- - - - tv1", tv1)
     split_no = 8
-    iprnt ("- - - - split_no", split_no)
+    iprnt ("- - - - eq_freq - split_no:", split_no)
 
-    test_result = deodel.Working.NumSplit(tv1, split_no, False)
+    test_result = deodel.Working.NumSplit(tv1, split_no, 'eq_freq', False)
     expect_result = [1.5, 2.5, 3.5, 4.5, 5.5, 6.5, 7.5]
 
     test_expect = expect_result
@@ -1002,9 +1088,9 @@ def UnitTest():
     tv1 = [4, 3, 1, 2, 8, 5, 7, 6]
     iprnt ("- - - - tv1", tv1)
     split_no = 16
-    iprnt ("- - - - split_no", split_no)
+    iprnt ("- - - - eq_freq - split_no:", split_no)
 
-    test_result = deodel.Working.NumSplit(tv1, split_no, False)
+    test_result = deodel.Working.NumSplit(tv1, split_no, 'eq_freq', False)
     #t expect_result = [1.5, 1.5, 2.5, 2.5, 3.5, 3.5, 4.5, 4.5, 5.5, 5.5, 6.5, 6.5, 7.5, 7.5]
     expect_result = [1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8]
 
@@ -1032,9 +1118,9 @@ def UnitTest():
     tv1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     iprnt ("- - - - tv1", tv1)
     split_no = 5
-    iprnt ("- - - - split_no", split_no)
+    iprnt ("- - - - eq_freq - split_no:", split_no)
 
-    test_result = deodel.Working.NumSplit(tv1, split_no, False)
+    test_result = deodel.Working.NumSplit(tv1, split_no, 'eq_freq', False)
     expect_result = [ 2.5, 4.5, 6.5, 8.5 ]
 
     test_expect = expect_result
@@ -1061,9 +1147,9 @@ def UnitTest():
     tv1 = [4, 3, 1, 2]
     iprnt ("- - - - tv1", tv1)
     split_no = 2
-    iprnt ("- - - - split_no", split_no)
+    iprnt ("- - - - eq_freq - split_no:", split_no)
 
-    test_result = deodel.Working.NumSplit(tv1, split_no, False)
+    test_result = deodel.Working.NumSplit(tv1, split_no, 'eq_freq', False)
     expect_result = [2.5]
 
     test_expect = expect_result
@@ -1090,9 +1176,9 @@ def UnitTest():
     tv1 = [1, 2, 3, 4]
     iprnt ("- - - - tv1", tv1)
     split_no = 4
-    iprnt ("- - - - split_no", split_no)
+    iprnt ("- - - - eq_freq - split_no:", split_no)
 
-    test_result = deodel.Working.NumSplit(tv1, split_no, False)
+    test_result = deodel.Working.NumSplit(tv1, split_no, 'eq_freq', False)
     expect_result = [1.5, 2.5, 3.5]
 
     test_expect = expect_result
@@ -1119,9 +1205,9 @@ def UnitTest():
     tv1 = [3, 3, 3, 4]
     iprnt ("- - - - tv1", tv1)
     split_no = 4
-    iprnt ("- - - - split_no", split_no)
+    iprnt ("- - - - eq_freq - split_no:", split_no)
 
-    test_result = deodel.Working.NumSplit(tv1, split_no, False)
+    test_result = deodel.Working.NumSplit(tv1, split_no, 'eq_freq', False)
     expect_result = [3.0, 3.0, 3.5]
 
     test_expect = expect_result
@@ -1148,9 +1234,9 @@ def UnitTest():
     tv1 = [3, 3, 3, 4]
     iprnt ("- - - - tv1", tv1)
     split_no = 4
-    iprnt ("- - - - split_no", split_no)
+    iprnt ("- - - - eq_freq - split_no:", split_no)
 
-    test_result = deodel.Working.NumSplit(tv1, split_no, True)
+    test_result = deodel.Working.NumSplit(tv1, split_no, 'eq_freq', True)
     # expect_result = [4]
     expect_result = [3, 4]
 
@@ -1178,9 +1264,9 @@ def UnitTest():
     tv1 = [3, 3, 3, 4]
     iprnt ("- - - - tv1", tv1)
     split_no = 2
-    iprnt ("- - - - split_no", split_no)
+    iprnt ("- - - - eq_freq - split_no:", split_no)
 
-    test_result = deodel.Working.NumSplit(tv1, split_no, False)
+    test_result = deodel.Working.NumSplit(tv1, split_no, 'eq_freq', False)
     # expect_result = [4]
     expect_result = [3]
 
@@ -1208,7 +1294,7 @@ def UnitTest():
     tv1 = [-2, -2, -2, -2]
     iprnt ("- - - - tv1", tv1)
     split_no = 4
-    iprnt ("- - - - split_no", split_no)
+    iprnt ("- - - - eq_freq - split_no:", split_no)
 
     test_result = deodel.Working.NumSplit(tv1, split_no)
     expect_result = [-2]
@@ -1237,10 +1323,68 @@ def UnitTest():
     tv1 = [-2, -2, -2]
     iprnt ("- - - - tv1", tv1)
     split_no = 4
-    iprnt ("- - - - split_no", split_no)
+    iprnt ("- - - - eq_freq - split_no:", split_no)
 
-    test_result = deodel.Working.NumSplit(tv1, split_no, False)
+    test_result = deodel.Working.NumSplit(tv1, split_no, 'eq_freq', False)
     expect_result = []
+    expect_result = [-2, -2, -2]
+
+    test_expect = expect_result
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    tv1 = [-2, -2, -2, -2]
+    iprnt ("- - - - tv1", tv1)
+    split_no = 4
+    iprnt ("- - - - eq_width - split_no:", split_no)
+
+    test_result = deodel.Working.NumSplit(tv1, split_no, 'eq_width')
+    expect_result = [-2]
+
+    test_expect = expect_result
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    tv1 = [-2, -2, -2]
+    iprnt ("- - - - tv1", tv1)
+    split_no = 4
+    iprnt ("- - - - eq_width - split_no:", split_no)
+
+    test_result = deodel.Working.NumSplit(tv1, split_no, 'eq_width', False)
     expect_result = [-2, -2, -2]
 
     test_expect = expect_result
@@ -1267,9 +1411,125 @@ def UnitTest():
     tv1 = [-2]
     iprnt ("- - - - tv1", tv1)
     split_no = 4
-    iprnt ("- - - - split_no", split_no)
+    iprnt ("- - - - eq_freq - split_no:", split_no)
 
-    test_result = deodel.Working.NumSplit(tv1, split_no, False)
+    test_result = deodel.Working.NumSplit(tv1, split_no, 'eq_freq', False)
+    expect_result = [-2, -2, -2]
+
+    test_expect = expect_result
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    tv1 = [-2]
+    iprnt ("- - - - tv1", tv1)
+    split_no = 4
+    iprnt ("- - - - eq_freq - split_no:", split_no)
+
+    test_result = deodel.Working.NumSplit(tv1, split_no, 'eq_freq', True)
+    expect_result = [-2]
+
+    test_expect = expect_result
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    tv1 = [-2]
+    iprnt ("- - - - tv1", tv1)
+    split_no = 4
+    iprnt ("- - - - eq_width - split_no:", split_no)
+
+    test_result = deodel.Working.NumSplit(tv1, split_no, 'eq_width', False)
+    expect_result = [-2, -2, -2]
+
+    test_expect = expect_result
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    tv1 = [-2]
+    iprnt ("- - - - tv1", tv1)
+    split_no = 4
+    iprnt ("- - - - eq_width - split_no:", split_no)
+
+    test_result = deodel.Working.NumSplit(tv1, split_no, 'eq_width', True)
+    expect_result = [-2]
+
+    test_expect = expect_result
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    tv1 = []
+    iprnt ("- - - - tv1", tv1)
+    split_no = 4
+    iprnt ("- - - - eq_freq - split_no:", split_no)
+
+    test_result = deodel.Working.NumSplit(tv1, split_no, 'eq_freq', True)
     expect_result = []
 
     test_expect = expect_result
@@ -1296,9 +1556,9 @@ def UnitTest():
     tv1 = []
     iprnt ("- - - - tv1", tv1)
     split_no = 4
-    iprnt ("- - - - split_no", split_no)
+    iprnt ("- - - - eq_width - split_no:", split_no)
 
-    test_result = deodel.Working.NumSplit(tv1, split_no, True)
+    test_result = deodel.Working.NumSplit(tv1, split_no, 'eq_width', True)
     expect_result = []
 
     test_expect = expect_result
@@ -1325,9 +1585,9 @@ def UnitTest():
     tv1 = [10, 20, 30]
     iprnt ("- - - - tv1", tv1)
     split_no = 7
-    iprnt ("- - - - split_no", split_no)
+    iprnt ("- - - - eq_freq - split_no:", split_no)
 
-    test_result = deodel.Working.NumSplit(tv1, split_no, False)
+    test_result = deodel.Working.NumSplit(tv1, split_no, 'eq_freq', False)
     expect_result = [10, 15, 20, 25, 30]
 
     test_expect = expect_result
@@ -1354,9 +1614,9 @@ def UnitTest():
     tv1 = [1.2, 2]
     iprnt ("- - - - tv1", tv1)
     split_no = 7
-    iprnt ("- - - - split_no", split_no)
+    iprnt ("- - - - eq_freq - split_no:", split_no)
 
-    ret_val = deodel.Working.NumSplit(tv1, split_no, False)
+    ret_val = deodel.Working.NumSplit(tv1, split_no, 'eq_freq', False)
     iprnt ("- - - - ret_val", ret_val)
     expect_result = [1.2, 1.6, 2]
 
@@ -1386,9 +1646,9 @@ def UnitTest():
     tv1 = [1.2, 2]
     iprnt ("- - - - tv1", tv1)
     split_no = 3
-    iprnt ("- - - - split_no", split_no)
+    iprnt ("- - - - eq_freq - split_no:", split_no)
 
-    ret_val = deodel.Working.NumSplit(tv1, split_no, True)
+    ret_val = deodel.Working.NumSplit(tv1, split_no, 'eq_freq', True)
     iprnt ("- - - - ret_val", ret_val)
     expect_result = [1.2 + 0.4/3, 2 - 0.4/3]
 
@@ -1418,9 +1678,9 @@ def UnitTest():
     tv1 = [1.2, 2]
     iprnt ("- - - - tv1", tv1)
     split_no = 2
-    iprnt ("- - - - split_no", split_no)
+    iprnt ("- - - - eq_freq - split_no:", split_no)
 
-    ret_val = deodel.Working.NumSplit(tv1, split_no, False)
+    ret_val = deodel.Working.NumSplit(tv1, split_no, 'eq_freq', False)
     iprnt ("- - - - ret_val", ret_val)
     expect_result = [1.6]
 
@@ -1450,9 +1710,9 @@ def UnitTest():
     tv1 = [3, 5, 3]
     iprnt ("- - - - tv1", tv1)
     split_no = 3
-    iprnt ("- - - - split_no", split_no)
+    iprnt ("- - - - eq_freq - split_no:", split_no)
 
-    ret_val = deodel.Working.NumSplit(tv1, split_no, True)
+    ret_val = deodel.Working.NumSplit(tv1, split_no, 'eq_freq', True)
     iprnt ("- - - - ret_val", ret_val)
     expect_result = [5]
 
@@ -1482,9 +1742,9 @@ def UnitTest():
     tv1 = [0, 0, 1]
     iprnt ("- - - - tv1", tv1)
     split_no = 2
-    iprnt ("- - - - split_no", split_no)
+    iprnt ("- - - - eq_freq - split_no:", split_no)
 
-    ret_val = deodel.Working.NumSplit(tv1, split_no, no_dupl_flag = False)
+    ret_val = deodel.Working.NumSplit(tv1, split_no, 'eq_freq', no_dupl_flag = False)
     iprnt ("- - - - ret_val", ret_val)
     # expect_result = [0]
     expect_result = [1.6653345369377348e-16]
@@ -1515,9 +1775,9 @@ def UnitTest():
     tv1 = [0, 0, 1]
     iprnt ("- - - - tv1", tv1)
     split_no = 2
-    iprnt ("- - - - split_no", split_no)
+    iprnt ("- - - - eq_freq - split_no:", split_no)
 
-    ret_val = deodel.Working.NumSplit(tv1, split_no, no_dupl_flag = True)
+    ret_val = deodel.Working.NumSplit(tv1, split_no, 'eq_freq', no_dupl_flag = True)
     iprnt ("- - - - ret_val", ret_val)
     # expect_result = [1]
     expect_result = [1.6653345369377348e-16]
@@ -1548,9 +1808,9 @@ def UnitTest():
     tv1 = [0, 0, 0, 0, 1]
     iprnt ("- - - - tv1", tv1)
     split_no = 2
-    iprnt ("- - - - split_no", split_no)
+    iprnt ("- - - - eq_freq - split_no:", split_no)
 
-    ret_val = deodel.Working.NumSplit(tv1, split_no, no_dupl_flag = True)
+    ret_val = deodel.Working.NumSplit(tv1, split_no, 'eq_freq', no_dupl_flag = True)
     iprnt ("- - - - ret_val", ret_val)
     # expect_result = [0.6666666666666665]
     expect_result = [1]
@@ -1581,9 +1841,9 @@ def UnitTest():
     tv1 = [0, 0, 0, 0, 1]
     iprnt ("- - - - tv1", tv1)
     split_no = 3
-    iprnt ("- - - - split_no", split_no)
+    iprnt ("- - - - eq_freq - split_no:", split_no)
 
-    ret_val = deodel.Working.NumSplit(tv1, split_no, no_dupl_flag = True)
+    ret_val = deodel.Working.NumSplit(tv1, split_no, 'eq_freq', no_dupl_flag = True)
     iprnt ("- - - - ret_val", ret_val)
     # expect_result = [1]
     expect_result = [0.6666666666666665]
@@ -1614,9 +1874,9 @@ def UnitTest():
     tv1 = [0, 0, 0, 0, 1]
     iprnt ("- - - - tv1", tv1)
     split_no = 4
-    iprnt ("- - - - split_no", split_no)
+    iprnt ("- - - - eq_freq - split_no:", split_no)
 
-    ret_val = deodel.Working.NumSplit(tv1, split_no, no_dupl_flag = True)
+    ret_val = deodel.Working.NumSplit(tv1, split_no, 'eq_freq', no_dupl_flag = True)
     iprnt ("- - - - ret_val", ret_val)
     expect_result = [1]
 
@@ -1646,9 +1906,9 @@ def UnitTest():
     tv1 = [0, 0, 0, 0, 1]
     iprnt ("- - - - tv1", tv1)
     split_no = 5
-    iprnt ("- - - - split_no", split_no)
+    iprnt ("- - - - eq_freq - split_no:", split_no)
 
-    ret_val = deodel.Working.NumSplit(tv1, split_no, no_dupl_flag = True)
+    ret_val = deodel.Working.NumSplit(tv1, split_no, 'eq_freq', no_dupl_flag = True)
     iprnt ("- - - - ret_val", ret_val)
     expect_result = [1]
 
@@ -1678,9 +1938,9 @@ def UnitTest():
     tv1 = [0, 0, 0, 0, 1]
     iprnt ("- - - - tv1", tv1)
     split_no = 6
-    iprnt ("- - - - split_no", split_no)
+    iprnt ("- - - - eq_freq - split_no:", split_no)
 
-    ret_val = deodel.Working.NumSplit(tv1, split_no, no_dupl_flag = True)
+    ret_val = deodel.Working.NumSplit(tv1, split_no, 'eq_freq', no_dupl_flag = True)
     iprnt ("- - - - ret_val", ret_val)
     expect_result = [0.8333333333333331, 1]
 
@@ -1710,9 +1970,9 @@ def UnitTest():
     tv1 = [0, 0, 0, 0, 1]
     iprnt ("- - - - tv1", tv1)
     split_no = 7
-    iprnt ("- - - - split_no", split_no)
+    iprnt ("- - - - eq_freq - split_no:", split_no)
 
-    ret_val = deodel.Working.NumSplit(tv1, split_no, no_dupl_flag = True)
+    ret_val = deodel.Working.NumSplit(tv1, split_no, 'eq_freq', no_dupl_flag = True)
     iprnt ("- - - - ret_val", ret_val)
     expect_result = [0.714285714285714, 1]
 
@@ -1742,9 +2002,9 @@ def UnitTest():
     tv1 = [0, 0, 0, 0, 1]
     iprnt ("- - - - tv1", tv1)
     split_no = 8
-    iprnt ("- - - - split_no", split_no)
+    iprnt ("- - - - eq_freq - split_no:", split_no)
 
-    ret_val = deodel.Working.NumSplit(tv1, split_no, no_dupl_flag = True)
+    ret_val = deodel.Working.NumSplit(tv1, split_no, 'eq_freq', no_dupl_flag = True)
     iprnt ("- - - - ret_val", ret_val)
     expect_result = [0.625, 1]
 
@@ -1774,9 +2034,9 @@ def UnitTest():
     tv1 = [0, 0, 0, 0, 1]
     iprnt ("- - - - tv1", tv1)
     split_no = 9
-    iprnt ("- - - - split_no", split_no)
+    iprnt ("- - - - eq_freq - split_no:", split_no)
 
-    ret_val = deodel.Working.NumSplit(tv1, split_no, no_dupl_flag = True)
+    ret_val = deodel.Working.NumSplit(tv1, split_no, 'eq_freq', no_dupl_flag = True)
     iprnt ("- - - - ret_val", ret_val)
     expect_result = [0.5555555555555558, 1]
 
@@ -1819,7 +2079,7 @@ def UnitTest():
            ]
 
     # o1 = deodel.deodel.DeodataDelangaClassifier()
-    tt_o = deodel.DeodataDelangaClassifier()
+    tt_o = deodel.DeodataDelangaClassifier({'split_mode': 'eq_freq'})
     tt_o.fit(tt_X, tt_y)
     iprnt ()
 
@@ -2120,7 +2380,7 @@ def UnitTest():
     iprnt ()
 
     test_result = deodel.DeodataDelangaClassifier.version
-    test_expect = 1.11
+    test_expect = 1.51
 
     iprnt ("- - - - test_result:", test_result)
     iprnt ("- - - - test_expect:", test_expect)
