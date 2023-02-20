@@ -19,11 +19,21 @@ Deodel is almost non-parametric. Obviously, there are configuration adjustments 
     deodel.py
         It contains all it is needed for the operation of the classifier.
 
-    utest.py
+    main.py
+        Module that serves as starting point / launchpad for use applications.
+
+    usap_demo.py
+        Module that contains a demo of the classifier usage.
+
+    usap_utest.py
         Module that implements a non-systematic set of sanity/unit tests.
 
-    main.py
-        Module that contains a demo of the classifier usage.
+    usap_cmp_binning.py
+        Module that compares accuracy of the two modes of discretization: eq_freq vs eq_width.
+
+    usap_common.py
+        Module that contains common code used by applications.
+
 
 ---
 
