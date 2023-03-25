@@ -4,6 +4,8 @@
         Tested with Winpython64-3.10.5.0
 """
 
+#   c4pub@git 2023
+
 # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 def iprnt( *args, **kwargs ) :
@@ -20,7 +22,7 @@ def iprnt( *args, **kwargs ) :
 # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 def SepLine ( display_flag = True ) :
-    separator_string = ">-------------------------------------------------------------------------------"
+    separator_string = ">-" + 78*"-"
     iprnt ( separator_string )
 
 # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -31,7 +33,7 @@ def CrtTimeStamp(display_flag = True) :
     in_time_stamp = datetime.datetime.now()
     time_str = in_time_stamp.strftime("%Y-%m-%d %H:%M:%S")
     out_str = "time_stamp: %s" % (time_str)
-    if display_flag : 
+    if display_flag :
         print(out_str)
     return out_str
 

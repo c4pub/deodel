@@ -4,6 +4,8 @@
         Tested with Winpython64-3.10.5.0
 """
 
+#   c4pub@git 2023
+
 import datetime
 import random
 import deodel

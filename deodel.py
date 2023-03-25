@@ -1,8 +1,6 @@
 """Deodata Delanga Classification"""
 
-# Author: 
-#          c4pub@github
-#
+#   c4pub@git 2023
 
 import numpy as np
 import warnings
@@ -55,7 +53,7 @@ class DeodataDelangaClassifier:
         else :
             self.aux_param = aux_param
 
-    version = 1.51
+    version = 1.65
 
     def __repr__(self):
         '''Returns representation of the object'''
@@ -157,7 +155,7 @@ class Working:
             crt_col = Working.GetCol( data_tbl, crt_idx )
             ret_tuple = Working.ProcessVector(crt_col)
             (conv_v, shadow_dict, shadrev_dict, numerical_list) = ret_tuple
-            
+
             # create numerical thresholds if numerical elements are present
             if len(numerical_list) > 0 :
                 next_id = len(shadow_dict) + 1
@@ -168,7 +166,7 @@ class Working:
             attr_num_thresh.append(crt_attr_thresh)
             attr_dict_list.append(shadow_dict)
             attr_tbl.append(conv_v)
-        
+
         # Replace numerical values with threshold
         for crt_idx_1 in range(attr_no) :
             crt_attr_list = attr_tbl[crt_idx_1]
@@ -200,7 +198,7 @@ class Working:
             query_req = in_query.tolist()
         else :
             query_req = in_query[:]
-        
+
         entry_no = len(object.attr_X)
         attr_no = len(object.attr_X[0])
 
@@ -216,13 +214,11 @@ class Working:
 # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     @staticmethod
     def TranslateAttrEntry(object, in_attr_list):
-
+        # translate to conforming list
         attr_entry = in_attr_list
         attr_no = len(attr_entry)
         translated_query = []
-
         for crt_idx in range(attr_no) :
-            
             crt_attr = attr_entry[crt_idx]
             crt_num_interval = object.attr_num_thresh[crt_idx]
             crt_dict = object.attr_dict_list[crt_idx]
@@ -230,14 +226,16 @@ class Working:
                 # None is considered to represent missing attribute values, will be ignored.
                     new_id = -1
             else :
-                if isinstance(crt_attr, (int, float)) :
+                ret_tuple = Working.NumericalCheck(crt_attr)
+                is_numerical, translate_value = ret_tuple
+                if is_numerical :
                     # numerical attribute, discretize with interval
-                    upper_idx = Working.GetElemIdxInOrderList(crt_attr, crt_num_interval)
+                    upper_idx = Working.GetElemIdxInOrderList(translate_value, crt_num_interval)
                     dict_len = len(crt_dict)
                     new_id = dict_len + 1 + upper_idx
                 else :
-                    if crt_attr in crt_dict :
-                        new_id = crt_dict[crt_attr]
+                    if translate_value in crt_dict :
+                        new_id = crt_dict[translate_value]
                     else :
                         new_id = 0
             translated_query.append(int(new_id))
@@ -247,7 +245,7 @@ class Working:
 # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     @staticmethod
     def PredictOne(object, in_query):
-
+        # prediction for one query
         attr_no = len(in_query)
         query_req = Working.TranslateAttrEntry(object, in_query)
         match_score_list = [[] for i in range(attr_no + 1)]
@@ -312,7 +310,7 @@ class Working:
 
         ret_item = fn_ret_insert_idx
         return(ret_item)
-    
+
 # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     @staticmethod
     def GetCol( in_array, in_col ) :
@@ -323,7 +321,7 @@ class Working:
             row_no = len(in_array)
             if not isinstance(in_array[0], list) :
                 ret_item = None
-            else : 
+            else :
                 ret_item = []
                 for crt_idx_row in range(row_no) :
                     ret_item.append((in_array[crt_idx_row][in_col]))
@@ -336,7 +334,7 @@ class Working:
         if in_array == [] : return []
         if not isinstance(in_array[0], list) :
             transp_data = list(in_array)
-        else : 
+        else :
             transp_data = []
             col_no = len(in_array[0])
             for crt_idx_col in range(col_no) :
@@ -533,6 +531,29 @@ class Working:
         return fn_ret
 
 # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    @staticmethod
+    def NumericalCheck( in_value, in_float_only = True ) :
+        """
+            Check if numerical. If non regular float, result is false and
+            translated value returned
+        """
+        if in_float_only :
+            if isinstance(in_value, float) :
+                float_flag, valid_val = CasetDeodel.ValidateFloat(in_value)
+                fn_ret = (float_flag, valid_val)
+            else :
+                fn_ret = (False, in_value)
+        else :
+            if isinstance(in_value, float) :
+                float_flag, valid_val = CasetDeodel.ValidateFloat(in_value)
+                fn_ret = (float_flag, valid_val)
+            elif isinstance(in_value, int) :
+                fn_ret = (True, in_value)
+            else :
+                fn_ret = (False, in_value)
+        return fn_ret
+
+# >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # > Working - End
 # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -561,7 +582,6 @@ class CasetDeodel:
                     first column the element itself from the list
                     second column the no of occurences
                     third column the list of indexes containing the element
-
         """
         from operator import itemgetter
 
@@ -604,7 +624,6 @@ class CasetDeodel:
                 List of distinct elements
             ret_count_list
                 List with counts of each element matching ret_elem_list
-
         """
         count_data = CasetDeodel.OrderedFreqCount(in_symbol_sequence_list)
         distinct_elem_no, elem_list, count_list = CasetDeodel.CountDataToFreqLists(count_data)
@@ -629,7 +648,6 @@ class CasetDeodel:
                 List of distinct elements
             ret_count_list
                 List with counts of each element matching ret_elem_list
-
         """
         # determine no of distinct elements
         distinct_elem_no = len(in_freq_count_data)
@@ -658,9 +676,7 @@ class CasetDeodel:
             ret_status
             ret_outcome_id
             ret_outcome_count
-
         """
-
         fn_ret_status = False
         fn_tbreak_status = False
         fn_ret_outcome_id = None
@@ -669,7 +685,7 @@ class CasetDeodel:
         # one iteration loop to allow unified return through loop breaks
         for dummy_idx in range(1) :
 
-            if (isinstance (in_sel_id_dict, dict) == False 
+            if (isinstance (in_sel_id_dict, dict) == False
                     and in_sel_id_dict != None ) :
                 break
 
@@ -753,11 +769,11 @@ class CasetDeodel:
                                 outcome_match_idx_list += [crt_max_idx]
                         else :
                             outcome_match_idx_list += [crt_max_idx]
-                        
+
                     crt_max_idx += 1
                 matching_outcome_no = len(outcome_match_idx_list)
                 if matching_outcome_no == 1 :
-                    # only outcome id matches the maximum score. 
+                    # only outcome id matches the maximum score.
                     # Success, recursion is over.
                     fn_ret_status = True
                     fn_tbreak_status = True
@@ -784,83 +800,26 @@ class CasetDeodel:
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     @staticmethod
-    def StrToFloat(in_str) :
-        if not isinstance(in_str, str) :
-            return None
-        try :
-            number = float(in_str)
-            return number 
-        except ValueError:
-            return None
-
-    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    @staticmethod
-    def StrToSubstr(in_str) :
-        import re
-
-        if not isinstance(in_str, str) :
-            return None
-        substr_flag = False
-        sub_str = None
-        cpy_instr = in_str
-        trim_str = cpy_instr.strip()
-        ret_reg = re.search(r"^[\"](?P<tmptag>.*)[\"]$", trim_str)
-        if ret_reg != None :
-            substr_flag = True
-            sub_str = ret_reg.group('tmptag')
+    def ValidateFloat(in_val) :
+        if not isinstance(in_val, float) :
+            fn_ret_status = False
+            fn_ret_translate = in_val
+        elif np.isnan(in_val) :
+            fn_ret_status = False
+            fn_ret_translate = "nan"
+        elif in_val == float('inf') :
+            fn_ret_status = False
+            fn_ret_translate = "+inf"
+        elif in_val == float('-inf') :
+            fn_ret_status = False
+            fn_ret_translate = "-inf"
         else :
-            ret_reg = re.search(r"^[\'](?P<tmptag>.*)[\']$", trim_str)
-            if ret_reg != None :
-                substr_flag = True
-                sub_str = ret_reg.group('tmptag')
-        return sub_str
+            fn_ret_status = True
+            fn_ret_translate = in_val
+        ret_tuple = fn_ret_status, fn_ret_translate
+        return ret_tuple
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    @staticmethod
-    def PreprocTbl(in_raw_tbl) :
-        row_no = len(in_raw_tbl)
-        col_no = len(in_raw_tbl[0])
-        tbl_csv = []
-
-        # convert fields
-        for crt_row_idx in range(row_no) :
-            row = in_raw_tbl[crt_row_idx]
-            new = []
-            for crt_col_idx in range(col_no) :
-                crt_elem = in_raw_tbl[crt_row_idx][crt_col_idx]
-                if isinstance(crt_elem, float) :
-                    new_elem = crt_elem
-                elif not isinstance(crt_elem, str) :
-                    new_elem = None
-                elif crt_elem == '' :
-                    new_elem = None
-                else :
-                    num_elem = CasetDeodel.StrToFloat(crt_elem)
-                    if num_elem == None :
-                        substr_elem = CasetDeodel.StrToSubstr(crt_elem)
-                        if substr_elem == None :
-                            new_elem = crt_elem
-                        else :
-                            new_elem = substr_elem
-                    else :
-                        new_elem = num_elem
-                new.append(new_elem)
-            tbl_csv.append(new)
-        return tbl_csv
-
-    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    @staticmethod
-    def ImportCsvToTbl(in_csv_file_path) :
-        import csv
-
-        file_d = open(in_csv_file_path, 'r')
-        csv_read = csv.reader(file_d)
-        list_of_csv = list(csv_read)
-        tbl_csv = CasetDeodel.PreprocTbl(list_of_csv)
-        return tbl_csv
-
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
