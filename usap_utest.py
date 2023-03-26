@@ -5,10 +5,11 @@ Deodata Delanga Unit Test
         Tested with Winpython64-3.10.5.0
 """
 
+#   c4pub@git 2023
+
 from usap_common import *
 
 # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
 def iprnt( *args, **kwargs ) :
     """ Non delayed prints """
 
@@ -21,17 +22,15 @@ def iprnt( *args, **kwargs ) :
     return ret_item
 
 # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
 def SepLine ( display_flag = True ) :
     separator_string = ">-------------------------------------------------------------------------------"
     iprnt ( separator_string )
 
 # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-def UnitTest():
+def UnitTestDeodel():
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    # Unit Tests - begin
+    # Unit Test Deodel - begin
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
     import traceback
@@ -39,14 +38,6 @@ def UnitTest():
     import numpy as np
 
     import deodel
-
-    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    SepLine()
-    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    SepLine()
-    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-    iprnt ( "*** unit test begin ***" )
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
@@ -398,22 +389,22 @@ def UnitTest():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
     tt1 = [['a',    1.01,   2.02,   'e'],
-           ['b',    2,      3.01,   'd'], 
-           ['do',   "4",    5,      'g'], 
-           ['e',    2,      3.01,   'h'], 
+           ['b',    2,      3.01,   'd'],
+           ['do',   "4",    5,      'g'],
+           ['e',    2,      3.01,   'h'],
            ['cc',   '3.01', 4.01,   'cc']]
 
     iprnt ("- - - - tt1: ", tt1)
 
     tt2 = np.array(tt1)
     iprnt ("- - - - tt2: ", tt2)
-    
+
     tt3 = tt2.tolist()
     iprnt ("- - - - tt3: ", tt3)
 
     test_result = tt3
-    test_expect = [['a', '1.01', '2.02', 'e'], 
-                    ['b', '2', '3.01', 'd'], ['do', '4', '5', 'g'], 
+    test_expect = [['a', '1.01', '2.02', 'e'],
+                    ['b', '2', '3.01', 'd'], ['do', '4', '5', 'g'],
                     ['e', '2', '3.01', 'h'],
                     ['cc', '3.01', '4.01', 'cc']]
 
@@ -597,6 +588,7 @@ def UnitTest():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("ProcessVector and RevertVector test")
 
     tv1 = ['e',    1,      3.01,   'h',     11,     None]
 
@@ -625,6 +617,7 @@ def UnitTest():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("ProcessVector and RevertVector test")
 
     ret_1 = deodel.Working.ProcessVector(tv1, False)
     iprnt ("- - - - ret_1", ret_1)
@@ -650,6 +643,7 @@ def UnitTest():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("NumSplit test")
 
     tv1 = [1, 2, 3, 4]
     iprnt ("- - - - tv1", tv1)
@@ -679,6 +673,7 @@ def UnitTest():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("NumSplit test")
 
     tv1 = [1, 2, 3, 4]
     iprnt ("- - - - tv1", tv1)
@@ -708,6 +703,7 @@ def UnitTest():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("NumSplit test")
 
     tv1 = [1, 2, 3, 4]
     iprnt ("- - - - tv1", tv1)
@@ -737,6 +733,7 @@ def UnitTest():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("NumSplit test")
 
     tv1 = [5, 1, 2, 3, 4]
     iprnt ("- - - - tv1", tv1)
@@ -766,6 +763,7 @@ def UnitTest():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("NumSplit test")
 
     tv1 = [1, 2, 3]
     iprnt ("- - - - tv1", tv1)
@@ -795,6 +793,7 @@ def UnitTest():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("NumSplit test")
 
     tv1 = [1, 2, 3, 4, 5, 6]
     iprnt ("- - - - tv1", tv1)
@@ -824,6 +823,7 @@ def UnitTest():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("NumSplit test")
 
     tv1 = [0, 2, 3, 4, 5, 6]
     iprnt ("- - - - tv1", tv1)
@@ -853,6 +853,7 @@ def UnitTest():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("NumSplit test")
 
     tv1 = [1, 2, 3, 4, 5, 6]
     iprnt ("- - - - tv1", tv1)
@@ -882,6 +883,7 @@ def UnitTest():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("NumSplit test")
 
     tv1 = [1, 2, 3, 4]
     iprnt ("- - - - tv1", tv1)
@@ -911,6 +913,7 @@ def UnitTest():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("NumSplit test")
 
     tv1 = [1, 2, 3, 4]
     iprnt ("- - - - tv1", tv1)
@@ -940,6 +943,7 @@ def UnitTest():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("NumSplit test")
 
     tv1 = [1, 2, 3, 4, 5, 6]
     iprnt ("- - - - tv1", tv1)
@@ -969,6 +973,7 @@ def UnitTest():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("NumSplit test")
 
     tv1 = [4, 3, 1, 2, 8, 5, 7, 6]
     iprnt ("- - - - tv1", tv1)
@@ -998,6 +1003,7 @@ def UnitTest():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("NumSplit test")
 
     tv1 = [4, 3, 1, 2, 5, 6]
     iprnt ("- - - - tv1", tv1)
@@ -1027,6 +1033,7 @@ def UnitTest():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("NumSplit test")
 
     tv1 = [4, 3, 1, 2, 8, 5, 7, 6]
     iprnt ("- - - - tv1", tv1)
@@ -1056,6 +1063,7 @@ def UnitTest():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("NumSplit test")
 
     tv1 = [4, 3, 1, 2, 8, 5, 7, 6]
     iprnt ("- - - - tv1", tv1)
@@ -1085,6 +1093,7 @@ def UnitTest():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("NumSplit test")
 
     tv1 = [4, 3, 1, 2, 8, 5, 7, 6]
     iprnt ("- - - - tv1", tv1)
@@ -1115,6 +1124,7 @@ def UnitTest():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("NumSplit test")
 
     tv1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     iprnt ("- - - - tv1", tv1)
@@ -1144,6 +1154,7 @@ def UnitTest():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("NumSplit test")
 
     tv1 = [4, 3, 1, 2]
     iprnt ("- - - - tv1", tv1)
@@ -1173,6 +1184,7 @@ def UnitTest():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("NumSplit test")
 
     tv1 = [1, 2, 3, 4]
     iprnt ("- - - - tv1", tv1)
@@ -1202,6 +1214,7 @@ def UnitTest():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("NumSplit test")
 
     tv1 = [3, 3, 3, 4]
     iprnt ("- - - - tv1", tv1)
@@ -1231,6 +1244,7 @@ def UnitTest():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("NumSplit test")
 
     tv1 = [3, 3, 3, 4]
     iprnt ("- - - - tv1", tv1)
@@ -1261,6 +1275,7 @@ def UnitTest():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("NumSplit test")
 
     tv1 = [3, 3, 3, 4]
     iprnt ("- - - - tv1", tv1)
@@ -1291,6 +1306,7 @@ def UnitTest():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("NumSplit test")
 
     tv1 = [-2, -2, -2, -2]
     iprnt ("- - - - tv1", tv1)
@@ -1320,6 +1336,7 @@ def UnitTest():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("NumSplit test")
 
     tv1 = [-2, -2, -2]
     iprnt ("- - - - tv1", tv1)
@@ -1350,6 +1367,7 @@ def UnitTest():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("NumSplit test")
 
     tv1 = [-2, -2, -2, -2]
     iprnt ("- - - - tv1", tv1)
@@ -1379,6 +1397,7 @@ def UnitTest():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("NumSplit test")
 
     tv1 = [-2, -2, -2]
     iprnt ("- - - - tv1", tv1)
@@ -1408,6 +1427,7 @@ def UnitTest():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("NumSplit test")
 
     tv1 = [-2]
     iprnt ("- - - - tv1", tv1)
@@ -1437,6 +1457,7 @@ def UnitTest():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("NumSplit test")
 
     tv1 = [-2]
     iprnt ("- - - - tv1", tv1)
@@ -1466,6 +1487,7 @@ def UnitTest():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("NumSplit test")
 
     tv1 = [-2]
     iprnt ("- - - - tv1", tv1)
@@ -1495,6 +1517,7 @@ def UnitTest():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("NumSplit test")
 
     tv1 = [-2]
     iprnt ("- - - - tv1", tv1)
@@ -1524,6 +1547,7 @@ def UnitTest():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("NumSplit test")
 
     tv1 = []
     iprnt ("- - - - tv1", tv1)
@@ -1553,6 +1577,7 @@ def UnitTest():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("NumSplit test")
 
     tv1 = []
     iprnt ("- - - - tv1", tv1)
@@ -1582,6 +1607,7 @@ def UnitTest():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("NumSplit test")
 
     tv1 = [10, 20, 30]
     iprnt ("- - - - tv1", tv1)
@@ -1611,6 +1637,7 @@ def UnitTest():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("NumSplit test")
 
     tv1 = [1.2, 2]
     iprnt ("- - - - tv1", tv1)
@@ -1626,7 +1653,7 @@ def UnitTest():
 
     iprnt ("- - - - test_result:", test_result)
     iprnt ("- - - - test_expect:", test_expect)
-    
+
     set_eval = ( test_result == test_expect )
     iprnt ("- - - utest_test_no:", utest_test_no)
     utest_test_no += 1
@@ -1643,6 +1670,7 @@ def UnitTest():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("NumSplit test")
 
     tv1 = [1.2, 2]
     iprnt ("- - - - tv1", tv1)
@@ -1658,7 +1686,7 @@ def UnitTest():
 
     iprnt ("- - - - test_result:", test_result)
     iprnt ("- - - - test_expect:", test_expect)
-    
+
     set_eval = ( test_result == test_expect )
     iprnt ("- - - utest_test_no:", utest_test_no)
     utest_test_no += 1
@@ -1675,6 +1703,7 @@ def UnitTest():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("NumSplit test")
 
     tv1 = [1.2, 2]
     iprnt ("- - - - tv1", tv1)
@@ -1690,7 +1719,7 @@ def UnitTest():
 
     iprnt ("- - - - test_result:", test_result)
     iprnt ("- - - - test_expect:", test_expect)
-    
+
     set_eval = ( test_result == test_expect )
     iprnt ("- - - utest_test_no:", utest_test_no)
     utest_test_no += 1
@@ -1707,6 +1736,7 @@ def UnitTest():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("NumSplit test")
 
     tv1 = [3, 5, 3]
     iprnt ("- - - - tv1", tv1)
@@ -1722,7 +1752,7 @@ def UnitTest():
 
     iprnt ("- - - - test_result:", test_result)
     iprnt ("- - - - test_expect:", test_expect)
-    
+
     set_eval = ( test_result == test_expect )
     iprnt ("- - - utest_test_no:", utest_test_no)
     utest_test_no += 1
@@ -1739,6 +1769,7 @@ def UnitTest():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("NumSplit test")
 
     tv1 = [0, 0, 1]
     iprnt ("- - - - tv1", tv1)
@@ -1755,7 +1786,7 @@ def UnitTest():
 
     iprnt ("- - - - test_result:", test_result)
     iprnt ("- - - - test_expect:", test_expect)
-    
+
     set_eval = ( test_result == test_expect )
     iprnt ("- - - utest_test_no:", utest_test_no)
     utest_test_no += 1
@@ -1772,6 +1803,7 @@ def UnitTest():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("NumSplit test")
 
     tv1 = [0, 0, 1]
     iprnt ("- - - - tv1", tv1)
@@ -1788,7 +1820,7 @@ def UnitTest():
 
     iprnt ("- - - - test_result:", test_result)
     iprnt ("- - - - test_expect:", test_expect)
-    
+
     set_eval = ( test_result == test_expect )
     iprnt ("- - - utest_test_no:", utest_test_no)
     utest_test_no += 1
@@ -1805,6 +1837,7 @@ def UnitTest():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("NumSplit test")
 
     tv1 = [0, 0, 0, 0, 1]
     iprnt ("- - - - tv1", tv1)
@@ -1821,7 +1854,7 @@ def UnitTest():
 
     iprnt ("- - - - test_result:", test_result)
     iprnt ("- - - - test_expect:", test_expect)
-    
+
     set_eval = ( test_result == test_expect )
     iprnt ("- - - utest_test_no:", utest_test_no)
     utest_test_no += 1
@@ -1838,6 +1871,7 @@ def UnitTest():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("NumSplit test")
 
     tv1 = [0, 0, 0, 0, 1]
     iprnt ("- - - - tv1", tv1)
@@ -1854,7 +1888,7 @@ def UnitTest():
 
     iprnt ("- - - - test_result:", test_result)
     iprnt ("- - - - test_expect:", test_expect)
-    
+
     set_eval = ( test_result == test_expect )
     iprnt ("- - - utest_test_no:", utest_test_no)
     utest_test_no += 1
@@ -1871,6 +1905,7 @@ def UnitTest():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("NumSplit test")
 
     tv1 = [0, 0, 0, 0, 1]
     iprnt ("- - - - tv1", tv1)
@@ -1886,7 +1921,7 @@ def UnitTest():
 
     iprnt ("- - - - test_result:", test_result)
     iprnt ("- - - - test_expect:", test_expect)
-    
+
     set_eval = ( test_result == test_expect )
     iprnt ("- - - utest_test_no:", utest_test_no)
     utest_test_no += 1
@@ -1903,6 +1938,7 @@ def UnitTest():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("NumSplit test")
 
     tv1 = [0, 0, 0, 0, 1]
     iprnt ("- - - - tv1", tv1)
@@ -1918,7 +1954,7 @@ def UnitTest():
 
     iprnt ("- - - - test_result:", test_result)
     iprnt ("- - - - test_expect:", test_expect)
-    
+
     set_eval = ( test_result == test_expect )
     iprnt ("- - - utest_test_no:", utest_test_no)
     utest_test_no += 1
@@ -1935,6 +1971,7 @@ def UnitTest():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("NumSplit test")
 
     tv1 = [0, 0, 0, 0, 1]
     iprnt ("- - - - tv1", tv1)
@@ -1950,7 +1987,7 @@ def UnitTest():
 
     iprnt ("- - - - test_result:", test_result)
     iprnt ("- - - - test_expect:", test_expect)
-    
+
     set_eval = ( test_result == test_expect )
     iprnt ("- - - utest_test_no:", utest_test_no)
     utest_test_no += 1
@@ -1967,6 +2004,7 @@ def UnitTest():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("NumSplit test")
 
     tv1 = [0, 0, 0, 0, 1]
     iprnt ("- - - - tv1", tv1)
@@ -1982,7 +2020,7 @@ def UnitTest():
 
     iprnt ("- - - - test_result:", test_result)
     iprnt ("- - - - test_expect:", test_expect)
-    
+
     set_eval = ( test_result == test_expect )
     iprnt ("- - - utest_test_no:", utest_test_no)
     utest_test_no += 1
@@ -1999,6 +2037,7 @@ def UnitTest():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("NumSplit test")
 
     tv1 = [0, 0, 0, 0, 1]
     iprnt ("- - - - tv1", tv1)
@@ -2014,7 +2053,7 @@ def UnitTest():
 
     iprnt ("- - - - test_result:", test_result)
     iprnt ("- - - - test_expect:", test_expect)
-    
+
     set_eval = ( test_result == test_expect )
     iprnt ("- - - utest_test_no:", utest_test_no)
     utest_test_no += 1
@@ -2031,6 +2070,7 @@ def UnitTest():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("NumSplit test")
 
     tv1 = [0, 0, 0, 0, 1]
     iprnt ("- - - - tv1", tv1)
@@ -2046,7 +2086,7 @@ def UnitTest():
 
     iprnt ("- - - - test_result:", test_result)
     iprnt ("- - - - test_expect:", test_expect)
-    
+
     set_eval = ( test_result == test_expect )
     iprnt ("- - - utest_test_no:", utest_test_no)
     utest_test_no += 1
@@ -2063,12 +2103,12 @@ def UnitTest():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("deodel fit test")
 
-    iprnt ()
     tt_X = [['a',   1.01,   'az',   'e'],
-            ['b',   "3.01", 3.01,   'd'], 
-            ['do',  "4",    5,      'd'], 
-            ['b',   2,      3.01,   'h'], 
+            ['b',   "3.01", 3.01,   'd'],
+            ['do',  "4",    5,      'd'],
+            ['b',   2,      3.01,   'h'],
             ['cc',  '3.01', 'az',   'e']]
 
     tt_y = [
@@ -2092,7 +2132,7 @@ def UnitTest():
 
     iprnt ("- - - - - - - - test_result:", test_result)
     iprnt ("- - - - - - - - test_expect:", test_expect)
-    
+
     test_result = test_result
     test_expect = test_expect
 
@@ -2115,6 +2155,7 @@ def UnitTest():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("predict test")
 
     tt_test = tt_X[:]
     tt_predict = tt_o.predict(tt_test)
@@ -2125,7 +2166,7 @@ def UnitTest():
 
     iprnt ("- - - - test_result:", test_result)
     iprnt ("- - - - test_expect:", test_expect)
-    
+
     set_eval = ( test_result == test_expect )
     iprnt ("- - - utest_test_no:", utest_test_no)
     utest_test_no += 1
@@ -2142,12 +2183,12 @@ def UnitTest():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
+    iprnt ("predict test")
     iprnt ()
     tt_X = [['a',   1.01,   'az',   'e'],
-            ['b',   "3.01", 3.01,   'd'], 
-            ['d',   "4",    5,      'd'], 
-            ['b',   2,      3.01,   'h'], 
+            ['b',   "3.01", 3.01,   'd'],
+            ['d',   "4",    5.0,    'd'],
+            ['b',   2.0,    3.01,   'h'],
             ['c',   '3.01', 'az',   'e']]
 
     tt_y = [
@@ -2160,8 +2201,8 @@ def UnitTest():
 
     tt_test = [
             ['a',   1.01,   5.0,    'd'],
-            ['b',   "3.01", 3.01,   'e'], 
-            ['b',   2,      5.0,    'e'],
+            ['b',   "3.01", 3.01,   'e'],
+            ['b',   2.0,    5.0,    'e'],
             ['a',   "4",    3.01,   'e']]
 
     tt_exp = [
@@ -2181,7 +2222,7 @@ def UnitTest():
 
     iprnt ("- - - - test_result:", test_result)
     iprnt ("- - - - test_expect:", test_expect)
-    
+
     set_eval = ( test_result == test_expect )
     iprnt ("- - - utest_test_no:", utest_test_no)
     utest_test_no += 1
@@ -2202,9 +2243,9 @@ def UnitTest():
     iprnt ("dealing with missing attributes (None), ignore them")
     iprnt ()
     tt_X = [['a',   1.01,   'az',   'e'],
-            ['b',   "3.01", 3.01,   'd'], 
-            ['d',   "4",    None,   'd'], 
-            ['b',   2,      3.01,   'h'], 
+            ['b',   "3.01", 3.01,   'd'],
+            ['d',   "4",    None,   'd'],
+            ['b',   2.0,    3.01,   'h'],
             ['c',   '3.01', 'az',   'e']]
 
     tt_y = [
@@ -2217,8 +2258,8 @@ def UnitTest():
 
     tt_test = [
             ['a',   1.01,   None,   'd'],
-            ['b',   "3.01", 3.01,   'e'], 
-            ['b',   2,      5.0,    'e'],
+            ['b',   "3.01", 3.01,   'e'],
+            ['b',   2.0,    5.0,    'e'],
             ['a',   "4",    3.01,   'e']]
 
     tt_exp = [
@@ -2238,7 +2279,7 @@ def UnitTest():
 
     iprnt ("- - - - test_result:", test_result)
     iprnt ("- - - - test_expect:", test_expect)
-    
+
     set_eval = ( test_result == test_expect )
     iprnt ("- - - utest_test_no:", utest_test_no)
     utest_test_no += 1
@@ -2259,9 +2300,9 @@ def UnitTest():
     iprnt ("behaviour when no tie break")
     iprnt ()
     tt_X = [['a',   1.01,   'az',   'e'],
-            ['b',   "3.01", 3.01,   'd'], 
-            ['d',   "4",    5,      'd'], 
-            ['b',   2,      3.01,   'h'], 
+            ['b',   "3.01", 3.01,   'd'],
+            ['d',   "4",    5.0,    'd'],
+            ['b',   2.0,    3.01,   'h'],
             ['c',   '3.01', 'az',   'e']]
 
     tt_y = [
@@ -2274,8 +2315,8 @@ def UnitTest():
 
     tt_test = [
             ['a',   1.01,   5.0,    'd'],
-            ['b',   "3.01", 3.01,   'e'], 
-            ['b',   2,      5.0,    'e'],
+            ['b',   "3.01", 3.01,   'e'],
+            ['b',   2.0,    5.0,    'e'],
             ['a',   "4",    3.01,   'e']]
 
     tt_exp = [
@@ -2296,7 +2337,179 @@ def UnitTest():
 
     iprnt ("- - - - test_result:", test_result)
     iprnt ("- - - - test_expect:", test_expect)
-    
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("integer mix in prediction")
+    iprnt ()
+    tt_X = [['a',   1.01,   'az',   'e'],
+            ['b',   "3.01", 3.01,   'd'],
+            ['d',   "4",    5,      'd'],
+            ['b',   2,      3.01,   'h'],
+            ['c',   '3.01', 'az',   'e']]
+
+    tt_y = [
+            'A',
+            'B',
+            'B',
+            'C',
+            'A'
+           ]
+
+    tt_test = [
+            ['a',   1.01,   5.0,    'd'],
+            ['b',   "3.01", 3.01,   'e'],
+            ['b',   2,      5.0,    'e'],
+            ['a',   "4",    3.01,   'e']]
+
+    tt_exp = [
+            'B',
+            'B',
+            'A',
+            'A',
+           ]
+
+    tt_o = deodel.DeodataDelangaClassifier()
+    tt_o.fit(tt_X, tt_y)
+    tt_predict = tt_o.predict(tt_test)
+    iprnt ()
+
+    test_result = tt_predict
+    test_expect = tt_exp
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("integer mix in dealing with missing attributes")
+    iprnt ()
+    tt_X = [['a',   1.01,   'az',   'e'],
+            ['b',   "3.01", 3.01,   'd'],
+            ['d',   "4",    None,   'd'],
+            ['b',   2,      3.01,   'h'],
+            ['c',   '3.01', 'az',   'e']]
+
+    tt_y = [
+            'A',
+            'B',
+            'B',
+            'C',
+            'A'
+           ]
+
+    tt_test = [
+            ['a',   1.01,   None,   'd'],
+            ['b',   "3.01", 3.01,   'e'],
+            ['b',   2,      5.0,    'e'],
+            ['a',   "4",    3.01,   'e']]
+
+    tt_exp = [
+            'A',
+            'B',
+            'B',
+            'A',
+           ]
+
+    tt_o = deodel.DeodataDelangaClassifier()
+    tt_o.fit(tt_X, tt_y)
+    tt_predict = tt_o.predict(tt_test)
+    iprnt ()
+
+    test_result = tt_predict
+    test_expect = tt_exp
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("integer mix in no tie break")
+    iprnt ()
+    tt_X = [['a',   1.01,   'az',   'e'],
+            ['b',   "3.01", 3.01,   'd'],
+            ['d',   "4",    5,      'd'],
+            ['b',   2,      3.01,   'h'],
+            ['c',   '3.01', 'az',   'e']]
+
+    tt_y = [
+            'A',
+            'B',
+            'B',
+            'C',
+            'A'
+           ]
+
+    tt_test = [
+            ['a',   1.01,   5.0,    'd'],
+            ['b',   "3.01", 3.01,   'e'],
+            ['b',   2,      5.0,    'e'],
+            ['a',   "4",    3.01,   'e']]
+
+    tt_exp = [
+            'A',
+            'B',
+            'A',
+            'A',
+           ]
+
+    aux_param = {'tbreak_depth': 1}
+    tt_o = deodel.DeodataDelangaClassifier(aux_param)
+    tt_o.fit(tt_X, tt_y)
+    tt_predict = tt_o.predict(tt_test)
+    iprnt ()
+
+    test_result = tt_predict
+    test_expect = tt_exp
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
     set_eval = ( test_result == test_expect )
     iprnt ("- - - utest_test_no:", utest_test_no)
     utest_test_no += 1
@@ -2318,10 +2531,10 @@ def UnitTest():
     iprnt ()
 
     tt_X = [['a',   None,  'a'],
-            ['a',   None,  'b'], 
-            ['c',   'c',   'c'], 
-            ['d',   'c',   'c'], 
-            ['e',   'd',   'd'], 
+            ['a',   None,  'b'],
+            ['c',   'c',   'c'],
+            ['d',   'c',   'c'],
+            ['e',   'd',   'd'],
             ['e',   'e',   'd']]
 
     tt_y = [
@@ -2353,7 +2566,7 @@ def UnitTest():
 
     iprnt ("- - - - test_result:", test_result)
     iprnt ("- - - - test_expect:", test_expect)
-    
+
     set_eval = ( test_result == test_expect )
     iprnt ("- - - utest_test_no:", utest_test_no)
     utest_test_no += 1
@@ -2381,11 +2594,12 @@ def UnitTest():
     iprnt ()
 
     test_result = deodel.DeodataDelangaClassifier.version
-    test_expect = 1.51
+    # test_expect = 1.51
+    test_expect = 1.65
 
     iprnt ("- - - - test_result:", test_result)
     iprnt ("- - - - test_expect:", test_expect)
-    
+
     set_eval = ( test_result == test_expect )
     iprnt ("- - - utest_test_no:", utest_test_no)
     utest_test_no += 1
@@ -2403,28 +2617,75 @@ def UnitTest():
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    iprnt ("test PreprocTbl")
+    # >- - - - - - - - - - -
+    SepLine()
+    iprnt ("- - - UnitTestDeodel results")
+    iprnt ("- - -   utest_fail_counter:", utest_fail_counter)
+    SepLine()
+    # >- - - - - - - - - - -
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    return utest_fail_counter
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    # Unit Test Deodel - end
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+# >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+
+
+# >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+def UnitTestUseApp():
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    # Unit Test Usap - begin
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    import traceback
+    import sys
+
+    import usap_csv_eval
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    utest_fail_counter = 0
+    utest_test_no = 0
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("test CsvTblPrep ok")
     iprnt ()
 
     test_csv_lst =  [
                         ['', '', '', '', ''],
                         ['', 'a', '   1.01', '   az', ''],
-                        ['', 'b', '3.01', "  ' 3.01' ", ' '],
-                        ['', 'd', '4', '    5', ' '],
+                        ['', 'b', '3.051', "  ' 3.051' ", ' '],
+                        ['', 'd', '4', '   5 ', ' '],
                         ['', 'b', '   2', '      3.01', ' '],
-                        ['', 'c', '33', ' az', ''],
+                        ['', 'c', "33", ' az', ''],
                         ['', 'a', '   ', '    az  z ', ''],
                         ['', 'b', '2.01', 7.01, ''],
-                        ['', 'd', '4', '5', ''],
+                        ['', 'd', '-4e-2', '-5', ''],
                         ['', 'b', '   2', "      33.013 '", ''],
-                        ['', 'c', '3.01', " az ' sd", ''],
+                        ['', 'c', '3.098', " az ' sd", ''],
                         ['', 'a', '   1.01', '   az \' "gd" \'uiou uo\' ds', ''],
-                        ['', 'b', '', '22 qqw  9.03', ''],
-                        ['', 'd', {1, 2, 1}, "6'    5", ''],
-                        ['', 'b', '   2.2424', '      44.013', ''],
-                        ['', 'c', '  "53.01"  ', '77 " az" 2\' sd 89', ''],
-                        ['', 'd', '', "''", '8'],
-                        ['', 'e', ' ', '``', '9'],
+                        ['', 'b', '', '22 qqw  9.03', '', -4, ' -75'],
+                        ['', 'd', {1, 2, 1}, "6'    5", '', 8.333],
+                        ['', 'b', '   2.2424', '      44.017', ''],
+                        ['', 'c', '  "53.07"  ', '77 " az" 2\' sd 89', ''],
+                        ['', 'd', '', "''", '8', -0],
+                        ['', 'e', ' ', '``', '9', -0.0],
+                        ['', 'a', '-inf', '+inf', 'nan'],
+                        ['', 'b', "-inf", "inf", "nan"],
+                        ['', 'c', float('-inf'), float('+inf'), float('nan')],
+                        ['', 'd', float('-inf'), float('inf'), None],
                         ['', '', None, "", '']
                     ]
 
@@ -2433,35 +2694,39 @@ def UnitTest():
     expect_result = [
                         [None, None, None, None, None],
                         [None, 'a', 1.01, '   az', None],
-                        [None, 'b', 3.01, ' 3.01', ' '],
-                        [None, 'd', 4, 5, ' '],
+                        [None, 'b', 3.051, ' 3.051', ' '],
+                        [None, 'd', 4, 5.0, ' '],
                         [None, 'b', 2, 3.01, ' '],
                         [None, 'c', 33, ' az', None],
                         [None, 'a', '   ', '    az  z ', None],
                         [None, 'b', 2.01, 7.01, None],
-                        [None, 'd', 4, 5, None],
+                        [None, 'd', -4e-2, -5, None],
                         [None, 'b', 2, "      33.013 '", None],
-                        [None, 'c', 3.01, " az ' sd", None],
+                        [None, 'c', 3.098, " az ' sd", None],
                         [None, 'a', 1.01, '   az \' "gd" \'uiou uo\' ds', None],
-                        [None, 'b', None, '22 qqw  9.03', None],
-                        [None, 'd', None, "6'    5", None],
-                        [None, 'b', 2.2424, 44.013, None],
-                        [None, 'c', "53.01", '77 " az" 2\' sd 89', None],
-                        [None, 'd', None, '', 8],
-                        [None, 'e', ' ', '``', 9],
+                        [None, 'b', None, '22 qqw  9.03', None, -4, -75],
+                        [None, 'd', None, "6'    5", None, 8.333],
+                        [None, 'b', 2.2424, 44.017, None],
+                        [None, 'c', "53.07", '77 " az" 2\' sd 89', None],
+                        [None, 'd', None, '', 8, 0],
+                        [None, 'e', ' ', '``', 9, 0.0],
+                        [None, "a", "-inf", "+inf", "nan"],
+                        [None, 'b', '-inf', 'inf', 'nan'],
+                        [None, 'c', '-inf', '+inf', 'nan'],
+                        [None, 'd', '-inf', '+inf', None],
                         [None, None, None, None, None]
                     ]
 
-    iprnt ("- - - - PreprocTbl - begin")
-    proc_tbl = deodel.CasetDeodel.PreprocTbl(test_csv_lst)
-    iprnt ("- - - - PreprocTbl - end")
+    iprnt ("- - - - CsvTblPrep - begin")
+    proc_tbl = usap_csv_eval.TblUtil.CsvTblPrep(test_csv_lst)
+    iprnt ("- - - - CsvTblPrep - end")
 
     test_result = proc_tbl
     test_expect = expect_result
 
     iprnt ("- - - - test_result:", test_result)
     iprnt ("- - - - test_expect:", test_expect)
-    
+
     set_eval = ( test_result == test_expect )
     iprnt ("- - - utest_test_no:", utest_test_no)
     utest_test_no += 1
@@ -2476,6 +2741,776 @@ def UnitTest():
         traceback.print_stack(file=sys.stdout)
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("test TblPrepProxy ok")
+    iprnt ()
+
+    t_csv = [
+                None,
+                [" 'a aa' ",     None,   " -15e-2 ",       '',         'Y' ],
+                ['  "a bb" ',  "None",            2, " '65' ",        "'N'"],
+                ['b aa',      {'a':1},  "  '3e-1' ",     '""', float('nan')],
+                {}
+            ]
+
+    ret_tuple = usap_csv_eval.TblUtil.TblPrepProxy(t_csv)
+    ret_status, ret_list_csv, ret_msg = ret_tuple
+
+    e_csv = [
+                [],
+                ['a aa',      None,     -0.15,      None,   'Y' ],
+                ['a bb',      "None",       2,      '65',   'N' ],
+                ['b aa',      None,     '3e-1',     '',   'nan' ],
+                []
+            ]
+
+    test_result = ret_tuple
+    test_expect = True, e_csv, ""
+
+    iprnt ("- - - - t_csv:", t_csv)
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("test CleanTargetExtract ok")
+    iprnt ()
+
+    t_csv = [
+                [None, None],
+                [],
+                [  'a', None,  101,   None, 'Y' ],
+                [  'b', None,  23.4,  None, 'N' ],
+                []
+            ]
+    t_targ_idx = -1
+
+    r_tuple = usap_csv_eval.TblUtil.CleanTargetExtract(t_csv, t_targ_idx)
+    r_status, r_train, r_targ, r_str = r_tuple
+
+    e_status = True
+    e_train = [
+                [  'a',        101  ],
+                [  'b',        23.4 ],
+            ]
+    e_targ = [ 'Y', 'N' ]
+    e_str = ""
+    e_tuple = e_status, e_train, e_targ, e_str
+
+    test_result = r_tuple
+    test_expect = e_tuple
+
+    iprnt ("- - - - t_csv:", t_csv)
+    iprnt ("- - - - t_targ_idx:", t_targ_idx)
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("test CleanTargetExtract ok")
+    iprnt ()
+
+    t_csv = [
+                [None, None],
+                [],
+                [  'a', None,  101,   None, 'Y' ],
+                [  'b', None,  23.4,  None, 'N' ],
+                []
+            ]
+    t_targ_idx = 4
+
+    r_tuple = usap_csv_eval.TblUtil.CleanTargetExtract(t_csv, t_targ_idx)
+    r_status, r_train, r_targ, r_str = r_tuple
+
+    e_status = True
+    e_train = [
+                [  'a',        101  ],
+                [  'b',        23.4 ],
+            ]
+    e_targ = [ 'Y', 'N' ]
+    e_str = ""
+    e_tuple = e_status, e_train, e_targ, e_str
+
+    test_result = r_tuple
+    test_expect = e_tuple
+
+    iprnt ("- - - - t_csv:", t_csv)
+    iprnt ("- - - - t_targ_idx:", t_targ_idx)
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("test CleanTargetExtract ok")
+    iprnt ()
+
+    t_csv = [
+                [None, None],
+                [],
+                [  'a', None,  101,   None, 'Y' ],
+                [  'b', None,  23.4,  None, 'N' ],
+                []
+            ]
+    t_targ_idx = 0
+
+    r_tuple = usap_csv_eval.TblUtil.CleanTargetExtract(t_csv, t_targ_idx)
+    r_status, r_train, r_targ, r_str = r_tuple
+
+    e_status = True
+    e_train = [
+                [ 101,    'Y' ],
+                [ 23.4,   'N' ],
+            ]
+    e_targ = [ 'a', 'b' ]
+    e_str = ""
+    e_tuple = e_status, e_train, e_targ, e_str
+
+    test_result = r_tuple
+    test_expect = e_tuple
+
+    iprnt ("- - - - t_csv:", t_csv)
+    iprnt ("- - - - t_targ_idx:", t_targ_idx)
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("test CleanTargetExtract ok")
+    iprnt ()
+
+    t_csv = [
+                [None, None],
+                [],
+                [  'a', None,  101,   None, 'Y' ],
+                [  'b', None,  23.4,  None, 'N' ],
+                []
+            ]
+    t_targ_idx = 2
+
+    r_tuple = usap_csv_eval.TblUtil.CleanTargetExtract(t_csv, t_targ_idx)
+    r_status, r_train, r_targ, r_str = r_tuple
+
+    e_status = True
+    e_train = [
+                [ 'a',    'Y' ],
+                [ 'b',    'N' ],
+            ]
+    e_targ = [ 101, 23.4 ]
+    e_str = ""
+    e_tuple = e_status, e_train, e_targ, e_str
+
+    test_result = r_tuple
+    test_expect = e_tuple
+
+    iprnt ("- - - - t_csv:", t_csv)
+    iprnt ("- - - - t_targ_idx:", t_targ_idx)
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("test CleanTargetExtract ok")
+    iprnt ()
+
+    t_csv = [
+                [None, None],
+                [],
+                [  None, 'a', None,  101,   None, 'Y' ],
+                [  None, 'b', None,  23.4,  None, 'N' ],
+                []
+            ]
+    t_targ_idx = 1
+
+    r_tuple = usap_csv_eval.TblUtil.CleanTargetExtract(t_csv, t_targ_idx)
+    r_status, r_train, r_targ, r_str = r_tuple
+
+    e_status = True
+    e_train = [
+                [ 101,    'Y' ],
+                [ 23.4,   'N' ],
+            ]
+    e_targ = [ 'a', 'b' ]
+    e_str = ""
+    e_tuple = e_status, e_train, e_targ, e_str
+
+    test_result = r_tuple
+    test_expect = e_tuple
+
+    iprnt ("- - - - t_csv:", t_csv)
+    iprnt ("- - - - t_targ_idx:", t_targ_idx)
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("test CleanTargetExtract idx fail")
+    iprnt ()
+
+    t_csv = [
+                [None, None],
+                [],
+                [  None, 'a', None,  101,   None, 'Y' ],
+                [  None, 'b', None,  23.4,  None, 'N' ],
+                []
+            ]
+    t_targ_idx = 0
+
+    r_tuple = usap_csv_eval.TblUtil.CleanTargetExtract(t_csv, t_targ_idx)
+    r_status, r_train, r_targ, r_str = r_tuple
+
+    e_status = False
+    e_train = []
+    e_targ = []
+    e_str = "Error: empty target column !"
+    e_tuple = e_status, e_train, e_targ, e_str
+
+    test_result = r_tuple
+    test_expect = e_tuple
+
+    iprnt ("- - - - t_csv:", t_csv)
+    iprnt ("- - - - t_targ_idx:", t_targ_idx)
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("test CleanTargetExtract idx fail")
+    iprnt ()
+
+    t_csv = [
+                [None, None],
+                [],
+                [  'a', None,  101,   None, 'Y' ],
+                [  'b', None,  23.4,  None, 'N' ],
+                []
+            ]
+    t_targ_idx = 10
+
+    r_tuple = usap_csv_eval.TblUtil.CleanTargetExtract(t_csv, t_targ_idx)
+    r_status, r_train, r_targ, r_str = r_tuple
+
+    e_status = False
+    e_train = []
+    e_targ = []
+    e_str = "Error: invalid target index !"
+    e_tuple = e_status, e_train, e_targ, e_str
+
+    test_result = r_tuple
+    test_expect = e_tuple
+
+    iprnt ("- - - - t_csv:", t_csv)
+    iprnt ("- - - - t_targ_idx:", t_targ_idx)
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("test CleanTargetExtract idx fail")
+    iprnt ()
+
+    t_csv = [
+                [None, None],
+                [],
+                [  'a', None,  101,   None, 'Y' ],
+                [  'b', None,  23.4,  None, 'N' ],
+                []
+            ]
+    t_targ_idx = 3
+
+    r_tuple = usap_csv_eval.TblUtil.CleanTargetExtract(t_csv, t_targ_idx)
+    r_status, r_train, r_targ, r_str = r_tuple
+
+    e_status = False
+    e_train = []
+    e_targ = []
+    e_str = "Error: empty target column !"
+    e_tuple = e_status, e_train, e_targ, e_str
+
+    test_result = r_tuple
+    test_expect = e_tuple
+
+    iprnt ("- - - - t_csv:", t_csv)
+    iprnt ("- - - - t_targ_idx:", t_targ_idx)
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("test CheckIsUrl ok")
+    iprnt ()
+
+    t_url = "https://unexistent.just.for.test.site.org"
+
+    r_status = usap_csv_eval.TblUtil.CheckIsUrl(t_url)
+
+    e_status = True
+
+    test_result = r_status
+    test_expect = e_status
+
+    iprnt ("- - - - t_url:", t_url)
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("test CheckIsUrl fail")
+    iprnt ()
+
+    t_url = "gggggghttps://unexistent.just.for.test.site.org"
+
+    r_status = usap_csv_eval.TblUtil.CheckIsUrl(t_url)
+
+    e_status = False
+
+    test_result = r_status
+    test_expect = e_status
+
+    iprnt ("- - - - t_url:", t_url)
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("test ImportCsvTbl fail")
+    iprnt ()
+
+    t_url = "gggggghttps://unexistent.just.for.test.site.org"
+
+    r_tuple = usap_csv_eval.TblUtil.ImportCsvTbl(t_url)
+
+    e_status = False
+    e_csv = None
+    e_str = "Error: failed file access !"
+    e_tuple = e_status, e_csv, e_str
+
+    test_result = r_tuple
+    test_expect = e_tuple
+
+    iprnt ("- - - - t_url:", t_url)
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("test ImportCsvTbl fail")
+    iprnt ()
+
+    t_url = "https://unexistent.just.for.test.site.org"
+
+    r_tuple = usap_csv_eval.TblUtil.ImportCsvTbl(t_url)
+
+    e_status = False
+    e_csv = None
+    e_str = "Error: failed urlopen"
+    e_tuple = e_status, e_csv, e_str
+
+    test_result = r_tuple
+    test_expect = e_tuple
+
+    iprnt ("- - - - t_url:", t_url)
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("test TblPrepProxy fail")
+    iprnt ()
+
+    t_url = "gggggghttps://unexistent.just.for.test.site.org"
+
+    r_tuple = usap_csv_eval.TblUtil.TblPrepProxy(t_url)
+
+    e_status = False
+    e_csv = None
+    e_str = "Error: failed file access !"
+    e_tuple = e_status, e_csv, e_str
+
+    test_result = r_tuple
+    test_expect = e_tuple
+
+    iprnt ("- - - - t_url:", t_url)
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("test CleanTargetExtract ok")
+    iprnt ()
+
+    t_csv = [
+                [None, None],
+                [],
+                [  'a', None,  101,   None, 'Y' ],
+                [  'b', None,  23.4,  None, 'N' ],
+                []
+            ]
+    t_targ_idx = 0
+
+    r_tuple = usap_csv_eval.TblUtil.CleanTargetExtract(t_csv, t_targ_idx)
+    r_status, r_train, r_targ, r_str = r_tuple
+
+    e_status = True
+    e_train = [
+                [ 101,    'Y' ],
+                [ 23.4,   'N' ],
+            ]
+    e_targ = [ 'a', 'b' ]
+    e_str = ""
+    e_tuple = e_status, e_train, e_targ, e_str
+
+    test_result = r_tuple
+    test_expect = e_tuple
+
+    iprnt ("- - - - t_csv:", t_csv)
+    iprnt ("- - - - t_targ_idx:", t_targ_idx)
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("test CvsProcess ok")
+    iprnt ()
+
+    t_csv = [
+                [  'a', None,  101,   None, 'Y' ],
+                [  'b', None,  23.4,  None, 'N' ],
+            ]
+
+    r_dict = usap_csv_eval.TblUtil.CvsProcess(t_csv)
+
+    e_dict = {}
+    e_dict['status'] = True
+    e_dict['data'] = (0, 1)
+    e_dict['msg'] = ""
+
+    test_result = r_dict
+    test_expect = e_dict
+
+    iprnt ("- - - - t_csv:", t_csv)
+    iprnt ("- - - - t_targ_idx:", t_targ_idx)
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("test CvsProcess fail")
+    iprnt ()
+
+    t_csv = [
+                [  'a', None,  101,   None, 'Y' ],
+                # [  'b', None,  23.4,  None, 'N' ],
+            ]
+
+    r_dict = usap_csv_eval.TblUtil.CvsProcess(t_csv)
+
+    e_dict = {}
+    e_dict['status'] = False
+    e_dict['data'] = (None, None)
+    e_dict['msg'] = ""
+
+    test_result = r_dict
+    test_expect = e_dict
+
+    iprnt ("- - - - t_csv:", t_csv)
+    iprnt ("- - - - t_targ_idx:", t_targ_idx)
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("test CvsProcess fail")
+    iprnt ()
+
+    t_csv = [
+                # [  'a', None,  101,   None, 'Y' ],
+                # [  'b', None,  23.4,  None, 'N' ],
+            ]
+
+    r_dict = usap_csv_eval.TblUtil.CvsProcess(t_csv)
+
+    e_dict = {}
+    e_dict['status'] = False
+    e_dict['data'] = (None, None)
+    e_dict['msg'] = "Error: data extraction failed !"
+
+    test_result = r_dict
+    test_expect = e_dict
+
+    iprnt ("- - - - t_csv:", t_csv)
+    iprnt ("- - - - t_targ_idx:", t_targ_idx)
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
@@ -2483,32 +3518,74 @@ def UnitTest():
 
     # >- - - - - - - - - - -
     SepLine()
-    iprnt ("- - - utest_fail_counter:", utest_fail_counter)
+    iprnt ("- - - UnitTestUseApp results")
+    iprnt ("- - -   utest_fail_counter:", utest_fail_counter)
+    SepLine()
+    # >- - - - - - - - - - -
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    return utest_fail_counter
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    # Unit Test Usap - end
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+# >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+# >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+def UnitTest():
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ( "*** unit test begin ***" )
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    utest_fail_counter = 0
+
+    ret_data = UnitTestDeodel()
+    utest_fail_counter += ret_data
+    iprnt ("- - - ")
+
+    ret_data = UnitTestUseApp()
+    utest_fail_counter += ret_data
+    iprnt ("- - - ")
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    # >- - - - - - - - - - -
+    SepLine()
+    iprnt ("- - - Aggregate results")
+    iprnt ("- - -   utest_fail_counter:", utest_fail_counter)
     if utest_fail_counter == 0:
         iprnt ("- - -   UnitTest succes")
     else:
         iprnt ("- - -   UnitTest failed !")
-        iprnt ("- - -       errorrs:", utest_fail_counter)
+        iprnt ("- - -       errors:", utest_fail_counter)
     SepLine()
     # >- - - - - - - - - - -
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
     iprnt ( "*** unit test end ***" )
-
-    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
     return utest_fail_counter
 
-    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    # Unit Tests - end
-    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+
+
+
 
 # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

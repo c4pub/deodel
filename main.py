@@ -4,6 +4,8 @@
         Tested with Winpython64-3.10.5.0
 """
 
+#   c4pub@git 2023
+
 # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 import usap_common
@@ -23,6 +25,7 @@ import usap_demo
 # import usap_utest
 # import usap_exprmnt
 # import usap_cmp_binning
+# import usap_csv_eval
 
 print()
 print("- - - - main end - - - - - ")
