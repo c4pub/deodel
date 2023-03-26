@@ -2677,7 +2677,7 @@ def UnitTestUseApp():
                         ['', 'c', '3.098', " az ' sd", ''],
                         ['', 'a', '   1.01', '   az \' "gd" \'uiou uo\' ds', ''],
                         ['', 'b', '', '22 qqw  9.03', '', -4, ' -75'],
-                        ['', 'd', {1, 2, 1}, "6'    5", '', 8.333],
+                        ['', 'd', {1, 2, 1, 3}, "6'    5", '', 8.333],
                         ['', 'b', '   2.2424', '      44.017', ''],
                         ['', 'c', '  "53.07"  ', '77 " az" 2\' sd 89', ''],
                         ['', 'd', '', "''", '8', -0],
@@ -2705,7 +2705,7 @@ def UnitTestUseApp():
                         [None, 'c', 3.098, " az ' sd", None],
                         [None, 'a', 1.01, '   az \' "gd" \'uiou uo\' ds', None],
                         [None, 'b', None, '22 qqw  9.03', None, -4, -75],
-                        [None, 'd', None, "6'    5", None, 8.333],
+                        [None, 'd', "{1, 2, 3}", "6'    5", None, 8.333],
                         [None, 'b', 2.2424, 44.017, None],
                         [None, 'c', "53.07", '77 " az" 2\' sd 89', None],
                         [None, 'd', None, '', 8, 0],
@@ -2760,10 +2760,10 @@ def UnitTestUseApp():
 
     e_csv = [
                 [],
-                ['a aa',      None,     -0.15,      None,   'Y' ],
-                ['a bb',      "None",       2,      '65',   'N' ],
-                ['b aa',      None,     '3e-1',     '',   'nan' ],
-                []
+                ['a aa',      None,     -0.15,      None,     'Y' ],
+                ['a bb',      "None",       2,      '65',     'N' ],
+                ['b aa',  "{'a': 1}",  '3e-1',        '',   'nan' ],
+                ['{}']
             ]
 
     test_result = ret_tuple
@@ -3522,6 +3522,270 @@ def UnitTestUseApp():
     iprnt ("- - -   utest_fail_counter:", utest_fail_counter)
     SepLine()
     # >- - - - - - - - - - -
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("test CvsProcess rand param")
+    iprnt ()
+
+    t_csv = [
+                [ 'a1',  'e2', 'm3', 'Y' ],
+                [ 'a1',  'e2', 'm3', 'Y' ],
+                [ 'b1',  'e2', 'n3', 'N' ],
+                [ 'b1',  'e2', 'n3', 'N' ],
+            ]
+    t_targ_idx = -1
+    t_itern_no = 1
+
+    r_dict = usap_csv_eval.TblUtil.CvsProcess(t_csv, in_targ_idx = -1, in_iter_no = 1, in_rand_seed = 42, aux_data = None, display_flag = True)
+    r_status = r_dict['status']
+    r_accuracy = r_dict['data'][0]
+
+    e_status = True
+    e_accuracy = 1.0
+
+    test_result = (r_status, r_accuracy)
+    test_expect = (e_status, e_accuracy)
+
+    iprnt ("- - - - t_csv:", t_csv)
+    iprnt ("- - - - t_targ_idx:", t_targ_idx)
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("test CvsProcess rand param")
+    iprnt ()
+
+    t_csv = [
+                [ 'a1',  'e2', 'm3', 'Y' ],
+                [ 'a1',  'e2', 'm3', 'Y' ],
+                [ 'b1',  'e2', 'n3', 'N' ],
+                [ 'b1',  'e2', 'n3', 'N' ],
+            ]
+    t_targ_idx = -1
+    t_itern_no = 1
+
+    r_dict = usap_csv_eval.TblUtil.CvsProcess(t_csv, in_targ_idx = -1, in_iter_no = 1, in_rand_seed = 44, aux_data = None, display_flag = True)
+    r_status = r_dict['status']
+    r_accuracy = r_dict['data'][0]
+
+    e_status = True
+    e_accuracy = 0.0
+
+    test_result = (r_status, r_accuracy)
+    test_expect = (e_status, e_accuracy)
+
+    iprnt ("- - - - t_csv:", t_csv)
+    iprnt ("- - - - t_targ_idx:", t_targ_idx)
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("test CvsProcess rand param")
+    iprnt ()
+
+    t_csv = [
+                [ 'a1',  'e2', 'm3', 'Y' ],
+                [ 'a1',  'e2', 'm3', 'Y' ],
+                [ 'b1',  'e2', 'n3', 'N' ],
+                # [ 'b1',  'e2', 'n3', 'N' ],
+            ]
+    t_targ_idx = -1
+    t_itern_no = 1
+
+    r_dict = usap_csv_eval.TblUtil.CvsProcess(t_csv, in_targ_idx = -1, in_iter_no = 1, in_rand_seed = 43, aux_data = None, display_flag = True)
+    r_status = r_dict['status']
+    r_accuracy = r_dict['data'][0]
+
+    e_status = True
+    e_accuracy = 0.5
+
+    test_result = (r_status, r_accuracy)
+    test_expect = (e_status, e_accuracy)
+
+    iprnt ("- - - - t_csv:", t_csv)
+    iprnt ("- - - - t_targ_idx:", t_targ_idx)
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("test CvsProcess none target")
+    iprnt ()
+
+    t_csv = [
+                [ 'a1',  'e2', 'm3', None ],
+                [ 'a1',  'e2', 'm3', 'Y' ],
+                [ 'b1',  'e2', 'n3', 'N' ],
+                # [ 'b1',  'e2', 'n3', 'N' ],
+            ]
+    t_targ_idx = -1
+    t_itern_no = 1
+
+    r_dict = usap_csv_eval.TblUtil.CvsProcess(t_csv, in_targ_idx = -1, in_iter_no = 1, in_rand_seed = 43, aux_data = None, display_flag = True)
+    r_status = r_dict['status']
+    r_accuracy = r_dict['data'][0]
+
+    e_status = True
+    e_accuracy = 0.0
+
+    test_result = (r_status, r_accuracy)
+    test_expect = (e_status, e_accuracy)
+
+    iprnt ("- - - - t_csv:", t_csv)
+    iprnt ("- - - - t_targ_idx:", t_targ_idx)
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("test CvsProcess none target")
+    iprnt ()
+
+    t_csv = [
+                [ 'a1',  'e2', 'm3', 'Y' ],
+                [ 'a1',  'e2', 'm3', None ],
+                [ 'b1',  'e2', 'n3', 'N' ],
+                # [ 'b1',  'e2', 'n3', 'N' ],
+            ]
+    t_targ_idx = -1
+    t_itern_no = 1
+
+    r_dict = usap_csv_eval.TblUtil.CvsProcess(t_csv, in_targ_idx = -1, in_iter_no = 1, in_rand_seed = 43, aux_data = None, display_flag = True)
+    r_status = r_dict['status']
+    r_accuracy = r_dict['data'][0]
+
+    e_status = True
+    e_accuracy = 0.0
+
+    test_result = (r_status, r_accuracy)
+    test_expect = (e_status, e_accuracy)
+
+    iprnt ("- - - - t_csv:", t_csv)
+    iprnt ("- - - - t_targ_idx:", t_targ_idx)
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("test CvsProcess none target")
+    iprnt ()
+
+    t_csv = [
+                [ 'a1',  'e2', 'm3', 'Y' ],
+                [ 'a1',  'e2', 'm3', 'Y' ],
+                [ 'b1',  'e2', 'n3', None ],
+                # [ 'b1',  'e2', 'n3', 'N' ],
+            ]
+    t_targ_idx = -1
+    t_itern_no = 1
+
+    r_dict = usap_csv_eval.TblUtil.CvsProcess(t_csv, in_targ_idx = -1, in_iter_no = 1, in_rand_seed = 43, aux_data = None, display_flag = True)
+    r_status = r_dict['status']
+    r_accuracy = r_dict['data'][0]
+
+    e_status = True
+    e_accuracy = 1.0
+
+    test_result = (r_status, r_accuracy)
+    test_expect = (e_status, e_accuracy)
+
+    iprnt ("- - - - t_csv:", t_csv)
+    iprnt ("- - - - t_targ_idx:", t_targ_idx)
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()

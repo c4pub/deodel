@@ -75,7 +75,8 @@ class TblUtil :
             row_crt = in_raw_tbl[crt_row_idx]
             row_new = []
             if not isinstance(row_crt, list) :
-                pass
+                if not row_crt == None :
+                    row_new.append(str(row_crt))
             else :
                 col_no = len(row_crt)
                 for crt_col_idx in range(col_no) :
@@ -86,7 +87,10 @@ class TblUtil :
                         float_flag, translated_val = deodel.CasetDeodel.ValidateFloat(crt_elem)
                         new_elem = translated_val
                     elif not isinstance(crt_elem, str) :
-                        new_elem = None
+                        if not crt_elem == None :
+                            new_elem = str(crt_elem)
+                        else :
+                            new_elem = None
                     elif crt_elem == '' :
                         new_elem = None
                     else :
@@ -309,10 +313,10 @@ class TblUtil :
     @staticmethod
     def AccuracyEval(x_data, y_target, classifier, iterations = 1, train_fraction = 0.5, random_seed = 42, display_flag = True) :
 
+        import random
         data_rows = len(x_data)
         data_cols = len(x_data[0])
 
-        if display_flag : print("- - - - - - - - - ")
         if display_flag : print("- - - - prediction accuracy test")
         if display_flag : print()
         if display_flag : print("- - - - - - classifier:", classifier)
@@ -322,6 +326,8 @@ class TblUtil :
         if display_flag : print("- - - - - - data_rows:", data_rows)
         if display_flag : print("- - - - - - data_cols:", data_cols)
         if display_flag : print()
+
+        random.seed(random_seed)
 
         ret_tuple = TblUtil.AccuracyIterEval(x_data, y_target, classifier, iterations, train_fraction, random_seed, True)
         avg_accuracy, rnd_accuracy, delta_secs, sample_test, sample_pred = ret_tuple
@@ -335,12 +341,12 @@ class TblUtil :
             str_smpl_test = str(sample_test[:column_limit])[:str_limit]
             str_smpl_pred = str(sample_pred[:column_limit])[:str_limit]
 
+        if display_flag : print("- - - - - - delta_secs:", delta_secs)
         if display_flag : print("- - - - - - sample_test:", str_smpl_test, "...")
         if display_flag : print("- - - - - - sample_pred:", str_smpl_pred, "...")
         if display_flag : print()
         if display_flag : print("- - - - - - avg_accuracy:", avg_accuracy)
         if display_flag : print("- - - - - - rnd_accuracy:", rnd_accuracy)
-        if display_flag : print("- - - - - - delta_secs:", delta_secs)
         return avg_accuracy, rnd_accuracy
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -385,10 +391,11 @@ class TblUtil :
                 if y_test[crt_jdx] == y_test[rand_idx] :
                     total_rand_matches += 1
 
-            clsf_accuracy = total_clsf_matches / (1.0 * effective_total)
-            cumulate_clsf_accuracy += clsf_accuracy
-            rand_accuracy = total_rand_matches / (1.0 * effective_total)
-            cumulate_rand_accuracy += rand_accuracy
+            if effective_total > 0 :
+                clsf_accuracy = total_clsf_matches / (1.0 * effective_total)
+                cumulate_clsf_accuracy += clsf_accuracy
+                rand_accuracy = total_rand_matches / (1.0 * effective_total)
+                cumulate_rand_accuracy += rand_accuracy
 
             if crt_idx == 0 :
                 sample_test = y_test[:]
@@ -479,7 +486,7 @@ class TblUtil :
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     @staticmethod
-    def CvsProcess(in_csv_path, in_targ_idx = None, in_iter_no = None, aux_data = None, display_flag = False) :
+    def CvsProcess(in_csv_data, in_targ_idx = -1, in_iter_no = 5, in_rand_seed = 42, aux_data = None, display_flag = False) :
         import deodel
 
         fn_ret_dict = {'status': False, 'data': (None, None), 'msg':""}
@@ -488,7 +495,7 @@ class TblUtil :
         for dummy_idx in range(1) :
 
             # Import table from csv and process valid numerical strings
-            ret_status, list_csv, ret_msg = TblUtil.TblPrepProxy(in_csv_path)
+            ret_status, list_csv, ret_msg = TblUtil.TblPrepProxy(in_csv_data)
             if not ret_status :
                 fn_ret_dict['status'] = False
                 fn_ret_dict['msg'] = ret_msg
@@ -498,9 +505,6 @@ class TblUtil :
             row_max_len = 10
             # show data
             tbl_sample = list_csv[:row_max_len]
-            if display_flag: print ()
-            if display_flag: print ("- - - - in_iter_no:", in_iter_no)
-            if display_flag: print ("- - - - in_targ_idx:", in_targ_idx)
             if display_flag: print ()
             if display_flag: print ("- - - - list_csv:")
             for crt_row in tbl_sample :
@@ -529,22 +533,19 @@ class TblUtil :
 
             # compute averege predict accuracy
 
-            iter_default = 20
-            if in_iter_no == None :
-                iter_no = iter_default
-            else :
-                iter_no = in_iter_no
-
             data_digi_x = train_tbl
             data_target_y = target_col
-            random_seed = 42
+
+            if display_flag: print("- - - - - - - - - - - - - - - - ")
 
             crt_classif = deodel.DeodataDelangaClassifier()
-            ret_tuple = TblUtil.AccuracyEval(data_digi_x, data_target_y, crt_classif, iterations=iter_no, random_seed=random_seed)
+            ret_tuple = TblUtil.AccuracyEval(data_digi_x, data_target_y, crt_classif, iterations=in_iter_no, 
+                                                random_seed=in_rand_seed, display_flag = display_flag)
             avg_accuracy, rnd_accuracy = ret_tuple
             fn_ret_dict['data'] = avg_accuracy, rnd_accuracy
 
-            if display_flag: print ("- - - - - - - - ")
+            if display_flag: print("- - - - - - - - - - - - - - - - ")
+
             if display_flag: print ()
             if avg_accuracy == None :
                 fn_ret_dict['status'] = False
@@ -562,7 +563,7 @@ class TblUtil :
 @staticmethod
 def CvsProcProxy(*in_argv) :
     in_arg_no = len(in_argv)
-    new_arg_no = 5
+    new_arg_no = 6
     new_arg_list = [None] * new_arg_no
     min_arg_no = min(in_arg_no, new_arg_no)
     for crt_idx in range(min_arg_no) :
@@ -579,7 +580,7 @@ def PrintHelp(in_module) :
         print()
         print("   Usage:")
         print()
-        print("      python %s <path-or-url> [<targ-idx> [<iter-no>]]" % (in_module))
+        print("      python %s <path-or-url> [<targ-idx> [<iter-no> [<rnd-seed]]]" % (in_module))
         print()
         print('         <path-or-url>')
         print('            specifies either the path to the data file')
@@ -592,6 +593,9 @@ def PrintHelp(in_module) :
         print()
         print('         <iter-no>')
         print('            specifies the number of predict iterations')
+        print()
+        print('         <rnd-seed>')
+        print('            random seed for prediction test')
         print()
         return
 
@@ -606,14 +610,14 @@ def Run(*in_argv) :
     module_name = os.path.basename(in_argv[0])
     param_list = in_argv[1:]
 
-    print("- - - - - - - - - - - - - - - - ")
+    print("- - - - - - - - - - - - - - - - - - - - - - - - ")
     print("   %s" % (str(module_name)))
     print()
-    print("      Evaluates the predictive potential of")
-    print("      a csv data table.")
-    print("- - - - - - - - - - - - - - - - ")
+    # print("      Evaluates the predictive potential of")
+    # print("      a csv data table.")
+    print("      Evaluates the predictive potential of a csv data table.")
+    print("- - - - - - - - - - - - - - - - - - - - - - - - ")
     print("   Parans: %s" % (str(param_list)))
-    print ("- - - - - - - - - - - - - - - - ")
 
     param_no = len(param_list)
     if param_no == 0 :
@@ -632,6 +636,9 @@ def Run(*in_argv) :
             iter_no = int(param_list[crt_idx])
             argv_list.append(iter_no)
         elif crt_idx == 3 :
+            rnd_seed = int(param_list[crt_idx])
+            argv_list.append(rnd_seed)
+        elif crt_idx == 4 :
             aux_param = ast.literal_eval(param_list[crt_idx])
             if not isinstance(aux_param, dict) :
                 PrintHelp(module_name)
@@ -639,12 +646,9 @@ def Run(*in_argv) :
             aux_data = dict(aux_param)
             argv_list.append(aux_data)
 
-    print()
-    print("- - - - - - - - - - - - - - - - ")
-    print("- - - - - - - - - - - - - - - - ")
+    print("- - - - - - - - - - - - - - - - - - - - - - - - ")
     ret_info = CvsProcProxy(*argv_list)
-    print("- - - - - - - - - - - - - - - - ")
-    print("- - - - - - - - - - - - - - - - ")
+    print("- - - - - - - - - - - - - - - - - - - - - - - - ")
     print()
     if ret_info['status'] :
         # normal exit
@@ -653,6 +657,7 @@ def Run(*in_argv) :
         print("Error:", ret_info['msg'])
         return False
 
+# >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
