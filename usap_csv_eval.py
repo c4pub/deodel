@@ -323,8 +323,6 @@ class TblUtil :
         if display_flag : print("- - - - - - iterations:", iterations)
         if display_flag : print("- - - - - - train_fraction:", train_fraction)
         if display_flag : print("- - - - - - random_seed:", random_seed)
-        if display_flag : print("- - - - - - data_rows:", data_rows)
-        if display_flag : print("- - - - - - data_cols:", data_cols)
         if display_flag : print()
 
         random.seed(random_seed)
@@ -419,20 +417,23 @@ class TblUtil :
         fn_ret_status = False
         fn_ret_table = []
         fn_ret_col = []
+        fn_ret_dim = (0, 0)
         fn_ret_msg = "Error: data extraction failed !"
 
         crt_tbl = in_table
         # Weed out empty rows and patch missing columns cells.
         ret_info = TblUtil.UniformCleanRows(crt_tbl)
         if not ret_info['status'] :
-            fn_ret_tuple = fn_ret_status, fn_ret_table, fn_ret_col, fn_ret_msg
+            fn_ret_tuple = fn_ret_status, fn_ret_table, fn_ret_col, fn_ret_dim, fn_ret_msg
             return fn_ret_tuple
         crt_tbl = ret_info['proc_tbl']
+        tbl_dim = ret_info['dim']
+        fn_ret_dim = tbl_dim
 
         # set target col idx
         if in_targ_idx == None :
             # in_targ_idx = -1
-            last_column = ret_info['dim'][1] - 1
+            last_column = tbl_dim[1] - 1
             crt_targ_col = last_column
         else :
             crt_targ_col = in_targ_idx
@@ -460,13 +461,13 @@ class TblUtil :
             else :
                adj_idx += 1
         if exit_flag :
-            fn_ret_tuple = fn_ret_status, fn_ret_table, fn_ret_col, fn_ret_msg
+            fn_ret_tuple = fn_ret_status, fn_ret_table, fn_ret_col, fn_ret_dim, fn_ret_msg
             return fn_ret_tuple
         new_targ_col = crt_targ_col - adj_idx
 
         if new_targ_col >= len(trans_crt_tbl) :
             fn_ret_msg = "Error: invalid target index !"
-            fn_ret_tuple = fn_ret_status, fn_ret_table, fn_ret_col, fn_ret_msg
+            fn_ret_tuple = fn_ret_status, fn_ret_table, fn_ret_col, fn_ret_dim, fn_ret_msg
             return fn_ret_tuple
 
         # split table into attributes and target
@@ -479,8 +480,9 @@ class TblUtil :
         fn_ret_status = True
         fn_ret_table = train_tbl
         fn_ret_col = target_col
+        fn_ret_dim = tbl_dim
         fn_ret_msg = ""
-        fn_ret_tuple = fn_ret_status, fn_ret_table, fn_ret_col, fn_ret_msg
+        fn_ret_tuple = fn_ret_status, fn_ret_table, fn_ret_col, fn_ret_dim, fn_ret_msg
 
         return fn_ret_tuple
 
@@ -494,6 +496,16 @@ class TblUtil :
         # one iteration loop to allow unified return through loop breaks
         for dummy_idx in range(1) :
 
+            # Provide default values where needed
+            if in_targ_idx == None :
+                in_targ_idx = -1
+            if in_iter_no == None :
+                in_iter_no = 5
+            if in_rand_seed == None :
+                in_rand_seed = 42
+            if display_flag == None :
+                display_flag = True
+
             # Import table from csv and process valid numerical strings
             ret_status, list_csv, ret_msg = TblUtil.TblPrepProxy(in_csv_data)
             if not ret_status :
@@ -501,9 +513,9 @@ class TblUtil :
                 fn_ret_dict['msg'] = ret_msg
                 break
 
+            # show data
             str_max_len = 60
             row_max_len = 10
-            # show data
             tbl_sample = list_csv[:row_max_len]
             if display_flag: print ()
             if display_flag: print ("- - - - list_csv:")
@@ -513,7 +525,13 @@ class TblUtil :
             if display_flag: print ("                ...")
 
             ret_info = TblUtil.CleanTargetExtract(list_csv, in_targ_idx)
-            ret_status, train_tbl, target_col, ret_str = ret_info
+            ret_status, train_tbl, target_col, ret_dim, ret_str = ret_info
+
+            tbl_rows = ret_dim[0]
+            tbl_cols = ret_dim[1]
+            if display_flag: print ("- - - - - - - - tbl_rows:", tbl_rows)
+            if display_flag: print ("- - - - - - - - tbl_cols:", tbl_cols)
+
             if not ret_status :
                 fn_ret_dict['status'] = False
                 fn_ret_dict['msg'] = ret_str
