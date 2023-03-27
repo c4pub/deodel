@@ -272,7 +272,7 @@ class TblUtil :
         row_no = len(in_raw_tbl)
         col_max = len(in_raw_tbl[0])
         col_min = len(in_raw_tbl[0])
-        clean_row_no = row_no
+        initial_row_no = row_no
         # search the maximum column no and remove empty lines
         for crt_idx in range(row_no) :
             crt_row = in_raw_tbl[crt_idx]
@@ -302,10 +302,9 @@ class TblUtil :
                 clean_tbl.append(new_row)
         else :
             clean_tbl = clean_row_tbl
-        clean_col_no = col_max
         fn_ret_dict['status'] = True
         fn_ret_dict['proc_tbl'] = clean_tbl
-        fn_ret_dict['dim'] = (clean_row_no, clean_col_no)
+        fn_ret_dict['dim'] = (initial_row_no, col_max)
         return fn_ret_dict
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -374,19 +373,20 @@ class TblUtil :
             y_predict = classifier.predict(x_test)
 
             # compute accuracy
-            total_elem_no = len(y_test)
+            test_total_no = len(y_test)
+            train_total_no = len(y_train)
             total_clsf_matches = 0
             total_rand_matches = 0
-            effective_total = total_elem_no
-            rand_list = random.sample(range(0, total_elem_no), total_elem_no)
-            for crt_jdx in range(total_elem_no) :
+            effective_total = test_total_no
+            rand_list = random.sample(range(0, train_total_no), train_total_no)
+            for crt_jdx in range(test_total_no) :
                 if valid_target_flag and y_test[crt_jdx] == None :
                     effective_total -= 1
                     continue
                 if y_test[crt_jdx] == y_predict[crt_jdx] :
                     total_clsf_matches += 1
-                rand_idx = rand_list[crt_jdx]
-                if y_test[crt_jdx] == y_test[rand_idx] :
+                rand_idx = rand_list[crt_jdx % train_total_no]
+                if y_test[crt_jdx] == y_train[rand_idx] :
                     total_rand_matches += 1
 
             if effective_total > 0 :
@@ -515,7 +515,7 @@ class TblUtil :
 
             # show data
             str_max_len = 60
-            row_max_len = 10
+            row_max_len = 6
             tbl_sample = list_csv[:row_max_len]
             if display_flag: print ()
             if display_flag: print ("- - - - list_csv:")
@@ -537,6 +537,7 @@ class TblUtil :
                 fn_ret_dict['msg'] = ret_str
                 break
 
+            row_max_len = 4
             tbl_sample = train_tbl[:row_max_len]
             if display_flag: print ()
             if display_flag: print ("- - - - train_tbl:")
@@ -601,8 +602,8 @@ def PrintHelp(in_module) :
         print("      python %s <path-or-url> [<targ-idx> [<iter-no> [<rnd-seed]]]" % (in_module))
         print()
         print('         <path-or-url>')
-        print('            specifies either the path to the data file')
-        print('            or the url of a remote data file.')
+        print('            specifies either the file path or the url to')
+        print('            the csv dataset')
         print()
         print('         <targ-idx>')
         print('            specifies the target column index')
@@ -628,18 +629,19 @@ def Run(*in_argv) :
     module_name = os.path.basename(in_argv[0])
     param_list = in_argv[1:]
 
+    print()
     print("- - - - - - - - - - - - - - - - - - - - - - - - ")
     print("   %s" % (str(module_name)))
     print()
-    # print("      Evaluates the predictive potential of")
-    # print("      a csv data table.")
     print("      Evaluates the predictive potential of a csv data table.")
     print("- - - - - - - - - - - - - - - - - - - - - - - - ")
     print("   Parans: %s" % (str(param_list)))
 
     param_no = len(param_list)
     if param_no == 0 :
+        print("- - - - - - - - - - - - - - - - - - - - - - - - ")
         PrintHelp(module_name)
+        print("- - - - - - - - - - - - - - - - - - - - - - - - ")
         return False
 
     argv_list = []
@@ -659,7 +661,9 @@ def Run(*in_argv) :
         elif crt_idx == 4 :
             aux_param = ast.literal_eval(param_list[crt_idx])
             if not isinstance(aux_param, dict) :
+                print("- - - - - - - - - - - - - - - - - - - - - - - - ")
                 PrintHelp(module_name)
+                print("- - - - - - - - - - - - - - - - - - - - - - - - ")
                 return False
             aux_data = dict(aux_param)
             argv_list.append(aux_data)
@@ -667,7 +671,7 @@ def Run(*in_argv) :
     print("- - - - - - - - - - - - - - - - - - - - - - - - ")
     ret_info = CvsProcProxy(*argv_list)
     print("- - - - - - - - - - - - - - - - - - - - - - - - ")
-    print()
+
     if ret_info['status'] :
         # normal exit
         return True
