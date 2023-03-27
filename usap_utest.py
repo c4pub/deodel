@@ -3417,7 +3417,7 @@ def UnitTestUseApp():
 
     e_dict = {}
     e_dict['status'] = True
-    e_dict['data'] = (0, 1)
+    e_dict['data'] = (0, 0)
     e_dict['msg'] = ""
 
     test_result = r_dict
