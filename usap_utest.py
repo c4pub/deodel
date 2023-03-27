@@ -2803,7 +2803,7 @@ def UnitTestUseApp():
     t_targ_idx = -1
 
     r_tuple = usap_csv_eval.TblUtil.CleanTargetExtract(t_csv, t_targ_idx)
-    r_status, r_train, r_targ, r_str = r_tuple
+    r_status, r_train, r_targ, r_dim, r_str = r_tuple
 
     e_status = True
     e_train = [
@@ -2811,8 +2811,9 @@ def UnitTestUseApp():
                 [  'b',        23.4 ],
             ]
     e_targ = [ 'Y', 'N' ]
+    e_dim = (5, 5)
     e_str = ""
-    e_tuple = e_status, e_train, e_targ, e_str
+    e_tuple = e_status, e_train, e_targ, e_dim, e_str
 
     test_result = r_tuple
     test_expect = e_tuple
@@ -2852,7 +2853,7 @@ def UnitTestUseApp():
     t_targ_idx = 4
 
     r_tuple = usap_csv_eval.TblUtil.CleanTargetExtract(t_csv, t_targ_idx)
-    r_status, r_train, r_targ, r_str = r_tuple
+    r_status, r_train, r_targ, r_dim, r_str = r_tuple
 
     e_status = True
     e_train = [
@@ -2860,8 +2861,9 @@ def UnitTestUseApp():
                 [  'b',        23.4 ],
             ]
     e_targ = [ 'Y', 'N' ]
+    e_dim = (5, 5)
     e_str = ""
-    e_tuple = e_status, e_train, e_targ, e_str
+    e_tuple = e_status, e_train, e_targ, e_dim, e_str
 
     test_result = r_tuple
     test_expect = e_tuple
@@ -2901,7 +2903,7 @@ def UnitTestUseApp():
     t_targ_idx = 0
 
     r_tuple = usap_csv_eval.TblUtil.CleanTargetExtract(t_csv, t_targ_idx)
-    r_status, r_train, r_targ, r_str = r_tuple
+    r_status, r_train, r_targ, r_dim, r_str = r_tuple
 
     e_status = True
     e_train = [
@@ -2909,8 +2911,9 @@ def UnitTestUseApp():
                 [ 23.4,   'N' ],
             ]
     e_targ = [ 'a', 'b' ]
+    e_dim = (5, 5)
     e_str = ""
-    e_tuple = e_status, e_train, e_targ, e_str
+    e_tuple = e_status, e_train, e_targ, e_dim, e_str
 
     test_result = r_tuple
     test_expect = e_tuple
@@ -2950,7 +2953,7 @@ def UnitTestUseApp():
     t_targ_idx = 2
 
     r_tuple = usap_csv_eval.TblUtil.CleanTargetExtract(t_csv, t_targ_idx)
-    r_status, r_train, r_targ, r_str = r_tuple
+    r_status, r_train, r_targ, r_dim, r_str = r_tuple
 
     e_status = True
     e_train = [
@@ -2958,8 +2961,9 @@ def UnitTestUseApp():
                 [ 'b',    'N' ],
             ]
     e_targ = [ 101, 23.4 ]
+    e_dim = (5, 5)
     e_str = ""
-    e_tuple = e_status, e_train, e_targ, e_str
+    e_tuple = e_status, e_train, e_targ, e_dim, e_str
 
     test_result = r_tuple
     test_expect = e_tuple
@@ -2999,7 +3003,7 @@ def UnitTestUseApp():
     t_targ_idx = 1
 
     r_tuple = usap_csv_eval.TblUtil.CleanTargetExtract(t_csv, t_targ_idx)
-    r_status, r_train, r_targ, r_str = r_tuple
+    e_tuple = e_status, e_train, e_targ, e_dim, e_str
 
     e_status = True
     e_train = [
@@ -3007,8 +3011,9 @@ def UnitTestUseApp():
                 [ 23.4,   'N' ],
             ]
     e_targ = [ 'a', 'b' ]
+    e_dim = (5, 6)
     e_str = ""
-    e_tuple = e_status, e_train, e_targ, e_str
+    e_tuple = e_status, e_train, e_targ, e_dim, e_str
 
     test_result = r_tuple
     test_expect = e_tuple
@@ -3048,13 +3053,14 @@ def UnitTestUseApp():
     t_targ_idx = 0
 
     r_tuple = usap_csv_eval.TblUtil.CleanTargetExtract(t_csv, t_targ_idx)
-    r_status, r_train, r_targ, r_str = r_tuple
+    r_status, r_train, r_targ, r_dim, r_str = r_tuple
 
     e_status = False
     e_train = []
     e_targ = []
+    e_dim = (5, 6)
     e_str = "Error: empty target column !"
-    e_tuple = e_status, e_train, e_targ, e_str
+    e_tuple = e_status, e_train, e_targ, e_dim, e_str
 
     test_result = r_tuple
     test_expect = e_tuple
@@ -3094,13 +3100,14 @@ def UnitTestUseApp():
     t_targ_idx = 10
 
     r_tuple = usap_csv_eval.TblUtil.CleanTargetExtract(t_csv, t_targ_idx)
-    r_status, r_train, r_targ, r_str = r_tuple
+    r_status, r_train, r_targ, r_dim, r_str = r_tuple
 
     e_status = False
     e_train = []
     e_targ = []
+    e_dim = (5, 5)
     e_str = "Error: invalid target index !"
-    e_tuple = e_status, e_train, e_targ, e_str
+    e_tuple = e_status, e_train, e_targ, e_dim, e_str
 
     test_result = r_tuple
     test_expect = e_tuple
@@ -3140,13 +3147,14 @@ def UnitTestUseApp():
     t_targ_idx = 3
 
     r_tuple = usap_csv_eval.TblUtil.CleanTargetExtract(t_csv, t_targ_idx)
-    r_status, r_train, r_targ, r_str = r_tuple
+    r_status, r_train, r_targ, r_dim, r_str = r_tuple
 
     e_status = False
     e_train = []
     e_targ = []
+    e_dim = (5, 5)
     e_str = "Error: empty target column !"
-    e_tuple = e_status, e_train, e_targ, e_str
+    e_tuple = e_status, e_train, e_targ, e_dim, e_str
 
     test_result = r_tuple
     test_expect = e_tuple
@@ -3360,7 +3368,7 @@ def UnitTestUseApp():
     t_targ_idx = 0
 
     r_tuple = usap_csv_eval.TblUtil.CleanTargetExtract(t_csv, t_targ_idx)
-    r_status, r_train, r_targ, r_str = r_tuple
+    r_status, r_train, r_targ, r_dim, r_str = r_tuple
 
     e_status = True
     e_train = [
@@ -3368,8 +3376,9 @@ def UnitTestUseApp():
                 [ 23.4,   'N' ],
             ]
     e_targ = [ 'a', 'b' ]
+    e_dim = (5, 5)
     e_str = ""
-    e_tuple = e_status, e_train, e_targ, e_str
+    e_tuple = e_status, e_train, e_targ, e_dim, e_str
 
     test_result = r_tuple
     test_expect = e_tuple
