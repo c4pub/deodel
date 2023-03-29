@@ -2,6 +2,7 @@
 Deodata Delanga Unit Test
 
     Module provides an unsystematic/opportunistic collection of tests.
+
         Tested with Winpython64-3.10.5.0
 """
 

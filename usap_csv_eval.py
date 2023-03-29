@@ -579,7 +579,6 @@ class TblUtil :
 # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-@staticmethod
 def CvsProcProxy(*in_argv) :
     in_arg_no = len(in_argv)
     new_arg_no = 6
@@ -619,7 +618,6 @@ def PrintHelp(in_module) :
         return
 
 # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-@staticmethod
 def Run(*in_argv) :
 
     import sys
@@ -659,7 +657,10 @@ def Run(*in_argv) :
             rnd_seed = int(param_list[crt_idx])
             argv_list.append(rnd_seed)
         elif crt_idx == 4 :
-            aux_param = ast.literal_eval(param_list[crt_idx])
+            try :
+                aux_param = ast.literal_eval(param_list[crt_idx])
+            except ValueError :
+                aux_param = None
             if not isinstance(aux_param, dict) :
                 print("- - - - - - - - - - - - - - - - - - - - - - - - ")
                 PrintHelp(module_name)
@@ -696,3 +697,4 @@ if __name__ == "__main__":
 
 # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#   Tested with Winpython64-3.10.5.0
