@@ -554,12 +554,15 @@ class TblUtil :
 
             data_digi_x = train_tbl
             data_target_y = target_col
+            train_ratio = 0.5
 
             if display_flag: print("- - - - - - - - - - - - - - - - ")
 
             crt_classif = deodel.DeodataDelangaClassifier()
-            ret_tuple = TblUtil.AccuracyEval(data_digi_x, data_target_y, crt_classif, iterations=in_iter_no, 
+            ret_tuple = TblUtil.AccuracyEval(data_digi_x, data_target_y, crt_classif, iterations = in_iter_no, 
+                                                train_fraction = train_ratio, 
                                                 random_seed=in_rand_seed, display_flag = display_flag)
+
             avg_accuracy, rnd_accuracy = ret_tuple
             fn_ret_dict['data'] = avg_accuracy, rnd_accuracy
 
