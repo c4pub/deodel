@@ -33,9 +33,11 @@ Deodel is almost non-parametric. Obviously, there are configuration adjustments 
 
     usap_cmp_binning.py
         Module that compares accuracy of the two modes of discretization: eq_freq vs eq_width.
+        More info at: [equal_width_vs_equal_frequency.ipynb](https://github.com/c4pub/misc/blob/main/notebooks/equal_width_vs_equal_frequency.ipynb)
 
     usap_csv_eval.py
         Module that evaluates the predictability of a csv dataset.
+        More info at: [csv_dataset_eval.ipynb](https://github.com/c4pub/misc/blob/main/notebooks/csv_dataset_eval.ipynb)
 
 ---
 
