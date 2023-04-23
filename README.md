@@ -1,4 +1,6 @@
+
 # deodel 
+
 ## classifier with good accuracy and support for mixed attributes
 
 The deodel module provides a Python implementation for the "Deodata Delanga" classifier [1]. Its main characteristics are versatility, accuracy and robustness.
@@ -16,31 +18,29 @@ Deodel is almost non-parametric. Obviously, there are configuration adjustments 
 
 ## modules
 
-    deodel.py
-        It contains all it is needed for the operation of the classifier.
+  * deodel.py
+    - It contains all it is needed for the operation of the classifier.
 
-    main.py
-        Module that serves as starting point / launchpad for use applications.
+  * main.py
+    - Module that serves as starting point / launchpad for use applications.
 
-    usap_demo.py
-        Module that contains a demo of the classifier usage.
+  * usap_demo.py
+    - Module that contains a demo of the classifier usage.
 
-    usap_common.py
-        Module that contains common code used by applications.
+  * usap_common.py
+    - Module that contains common code used by applications.
 
-    usap_utest.py
-        Module that implements a non-systematic set of sanity/unit tests.
+  * usap_utest.py
+    - Module that implements a non-systematic set of sanity/unit tests.
 
-    usap_cmp_binning.py
-        Module that compares accuracy of the two modes of discretization: eq_freq vs eq_width.
-        More info at: [equal_width_vs_equal_frequency.ipynb](https://github.com/c4pub/misc/blob/main/notebooks/equal_width_vs_equal_frequency.ipynb)
+  * usap_cmp_binning.py
+    - Module that compares accuracy of the two modes of discretization: eq_freq vs eq_width.
+    - Example at: [equal_width_vs_equal_frequency.ipynb](https://github.com/c4pub/misc/blob/main/notebooks/equal_width_vs_equal_frequency.ipynb)
 
-    usap_csv_eval.py
-        Module that evaluates the predictability of a csv dataset.
-        More info at: [csv_dataset_eval.ipynb](https://github.com/c4pub/misc/blob/main/notebooks/csv_dataset_eval.ipynb)
+  * usap_csv_eval.py
+    - Module that evaluates the predictability of a csv dataset.
+    - Example at: : [csv_dataset_eval.ipynb](https://github.com/c4pub/misc/blob/main/notebooks/csv_dataset_eval.ipynb)
 
 ---
-
 ##### [1] ["Collapsing the Decision Tree: the Concurrent Data Predictor"](https://doi.org/10.13140/RG.2.2.33413.06880)
- 
 ---
