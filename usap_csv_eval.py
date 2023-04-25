@@ -601,7 +601,7 @@ def PrintHelp(in_module) :
         print()
         print("   Usage:")
         print()
-        print("      python %s <path-or-url> [<targ-idx> [<iter-no> [<rnd-seed]]]" % (in_module))
+        print("      python %s <path-or-url> [<targ-idx> [<iter-no> [<rnd-seed>]]]" % (in_module))
         print()
         print('         <path-or-url>')
         print('            specifies either the file path or the url to')
