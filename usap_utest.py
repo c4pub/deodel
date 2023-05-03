@@ -3669,6 +3669,94 @@ def UnitTestUseApp():
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+    iprnt ("test CvsProcess tie ref")
+    iprnt ()
+
+    t_csv = [
+                [ 'a1',  'e2', 'm3', 'Y' ],
+                [ 'b1',  'e2', 'n3', 'N' ],
+                [ 'b1',  'e2', 'm3', 'N' ],
+                [ 'a1',  'e2', 'n3', 'Y' ],
+            ]
+    t_targ_idx = -1
+    t_itern_no = 1
+
+    r_dict = usap_csv_eval.TblUtil.CvsProcess(t_csv, in_targ_idx = -1, in_iter_no = 1, in_rand_seed = 45, aux_data = None, display_flag = True)
+    r_status = r_dict['status']
+    r_accuracy = r_dict['data'][0]
+
+    e_status = True
+    e_accuracy = 0.5
+
+    test_result = (r_status, r_accuracy)
+    test_expect = (e_status, e_accuracy)
+
+    iprnt ("- - - - t_csv:", t_csv)
+    iprnt ("- - - - t_targ_idx:", t_targ_idx)
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("test CvsProcess aux param")
+    iprnt ()
+
+    t_csv = [
+                [ 'a1',  'e2', 'm3', 'Y' ],
+                [ 'b1',  'e2', 'n3', 'N' ],
+                [ 'b1',  'e2', 'm3', 'N' ],
+                [ 'a1',  'e2', 'n3', 'Y' ],
+            ]
+    t_targ_idx = -1
+    t_itern_no = 1
+
+    r_dict = usap_csv_eval.TblUtil.CvsProcess(t_csv, in_targ_idx = -1, in_iter_no = 1, in_rand_seed = 45, aux_data = {'exc':{2}}, display_flag = True)
+    r_status = r_dict['status']
+    r_accuracy = r_dict['data'][0]
+
+    e_status = True
+    e_accuracy = 1.0
+
+    test_result = (r_status, r_accuracy)
+    test_expect = (e_status, e_accuracy)
+
+    iprnt ("- - - - t_csv:", t_csv)
+    iprnt ("- - - - t_targ_idx:", t_targ_idx)
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
     iprnt ("test CvsProcess none target")
     iprnt ()
 

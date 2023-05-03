@@ -262,7 +262,7 @@ class TblUtil :
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     @staticmethod
-    def UniformCleanRows(in_raw_tbl) :
+    def UniformCleanRows(in_raw_tbl, in_exclude_set) :
         # Weed out empty rows and patch missing columns cells.
 
         fn_ret_dict = {'status': False, 'proc_tbl': [], 'del_row': [], 'dim':(0, 0)}
@@ -281,8 +281,15 @@ class TblUtil :
                 col_max = col_no
             if col_no < col_min :
                 col_min = col_no
-            if crt_row == [None]*col_no :
+            if crt_idx in in_exclude_set :
+                # remove request
+                remove_flag = True
+            elif crt_row == [None]*col_no :
                 # skip empty row
+                remove_flag = True
+            else :
+                remove_flag = False
+            if remove_flag :
                 fn_ret_dict['del_row'].append(crt_idx)
             else :
                 clean_row_tbl.append(crt_row)
@@ -310,7 +317,7 @@ class TblUtil :
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     @staticmethod
-    def AccuracyEval(x_data, y_target, classifier, iterations = 1, train_fraction = 0.5, random_seed = 42, display_flag = True) :
+    def AccuracyEval(x_data, y_target, classifier, iterations = 1, train_fraction = 0.5, random_seed = 42, aux_data = None, display_flag = True) :
 
         import random
         data_rows = len(x_data)
@@ -321,12 +328,16 @@ class TblUtil :
         if display_flag : print("- - - - - - classifier:", classifier)
         if display_flag : print("- - - - - - iterations:", iterations)
         if display_flag : print("- - - - - - train_fraction:", train_fraction)
+        if display_flag : print("- - - - - - aux_data:", aux_data)
         if display_flag : print("- - - - - - random_seed:", random_seed)
         if display_flag : print()
 
+        if aux_data == None :
+            aux_data = {}
+
         random.seed(random_seed)
 
-        ret_tuple = TblUtil.AccuracyIterEval(x_data, y_target, classifier, iterations, train_fraction, random_seed, True)
+        ret_tuple = TblUtil.AccuracyIterEval(x_data, y_target, classifier, iterations, train_fraction, random_seed, aux_data, True)
         avg_accuracy, rnd_accuracy, delta_secs, sample_test, sample_pred = ret_tuple
 
         column_limit = 40
@@ -348,7 +359,7 @@ class TblUtil :
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     @staticmethod
-    def AccuracyIterEval(x_data, y_target, classifier, iterations, train_fraction, random_seed, valid_target_flag) :
+    def AccuracyIterEval(x_data, y_target, classifier, iterations, train_fraction, random_seed, aux_data, valid_target_flag) :
         import datetime
         import random
         from sklearn.model_selection import train_test_split
@@ -411,7 +422,7 @@ class TblUtil :
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     @staticmethod
-    def CleanTargetExtract(in_table, in_targ_idx = None) :
+    def CleanTargetExtract(in_table, in_targ_idx = None, in_exclude_col_set = None) :
         import deodel
 
         fn_ret_status = False
@@ -422,7 +433,7 @@ class TblUtil :
 
         crt_tbl = in_table
         # Weed out empty rows and patch missing columns cells.
-        ret_info = TblUtil.UniformCleanRows(crt_tbl)
+        ret_info = TblUtil.UniformCleanRows(crt_tbl, {})
         if not ret_info['status'] :
             fn_ret_tuple = fn_ret_status, fn_ret_table, fn_ret_col, fn_ret_dim, fn_ret_msg
             return fn_ret_tuple
@@ -438,9 +449,12 @@ class TblUtil :
         else :
             crt_targ_col = in_targ_idx
 
+        if in_exclude_col_set == None :
+            in_exclude_col_set = {}
+
         # Weed out empty columns.
         transpose_tbl = deodel.Working.MatrixTranspose(crt_tbl)
-        ret_info = TblUtil.UniformCleanRows(transpose_tbl)
+        ret_info = TblUtil.UniformCleanRows(transpose_tbl, in_exclude_col_set)
         trans_crt_tbl = ret_info['proc_tbl']
 
         # adjust target column if required
@@ -503,6 +517,8 @@ class TblUtil :
                 in_iter_no = 5
             if in_rand_seed == None :
                 in_rand_seed = 42
+            if aux_data == None :
+                aux_data = {}
             if display_flag == None :
                 display_flag = True
 
@@ -524,7 +540,12 @@ class TblUtil :
                 if display_flag: print ("- - - - - - - - crt_row:", str_row)
             if display_flag: print ("                ...")
 
-            ret_info = TblUtil.CleanTargetExtract(list_csv, in_targ_idx)
+            if 'exc' in aux_data :
+                exclude_column_set = aux_data['exc']
+            else :
+                exclude_column_set = {}
+
+            ret_info = TblUtil.CleanTargetExtract(list_csv, in_targ_idx, exclude_column_set)
             ret_status, train_tbl, target_col, ret_dim, ret_str = ret_info
 
             tbl_rows = ret_dim[0]
@@ -559,9 +580,10 @@ class TblUtil :
             if display_flag: print("- - - - - - - - - - - - - - - - ")
 
             crt_classif = deodel.DeodataDelangaClassifier()
-            ret_tuple = TblUtil.AccuracyEval(data_digi_x, data_target_y, crt_classif, iterations = in_iter_no, 
-                                                train_fraction = train_ratio, 
-                                                random_seed=in_rand_seed, display_flag = display_flag)
+            ret_tuple = TblUtil.AccuracyEval(data_digi_x, data_target_y, crt_classif, 
+                                                in_iter_no, train_ratio, 
+                                                in_rand_seed, aux_data, 
+                                                display_flag = display_flag)
 
             avg_accuracy, rnd_accuracy = ret_tuple
             fn_ret_dict['data'] = avg_accuracy, rnd_accuracy
@@ -601,7 +623,8 @@ def PrintHelp(in_module) :
         print()
         print("  Usage:")
         print()
-        print("    python %s <path-or-url> [<targ-idx> [<iter-no> [<rnd-seed>]]]" % (in_module))
+        print("    python %s <path-or-url> [<targ-idx> [<iter-no>" % (in_module)) 
+        print("                             [<rnd-seed> [<aux-param>]]]]")
         print()
         print('      <path-or-url>')
         print('        specifies either the file path or the url to')
@@ -617,6 +640,19 @@ def PrintHelp(in_module) :
         print()
         print('      <rnd-seed>')
         print('        random seed for prediction test')
+        print()
+        print('      <aux-param>')
+        print('        a string containing additional parameters')
+        print('        specified as a dict structure:')
+        print("              \"{'id-key1': 'id-value1', ...}\"")
+        print()
+        print("          'exc': {<idx_0>, <idx_1>, ...}")
+        print('             excluded columns - specifies a set')
+        print('             of column indexes to be excluded')
+        print('             from the dataset')
+        print()
+        print("  Usage example:")
+        print("    python %s data.csv -1 10 42 \"{'exc': {2, 3}}\"" % (in_module)) 
         print()
         return
 
