@@ -672,7 +672,7 @@ def Run(*in_argv) :
     print()
     print("      Evaluates the predictive potential of a csv data table.")
     print("- - - - - - - - - - - - - - - - - - - - - - - - ")
-    print("   Parans: %s" % (str(param_list)))
+    print("   Params: %s" % (str(param_list)))
 
     param_no = len(param_list)
     if param_no == 0 :
