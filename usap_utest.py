@@ -2618,6 +2618,69 @@ def UnitTestDeodel():
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+    iprnt ("pandas data - 1")
+    iprnt ()
+
+    import pandas as pd
+
+    tt_X = [['a',   None,  'a'],
+            ['a',   None,  'b'],
+            ['c',   'c',   'c'],
+            ['d',   'c',   'c'],
+            ['e',   'd',   'd'],
+            ['e',   'e',   'd']]
+
+    tt_y = [
+            'X',
+            'X',
+            'Y',
+            'Y',
+            'Y',
+            'Z',
+           ]
+
+    tt_test= [
+            ['c',   None,  'c'],
+            ['a',   'c',   'd']]
+
+    tt_pd_X = pd.DataFrame(tt_X)
+    tt_pd_test = pd.DataFrame(tt_test)
+    tt_pd_y = pd.Series(tt_y)
+    
+    tt_exp = [
+            'Y',
+            'Y',
+           ]
+
+    aux_param = {'tbreak_depth': 1}
+    tt_o = deodel.DeodataDelangaClassifier(aux_param)
+    tt_o.fit(tt_pd_X, tt_pd_y)
+    tt_predict = tt_o.predict(tt_pd_test)
+    iprnt ()
+
+    test_result = tt_predict
+    test_expect = tt_exp
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
     # >- - - - - - - - - - -
     SepLine()
     iprnt ("- - - UnitTestDeodel results")

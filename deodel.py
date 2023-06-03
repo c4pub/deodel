@@ -109,13 +109,19 @@ class Working:
     @staticmethod
     def WorkFit(object, in_X, in_y):
 
+        import pandas as pd
+
         if (isinstance(in_y, np.ndarray)) :
             data_y = in_y.tolist()
+        elif (isinstance(in_y, pd.core.series.Series)) :
+            data_y = in_y.values.tolist()
         else :
             data_y = in_y.copy()
 
         if (isinstance(in_X, np.ndarray)) :
             data_X = in_X.tolist()
+        elif (isinstance(in_X, pd.core.frame.DataFrame)) :
+            data_X = in_X.values.tolist()
         else :
             data_X = in_X.copy()
 
@@ -194,8 +200,14 @@ class Working:
     @staticmethod
     def WorkPredict(object, in_query):
 
+        import pandas as pd
+
         if isinstance(in_query, np.ndarray) :
             query_req = in_query.tolist()
+
+        elif (isinstance(in_query, pd.core.frame.DataFrame)) :
+            query_req = in_query.values.tolist()
+
         else :
             query_req = in_query[:]
 
