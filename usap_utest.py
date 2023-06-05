@@ -409,6 +409,9 @@ def UnitTestDeodel():
                     ['e', '2', '3.01', 'h'],
                     ['cc', '3.01', '4.01', 'cc']]
 
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
     set_eval = ( test_result == test_expect )
     iprnt ("- - - utest_test_no:", utest_test_no)
     utest_test_no += 1
@@ -444,6 +447,9 @@ def UnitTestDeodel():
     test_result = tt1c
     test_expect = tt1
 
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
     set_eval = ( test_result == test_expect )
     iprnt ("- - - utest_test_no:", utest_test_no)
     utest_test_no += 1
@@ -472,6 +478,9 @@ def UnitTestDeodel():
 
     test_result = ty1
     test_expect = ty1c
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
 
     set_eval = ( test_result == test_expect )
     iprnt ("- - - utest_test_no:", utest_test_no)
@@ -503,6 +512,9 @@ def UnitTestDeodel():
 
     test_result = ttu
     test_expect = ttuc
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
 
     set_eval = ( test_result == test_expect )
     iprnt ("- - - utest_test_no:", utest_test_no)
@@ -537,6 +549,9 @@ def UnitTestDeodel():
     test_result = ttu
     test_expect = ttuc
 
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
     set_eval = ( test_result == test_expect )
     iprnt ("- - - utest_test_no:", utest_test_no)
     utest_test_no += 1
@@ -568,6 +583,9 @@ def UnitTestDeodel():
     test_result = ttu
     test_expect = ttuc
 
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
     set_eval = ( test_result == test_expect )
     iprnt ("- - - utest_test_no:", utest_test_no)
     utest_test_no += 1
@@ -589,10 +607,15 @@ def UnitTestDeodel():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    iprnt ("ProcessVector and RevertVector test")
+    iprnt ("ProcessVector and RevertVector test - int is num - 1")
 
     tv1 = ['e',    1,      3.01,   'h',     11,     None]
 
+    # backup global state
+    bkp_opmode_intisnum = deodel.opmode_intisnum
+    iprnt ("- - - - bkp_opmode_intisnum:", bkp_opmode_intisnum)
+    deodel.opmode_intisnum = True
+    iprnt ("- - - - deodel.opmode_intisnum:", deodel.opmode_intisnum)
     iprnt ("- - - - tv1", tv1)
     ret_1 = deodel.Working.ProcessVector(tv1, True)
     iprnt ("- - - - ret_1", ret_1)
@@ -602,6 +625,9 @@ def UnitTestDeodel():
     test_result = tv1
     test_expect = tv2
 
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
     set_eval = ( test_result == test_expect )
     iprnt ("- - - utest_test_no:", utest_test_no)
     utest_test_no += 1
@@ -618,9 +644,10 @@ def UnitTestDeodel():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    iprnt ("ProcessVector and RevertVector test")
+    iprnt ("ProcessVector and RevertVector test - int is num - 2")
 
     ret_1 = deodel.Working.ProcessVector(tv1, False)
+    iprnt ("- - - - deodel.opmode_intisnum:", deodel.opmode_intisnum)
     iprnt ("- - - - ret_1", ret_1)
     tv3 = deodel.Working.RevertVector(ret_1[0], ret_1[2])
     iprnt ("- - - - tv3", tv3)
@@ -628,6 +655,9 @@ def UnitTestDeodel():
     test_result = tv1
     test_expect = tv3
 
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
     set_eval = ( test_result == test_expect )
     iprnt ("- - - utest_test_no:", utest_test_no)
     utest_test_no += 1
@@ -644,6 +674,75 @@ def UnitTestDeodel():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("ProcessVector and RevertVector test - int not num - 3")
+
+    tv1 = ['e',    1,      3.01,   'h',     11,     None]
+
+    deodel.opmode_intisnum = False
+    iprnt ("- - - - deodel.opmode_intisnum:", deodel.opmode_intisnum)
+    iprnt ("- - - - tv1", tv1)
+    ret_1 = deodel.Working.ProcessVector(tv1, True)
+    iprnt ("- - - - ret_1", ret_1)
+    tv2 = deodel.Working.RevertVector(ret_1[0], ret_1[2])
+    iprnt ("- - - - tv2", tv2)
+
+    test_result = tv1
+    test_expect = tv2
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("ProcessVector and RevertVector test - int not num - 4")
+
+    ret_1 = deodel.Working.ProcessVector(tv1, False)
+    iprnt ("- - - - deodel.opmode_intisnum:", deodel.opmode_intisnum)
+    iprnt ("- - - - ret_1", ret_1)
+    tv3 = deodel.Working.RevertVector(ret_1[0], ret_1[2])
+    iprnt ("- - - - tv3", tv3)
+
+    test_result = tv1
+    test_expect = tv3
+
+    # restore global state
+    deodel.opmode_intisnum = bkp_opmode_intisnum
+    iprnt ("- - - - restored deodel.opmode_intisnum:", deodel.opmode_intisnum)
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
     iprnt ("NumSplit test")
 
     tv1 = [1, 2, 3, 4]
@@ -2104,7 +2203,14 @@ def UnitTestDeodel():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    iprnt ("deodel fit test")
+    iprnt ("deodel fit test - 1")
+
+    # backup global state
+    bkp_opmode_intisnum = deodel.opmode_intisnum
+    iprnt ("- - - - bkp_opmode_intisnum:", bkp_opmode_intisnum)
+
+    deodel.opmode_intisnum = True
+    iprnt ("- - - - deodel.opmode_intisnum:", deodel.opmode_intisnum)
 
     tt_X = [['a',   1.01,   'az',   'e'],
             ['b',   "3.01", 3.01,   'd'],
@@ -2120,14 +2226,27 @@ def UnitTestDeodel():
             2
            ]
 
+    iprnt ("- - - - tt_X:", tt_X)
+    iprnt ("- - - - tt_y:", tt_y)
+    iprnt ()
+
+    tt_transp_X = deodel.Working.MatrixTranspose(tt_X)
+    iprnt ("- - - -        tt_transp_X:", tt_transp_X)
+
     # o1 = deodel.deodel.DeodataDelangaClassifier()
     tt_o = deodel.DeodataDelangaClassifier({'split_mode': 'eq_freq'})
     tt_o.fit(tt_X, tt_y)
     iprnt ()
 
     test_result = tt_o.attr_X.tolist()
+    test_transp_result = deodel.Working.MatrixTranspose(test_result)
 
     ref_item = [[1, 2, 3, 2, 4], [3, 1, 2, 5, 1], [1, 2, 3, 2, 1], [1, 2, 2, 3, 1]]
+
+
+    iprnt ("- - - - test_transp_result:", test_transp_result)
+    iprnt ("- - - -           ref_item:", ref_item)
+    iprnt ()
 
     test_expect = deodel.Working.MatrixTranspose(ref_item)
 
@@ -2152,6 +2271,79 @@ def UnitTestDeodel():
 
     iprnt ("- - - - tt_o.__dict__ :", tt_o.__dict__ )
     iprnt ()
+
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("deodel fit test - 2")
+
+    deodel.opmode_intisnum = False
+    iprnt ("- - - - deodel.opmode_intisnum:", deodel.opmode_intisnum)
+
+    tt_X = [['a',   101.01,   'az',   'e'],
+            [77,    "3.01",   3.01,   'd'],
+            ['do',  103.03,   5,      'd'],
+            [77,    102.02,   3.01,   'h'],
+            [4,     '3.01',   'az',   'e']]
+
+    tt_y = [
+            'one',
+            2.0,
+            3,
+            "one",
+            2
+           ]
+
+    iprnt ("- - - - tt_X:", tt_X)
+    iprnt ("- - - - tt_y:", tt_y)
+    iprnt ()
+
+    tt_transp_X = deodel.Working.MatrixTranspose(tt_X)
+    iprnt ("- - - -        tt_transp_X:", tt_transp_X)
+
+    # o1 = deodel.deodel.DeodataDelangaClassifier()
+    tt_o = deodel.DeodataDelangaClassifier({'split_mode': 'eq_freq'})
+    tt_o.fit(tt_X, tt_y)
+    iprnt ()
+
+    test_result = tt_o.attr_X.tolist()
+    test_transp_result = deodel.Working.MatrixTranspose(test_result)
+
+    ref_item = [[1, 2, 3, 2, 4], [2, 1, 4, 3, 1], [1, 4, 2, 4, 1], [1, 2, 2, 3, 1]]
+
+    iprnt ("- - - - test_transp_result:", test_transp_result)
+    iprnt ("- - - -           ref_item:", ref_item)
+    iprnt ()
+
+    test_expect = deodel.Working.MatrixTranspose(ref_item)
+
+    deodel.opmode_intisnum = bkp_opmode_intisnum
+    iprnt ("- - - - restored deodel.opmode_intisnum:", deodel.opmode_intisnum)
+
+    iprnt ("- - - - - - - - test_result:", test_result)
+    iprnt ("- - - - - - - - test_expect:", test_expect)
+
+    test_result = test_result
+    test_expect = test_expect
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    iprnt ("- - - - tt_o.__dict__ :", tt_o.__dict__ )
+    iprnt ()
+
+
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
@@ -2356,12 +2548,80 @@ def UnitTestDeodel():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    iprnt ("integer mix in prediction")
+    iprnt ("integer mix in prediction - opmode_intisnum: true")
+    iprnt ()
+
+    bkp_opmode_intisnum = deodel.opmode_intisnum
+    iprnt ("- - - - bkp_opmode_intisnum:", bkp_opmode_intisnum)
+    deodel.opmode_intisnum = True
+    iprnt ("- - - - deodel.opmode_intisnum:", deodel.opmode_intisnum)
+
     iprnt ()
     tt_X = [['a',   1.01,   'az',   'e'],
             ['b',   "3.01", 3.01,   'd'],
             ['d',   "4",    5,      'd'],
             ['b',   2,      3.01,   'h'],
+            ['c',   '3.01', 'az',   'e']]
+
+    tt_y = [
+            'A',
+            'B',
+            'B',
+            'C',
+            'A'
+           ]
+
+    tt_test = [
+            ['a',   1.01,   5.0,    'd'],
+            ['b',   "3.01", 3.01,   'e'],
+            ['b',   2,      5.0,    'e'],
+            ['a',   "4",    3.01,   'e']]
+
+    tt_exp = [
+            'B',
+            'B',
+            'C',
+            'A',
+           ]
+
+    tt_o = deodel.DeodataDelangaClassifier()
+    tt_o.fit(tt_X, tt_y)
+    tt_predict = tt_o.predict(tt_test)
+    iprnt ()
+
+    test_result = tt_predict
+    test_expect = tt_exp
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("integer mix in prediction - opmode_intisnum: false")
+    iprnt ()
+
+    deodel.opmode_intisnum = False
+    iprnt ("- - - - deodel.opmode_intisnum:", deodel.opmode_intisnum)
+
+    iprnt ()
+    tt_X = [['a',   1.01,   'az',   'e'],
+            ['b',   "3.01", 3.01,   'd'],
+            ['d',   "4",    5.0,    'd'],
+            ['b',   2.0,    3.01,   'h'],
             ['c',   '3.01', 'az',   'e']]
 
     tt_y = [
@@ -2413,12 +2673,12 @@ def UnitTestDeodel():
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    iprnt ("integer mix in dealing with missing attributes")
+    iprnt ("integer mix in dealing with missing attributes - opmode_intisnum: false")
     iprnt ()
     tt_X = [['a',   1.01,   'az',   'e'],
             ['b',   "3.01", 3.01,   'd'],
             ['d',   "4",    None,   'd'],
-            ['b',   2,      3.01,   'h'],
+            ['b',   2.0,    3.01,   'h'],
             ['c',   '3.01', 'az',   'e']]
 
     tt_y = [
@@ -2470,12 +2730,12 @@ def UnitTestDeodel():
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    iprnt ("integer mix in no tie break")
+    iprnt ("integer mix in no tie break - opmode_intisnum: false")
     iprnt ()
     tt_X = [['a',   1.01,   'az',   'e'],
             ['b',   "3.01", 3.01,   'd'],
-            ['d',   "4",    5,      'd'],
-            ['b',   2,      3.01,   'h'],
+            ['d',   "4",    5.0,    'd'],
+            ['b',    2.0,   3.01,   'h'],
             ['c',   '3.01', 'az',   'e']]
 
     tt_y = [
@@ -2507,6 +2767,9 @@ def UnitTestDeodel():
 
     test_result = tt_predict
     test_expect = tt_exp
+
+    deodel.opmode_intisnum = bkp_opmode_intisnum
+    iprnt ("- - - - restored deodel.opmode_intisnum:", deodel.opmode_intisnum)
 
     iprnt ("- - - - test_result:", test_result)
     iprnt ("- - - - test_expect:", test_expect)
@@ -2596,7 +2859,8 @@ def UnitTestDeodel():
 
     test_result = deodel.DeodataDelangaClassifier.version
     # test_expect = 1.51
-    test_expect = 1.65
+    # test_expect = 1.65
+    test_expect = 1.75
 
     iprnt ("- - - - test_result:", test_result)
     iprnt ("- - - - test_expect:", test_expect)

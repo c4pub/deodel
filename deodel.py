@@ -53,7 +53,7 @@ class DeodataDelangaClassifier:
         else :
             self.aux_param = aux_param
 
-    version = 1.65
+    version = 1.75
 
     def __repr__(self):
         '''Returns representation of the object'''
@@ -98,6 +98,8 @@ class DeodataDelangaClassifier:
 
 
 # >-----------------------------------------------------------------------------
+
+opmode_intisnum = True
 
 # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # > Working - Begin
@@ -159,12 +161,11 @@ class Working:
         for crt_idx in range(attr_no) :
 
             crt_col = Working.GetCol( data_tbl, crt_idx )
-            ret_tuple = Working.ProcessVector(crt_col)
+            ret_tuple = Working.ProcessVector(crt_col, True)
             (conv_v, shadow_dict, shadrev_dict, numerical_list) = ret_tuple
 
             # create numerical thresholds if numerical elements are present
             if len(numerical_list) > 0 :
-                next_id = len(shadow_dict) + 1
                 crt_attr_thresh = Working.NumSplit(numerical_list, num_split, in_split_mode)
             else :
                 crt_attr_thresh = []
@@ -178,14 +179,14 @@ class Working:
             crt_attr_list = attr_tbl[crt_idx_1]
             for crt_idx_2 in range(entry_no) :
                 crt_elem = crt_attr_list[crt_idx_2]
-                if isinstance(crt_elem, float) :
-                    # entry is a float that needs conversion
+                if isinstance(crt_elem, tuple) :
+                    # entry is a number that needs conversion
                     start_no_id = len( attr_dict_list[crt_idx_1] ) + 1
                     crt_thresh_list = attr_num_thresh[crt_idx_1]
                     if crt_thresh_list == [] :
                         new_id = start_no_id
                     else :
-                        upper_idx = Working.GetElemIdxInOrderList(crt_elem, crt_thresh_list)
+                        upper_idx = Working.GetElemIdxInOrderList(crt_elem[0], crt_thresh_list)
                         new_id = start_no_id + upper_idx
                     attr_tbl[crt_idx_1][crt_idx_2] = new_id
 
@@ -238,7 +239,7 @@ class Working:
                 # None is considered to represent missing attribute values, will be ignored.
                     new_id = -1
             else :
-                ret_tuple = Working.NumericalCheck(crt_attr)
+                ret_tuple = Working.NumericalCheck(crt_attr, opmode_intisnum)
                 is_numerical, translate_value = ret_tuple
                 if is_numerical :
                     # numerical attribute, discretize with interval
@@ -366,17 +367,18 @@ class Working:
         conv_v = []
         for crt_idx in range(vect_size) :
             crt_elem = in_v[crt_idx]
-            if ( in_num_flag and isinstance(crt_elem, (int, float)) ) :
+            is_num_flag, equiv_val = Working.NumericalCheck(crt_elem, opmode_intisnum)
+            if ( in_num_flag and is_num_flag ) :
                 numerical_list.append(crt_elem)
-                conv_v.append(float(crt_elem))
+                conv_v.append(tuple([crt_elem]))
             else :
-                if not crt_elem in shadow_dict :
+                if not equiv_val in shadow_dict :
                    shadow_dict[in_v[crt_idx]] = shadow_id
-                   shadrev_dict[shadow_id] = crt_elem
+                   shadrev_dict[shadow_id] = equiv_val
                    conv_v.append(shadow_id)
                    shadow_id += 1
                 else :
-                   conv_v.append(shadow_dict[crt_elem])
+                   conv_v.append(shadow_dict[equiv_val])
 
         fn_ret_tuple = (conv_v, shadow_dict, shadrev_dict, numerical_list)
         return fn_ret_tuple
@@ -533,8 +535,8 @@ class Working:
         revrt_v = []
         for crt_idx in range(vect_size) :
             crt_elem = in_v[crt_idx]
-            if ( isinstance(crt_elem, float) ) :
-                revrt_v.append(crt_elem)
+            if isinstance(crt_elem, tuple) :
+                revrt_v.append(crt_elem[0])
             else :
                tr_elem = shadrev_dict[crt_elem]
                revrt_v.append(tr_elem)
@@ -544,12 +546,12 @@ class Working:
 
 # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     @staticmethod
-    def NumericalCheck( in_value, in_float_only = True ) :
+    def NumericalCheck( in_value, int_is_num_flag = True ) :
         """
             Check if numerical. If non regular float, result is false and
             translated value returned
         """
-        if in_float_only :
+        if not int_is_num_flag :
             if isinstance(in_value, float) :
                 float_flag, valid_val = CasetDeodel.ValidateFloat(in_value)
                 fn_ret = (float_flag, valid_val)
