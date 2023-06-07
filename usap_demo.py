@@ -2,10 +2,14 @@
 deodel - demo
 
     Module provides examplea of usage for the deodel module.
+
         Tested with Winpython64-3.10.5.0
 """
 
 #   c4pub@git 2023
+#
+# Latest version available at: https://github.com/c4pub/deodel
+#
 
 import datetime
 import random

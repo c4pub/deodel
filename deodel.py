@@ -1,6 +1,9 @@
 """Deodata Delanga Classification"""
 
 #   c4pub@git 2023
+#
+# Latest version available at: https://github.com/c4pub/deodel
+#
 
 import numpy as np
 import warnings

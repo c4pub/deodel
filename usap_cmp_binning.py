@@ -5,6 +5,9 @@
 """
 
 #   c4pub@git 2023
+#
+# Latest version available at: https://github.com/c4pub/deodel
+#
 
 import datetime
 import random
