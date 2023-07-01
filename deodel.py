@@ -7,6 +7,8 @@
 
 import numpy as np
 import warnings
+import pandas as pd
+import numpy as np
 
 class DeodataDelangaClassifier:
     """Classifier implementing the Deodata Delanga classifier.
@@ -56,7 +58,7 @@ class DeodataDelangaClassifier:
         else :
             self.aux_param = aux_param
 
-    version = 1.75
+    version = 1.77
 
     def __repr__(self):
         '''Returns representation of the object'''
@@ -114,21 +116,17 @@ class Working:
     @staticmethod
     def WorkFit(object, in_X, in_y):
 
-        import pandas as pd
+        data_y = CasetDeodel.ListDataConvert(in_y)
+        if not data_y == [] :
+            if (isinstance(data_y[0], list)) :
+                if len(data_y[0]) == 1 :
+                    # must be a one column matrix
+                    transpose_data = Working.MatrixTranspose(data_y)
+                    data_y = transpose_data[0]
+                else :
+                    data_y = None
 
-        if (isinstance(in_y, np.ndarray)) :
-            data_y = in_y.tolist()
-        elif (isinstance(in_y, pd.core.series.Series)) :
-            data_y = in_y.values.tolist()
-        else :
-            data_y = in_y.copy()
-
-        if (isinstance(in_X, np.ndarray)) :
-            data_X = in_X.tolist()
-        elif (isinstance(in_X, pd.core.frame.DataFrame)) :
-            data_X = in_X.values.tolist()
-        else :
-            data_X = in_X.copy()
+        data_X = CasetDeodel.ListDataConvert(in_X)
 
         if 'split_no' in object.aux_param :
             num_split = object.aux_param['split_no']
@@ -154,7 +152,14 @@ class Working:
 
         data_tbl = in_tbl
         entry_no = len(data_tbl)
-        attr_no = len(data_tbl[0])
+
+        # determine column dimension (for incomplete lists of lists)
+        max_col_no = 0
+        for crt_row in data_tbl :
+            crt_rlen = len(crt_row)
+            if crt_rlen > max_col_no :
+                max_col_no = crt_rlen
+        attr_no = max_col_no
 
         attr_tbl = []
         attr_dict_list = []
@@ -204,20 +209,9 @@ class Working:
     @staticmethod
     def WorkPredict(object, in_query):
 
-        import pandas as pd
+        query_req = CasetDeodel.ListDataConvert(in_query)
 
-        if isinstance(in_query, np.ndarray) :
-            query_req = in_query.tolist()
-
-        elif (isinstance(in_query, pd.core.frame.DataFrame)) :
-            query_req = in_query.values.tolist()
-
-        else :
-            query_req = in_query[:]
-
-        entry_no = len(object.attr_X)
         attr_no = len(object.attr_X[0])
-
         if attr_no != len( object.attr_num_thresh ) :
             raise ValueError( "Mismatch in the number of attributes" )
 
@@ -262,10 +256,21 @@ class Working:
     @staticmethod
     def PredictOne(object, in_query):
         # prediction for one query
-        attr_no = len(in_query)
-        query_req = Working.TranslateAttrEntry(object, in_query)
+        query_len = len(in_query)
+        train_len = len(object.attr_X[0])
+        if query_len == train_len :
+            adjusted_query = in_query[:]
+        elif query_len > train_len :
+            adjusted_query = in_query[:train_len]
+        else :
+            adjusted_query = in_query + [None]*(train_len - query_len)
+        attr_no = query_len
+        query_req = Working.TranslateAttrEntry(object, adjusted_query)
+
         match_score_list = [[] for i in range(attr_no + 1)]
-        train_no = len(object.attr_X)
+        attr_rows = len(object.attr_X)
+        targ_no = len(object.out_y)
+        train_no = min(attr_rows, targ_no)
 
         for crt_idx in range(train_no) :
             crt_train_attr = object.attr_X[crt_idx]
@@ -340,8 +345,11 @@ class Working:
             else :
                 ret_item = []
                 for crt_idx_row in range(row_no) :
-                    ret_item.append((in_array[crt_idx_row][in_col]))
-
+                    crt_row_len = len(in_array[crt_idx_row])
+                    if in_col < crt_row_len :
+                        ret_item.append((in_array[crt_idx_row][in_col]))
+                    else :
+                        ret_item.append(None)
         return(ret_item)
 
 # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -835,6 +843,26 @@ class CasetDeodel:
             fn_ret_translate = in_val
         ret_tuple = fn_ret_status, fn_ret_translate
         return ret_tuple
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    @staticmethod
+    def ListDataConvert(in_data) :
+
+        if (isinstance(in_data, list)) :
+            # check whether is a one column array
+            lst_data = in_data.copy()
+        elif (isinstance(in_data, np.ndarray)) :
+            lst_data = in_data.tolist()
+        elif (isinstance(in_data, pd.core.arrays.PandasArray)) :
+            lst_data = in_data.tolist()
+        elif (isinstance(in_data, pd.core.frame.DataFrame)) :
+            lst_data = in_data.values.tolist()
+        elif (isinstance(in_data, pd.core.series.Series)) :
+            lst_data = in_data.values.tolist()
+        else :
+            lst_data = None
+
+        return lst_data
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

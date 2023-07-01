@@ -11,6 +11,7 @@ Deodata Delanga Unit Test
 # Latest version available at: https://github.com/c4pub/deodel
 #
 
+import usap_common
 from usap_common import *
 
 # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -40,6 +41,7 @@ def UnitTestDeodel():
     import traceback
     import sys
     import numpy as np
+    import pandas as pd
 
     import deodel
 
@@ -605,7 +607,6 @@ def UnitTestDeodel():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
@@ -2548,7 +2549,6 @@ def UnitTestDeodel():
         traceback.print_stack(file=sys.stdout)
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     iprnt ("integer mix in prediction - opmode_intisnum: true")
@@ -2851,8 +2851,43 @@ def UnitTestDeodel():
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    iprnt ("check version")
+    iprnt ("pathological input - 1")
     iprnt ()
+
+    tt_X = [
+            ['a',   None,  'b'],
+            ['c',   99.0,   'c'],
+            [],
+            ['d',   'c'],
+            ['e'],
+            ['e',   101,   None],
+            ]
+
+    iprnt ("- - - - tt_X:", tt_X)
+
+    tt_y = [
+            'X',
+            'X',
+            'Y',
+            'Y',
+            'Y',
+            'Z',
+           ]
+
+    iprnt ("- - - - tt_y:", tt_y)
+
+    tt_test= [
+            ['c',   None,  'c'],
+            ['a',   'c']]
+
+    iprnt ("- - - - tt_test:", tt_test)
+
+    tt_exp = [
+            'X',
+            'X',
+           ]
+
+    iprnt ("- - - - tt_exp:", tt_exp)
 
     aux_param = {'tbreak_depth': 1}
     tt_o = deodel.DeodataDelangaClassifier(aux_param)
@@ -2860,10 +2895,8 @@ def UnitTestDeodel():
     tt_predict = tt_o.predict(tt_test)
     iprnt ()
 
-    test_result = deodel.DeodataDelangaClassifier.version
-    # test_expect = 1.51
-    # test_expect = 1.65
-    test_expect = 1.75
+    test_result = tt_predict
+    test_expect = tt_exp
 
     iprnt ("- - - - test_result:", test_result)
     iprnt ("- - - - test_expect:", test_expect)
@@ -2885,10 +2918,1411 @@ def UnitTestDeodel():
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    iprnt ("pandas data - 1")
+    iprnt ("pathological input - 2")
     iprnt ()
 
-    import pandas as pd
+    tt_X = [['a'],
+            ['a',   None,  'b'],
+            ['c',   99.0,   'c'],
+            ['d',   'c'],
+            ['e'],
+            ['e',   101,   None]]
+
+    iprnt ("- - - - tt_X:", tt_X)
+
+    tt_y = [
+            'X',
+            'X',
+            'Y',
+            'Y',
+            'Y',
+            'Z',
+           ]
+
+    iprnt ("- - - - tt_y:", tt_y)
+
+    tt_test= [
+            ['c',   None,  'c'],
+            ['a',   'c']]
+
+    iprnt ("- - - - tt_test:", tt_test)
+
+    tt_exp = [
+            'Y',
+            'X',
+           ]
+
+    iprnt ("- - - - tt_exp:", tt_exp)
+
+    aux_param = {'tbreak_depth': 1}
+    tt_o = deodel.DeodataDelangaClassifier(aux_param)
+    tt_o.fit(tt_X, tt_y)
+    tt_predict = tt_o.predict(tt_test)
+    iprnt ()
+
+    test_result = tt_predict
+    test_expect = tt_exp
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("pathological input - 3")
+    iprnt ()
+
+    tt_X = [['a'],
+            ['a',   None,  'b'],
+            ['c',   99.0,   'c'],
+            ['d',   'c'],
+            ['e'],
+            ['e',   101,   None]]
+
+    iprnt ("- - - - tt_X:", tt_X)
+
+    tt_y = [
+            'X',
+            'X',
+            'Y',
+            'Y',
+           ]
+
+    iprnt ("- - - - tt_y:", tt_y)
+
+    tt_test= [
+            ['c',   None,  'c'],
+            ['a',   'c']]
+
+    iprnt ("- - - - tt_test:", tt_test)
+
+    tt_exp = [
+            'Y',
+            'X',
+           ]
+
+    iprnt ("- - - - tt_exp:", tt_exp)
+
+    aux_param = {'tbreak_depth': 1}
+    tt_o = deodel.DeodataDelangaClassifier(aux_param)
+    tt_o.fit(tt_X, tt_y)
+    tt_predict = tt_o.predict(tt_test)
+    iprnt ()
+
+    test_result = tt_predict
+    test_expect = tt_exp
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("pathological input - 4")
+    iprnt ()
+
+    tt_X = [['a'],
+            ['a',   None,  'b'],
+            ['c',   99.0,   'c'],
+            ['d',   'c'],
+            ['e'],
+            ['e',   101,   None]]
+
+    iprnt ("- - - - tt_X:", tt_X)
+
+    tt_y = [
+            'X',
+            'X',
+            'Y',
+            'Y',
+            'Y',
+            'Z',
+            'X',
+            'X',
+            'Y',
+            'Y',
+           ]
+
+    iprnt ("- - - - tt_y:", tt_y)
+
+    tt_test= [
+            ['c',   None,  'c'],
+            ['a',   'c']]
+
+    iprnt ("- - - - tt_test:", tt_test)
+
+    tt_exp = [
+            'Y',
+            'X',
+           ]
+
+    iprnt ("- - - - tt_exp:", tt_exp)
+
+    aux_param = {'tbreak_depth': 1}
+    tt_o = deodel.DeodataDelangaClassifier(aux_param)
+    tt_o.fit(tt_X, tt_y)
+    tt_predict = tt_o.predict(tt_test)
+    iprnt ()
+
+    test_result = tt_predict
+    test_expect = tt_exp
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("pathological input - 5")
+    iprnt ()
+
+    tt_X = [['a'],
+            ['a',   None,  'b'],
+            ['c',   99.0,   'c'],
+            ['d',   'c'],
+            ['e'],
+            ['e',   101,   None]]
+
+    iprnt ("- - - - tt_X:", tt_X)
+
+    tt_y = [
+           ]
+
+    iprnt ("- - - - tt_y:", tt_y)
+
+    tt_test= [
+            ['c',   None,  'c'],
+            ['a',   'c']]
+
+    iprnt ("- - - - tt_test:", tt_test)
+
+    tt_exp = [
+            None,
+            None,
+           ]
+
+    iprnt ("- - - - tt_exp:", tt_exp)
+
+    aux_param = {'tbreak_depth': 1}
+    tt_o = deodel.DeodataDelangaClassifier(aux_param)
+    tt_o.fit(tt_X, tt_y)
+    tt_predict = tt_o.predict(tt_test)
+    iprnt ()
+
+    test_result = tt_predict
+    test_expect = tt_exp
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("pathological ref - 6")
+    iprnt ()
+
+    tt_X = [['a',   1.01,   'az',   'e'],
+            ['b',   "3.01", 3.01,   'd'],
+            ['d',   "4",    5.0,    'd'],
+            ['b',    2.0,   3.01,   'h'],
+            ['a',    3,     4,         ],
+            ['d',    -1.0,  None,   'i'],
+            ['c',   '3.01', 'az',   'e']]
+
+    tt_y = [
+            'C',
+            'A',
+            'B',
+            'B',
+            'A',
+            'A'
+           ]
+
+    tt_test = [
+            ['a',   1.01,   5.0,    'd'],
+            ['b',   "3.01", 3.01,   'e'],
+            ['b',   2,      5.0,    'e'],
+            ['a',   "4",    3.01,   'e']]
+
+    tt_exp = [
+            'C',
+            'A',
+            'B',
+            'C',
+           ]
+
+    iprnt ("- - - - tt_X:", tt_X)
+    iprnt ("- - - - tt_y:", tt_y)
+    iprnt ("- - - - tt_test:", tt_test)
+
+    aux_param = {'tbreak_depth': 1}
+    tt_o = deodel.DeodataDelangaClassifier(aux_param)
+    tt_o.fit(tt_X, tt_y)
+    tt_predict = tt_o.predict(tt_test)
+    iprnt ()
+
+    test_result = tt_predict
+    test_expect = tt_exp
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("pathological input - 7")
+    iprnt ()
+
+    tt_X = [['a',   1.01,   'az',   'e'],
+            ['b',   "3.01", 3.01,   'd'],
+            ['d',   "4",    5.0,    'd'],
+            ['b',    2.0,   3.01,   'h'],
+            ['a',    3,     4,         ],
+            ['d',    -1.0,  None,   'i'],
+            ['c',   '3.01', 'az',   'e']]
+
+    tt_y = [
+            ['C'],
+            ['A'],
+            ['B'],
+            ['B'],
+            ['A'],
+            ['A']
+           ]
+
+    tt_test = [
+            ['a',   1.01,   5.0,    'd'],
+            ['b',   "3.01", 3.01,   'e'],
+            ['b',   2,      5.0,    'e'],
+            ['a',   "4",    3.01,   'e']]
+
+    tt_exp = [
+            'C',
+            'A',
+            'B',
+            'C',
+           ]
+
+    iprnt ("- - - - tt_X:", tt_X)
+    iprnt ("- - - - tt_y:", tt_y)
+    iprnt ("- - - - tt_test:", tt_test)
+
+    aux_param = {'tbreak_depth': 1}
+    tt_o = deodel.DeodataDelangaClassifier(aux_param)
+    tt_o.fit(tt_X, tt_y)
+    tt_predict = tt_o.predict(tt_test)
+    iprnt ()
+
+    test_result = tt_predict
+    test_expect = tt_exp
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("pathological ref pd - 8")
+    iprnt ()
+
+    t1_X = [['a',   1.01,   'az',   'e'],
+            ['b',   "3.01", 3.01,   'd'],
+            ['d',   "4",    5.0,    'd'],
+            ['b',    2.0,   3.01,   'h'],
+            ['a',    3,     4,         ],
+            ['d',    -1.0,  None,   'i'],
+            ['c',   '3.01', 'az',   'e']]
+
+    t1_y = [
+            'C',
+            'A',
+            'B',
+            'B',
+            # 'A',
+            102,
+            'A'
+           ]
+
+    t1_test = [
+            ['a',   1.01,   5.0,    'd'],
+            ['b',   "3.01", 3.01,   'e'],
+            ['b',   2,      5.0,    'e'],
+            ['a',   "4",    3.01,   'e']]
+
+    tt_exp = [
+            'C',
+            'A',
+            'B',
+            'C',
+           ]
+
+    tt_X = pd.array(t1_X)
+    tt_y = pd.array(t1_y)
+    tt_test = pd.array(t1_test)
+
+    iprnt ("- - - - tt_X:", tt_X)
+    iprnt ("- - - - tt_y:", tt_y)
+    iprnt ("- - - - tt_test:", tt_test)
+
+    aux_param = {'tbreak_depth': 1}
+    tt_o = deodel.DeodataDelangaClassifier(aux_param)
+    tt_o.fit(tt_X, tt_y)
+    tt_predict = tt_o.predict(tt_test)
+    iprnt ()
+
+    test_result = tt_predict
+    test_expect = tt_exp
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("pathological input pd - 9")
+    iprnt ()
+
+    t1_X = [['a',   1.01,   'az',   'e'],
+            ['b',   "3.01", 3.01,   'd'],
+            ['d',   "4",    5.0,    'd'],
+            ['b',    2.0,   3.01,   'h'],
+            ['a',    3,     4,         ],
+            ['d',    -1.0,  None,   'i'],
+            ['c',   '3.01', 'az',   'e']]
+
+    t1_y = [
+            ['C'],
+            ['A'],
+            ['B'],
+            ['B'],
+            # ['A'],
+            [102],
+            ['A']
+           ]
+
+    t1_test = [
+            ['a',   1.01,   5.0,    'd'],
+            ['b',   "3.01", 3.01,   'e'],
+            ['b',   2,      5.0,    'e'],
+            ['a',   "4",    3.01,   'e']]
+
+    tt_exp = [
+            'C',
+            'A',
+            'B',
+            'C',
+           ]
+
+    tt_X = pd.array(t1_X)
+    tt_y = pd.array(t1_y)
+    tt_test = pd.array(t1_test)
+
+    iprnt ("- - - - tt_X:", tt_X)
+    iprnt ("- - - - tt_y:", tt_y)
+    iprnt ("- - - - tt_test:", tt_test)
+
+    aux_param = {'tbreak_depth': 1}
+    tt_o = deodel.DeodataDelangaClassifier(aux_param)
+    tt_o.fit(tt_X, tt_y)
+    tt_predict = tt_o.predict(tt_test)
+    iprnt ()
+
+    test_result = tt_predict
+    test_expect = tt_exp
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("pathological input pd - 10")
+    iprnt ()
+
+    t1_X = [['a',   1.01,   'az',   'e'],
+            ['b',   "3.01", 3.01,   'd'],
+            ['d',   "4",    5.0,    'd'],
+            ['b',    2.0,   3.01,   'h'],
+            ['a',    3,     4,         ],
+            ['d',    -1.0,  None,   'i'],
+            ['c',   '3.01', 'az',   'e']]
+
+    t1_y = [
+            'C',
+            'A',
+            'B',
+            'B',
+            102,
+            'A'
+           ]
+
+    t1_test = [
+            ['a',   1.01,   5.0,    'd'],
+            ['b',   "3.01", 3.01,   'e'],
+            ['b',   2,      5.0,    'e'],
+            ['a',   "4",    3.01,   'e']]
+
+    tt_exp = [
+            'C',
+            'A',
+            'B',
+            'C',
+           ]
+
+    tt_X = pd.DataFrame(t1_X)
+    tt_y = pd.DataFrame(t1_y)
+    tt_test = pd.DataFrame(t1_test)
+
+    iprnt ("- - - - tt_X:", tt_X)
+    iprnt ("- - - - tt_y:", tt_y)
+    iprnt ("- - - - tt_test:", tt_test)
+
+    aux_param = {'tbreak_depth': 1}
+    tt_o = deodel.DeodataDelangaClassifier(aux_param)
+    tt_o.fit(tt_X, tt_y)
+    tt_predict = tt_o.predict(tt_test)
+    iprnt ()
+
+    test_result = tt_predict
+    test_expect = tt_exp
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("pathological input pd - 11")
+    iprnt ()
+
+    t1_X = [['a',   1.01,   'az',   'e'],
+            ['b',   "3.01", 3.01,   'd'],
+            ['d',   "4",    5.0,    'd'],
+            ['b',    2.0,   3.01,   'h'],
+            ['a',    3,     4,         ],
+            ['d',    -1.0,  None,   'i'],
+            ['c',   '3.01', 'az',   'e']]
+
+    t1_y = [
+            ['C'],
+            ['A'],
+            ['B'],
+            ['B'],
+            [102],
+            ['A']
+           ]
+
+    t1_test = [
+            ['a',   1.01,   5.0,    'd'],
+            ['b',   "3.01", 3.01,   'e'],
+            ['b',   2,      5.0,    'e'],
+            ['a',   "4",    3.01,   'e']]
+
+    tt_exp = [
+            'C',
+            'A',
+            'B',
+            'C',
+           ]
+
+    tt_X = pd.DataFrame(t1_X)
+    tt_y = pd.DataFrame(t1_y)
+    tt_test = pd.DataFrame(t1_test)
+
+    iprnt ("- - - - tt_X:", tt_X)
+    iprnt ("- - - - tt_y:", tt_y)
+    iprnt ("- - - - tt_test:", tt_test)
+
+    aux_param = {'tbreak_depth': 1}
+    tt_o = deodel.DeodataDelangaClassifier(aux_param)
+    tt_o.fit(tt_X, tt_y)
+    tt_predict = tt_o.predict(tt_test)
+    iprnt ()
+
+    test_result = tt_predict
+    test_expect = tt_exp
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("pathological input pd - 12")
+    iprnt ()
+
+    t1_X = [['a',   1.01,   'az',   'e'],
+            ['b',   "3.01", 3.01,   'd'],
+            ['d',   "4",    5.0,    'd'],
+            ['b',    2.0,   3.01,   'h'],
+            ['a',    3,     4,         ],
+            ['d',    -1.0,  None,   'i'],
+            ['c',   '3.01', 'az',   'e']]
+
+    t1_y = [
+            ['C'],
+            ['A'],
+            ['B'],
+            ['B'],
+            [102],
+            ['A']
+           ]
+
+    t1_test = [
+            ['a',   1.01,   5.0,    'd'],
+            ['b',   "3.01", 3.01,   'e'],
+            ['b',   2,      5.0,    'e'],
+            ['a',   "4",    3.01,   'e']]
+
+    tt_exp = [
+            'C',
+            'A',
+            'B',
+            'C',
+           ]
+
+    tt_X = pd.DataFrame(t1_X)
+    tt_y = pd.DataFrame(t1_y)
+    tt_test = pd.DataFrame(t1_test)
+
+    iprnt ("- - - - tt_X:", tt_X)
+    iprnt ("- - - - tt_y:", tt_y)
+    iprnt ("- - - - tt_test:", tt_test)
+
+    aux_param = {'tbreak_depth': 1}
+    tt_o = deodel.DeodataDelangaClassifier(aux_param)
+    tt_o.fit(tt_X, tt_y)
+    tt_predict = tt_o.predict(tt_test)
+    iprnt ()
+
+    test_result = tt_predict
+    test_expect = tt_exp
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("pathological input pd - 13")
+    iprnt ()
+
+    t1_X = [['a',   1.01,   'az',   'e'],
+            ['b',   "3.01", 3.01,   'd'],
+            ['d',   "4",    5.0,    'd'],
+            ['b',    2.0,   3.01,   'h'],
+            ['a',    3,     4,         ],
+            ['d',    -1.0,  None,   'i'],
+            ['c',   '3.01', 'az',   'e']]
+
+    t1_y = [
+            ['C'],
+            ['A'],
+            ['B'],
+            ['B'],
+            [102],
+            ['A']
+           ]
+
+    t1_test = [
+            ['a',   1.01,   5.0,    'd'],
+            ['b',   "3.01", 3.01,   'e'],
+            ['b',   2,      5.0,    'e'],
+            ['a',   "4",    3.01,   'e']]
+
+    tt_exp = [
+            'C',
+            'A',
+            'B',
+            'C',
+           ]
+
+    tt_X = pd.DataFrame(t1_X)
+    # tt_y = pd.DataFrame(t1_y)
+    tt_y = pd.Series(t1_y)
+    tt_test = pd.DataFrame(t1_test)
+
+    iprnt ("- - - - tt_X:", tt_X)
+    iprnt ("- - - - tt_y:", tt_y)
+    iprnt ("- - - - tt_test:", tt_test)
+
+    aux_param = {'tbreak_depth': 1}
+    tt_o = deodel.DeodataDelangaClassifier(aux_param)
+    tt_o.fit(tt_X, tt_y)
+    tt_predict = tt_o.predict(tt_test)
+    iprnt ()
+
+    test_result = tt_predict
+    test_expect = tt_exp
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("pathological input pd - 14")
+    iprnt ()
+
+    t1_X = [['a',   1.01,   'az',   'e'],
+            ['b',   "3.01", 3.01,   'd'],
+            ['d',   "4",    5.0,    'd'],
+            ['b',    2.0,   3.01,   'h'],
+            ['a',    3,     4,         ],
+            ['d',    -1.0,  None,   'i'],
+            ['c',   '3.01', 'az',   'e']]
+
+    t1_y = [
+            'C',
+            'A',
+            'B',
+            'B',
+            102,
+            'A'
+           ]
+
+    t1_test = [
+            ['a',   1.01,   5.0,    'd'],
+            ['b',   "3.01", 3.01,   'e'],
+            ['b',   2,      5.0,    'e'],
+            ['a',   "4",    3.01,   'e']]
+
+    tt_exp = [
+            'C',
+            'A',
+            'B',
+            'C',
+           ]
+
+    tt_X = pd.DataFrame(t1_X)
+    tt_y = pd.Series(t1_y)
+    tt_test = pd.DataFrame(t1_test)
+
+    iprnt ("- - - - tt_X:", tt_X)
+    iprnt ("- - - - tt_y:", tt_y)
+    iprnt ("- - - - tt_test:", tt_test)
+
+    aux_param = {'tbreak_depth': 1}
+    tt_o = deodel.DeodataDelangaClassifier(aux_param)
+    tt_o.fit(tt_X, tt_y)
+    tt_predict = tt_o.predict(tt_test)
+    iprnt ()
+
+    test_result = tt_predict
+    test_expect = tt_exp
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("pathological ref np - 1")
+    iprnt ()
+
+    t1_X = [['a',   1.01,   'az',   'e'],
+            ['b',   "3.01", 3.01,   'd'],
+            ['d',   "4",    5.0,    'd'],
+            ['b',    2.0,   3.01,   'h'],
+            ['a',    3,     4,      None],
+            ['d',    -1.0,  None,   'i'],
+            ['c',   '3.01', 'az',   'e']]
+
+    t1_y = [
+            'C',
+            'A',
+            'B',
+            'B',
+            'A',
+            'A'
+           ]
+
+    t1_test = [
+            ['a',   1.01,   5.0,    'd'],
+            ['b',   "3.01", 3.01,   'e'],
+            ['b',   2,      5.0,    'e'],
+            ['a',   "4",    3.01,   'e']]
+
+    tt_exp = [
+            'A',
+            'A',
+            'C',
+            'C',
+           ]
+
+    tt_X = np.array(t1_X)
+    tt_y = np.array(t1_y)
+    tt_test = np.array(t1_test)
+
+    iprnt ("- - - - tt_X:", tt_X)
+    iprnt ("- - - - tt_y:", tt_y)
+    iprnt ("- - - - tt_test:", tt_test)
+
+    aux_param = {'tbreak_depth': 1}
+    tt_o = deodel.DeodataDelangaClassifier(aux_param)
+    tt_o.fit(tt_X, tt_y)
+    tt_predict = tt_o.predict(tt_test)
+    iprnt ()
+
+    test_result = tt_predict
+    test_expect = tt_exp
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("pathological input np - 2")
+    iprnt ()
+
+    t1_X = [['a',   1.01,   'az',   'e'],
+            ['b',   "3.01", 3.01,   'd'],
+            ['d',   "4",    5.0,    'd'],
+            ['b',    2.0,   3.01,   'h'],
+            ['a',    3,     4,      None],
+            ['d',    -1.0,  None,   'i'],
+            ['c',   '3.01', 'az',   'e']]
+
+    t1_y = [
+            ['C'],
+            ['A'],
+            ['B'],
+            ['B'],
+            ['A'],
+            ['A']
+           ]
+
+    t1_test = [
+            ['a',   1.01,   5.0,    'd'],
+            ['b',   "3.01", 3.01,   'e'],
+            ['b',   2,      5.0,    'e'],
+            ['a',   "4",    3.01,   'e']]
+
+    tt_exp = [
+            'A',
+            'A',
+            'C',
+            'C',
+           ]
+
+    tt_X = np.array(t1_X)
+    tt_y = np.array(t1_y)
+    tt_test = np.array(t1_test)
+
+    iprnt ("- - - - tt_X:", tt_X)
+    iprnt ("- - - - tt_y:", tt_y)
+    iprnt ("- - - - tt_test:", tt_test)
+
+    aux_param = {'tbreak_depth': 1}
+    tt_o = deodel.DeodataDelangaClassifier(aux_param)
+    tt_o.fit(tt_X, tt_y)
+    tt_predict = tt_o.predict(tt_test)
+    iprnt ()
+
+    test_result = tt_predict
+    test_expect = tt_exp
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("ListDataConvert pd 1")
+    iprnt ()
+
+    tin_1 =    [['a',    3,                ],
+                ['b',   "3.01", 3.01,   'd'],
+                ['b',    2.0,   3.01       ],
+                ['d',    -1.0,  None,   'i'],
+                ['c',   '3.01', 'az',   'e']]
+
+    tin_2 =    [
+                ['C'],
+                [],
+                ['B'],
+                [102],
+                ['A']
+               ]
+
+    tin_3 =    [
+                'C',
+                None,
+                'B',
+                102,
+                'A',
+               ]
+
+    iprnt ("- - - - tin_1:", tin_1)
+    iprnt ("- - - - tin_2:", tin_2)
+    iprnt ("- - - - tin_3:", tin_3)
+
+    # tt_in_1 = pd.DataFrame(tin_1)
+    tt_in_1 = pd.array(tin_1)
+    tt_in_2 = pd.array(tin_2)
+    tt_in_3 = pd.array(tin_3)
+    
+    iprnt ("- - - - tt_in_1:", tt_in_1)
+    iprnt ("- - - - tt_in_2:", tt_in_2)
+    iprnt ("- - - - tt_in_3:", tt_in_3)
+
+    tout_1 = deodel.CasetDeodel.ListDataConvert(tt_in_1)
+    tout_2 = deodel.CasetDeodel.ListDataConvert(tt_in_2)
+    tout_3 = deodel.CasetDeodel.ListDataConvert(tt_in_3)
+
+    iprnt ("- - - - tout_1:", tout_1)
+    iprnt ("- - - - tout_2:", tout_2)
+    iprnt ("- - - - tout_3:", tout_3)
+
+    test_result = (tout_1, tout_2, tout_3)
+    test_expect = (tin_1, tin_2, tin_3)
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("ListDataConvert pd 2")
+    iprnt ()
+
+    tin_1 =    [['a',    3,                ],
+                ['b',   "3.01", 3.01,   'd'],
+                ['b',    2.0,   3.01       ],
+                ['d',    -1.0,  None,   'i'],
+                ['c',   '3.01', 'az',   'e']]
+
+    tin_2 =    [
+                ['C'],
+                [],
+                ['B'],
+                [102],
+                ['A']
+               ]
+
+    tin_3 =    [
+                'C',
+                None,
+                'B',
+                102,
+                'A',
+               ]
+
+    iprnt ("- - - - tin_1:", tin_1)
+    iprnt ("- - - - tin_2:", tin_2)
+    iprnt ("- - - - tin_3:", tin_3)
+
+    # tt_in_1 = pd.array(tin_1)
+    tt_in_1 = pd.DataFrame(tin_1)
+    tt_in_2 = pd.DataFrame(tin_2)
+    tt_in_3 = pd.DataFrame(tin_3)
+    
+    iprnt ("- - - - tt_in_1:", tt_in_1)
+    iprnt ("- - - - tt_in_2:", tt_in_2)
+    iprnt ("- - - - tt_in_3:", tt_in_3)
+
+    tout_1 = deodel.CasetDeodel.ListDataConvert(tt_in_1)
+    tout_2 = deodel.CasetDeodel.ListDataConvert(tt_in_2)
+    tout_3 = deodel.CasetDeodel.ListDataConvert(tt_in_3)
+
+    iprnt ("- - - - tout_1:", tout_1)
+    iprnt ("- - - - tout_2:", tout_2)
+    iprnt ("- - - - tout_3:", tout_3)
+
+
+    texp_1 =    [['a',    3,    None,   None],
+                ['b',   "3.01", 3.01,   'd'],
+                ['b',    2.0,   3.01,   None],
+                ['d',    -1.0,  None,   'i'],
+                ['c',   '3.01', 'az',   'e']]
+
+    texp_2 =    [
+                ['C'],
+                [None],
+                ['B'],
+                [102],
+                ['A']
+               ]
+
+    texp_3 =    [
+                ['C'],
+                [None],
+                ['B'],
+                [102],
+                ['A']
+               ]
+
+    test_result = (tout_1, tout_2, tout_3)
+    test_expect = (texp_1, texp_2, texp_3)
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("ListDataConvert pd 3")
+    iprnt ()
+
+    tin_1 =    [['a',    3,                ],
+                ['b',   "3.01", 3.01,   'd'],
+                ['b',    2.0,   3.01       ],
+                ['d',    -1.0,  None,   'i'],
+                ['c',   '3.01', 'az',   'e']]
+
+    tin_2 =    [
+                ['C'],
+                [],
+                ['B'],
+                [102],
+                ['A']
+               ]
+
+    tin_3 =    [
+                'C',
+                None,
+                'B',
+                102,
+                'A',
+               ]
+
+    iprnt ("- - - - tin_1:", tin_1)
+    iprnt ("- - - - tin_2:", tin_2)
+    iprnt ("- - - - tin_3:", tin_3)
+
+    # tt_in_1 = pd.array(tin_1)
+    # tt_in_1 = pd.DataFrame(tin_1)
+    tt_in_1 = pd.Series(tin_1)
+    tt_in_2 = pd.Series(tin_2)
+    tt_in_3 = pd.Series(tin_3)
+    
+    iprnt ("- - - - tt_in_1:", tt_in_1)
+    iprnt ("- - - - tt_in_2:", tt_in_2)
+    iprnt ("- - - - tt_in_3:", tt_in_3)
+
+    tout_1 = deodel.CasetDeodel.ListDataConvert(tt_in_1)
+    tout_2 = deodel.CasetDeodel.ListDataConvert(tt_in_2)
+    tout_3 = deodel.CasetDeodel.ListDataConvert(tt_in_3)
+
+    iprnt ("- - - - tout_1:", tout_1)
+    iprnt ("- - - - tout_2:", tout_2)
+    iprnt ("- - - - tout_3:", tout_3)
+
+
+    texp_1 =    [['a',    3],
+                ['b',   "3.01", 3.01,   'd'],
+                ['b',    2.0,   3.01],
+                ['d',    -1.0,  None,   'i'],
+                ['c',   '3.01', 'az',   'e']]
+
+    texp_2 =    [
+                ['C'],
+                [],
+                ['B'],
+                [102],
+                ['A']
+               ]
+
+    texp_3 =    [
+                'C',
+                None,
+                'B',
+                102,
+                'A'
+               ]
+
+    test_result = (tout_1, tout_2, tout_3)
+    test_expect = (texp_1, texp_2, texp_3)
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("ListDataConvert np 1")
+    iprnt ()
+
+    tin_1 =    [['a',    3,                ],
+                ['b',   "3.01", 3.01,   'd'],
+                ['b',    2.0,   3.01       ],
+                ['d',    -1.0,  None,   'i'],
+                ['c',   '3.01', 'az',   'e']]
+
+    tin_2 =    [
+                ['C'],
+                [],
+                ['B'],
+                [102],
+                ['A']
+               ]
+
+    tin_3 =    [
+                'C',
+                None,
+                'B',
+                102,
+                'A',
+               ]
+
+    iprnt ("- - - - tin_1:", tin_1)
+    iprnt ("- - - - tin_2:", tin_2)
+    iprnt ("- - - - tin_3:", tin_3)
+
+    tt_in_1 = np.array(tin_1)
+    tt_in_2 = np.array(tin_2)
+    tt_in_3 = np.array(tin_3)
+    
+    iprnt ("- - - - tt_in_1:", tt_in_1)
+    iprnt ("- - - - tt_in_2:", tt_in_2)
+    iprnt ("- - - - tt_in_3:", tt_in_3)
+
+    tout_1 = deodel.CasetDeodel.ListDataConvert(tt_in_1)
+    tout_2 = deodel.CasetDeodel.ListDataConvert(tt_in_2)
+    tout_3 = deodel.CasetDeodel.ListDataConvert(tt_in_3)
+
+    iprnt ("- - - - tout_1:", tout_1)
+    iprnt ("- - - - tout_2:", tout_2)
+    iprnt ("- - - - tout_3:", tout_3)
+
+    test_result = (tout_1, tout_2, tout_3)
+    test_expect = (tin_1, tin_2, tin_3)
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    #'''#
+
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("check version")
+    iprnt ()
+
+    test_result = deodel.DeodataDelangaClassifier.version
+    # test_expect = 1.51
+    # test_expect = 1.65
+    # test_expect = 1.75
+    test_expect = 1.77
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    #"""#
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("pandas data - 1")
+    iprnt ()
 
     tt_X = [['a',   None,  'a'],
             ['a',   None,  'b'],
