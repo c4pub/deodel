@@ -349,8 +349,8 @@ class TblUtil :
             str_smpl_test = str(sample_test)
             str_smpl_pred = str(sample_pred)
         else :
-            str_smpl_test = str(sample_test[:column_limit])[:str_limit]
-            str_smpl_pred = str(sample_pred[:column_limit])[:str_limit]
+            str_smpl_test = str(list(sample_test[:column_limit]))[:str_limit]
+            str_smpl_pred = str(list(sample_pred[:column_limit]))[:str_limit]
 
         if display_flag : print("- - - - - - delta_secs:", delta_secs)
         if display_flag : print("- - - - - - sample_test:", str_smpl_test, "...")

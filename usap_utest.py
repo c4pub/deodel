@@ -75,7 +75,7 @@ def UnitTestDeodel():
         iprnt ("- - -  invalid test_result")
         iprnt ("Unit test failure !")
         traceback.print_stack(file=sys.stdout)
-
+    #'''#
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
@@ -2846,6 +2846,7 @@ def UnitTestDeodel():
 
         iprnt ("Unit test failure !")
         traceback.print_stack(file=sys.stdout)
+    #'''#
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
@@ -4283,13 +4284,6 @@ def UnitTestDeodel():
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    #'''#
-
-
-    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    SepLine()
-    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
     iprnt ("check version")
     iprnt ()
 
@@ -4297,7 +4291,8 @@ def UnitTestDeodel():
     # test_expect = 1.51
     # test_expect = 1.65
     # test_expect = 1.75
-    test_expect = 1.77
+    # test_expect = 1.77
+    test_expect = 2.01
 
     iprnt ("- - - - test_result:", test_result)
     iprnt ("- - - - test_expect:", test_expect)
@@ -4314,8 +4309,6 @@ def UnitTestDeodel():
 
         iprnt ("Unit test failure !")
         traceback.print_stack(file=sys.stdout)
-
-    #"""#
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
@@ -4378,6 +4371,1320 @@ def UnitTestDeodel():
         iprnt ("Unit test failure !")
         traceback.print_stack(file=sys.stdout)
 
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("regression test 1")
+    iprnt ()
+
+    # regr_fn_coeff = [1, -1, 2, -0.5, 3, -2]
+    regr_fn_coeff = [1, 0, 1]
+
+    def RegressFn(in_attr_list, in_fn_coeff = None) :
+        if in_fn_coeff == None :
+            in_fn_coeff = [1.0, 2.0, -0.5]
+        coeff_len = len(in_fn_coeff)
+        attr_len = len(in_attr_list)
+        use_len = min(coeff_len, attr_len)
+        ret_val = 0
+        for crt_idx in range(use_len) :
+            ret_val += in_attr_list[crt_idx] * in_fn_coeff[crt_idx]
+        return ret_val
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    data_attr_col_no = 2
+    data_train_row_no = 10
+    # data_test_row_no = 2
+    data_test_row_no = data_train_row_no
+    data_tot_row_no = data_train_row_no + data_test_row_no
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    data_attr_tbl = []
+    data_y_vect = []
+
+    for crt_idx_row in range(data_tot_row_no) :
+        crt_row = []
+        for crt_idx_col in range(data_attr_col_no) :
+            crt_row.append(((crt_idx_row)/(data_tot_row_no)))
+        data_attr_tbl.append(crt_row)
+        y_fn = RegressFn(crt_row, regr_fn_coeff)
+        data_y_vect.append(y_fn)
+
+    data_attr_train_tbl = []
+    data_attr_test_tbl = []
+    data_y_train_vect = []
+    data_y_test_vect = []
+
+    for crt_idx_row in range(data_tot_row_no) :
+        crt_row = data_attr_tbl[crt_idx_row][:]
+        if crt_idx_row % 2 == 0 :
+            data_attr_train_tbl.append(crt_row[:])
+            data_y_train_vect.append(data_y_vect[crt_idx_row])
+        else :
+            data_attr_test_tbl.append(crt_row[:])
+            data_y_test_vect.append(data_y_vect[crt_idx_row])
+
+    X_train = data_attr_train_tbl
+    y_train = data_y_train_vect
+
+    X_test = data_attr_test_tbl
+    y_test = data_y_test_vect
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    # import deodel
+    # deodel_regress = deodel.DeodataDelangaClassifier()
+    # deodel_regress = deodel.DeodataDelangaClassifier({'split_no': 5, 'split_mode': 'eq_freq'})
+    deodel_regress = deodel.DeodataDelangaClassifier({'split_no': 10, 'split_mode': 'eq_width'})
+
+    deodel_regress.fit(X_train,y_train)
+    # ret_data = deodel_regress.tweak()
+    y_pred = deodel_regress.predict(X_test)
+    # ret_data = deodel_regress.tweak()
+    t_pred = y_pred
+
+    from sklearn import metrics
+    t_mae = metrics.mean_absolute_error(y_test, y_pred)
+    t_mse = metrics.mean_squared_error(y_test, y_pred)
+    t_R2 = metrics.r2_score(y_test, y_pred)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("- - - - X_train:", X_train)
+    iprnt ("- - - - X_test:", X_test)
+    iprnt ()
+    iprnt ("- - - - y_train:", y_train)
+    iprnt ("- - - - y_test:", y_test)
+    iprnt ()
+
+    e_pred = [0.0, 0.1, 0.2, 0.3, 0.5, 0.6, 0.7, 0.8, 0.9, 0.9]
+    e_mae = 0.04999999999999998
+    e_mse = 0.0024999999999999988
+    e_R2 = 0.9696969696969697
+
+    test_result = (t_pred, t_mae, t_mse, t_R2)
+    test_expect = (e_pred, e_mae, e_mse, e_R2)
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("regression test 2")
+    iprnt ()
+
+    # regr_fn_coeff = [1, -1, 2, -0.5, 3, -2]
+    regr_fn_coeff = [1, 0, 1]
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    data_attr_col_no = 2
+    data_train_row_no = 10
+    # data_test_row_no = 2
+    data_test_row_no = data_train_row_no
+    data_tot_row_no = data_train_row_no + data_test_row_no
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    data_attr_tbl = []
+    data_y_vect = []
+
+    for crt_idx_row in range(data_tot_row_no) :
+        crt_row = []
+        for crt_idx_col in range(data_attr_col_no) :
+            crt_row.append(((crt_idx_row)/(data_tot_row_no)))
+        data_attr_tbl.append(crt_row)
+        y_fn = RegressFn(crt_row, regr_fn_coeff)
+        data_y_vect.append(y_fn)
+
+    data_attr_train_tbl = []
+    data_attr_test_tbl = []
+    data_y_train_vect = []
+    data_y_test_vect = []
+
+    for crt_idx_row in range(data_tot_row_no) :
+        crt_row = data_attr_tbl[crt_idx_row][:]
+        if crt_idx_row % 2 == 0 :
+            data_attr_train_tbl.append(crt_row[:])
+            data_y_train_vect.append(data_y_vect[crt_idx_row])
+        else :
+            data_attr_test_tbl.append(crt_row[:])
+            data_y_test_vect.append(data_y_vect[crt_idx_row])
+
+    X_train = data_attr_train_tbl
+    y_train = data_y_train_vect
+
+    X_test = data_attr_test_tbl
+    y_test = data_y_test_vect
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    deodel_regress = deodel.DeodataDelangaClassifier({'split_no': 4, 'split_mode': 'eq_width'})
+
+    deodel_regress.fit(X_train,y_train)
+    y_pred = deodel_regress.predict(X_test)
+    t_pred = y_pred
+
+    from sklearn import metrics
+    t_mae = metrics.mean_absolute_error(y_test, y_pred)
+    t_mse = metrics.mean_squared_error(y_test, y_pred)
+    t_R2 = metrics.r2_score(y_test, y_pred)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("- - - - X_train:", X_train)
+    iprnt ("- - - - X_test:", X_test)
+    iprnt ()
+    iprnt ("- - - - y_train:", y_train)
+    iprnt ("- - - - y_test:", y_test)
+    iprnt ()
+
+    e_pred = [0.1, 0.1, 0.35, 0.35, 0.55, 0.55, 0.55, 0.8, 0.8, 0.8]
+    
+    e_mae = 0.06499999999999999
+    e_mse = 0.006249999999999997
+    e_R2 = 0.9242424242424243
+
+    test_result = (t_pred, t_mae, t_mse, t_R2)
+    test_expect = (e_pred, e_mae, e_mse, e_R2)
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("regression test 3")
+    iprnt ()
+
+    # regr_fn_coeff = [1, -1, 2, -0.5, 3, -2]
+    regr_fn_coeff = [1, 0, 1]
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    data_attr_col_no = 2
+    data_train_row_no = 10
+    # data_test_row_no = 2
+    data_test_row_no = data_train_row_no
+    data_tot_row_no = data_train_row_no + data_test_row_no
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    data_attr_tbl = []
+    data_y_vect = []
+
+    for crt_idx_row in range(data_tot_row_no) :
+        crt_row = []
+        for crt_idx_col in range(data_attr_col_no) :
+            crt_row.append(((crt_idx_row)/(data_tot_row_no)))
+        data_attr_tbl.append(crt_row)
+        y_fn = RegressFn(crt_row, regr_fn_coeff)
+        data_y_vect.append(y_fn)
+
+    data_attr_train_tbl = []
+    data_attr_test_tbl = []
+    data_y_train_vect = []
+    data_y_test_vect = []
+
+    for crt_idx_row in range(data_tot_row_no) :
+        crt_row = data_attr_tbl[crt_idx_row][:]
+        if crt_idx_row % 2 == 0 :
+            data_attr_train_tbl.append(crt_row[:])
+            data_y_train_vect.append(data_y_vect[crt_idx_row])
+        else :
+            data_attr_test_tbl.append(crt_row[:])
+            data_y_test_vect.append(data_y_vect[crt_idx_row])
+
+    X_train = data_attr_train_tbl
+    y_train = data_y_train_vect
+
+    X_test = data_attr_test_tbl
+    y_test = data_y_test_vect
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    deodel_regress = deodel.DeodataDelangaClassifier({'predict_mode': 'regress', 'split_no': 4, 'split_mode': 'eq_width'})
+
+    deodel_regress.fit(X_train,y_train)
+    y_pred = deodel_regress.predict(X_test)
+    t_pred = y_pred
+
+    from sklearn import metrics
+    t_mae = metrics.mean_absolute_error(y_test, y_pred)
+    t_mse = metrics.mean_squared_error(y_test, y_pred)
+    t_R2 = metrics.r2_score(y_test, y_pred)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("- - - - X_train:", X_train)
+    iprnt ("- - - - X_test:", X_test)
+    iprnt ()
+    iprnt ("- - - - y_train:", y_train)
+    iprnt ("- - - - y_test:", y_test)
+    iprnt ()
+
+    e_pred = [0.1, 0.1, 0.35, 0.35, 0.55, 0.55, 0.55, 0.8, 0.8, 0.8]
+    
+    e_mae = 0.06499999999999999
+    e_mse = 0.006249999999999997
+    e_R2 = 0.9242424242424243
+
+    test_result = (t_pred, t_mae, t_mse, t_R2)
+    test_expect = (e_pred, e_mae, e_mse, e_R2)
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("regression test 4")
+    iprnt ()
+
+    # regr_fn_coeff = [1, -1, 2, -0.5, 3, -2]
+    regr_fn_coeff = [1, 0, 1]
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    data_attr_col_no = 2
+    data_train_row_no = 10
+    # data_test_row_no = 2
+    data_test_row_no = data_train_row_no
+    data_tot_row_no = data_train_row_no + data_test_row_no
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    data_attr_tbl = []
+    data_y_vect = []
+
+    for crt_idx_row in range(data_tot_row_no) :
+        crt_row = []
+        for crt_idx_col in range(data_attr_col_no) :
+            crt_row.append(((crt_idx_row)/(data_tot_row_no)))
+        data_attr_tbl.append(crt_row)
+        y_fn = RegressFn(crt_row, regr_fn_coeff)
+        data_y_vect.append(y_fn)
+
+    data_attr_train_tbl = []
+    data_attr_test_tbl = []
+    data_y_train_vect = []
+    data_y_test_vect = []
+
+    for crt_idx_row in range(data_tot_row_no) :
+        crt_row = data_attr_tbl[crt_idx_row][:]
+        if crt_idx_row % 2 == 0 :
+            data_attr_train_tbl.append(crt_row[:])
+            data_y_train_vect.append(data_y_vect[crt_idx_row])
+        else :
+            data_attr_test_tbl.append(crt_row[:])
+            data_y_test_vect.append(data_y_vect[crt_idx_row])
+
+    X_train = data_attr_train_tbl
+    y_train = data_y_train_vect
+
+    X_test = data_attr_test_tbl
+    y_test = data_y_test_vect
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    deodel_regress = deodel.DeodataDelangaClassifier({'predict_mode': 'classif', 'split_no': 4, 'split_mode': 'eq_width'})
+
+    deodel_regress.fit(X_train,y_train)
+    y_pred = deodel_regress.predict(X_test)
+    t_pred = y_pred
+
+    from sklearn import metrics
+    t_mae = metrics.mean_absolute_error(y_test, y_pred)
+    t_mse = metrics.mean_squared_error(y_test, y_pred)
+    t_R2 = metrics.r2_score(y_test, y_pred)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("- - - - X_train:", X_train)
+    iprnt ("- - - - X_test:", X_test)
+    iprnt ()
+    iprnt ("- - - - y_train:", y_train)
+    iprnt ("- - - - y_test:", y_test)
+    iprnt ()
+
+    e_pred = [0.0, 0.0, 0.3, 0.3, 0.5, 0.5, 0.5, 0.7, 0.7, 0.7]
+    
+    e_mae = 0.1
+    e_mse = 0.014500000000000002
+    e_R2 = 0.8242424242424242
+
+    test_result = (t_pred, t_mae, t_mse, t_R2)
+    test_expect = (e_pred, e_mae, e_mse, e_R2)
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("regression mixed test 1")
+    iprnt ()
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    X_train = [[0.0, 0.0, 'a'], [0.1, 0.1, 'a'], [0.2, 0.2, 'a'], [0.3, 0.3, 'a'], [0.4, 0.4, 'a'], 
+               [0.5, 0.5, 'a'], [0.6, 0.6, 'a'], [0.7, 0.7, 'a'], [0.8, 0.8, 'a'], [0.9, 0.9, 'a']]
+
+    y_train = [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 'x', 'y', 'z', 'x']
+
+    X_test = [[0.05, 0.05, 'b'], [0.15, 0.15, 'b'], [0.25, 0.25, 'b'], [0.35, 0.35, 'b'], [0.45, 0.45, 'b'], 
+              [0.55, 0.55, 'b'], [0.65, 0.65, 'b'], [0.75, 0.75, 'b'], [0.85, 0.85, 'b'], [0.95, 0.95, 'b']]
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    deodel_regress = deodel.DeodataDelangaClassifier({'split_no': 10, 'split_mode': 'eq_width'})
+
+    deodel_regress.fit(X_train,y_train)
+    y_pred = deodel_regress.predict(X_test)
+    t_pred = y_pred
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("- - - - X_train:", X_train)
+    iprnt ("- - - - X_test:", X_test)
+    iprnt ()
+    iprnt ("- - - - y_train:", y_train)
+    iprnt ("- - - - y_test:", y_test)
+    iprnt ()
+
+    e_pred = [0.0, 0.1, 0.2, 0.3, 0.5, 'x', 'y', 'z', 'x', 'x']
+
+    test_result = (t_pred)
+    test_expect = (e_pred)
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("regression mixed test 2")
+    iprnt ()
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    X_train = [[0.0, 'a'], [0.1, 'a'], [0.2, 'a'], [0.3, 'a'], [0.4, 'a'], 
+               [0.5, 'a'], [0.6, 'a'], [0.7, 'a'], [0.8, 'a'], [0.9, 'a']]
+
+    y_train = [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 'x', 'x', 'y', 'z']
+
+    X_test = [[0.05, 'b'], [0.15, 'b'], [0.25, 'b'], [0.35, 'b'], [0.45, 'b'], 
+              [0.55, 'b'], [0.65, 'b'], [0.75, 'b'], [0.85, 'b'], [0.95, 'b']]
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    deodel_regress = deodel.DeodataDelangaClassifier({'split_no': 10, 'split_mode': 'eq_width'})
+
+    deodel_regress.fit(X_train,y_train)
+    y_pred = deodel_regress.predict(X_test)
+    t_pred = y_pred
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("- - - - X_train:", X_train)
+    iprnt ("- - - - X_test:", X_test)
+    iprnt ()
+    iprnt ("- - - - y_train:", y_train)
+    iprnt ("- - - - y_test:", y_test)
+    iprnt ()
+
+    e_pred = [0.0, 0.1, 0.2, 0.3, 0.5, 'x', 'x', 'y', 'z', 'z']
+
+    test_result = (t_pred)
+    test_expect = (e_pred)
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("regression mixed test 3")
+    iprnt ()
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    X_train = [[0.0, 'a', 'g'], [0.1, 'a', 'g'], [0.2, 'a', 'g'], [0.3, 'a', 'g'], [0.4, 'a', 'g'], 
+               [0.5, 'a', 'g'], [0.6, 'a', 'g'], [0.7, 'a', 'g'], [0.8, 'a', 'g'], [0.9, 'a', 'g']]
+
+    y_train = [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 'x', 'x', 'y']
+
+    X_test = [[0.05, 'b', 'h'], [0.15, 'b', 'h'], [0.25, 'b', 'h'], [0.35, 'b', 'h'], [0.45, 'b', 'h'], 
+              [0.55, 'b', 'h'], [0.65, 'b', 'h'], [0.75, 'b', 'h'], [0.85, 'b', 'h'], [0.95, 'b', 'h']]
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    deodel_regress = deodel.DeodataDelangaClassifier({'split_no': 2, 'split_mode': 'eq_width'})
+
+    deodel_regress.fit(X_train,y_train)
+    y_pred = deodel_regress.predict(X_test)
+    t_pred = y_pred
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("- - - - X_train:", X_train)
+    iprnt ("- - - - X_test:", X_test)
+    iprnt ()
+    iprnt ("- - - - y_train:", y_train)
+    iprnt ("- - - - y_test:", y_test)
+    iprnt ()
+
+    e_pred = [0.2, 0.2, 0.2, 0.2, 0.55, 0.55, 0.55, 0.55, 0.55, 0.55]
+
+    test_result = (t_pred)
+    test_expect = (e_pred)
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("regression mixed test 4")
+    iprnt ()
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    X_train = [[0.0, 'a', 'g'], [0.1, 'a', 'g'], [0.2, 'a', 'g'], [0.3, 'a', 'g'], [0.4, 'a', 'g'], 
+               [0.5, 'a', 'g'], [0.6, 'a', 'g'], [0.7, 'a', 'g'], [0.8, 'a', 'g'], [0.9, 'a', 'g']]
+
+    y_train = [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 'x', 'x', 'y']
+
+    X_test = [[0.05, 'b', 'h'], [0.15, 'b', 'h'], [0.25, 'b', 'h'], [0.35, 'b', 'h'], [0.45, 'b', 'h'], 
+              [0.55, 'b', 'h'], [0.65, 'b', 'h'], [0.75, 'b', 'h'], [0.85, 'b', 'h'], [0.95, 'b', 'h']]
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    deodel_regress = deodel.DeodataDelangaClassifier({'predict_mode': 'classif', 'split_no': 2, 'split_mode': 'eq_width'})
+
+    deodel_regress.fit(X_train,y_train)
+    y_pred = deodel_regress.predict(X_test)
+    t_pred = y_pred
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("- - - - X_train:", X_train)
+    iprnt ("- - - - X_test:", X_test)
+    iprnt ()
+    iprnt ("- - - - y_train:", y_train)
+    iprnt ("- - - - y_test:", y_test)
+    iprnt ()
+
+    e_pred = [0.0, 0.0, 0.0, 0.0, 'x', 'x', 'x', 'x', 'x', 'x']
+
+    test_result = (t_pred)
+    test_expect = (e_pred)
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("regression mixed test 5")
+    iprnt ()
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    X_train = [ 
+                ['a1', 'b1', 'c1', 'd1', 'e1', 'f1'], 
+                ['a2', 'b1', 'c2', 'd1', 'e1', 'f1'], 
+                ['a3', 'b1', 'c2', 'd2', 'e2', 'f1'], 
+                ['a4', 'b2', 'c4', 'd2', 'e2', 'f1'], 
+                ['a5', 'b2', 'c2', 'd2', 'e2', 'f1'], 
+                ['a6', 'b2', 'c6', 'd2', 'e2', 'f2']
+              ]
+
+    y_train = [0.1, 0.2, 0.3, 'x', 'y', 'y']
+
+    X_test =  [
+                ['a7', 'b1', 'c7', 'd7', 'e7', 'f7'], 
+                ['a7', 'b3', 'c7', 'd7', 'e7', 'f7'], 
+                ['a7', 'b7', 'c2', 'd7', 'e7', 'f7'], 
+                ['a7', 'b2', 'c4', 'd7', 'e7', 'f7'], 
+                ['a6', 'b7', 'c2', 'd7', 'e7', 'f7'], 
+                ['a7', 'b2', 'c7', 'd7', 'e2', 'f7'], 
+                ['a7', 'b7', 'c7', 'd7', 'e2', 'f1'], 
+                ['a7', 'b7', 'c7', 'd7', 'e2', 'f7'], 
+              ]
+
+    y_expect = [
+                0.2, 
+                0.2, 
+                0.25, 
+                'x', 
+                0.25,
+                'y',
+                0.3,
+                'y',
+               ]
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    deodel_regress = deodel.DeodataDelangaClassifier({'predict_mode': 'regress', 'split_no': 2, 'split_mode': 'eq_width'})
+
+    deodel_regress.fit(X_train,y_train)
+    y_pred = deodel_regress.predict(X_test)
+    t_pred = y_pred
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("- - - - X_train:", X_train)
+    iprnt ("- - - - X_test:", X_test)
+    iprnt ()
+    iprnt ("- - - - y_train:", y_train)
+    iprnt ("- - - - y_test:", y_test)
+    iprnt ()
+
+    e_pred = y_expect
+
+    test_result = (t_pred)
+    test_expect = (e_pred)
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("regression mixed test 6")
+    iprnt ()
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    X_train = [ 
+                ['n', 12, 'm'],
+                ['y', 16, 'f'],
+                ['y', 20, 'm'],
+                ['y', 21, 'f'],
+                ['n', 29, 'm'],
+              ]
+
+    y_train = [
+                'juice',
+                'coffee',
+                0.05,
+                0.04,
+                0.40,
+              ]
+
+    X_test =  [
+                ['n', 12, 'm'],
+                ['y', 16, 'f'],
+                ['y', 20, 'm'],
+                ['y', 21, 'f'],
+                ['n', 29, 'm'],
+                ['y', 18, 'f'],
+                ['y', 27, 'f'],
+              ]
+
+    y_expect = [
+                'juice',
+                'coffee',
+                0.05,
+                0.04,
+                0.40,
+                'coffee',
+                0.04,
+               ]
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    deodel_regress = deodel.DeodataDelangaClassifier({'predict_mode': 'classif', 'split_no': 2, 'split_mode': 'eq_width'})
+
+    deodel_regress.fit(X_train,y_train)
+    y_pred = deodel_regress.predict(X_test)
+    t_pred = y_pred
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("- - - - X_train:", X_train)
+    iprnt ("- - - - X_test:", X_test)
+    iprnt ()
+    iprnt ("- - - - y_train:", y_train)
+    iprnt ("- - - - y_test:", y_test)
+    iprnt ()
+
+    e_pred = y_expect
+
+    test_result = (t_pred)
+    test_expect = (e_pred)
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("regression mixed test 7")
+    iprnt ()
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    X_train = [ 
+                ['n', 12, 'm'],
+                ['y', 16, 'f'],
+                ['y', 15, 'f'],
+                ['m', 14, 'm'],
+                ['y', 20, 'm'],
+                ['n', 22, 'm'],
+                ['y', 21, 'f'],
+                ['n', 31, 'f'],
+                ['n', 29, 'm'],
+              ]
+
+    y_train = [
+                'juice',
+                'coffee',
+                'juice',
+                'coffee',
+                0.05,
+                0.04,
+                0.06,
+                0.13,
+                0.40,
+              ]
+
+    X_test =  [
+                ['n', 12, 'm'],
+                ['y', 16, 'f'],
+                ['y', 20, 'm'],
+                ['y', 21, 'f'],
+                ['n', 29, 'm'],
+                ['y', 18, 'f'],
+                ['y', 27, 'f'],
+              ]
+
+    y_expect = [
+                'juice',
+                0.06,
+                0.05,
+                0.06,
+                0.22,
+                0.06,
+                0.095,
+               ]
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    # deodel_regress = deodel.DeodataDelangaClassifier({'predict_mode': 'regress', 'split_no': 2, 'split_mode': 'eq_width'})
+    deodel_regress = deodel.DeodataDelangaClassifier({'split_no': 2, 'split_mode': 'eq_width'})
+
+    deodel_regress.fit(X_train,y_train)
+    y_pred = deodel_regress.predict(X_test)
+    t_pred = y_pred
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("- - - - X_train:", X_train)
+    iprnt ("- - - - X_test:", X_test)
+    iprnt ()
+    iprnt ("- - - - y_train:", y_train)
+    iprnt ("- - - - y_test:", y_test)
+    iprnt ()
+
+    e_pred = y_expect
+
+    test_result = (t_pred)
+    test_expect = (e_pred)
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("regression mixed test 8")
+    iprnt ()
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    X_train = [ 
+                ['n', 12, 'm'],
+                ['y', 16, 'f'],
+                ['y', 15, 'f'],
+                ['m', 14, 'm'],
+                ['y', 20, 'm'],
+                ['n', 22, 'm'],
+                ['y', 21, 'f'],
+                ['n', 31, 'f'],
+                ['n', 29, 'm'],
+              ]
+
+    y_train = [
+                'juice',
+                'coffee',
+                'juice',
+                'coffee',
+                0.05,
+                0.04,
+                0.06,
+                0.13,
+                0.40,
+              ]
+
+    X_test =  [
+                ['n', 12, 'm'],
+                ['y', 16, 'f'],
+                ['y', 20, 'm'],
+                ['y', 21, 'f'],
+                ['n', 29, 'm'],
+                ['y', 18, 'f'],
+                ['y', 27, 'f'],
+              ]
+
+    y_expect = [
+                'juice',
+                'juice',
+                0.05,
+                'juice',
+                0.04,
+                'juice',
+                'juice',
+               ]
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    deodel_regress = deodel.DeodataDelangaClassifier({'predict_mode': 'classif', 'split_no': 2, 'split_mode': 'eq_width'})
+
+    deodel_regress.fit(X_train,y_train)
+    y_pred = deodel_regress.predict(X_test)
+    t_pred = y_pred
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("- - - - X_train:", X_train)
+    iprnt ("- - - - X_test:", X_test)
+    iprnt ()
+    iprnt ("- - - - y_train:", y_train)
+    iprnt ("- - - - y_test:", y_test)
+    iprnt ()
+
+    e_pred = y_expect
+
+    test_result = (t_pred)
+    test_expect = (e_pred)
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+
+
+
+
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("regression vs classificatiion test 1")
+    iprnt ()
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    X_train = [ 
+                ['a1', 'b1', 'c1', 'd1', 'e1', 'f1'], 
+                ['a2', 'b1', 'c2', 'd1', 'e1', 'f1'], 
+                ['a3', 'b1', 'c2', 'd2', 'e2', 'f1'], 
+                ['a4', 'b2', 'c4', 'd2', 'e2', 'f1'], 
+                ['a5', 'b2', 'c2', 'd2', 'e2', 'f1'], 
+                ['a6', 'b2', 'c6', 'd2', 'e2', 'f2'],
+                ['a7', 'b2', 'c6', 'd2', 'e2', 'f2'],
+              ]
+
+    y_train = ['x', 1, 2, 3, 4, 'y', 'y', 'y']
+
+    X_test =  [
+                ['a7', 'b1', 'c7', 'd7', 'e7', 'f7'], 
+                ['a7', 'b3', 'c7', 'd7', 'e7', 'f7'], 
+                ['a7', 'b7', 'c2', 'd7', 'e7', 'f7'], 
+                ['a7', 'b2', 'c4', 'd7', 'e7', 'f7'], 
+                ['a6', 'b7', 'c2', 'd7', 'e7', 'f7'], 
+                ['a7', 'b2', 'c7', 'd7', 'e2', 'f7'], 
+                ['a7', 'b7', 'c7', 'd7', 'e2', 'f1'], 
+                ['a7', 'b7', 'c7', 'd7', 'e2', 'f7'], 
+              ]
+
+    y_expect = [
+                0.2, 
+                0.2, 
+                0.25, 
+                'x', 
+                0.25,
+                'y',
+                0.3,
+                'y',
+               ]
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    deodelo = deodel.DeodataDelangaClassifier()
+
+    # tst_1 = deodelo.regress_flag
+    deodelo.fit(X_train,y_train)
+    tst_val = deodelo.regress_flag
+    y_pred = deodelo.predict(X_test)
+    t_pred = y_pred
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("- - - - X_train:", X_train)
+    iprnt ("- - - - X_test:", X_test)
+    iprnt ()
+    iprnt ("- - - - y_train:", y_train)
+    iprnt ("- - - - y_test:", y_test)
+    iprnt ()
+
+    e_pred = y_expect
+
+    test_result = tst_val
+    test_expect = False
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("regression vs classificatiion test 2")
+    iprnt ()
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    X_train = [ 
+                ['a1', 'b1', 'c1', 'd1', 'e1', 'f1'], 
+                ['a2', 'b1', 'c2', 'd1', 'e1', 'f1'], 
+                ['a3', 'b1', 'c2', 'd2', 'e2', 'f1'], 
+                ['a4', 'b2', 'c4', 'd2', 'e2', 'f1'], 
+                ['a5', 'b2', 'c2', 'd2', 'e2', 'f1'], 
+                ['a6', 'b2', 'c6', 'd2', 'e2', 'f2'],
+                ['a7', 'b2', 'c6', 'd2', 'e2', 'f2'],
+              ]
+
+    y_train = ['x', 1, 2, 3, 4, 5, 'y', 'y']
+
+    X_test =  [
+                ['a7', 'b1', 'c7', 'd7', 'e7', 'f7'], 
+                ['a7', 'b3', 'c7', 'd7', 'e7', 'f7'], 
+                ['a7', 'b7', 'c2', 'd7', 'e7', 'f7'], 
+                ['a7', 'b2', 'c4', 'd7', 'e7', 'f7'], 
+                ['a6', 'b7', 'c2', 'd7', 'e7', 'f7'], 
+                ['a7', 'b2', 'c7', 'd7', 'e2', 'f7'], 
+                ['a7', 'b7', 'c7', 'd7', 'e2', 'f1'], 
+                ['a7', 'b7', 'c7', 'd7', 'e2', 'f7'], 
+              ]
+
+    y_expect = [
+                0.2, 
+                0.2, 
+                0.25, 
+                'x', 
+                0.25,
+                'y',
+                0.3,
+                'y',
+               ]
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    deodelo = deodel.DeodataDelangaClassifier()
+
+    # tst_1 = deodelo.regress_flag
+    deodelo.fit(X_train,y_train)
+    tst_val = deodelo.regress_flag
+    y_pred = deodelo.predict(X_test)
+    t_pred = y_pred
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("- - - - X_train:", X_train)
+    iprnt ("- - - - X_test:", X_test)
+    iprnt ()
+    iprnt ("- - - - y_train:", y_train)
+    iprnt ("- - - - y_test:", y_test)
+    iprnt ()
+
+    e_pred = y_expect
+
+    test_result = tst_val
+    test_expect = True
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("regression vs classificatiion test 3")
+    iprnt ()
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    X_train = [ 
+                ['a1', 'b1', 'c1', 'd1', 'e1', 'f1'], 
+                ['a2', 'b1', 'c2', 'd1', 'e1', 'f1'], 
+                ['a3', 'b1', 'c2', 'd2', 'e2', 'f1'], 
+                ['a4', 'b2', 'c4', 'd2', 'e2', 'f1'], 
+                ['a5', 'b2', 'c2', 'd2', 'e2', 'f1'], 
+                ['a6', 'b2', 'c6', 'd2', 'e2', 'f2'],
+                ['a7', 'b2', 'c6', 'd2', 'e2', 'f2'],
+              ]
+
+    y_train = ['x', 1, 2, 3, 4, 5, 1, 'y']
+
+    X_test =  [
+                ['a7', 'b1', 'c7', 'd7', 'e7', 'f7'], 
+                ['a7', 'b3', 'c7', 'd7', 'e7', 'f7'], 
+                ['a7', 'b7', 'c2', 'd7', 'e7', 'f7'], 
+                ['a7', 'b2', 'c4', 'd7', 'e7', 'f7'], 
+                ['a6', 'b7', 'c2', 'd7', 'e7', 'f7'], 
+                ['a7', 'b2', 'c7', 'd7', 'e2', 'f7'], 
+                ['a7', 'b7', 'c7', 'd7', 'e2', 'f1'], 
+                ['a7', 'b7', 'c7', 'd7', 'e2', 'f7'], 
+              ]
+
+    y_expect = [
+                0.2, 
+                0.2, 
+                0.25, 
+                'x', 
+                0.25,
+                'y',
+                0.3,
+                'y',
+               ]
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    deodelo = deodel.DeodataDelangaClassifier()
+
+    # tst_1 = deodelo.regress_flag
+    deodelo.fit(X_train,y_train)
+    tst_val = deodelo.regress_flag
+    y_pred = deodelo.predict(X_test)
+    t_pred = y_pred
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("- - - - X_train:", X_train)
+    iprnt ("- - - - X_test:", X_test)
+    iprnt ()
+    iprnt ("- - - - y_train:", y_train)
+    iprnt ("- - - - y_test:", y_test)
+    iprnt ()
+
+    e_pred = y_expect
+
+    test_result = tst_val
+    test_expect = True
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("regression vs classificatiion test 4")
+    iprnt ()
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    X_train = [ 
+                ['a1', 'b1', 'c1', 'd1', 'e1', 'f1'], 
+                ['a2', 'b1', 'c2', 'd1', 'e1', 'f1'], 
+                ['a3', 'b1', 'c2', 'd2', 'e2', 'f1'], 
+                ['a4', 'b2', 'c4', 'd2', 'e2', 'f1'], 
+                ['a5', 'b2', 'c2', 'd2', 'e2', 'f1'], 
+                ['a6', 'b2', 'c6', 'd2', 'e2', 'f2'],
+                ['a7', 'b2', 'c6', 'd2', 'e2', 'f2'],
+              ]
+
+    y_train = ['x', 1, 2, 3, 4, 5, 1, 2]
+
+    X_test =  [
+                ['a7', 'b1', 'c7', 'd7', 'e7', 'f7'], 
+                ['a7', 'b3', 'c7', 'd7', 'e7', 'f7'], 
+                ['a7', 'b7', 'c2', 'd7', 'e7', 'f7'], 
+                ['a7', 'b2', 'c4', 'd7', 'e7', 'f7'], 
+                ['a6', 'b7', 'c2', 'd7', 'e7', 'f7'], 
+                ['a7', 'b2', 'c7', 'd7', 'e2', 'f7'], 
+                ['a7', 'b7', 'c7', 'd7', 'e2', 'f1'], 
+                ['a7', 'b7', 'c7', 'd7', 'e2', 'f7'], 
+              ]
+
+    y_expect = [
+                0.2, 
+                0.2, 
+                0.25, 
+                'x', 
+                0.25,
+                'y',
+                0.3,
+                'y',
+               ]
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    deodelo = deodel.DeodataDelangaClassifier()
+
+    # tst_1 = deodelo.regress_flag
+    deodelo.fit(X_train,y_train)
+    tst_val = deodelo.regress_flag
+    y_pred = deodelo.predict(X_test)
+    t_pred = y_pred
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("- - - - X_train:", X_train)
+    iprnt ("- - - - X_test:", X_test)
+    iprnt ()
+    iprnt ("- - - - y_train:", y_train)
+    iprnt ("- - - - y_test:", y_test)
+    iprnt ()
+
+    e_pred = y_expect
+
+    test_result = tst_val
+    test_expect = False
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+
+
+
+
+
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -4805,7 +6112,7 @@ def UnitTestUseApp():
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    iprnt ("test CleanTargetExtract idx fail")
+    iprnt ("test CleanTargetExtract idx wrong")
     iprnt ()
 
     t_csv = [
@@ -4852,7 +6159,7 @@ def UnitTestUseApp():
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    iprnt ("test CleanTargetExtract idx fail")
+    iprnt ("test CleanTargetExtract idx wrong")
     iprnt ()
 
     t_csv = [
@@ -4899,7 +6206,7 @@ def UnitTestUseApp():
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    iprnt ("test CleanTargetExtract idx fail")
+    iprnt ("test CleanTargetExtract idx wrong")
     iprnt ()
 
     t_csv = [
@@ -4979,7 +6286,7 @@ def UnitTestUseApp():
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    iprnt ("test CheckIsUrl fail")
+    iprnt ("test CheckIsUrl wrong")
     iprnt ()
 
     t_url = "gggggghttps://unexistent.just.for.test.site.org"
@@ -5012,7 +6319,7 @@ def UnitTestUseApp():
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    iprnt ("test ImportCsvTbl fail")
+    iprnt ("test ImportCsvTbl wrong")
     iprnt ()
 
     t_url = "gggggghttps://unexistent.just.for.test.site.org"
@@ -5048,7 +6355,7 @@ def UnitTestUseApp():
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    iprnt ("test ImportCsvTbl fail")
+    iprnt ("test ImportCsvTbl wrong")
     iprnt ()
 
     t_url = "https://unexistent.just.for.test.site.org"
@@ -5084,7 +6391,7 @@ def UnitTestUseApp():
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    iprnt ("test TblPrepProxy fail")
+    iprnt ("test TblPrepProxy wrong")
     iprnt ()
 
     t_url = "gggggghttps://unexistent.just.for.test.site.org"
@@ -5210,7 +6517,7 @@ def UnitTestUseApp():
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    iprnt ("test CvsProcess fail")
+    iprnt ("test CvsProcess wrong")
     iprnt ()
 
     t_csv = [
@@ -5250,7 +6557,7 @@ def UnitTestUseApp():
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    iprnt ("test CvsProcess fail")
+    iprnt ("test CvsProcess wrong")
     iprnt ()
 
     t_csv = [
@@ -5652,6 +6959,207 @@ def UnitTestUseApp():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("test HashValue")
+    iprnt ()
+
+    tt_list_var = ["", 22, {}, [], None, "None", "caramba", [1, 2, 4], [1,2,3], [3, 1, 2]]
+    tt_out_list = []
+
+    for crt_elem in tt_list_var :
+        var = crt_elem
+        hash = usap_common.HashValue(var)
+        tt_out_list.append(hash)
+
+    ee_out_list = [1114, 1179, 1428, 1436, 2009, 1480, 1780, 1733, 1692, 1732]
+
+    iprnt ("- - - - tt_list_var:", tt_list_var)
+
+    test_result = (tt_out_list)
+    test_expect = (ee_out_list)
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("test RandBaselinePredictor 1")
+    iprnt ()
+
+    tt_X = [['a',   1.01,   'az',   'e'],
+            ['b',   "3.01", 3.01,   'd'],
+            ['do',  "4",    5,      'd'],
+            ['b',   2,      3.01,   'h'],
+            ['cc',  '3.01', 'az',   'e']]
+
+    tt_y = [
+            'one',
+            2.0,
+            3,
+            "one",
+            2
+           ]
+
+    tt_T = [['a',   2.0,     'az',   'd'],
+            ['dp',  "3.01",  3.01,   'd'],
+            ['a',   None,    None,   'e'],
+            ['dp',  None,    'za',   'h'],
+            ['b',  "5",      3.02,   'e'],
+            ['cc',  1.01,    'az',   'h'],
+            ['e',  '3.01',   'az',   'i']]
+
+
+    tt_o = usap_common.RandBaselinePredictor({'rand_seed': 42})
+    tt_o.fit(tt_X, tt_y)
+    rr_predict = tt_o.predict(tt_T)
+
+    ee_y = ['one', 'one', 'one', 3, 2.0, 'one', 2]
+
+    iprnt ("- - - - tt_X:", tt_X)
+    iprnt ("- - - - tt_y:", tt_y)
+    iprnt ("- - - - tt_T:", tt_T)
+
+    test_result = (rr_predict)
+    test_expect = (ee_y)
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("test sklearn dataset 1")
+    iprnt ()
+
+    import deodel
+    from sklearn import datasets
+
+    data_set = datasets.load_wine()
+    display_flag = True
+
+    data_digi_x = data_set.data
+    data_target_y = data_set.target
+    train_ratio = 0.5
+    in_iter_no = 3
+    in_rand_seed = 42
+    aux_data = None
+
+    if display_flag: print("- - - - - - - - - - - - - - - - ")
+
+    crt_classif = deodel.DeodataDelangaClassifier()
+    ret_tuple = usap_common.AccuracyEval(data_digi_x, data_target_y, crt_classif, 
+                                        in_iter_no, train_ratio, 
+                                        in_rand_seed, aux_data, 
+                                        display_flag = display_flag)
+
+    avg_accuracy, rnd_accuracy = ret_tuple
+
+    test_result = (avg_accuracy, rnd_accuracy)
+    test_expect = (0.9400749063670412, 0.250936329588015)
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("test sklearn dataset 2")
+    iprnt ()
+
+    import deodel
+    from sklearn import datasets
+
+    data_set = datasets.load_wine()
+    display_flag = True
+
+    data_digi_x = data_set.data
+    data_target_y = data_set.target
+    train_ratio = 0.5
+    in_iter_no = 10
+    in_rand_seed = 42
+    aux_data = None
+
+    if display_flag: print("- - - - - - - - - - - - - - - - ")
+
+    crt_classif = usap_common.RandBaselinePredictor({'rand_seed': in_rand_seed})
+    ret_tuple = usap_common.AccuracyEval(data_digi_x, data_target_y, crt_classif, 
+                                        in_iter_no, train_ratio, 
+                                        in_rand_seed, aux_data, 
+                                        display_flag = display_flag)
+
+    avg_accuracy, rnd_accuracy = ret_tuple
+
+    test_result = (avg_accuracy, rnd_accuracy)
+    test_expect = (0.3382022471910112, 0.3146067415730337)
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
     return utest_fail_counter
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

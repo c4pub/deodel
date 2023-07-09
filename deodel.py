@@ -7,6 +7,7 @@
 
 import numpy as np
 import warnings
+import statistics
 import pandas as pd
 import numpy as np
 
@@ -58,7 +59,7 @@ class DeodataDelangaClassifier:
         else :
             self.aux_param = aux_param
 
-    version = 1.77
+    version = 2.01
 
     def __repr__(self):
         '''Returns representation of the object'''
@@ -101,7 +102,6 @@ class DeodataDelangaClassifier:
         ret = Working.WorkPredict( self, X )
         return ret
 
-
 # >-----------------------------------------------------------------------------
 
 opmode_intisnum = True
@@ -138,13 +138,28 @@ class Working:
         else :
             split_mode = 'eq_width'
 
+        if 'predict_mode' in object.aux_param :
+            predict_mode = object.aux_param['predict_mode']
+        else :
+            predict_mode = 'auto'
+
         ret_item = Working.DicretizeTable( data_X, num_split, split_mode )
         (ret_tbl, ret_attr_num_thresh, ret_attr_dict_list) = ret_item
 
         object.attr_X = np.array(ret_tbl, dtype='int')
         object.attr_num_thresh = ret_attr_num_thresh
         object.attr_dict_list = ret_attr_dict_list
-        object.out_y = data_y
+
+        if predict_mode == 'auto' :
+            regress_flag = Working.NumParse(data_y)
+        elif predict_mode == 'regress' :
+            regress_flag = True
+        else :
+            # 'classif'
+            regress_flag = False
+
+        object.regress_flag = regress_flag
+        object.targ_y = data_y
 
 # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     @staticmethod
@@ -234,7 +249,7 @@ class Working:
             crt_dict = object.attr_dict_list[crt_idx]
             if crt_attr == None :
                 # None is considered to represent missing attribute values, will be ignored.
-                    new_id = -1
+                new_id = -1
             else :
                 ret_tuple = Working.NumericalCheck(crt_attr, opmode_intisnum)
                 is_numerical, translate_value = ret_tuple
@@ -268,15 +283,31 @@ class Working:
         query_req = Working.TranslateAttrEntry(object, adjusted_query)
 
         match_score_list = [[] for i in range(attr_no + 1)]
+        shadow_score_list = [[] for i in range(attr_no + 1)]
+    
         attr_rows = len(object.attr_X)
-        targ_no = len(object.out_y)
+        targ_no = len(object.targ_y)
         train_no = min(attr_rows, targ_no)
 
-        for crt_idx in range(train_no) :
-            crt_train_attr = object.attr_X[crt_idx]
-            compare_vect = (np.equal(crt_train_attr, query_req)).astype(int)
-            entry_match_score = int(np.count_nonzero(compare_vect))
-            match_score_list[entry_match_score].append(object.out_y[crt_idx])
+        if object.regress_flag :
+            for crt_idx in range(train_no) :
+                crt_train_attr = object.attr_X[crt_idx]
+                compare_vect = (np.equal(crt_train_attr, query_req)).astype(int)
+                entry_match_score = int(np.count_nonzero(compare_vect))
+                crt_targ_elem = object.targ_y[crt_idx]
+                ret_tuple = Working.NumericalCheck(crt_targ_elem, opmode_intisnum)
+                is_numerical, translate_value = ret_tuple
+                if is_numerical :
+                    match_score_list[entry_match_score].append(0.00)
+                    shadow_score_list[entry_match_score].append(object.targ_y[crt_idx])
+                else :
+                    match_score_list[entry_match_score].append(object.targ_y[crt_idx])
+        else :
+            for crt_idx in range(train_no) :
+                crt_train_attr = object.attr_X[crt_idx]
+                compare_vect = (np.equal(crt_train_attr, query_req)).astype(int)
+                entry_match_score = int(np.count_nonzero(compare_vect))
+                match_score_list[entry_match_score].append(object.targ_y[crt_idx])
 
         aux_data = {'top_first': False}
         if 'tbreak_depth' in object.aux_param :
@@ -284,6 +315,23 @@ class Working:
                 aux_data['eval_limit'] = object.aux_param['tbreak_depth']
         ret_tuple = CasetDeodel.HelperRecurseTieBreaker(match_score_list, None, aux_data)
         champ_sel = ret_tuple[2]
+        
+        if object.regress_flag :
+            if champ_sel == 0.00 :
+                # This indicates that the predicted outcome is numerical. 
+                # Find top numerical entry.
+                # Top score is last non-empty entry
+                shadow_len = len(shadow_score_list)
+                for crt_idx in range(shadow_len) :
+                    complmnt_idx = (shadow_len - 1) - crt_idx
+                    crt_list = shadow_score_list[complmnt_idx]
+                    if not crt_list == [] :
+                        break
+                top_score = crt_idx
+                top_num_list = crt_list
+                vect_mean = statistics.mean(top_num_list)
+                champ_sel = vect_mean
+
         predict_y = champ_sel
         return predict_y
 
@@ -579,6 +627,31 @@ class Working:
         return fn_ret
 
 # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    @staticmethod
+    def NumParse( in_vect ) :
+        """
+            Parse vector and check if vector has valid regress numerical elements.
+            Also computes the average of the numerical elements.
+            
+        """
+        regress_flag = False
+        num_list = []
+        for crt_elem in in_vect :
+            is_numerical, translate_value = Working.NumericalCheck(crt_elem, opmode_intisnum)
+            if is_numerical :
+                num_list.append(crt_elem)
+        if not num_list == [] :
+            # check whether list appears to be made of continuous values
+            ret_tuple = CasetDeodel.SummaryFreqCount(num_list)
+            crt_types_no, crt_id_list, crt_count_list = ret_tuple
+            if crt_types_no > 4 :
+                mid_idx = int(crt_types_no/2) - 1
+                if crt_count_list[mid_idx] == 1 :
+                    # more than half of values are unique
+                    regress_flag = True
+        return regress_flag
+
+# >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # > Working - End
 # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -775,7 +848,6 @@ class CasetDeodel:
                     ret_tuple = CasetDeodel.HelperRecurseTieBreaker(matchnum_score_list, new_sel_id_dict, new_aux)
                     fn_ret_status, fn_tbreak_status, fn_ret_outcome_id, fn_ret_outcome_count = ret_tuple
                 break
-
             else :
                 # a match has been found
                 if 'eval_limit' in new_aux :
