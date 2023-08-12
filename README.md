@@ -2,19 +2,16 @@
 # deodel
 
 
-## Summary
-
-Predictive algorithm with a unique combination of features:
-
-- performs classification intermixed with regression
-- supports both types of attributes/features: nominal or continuous
-- admits mixed types, categorical and numerical, in the same attribute column
-- supports multi-class target classification
-- admits missing values in the training and query/test data
-- good accuracy
-
-
 ## Predictive Algorithm for Very Mixed Data
+
+A predictive algorithm with a unique combination of features:
+
+- supports multi-class target classification
+- supports nominal and continuous attributes
+- admits missing values in the training and query/test data
+- admits mixed types, categorical and numerical, in the same attribute column
+- performs classification intermixed with regression
+- good accuracy
 
 Deodel started as a python implementation of the "Deodata Delanga" classifier [1]. It has been extended to operate predictions on very heterogenous data. It supports attributes/features that are continuous, categorical, or a mix of both. Furthermore, this applies also to the target values. This means it can do classification, regression, or a mix of both within the context of the same training data. In regression mode, the algorithm implements the technique described in [2].
 
@@ -55,11 +52,11 @@ Deodel will generate a prediction in either case.
 
 ### How does deodel deals with mixed attributes?
 
-The "Deodata Delanga" algorithm (deodel) is a variation of the nearest neighbor type of supervised classifiers. Unlike k-NN that was used on data with continuous numerical attributes, the "Deodata Delanga" algorithm was meant to deal with heterogeneous discrete attributes; much like the ID3 decision tree. The deodel classifier can be viewed as a flattened/collapsed ID3 decision tree.
+The "Deodata Delanga" algorithm is a variation of the nearest neighbor type of supervised classifiers. It doesn't seek a fixed number of neighbors, but rather a nearest neighborhood with a variable number of neighbours. Unlike k-NN, that was used on data with continuous numerical attributes, the "Deodata Delanga" algorithm was intended to deal with discrete attributes; much like the ID3 decision tree. The deodel classifier can be viewed as a flattened/collapsed ID3 decision tree. Each branch of the flattened tree corresponds to a unique combination of attribute values, rather than just a single value, as is the case with conventional decision trees.
 
 Deodel starts from a categorical data classiffier and adapts it to continuous/numerical attributes by discretizing them. So, unlike many other algorithms that convert discrete data into numerical ones (like one hot encoding), deodel discretizes the continuous data. Obviously, this entails a loss of information. However, this loss doesn't seem to be severe, and provides surprisingly good results in many settings.
 
-Deodel is almost non-parametric. However, there are configuration adjustments that can be tuned through an optional dictionary structure specified at initialization. The main adjustment is the number of bins used to discretize numerical attributes. By default, it is set to three. It is also possible to choose the discretization method: "equal-width" vs "equal-frequency". Also, the automatic usage of regression can be overridden.
+Deodel is essentially non-parametric. However, there are configuration adjustments that can be tuned through an optional dictionary structure specified at initialization. The main adjustment is the number of bins used to discretize numerical attributes. By default, it is set to three. It is also possible to choose the discretization method: "equal-width" vs "equal-frequency". Also, the automatic usage of regression can be overridden.
 
 In terms of accuracy, deodel performs well on datasets with heterogeneous features. On datasets with only categorical/nominal data, the algorithm exhibits accuracy convergence: it approaches the maximum achievable accuracy as more training data is provided.
 
