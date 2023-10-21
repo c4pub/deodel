@@ -6,7 +6,7 @@
 
 #   c4pub@git 2023
 #
-# Latest version available at: https://github.com/c4pub/deodel
+# Latest version available at: https://github.com/c4pub/
 #
 
 # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

@@ -621,7 +621,7 @@ def UnitTestDeodel():
     deodel.opmode_intisnum = True
     iprnt ("- - - - deodel.opmode_intisnum:", deodel.opmode_intisnum)
     iprnt ("- - - - tv1", tv1)
-    ret_1 = deodel.Working.ProcessVector(tv1, True)
+    ret_1 = deodel.Working.ProcessVector(tv1)
     iprnt ("- - - - ret_1", ret_1)
     tv2 = deodel.Working.RevertVector(ret_1[0], ret_1[2])
     iprnt ("- - - - tv2", tv2)
@@ -650,7 +650,7 @@ def UnitTestDeodel():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     iprnt ("ProcessVector and RevertVector test - int is num - 2")
 
-    ret_1 = deodel.Working.ProcessVector(tv1, False)
+    ret_1 = deodel.Working.ProcessVector(tv1)
     iprnt ("- - - - deodel.opmode_intisnum:", deodel.opmode_intisnum)
     iprnt ("- - - - ret_1", ret_1)
     tv3 = deodel.Working.RevertVector(ret_1[0], ret_1[2])
@@ -685,7 +685,7 @@ def UnitTestDeodel():
     deodel.opmode_intisnum = False
     iprnt ("- - - - deodel.opmode_intisnum:", deodel.opmode_intisnum)
     iprnt ("- - - - tv1", tv1)
-    ret_1 = deodel.Working.ProcessVector(tv1, True)
+    ret_1 = deodel.Working.ProcessVector(tv1)
     iprnt ("- - - - ret_1", ret_1)
     tv2 = deodel.Working.RevertVector(ret_1[0], ret_1[2])
     iprnt ("- - - - tv2", tv2)
@@ -714,7 +714,7 @@ def UnitTestDeodel():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     iprnt ("ProcessVector and RevertVector test - int not num - 4")
 
-    ret_1 = deodel.Working.ProcessVector(tv1, False)
+    ret_1 = deodel.Working.ProcessVector(tv1)
     iprnt ("- - - - deodel.opmode_intisnum:", deodel.opmode_intisnum)
     iprnt ("- - - - ret_1", ret_1)
     tv3 = deodel.Working.RevertVector(ret_1[0], ret_1[2])
@@ -743,6 +743,9 @@ def UnitTestDeodel():
         iprnt ("Unit test failure !")
         traceback.print_stack(file=sys.stdout)
 
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -2247,12 +2250,14 @@ def UnitTestDeodel():
 
     ref_item = [[1, 2, 3, 2, 4], [3, 1, 2, 5, 1], [1, 2, 3, 2, 1], [1, 2, 2, 3, 1]]
 
-
     iprnt ("- - - - test_transp_result:", test_transp_result)
     iprnt ("- - - -           ref_item:", ref_item)
     iprnt ()
 
     test_expect = deodel.Working.MatrixTranspose(ref_item)
+
+    iprnt ("- - - - tt_o.__dict__ :", tt_o.__dict__ )
+    iprnt ()
 
     iprnt ("- - - - - - - - test_result:", test_result)
     iprnt ("- - - - - - - - test_expect:", test_expect)
@@ -2272,10 +2277,6 @@ def UnitTestDeodel():
 
         iprnt ("Unit test failure !")
         traceback.print_stack(file=sys.stdout)
-
-    iprnt ("- - - - tt_o.__dict__ :", tt_o.__dict__ )
-    iprnt ()
-
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
@@ -2325,6 +2326,9 @@ def UnitTestDeodel():
     deodel.opmode_intisnum = bkp_opmode_intisnum
     iprnt ("- - - - restored deodel.opmode_intisnum:", deodel.opmode_intisnum)
 
+    iprnt ("- - - - tt_o.__dict__ :", tt_o.__dict__ )
+    iprnt ()
+
     iprnt ("- - - - - - - - test_result:", test_result)
     iprnt ("- - - - - - - - test_expect:", test_expect)
 
@@ -2343,10 +2347,6 @@ def UnitTestDeodel():
 
         iprnt ("Unit test failure !")
         traceback.print_stack(file=sys.stdout)
-
-    iprnt ("- - - - tt_o.__dict__ :", tt_o.__dict__ )
-    iprnt ()
-
 
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -3143,6 +3143,69 @@ def UnitTestDeodel():
     tt_exp = [
             None,
             None,
+           ]
+
+    iprnt ("- - - - tt_exp:", tt_exp)
+
+    aux_param = {'tbreak_depth': 1}
+    tt_o = deodel.DeodataDelangaClassifier(aux_param)
+    tt_o.fit(tt_X, tt_y)
+    tt_predict = tt_o.predict(tt_test)
+    iprnt ()
+
+    test_result = tt_predict
+    test_expect = tt_exp
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("pathological input - bis 5-a")
+    iprnt ()
+
+    tt_X = [['a'],
+            ['a',   None,  'b'],
+            ['c',   99.0,   'c'],
+            ['d',   'c'],
+            ['e'],
+            ['e',   101,   None]]
+
+    iprnt ("- - - - tt_X:", tt_X)
+
+    tt_y = [
+            'X',
+            'X',
+            'Y',
+            'Y',
+           ]
+
+    iprnt ("- - - - tt_y:", tt_y)
+
+    tt_test= [
+            ['c',   None,  'c', 'zzz', 555],
+            ['a',   'c']]
+
+    iprnt ("- - - - tt_test:", tt_test)
+
+    tt_exp = [
+            'Y',
+            'X',
            ]
 
     iprnt ("- - - - tt_exp:", tt_exp)
@@ -5831,7 +5894,7 @@ def UnitTestUseApp():
     ret_status, ret_list_csv, ret_msg = ret_tuple
 
     e_csv = [
-                [],
+                [None],
                 ['a aa',      None,     -0.15,      None,     'Y' ],
                 ['a bb',      "None",       2,      '65',     'N' ],
                 ['b aa',  "{'a': 1}",  '3e-1',        '',   'nan' ],
@@ -7226,6 +7289,11 @@ def UnitTest():
 # if __name__ == "__main__":
 if True :
     print()
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    CrtTimeStamp()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    print()
     print("- - - - - - - - - ")
 
     ret_data = UnitTest()
@@ -7234,6 +7302,11 @@ if True :
     print("- - - - - - - - - ")
     print("- - - - ret_data:", ret_data)
     print("- - - - - - - - - ")
+    print()
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    CrtTimeStamp()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     print()
 
 # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

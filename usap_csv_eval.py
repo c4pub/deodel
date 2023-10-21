@@ -80,6 +80,8 @@ class TblUtil :
             if not isinstance(row_crt, list) :
                 if not row_crt == None :
                     row_new.append(str(row_crt))
+                else :
+                    row_new.append(None)
             else :
                 col_no = len(row_crt)
                 for crt_col_idx in range(col_no) :

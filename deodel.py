@@ -184,7 +184,7 @@ class Working:
         for crt_idx in range(attr_no) :
 
             crt_col = Working.GetCol( data_tbl, crt_idx )
-            ret_tuple = Working.ProcessVector(crt_col, True)
+            ret_tuple = Working.ProcessVector(crt_col)
             (conv_v, shadow_dict, shadrev_dict, numerical_list) = ret_tuple
 
             # create numerical thresholds if numerical elements are present
@@ -204,6 +204,7 @@ class Working:
                 crt_elem = crt_attr_list[crt_idx_2]
                 if isinstance(crt_elem, tuple) :
                     # entry is a number that needs conversion
+                    # tuple used as a marker for numerical values
                     start_no_id = len( attr_dict_list[crt_idx_1] ) + 1
                     crt_thresh_list = attr_num_thresh[crt_idx_1]
                     if crt_thresh_list == [] :
@@ -225,10 +226,6 @@ class Working:
     def WorkPredict(object, in_query):
 
         query_req = CasetDeodel.ListDataConvert(in_query)
-
-        attr_no = len(object.attr_X[0])
-        if attr_no != len( object.attr_num_thresh ) :
-            raise ValueError( "Mismatch in the number of attributes" )
 
         result_lst = []
         for row in query_req :
@@ -373,7 +370,7 @@ class Working:
                 if interval_len <= 0 :
                     break
 
-            # After iterations completed interval is one or zero and the appropiate position is in offset_idx
+            # After iterations completed the appropiate position is in offset_idx
             fn_ret_status = True
             fn_ret_insert_idx = offset_idx
 
@@ -417,7 +414,7 @@ class Working:
 
 # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     @staticmethod
-    def ProcessVector( in_v, in_num_flag = True ) :
+    def ProcessVector( in_v ) :
         vect_size = len(in_v)
         shadow_id = 1
         shadow_dict = {}
@@ -427,12 +424,13 @@ class Working:
         for crt_idx in range(vect_size) :
             crt_elem = in_v[crt_idx]
             is_num_flag, equiv_val = Working.NumericalCheck(crt_elem, opmode_intisnum)
-            if ( in_num_flag and is_num_flag ) :
+            if is_num_flag :
                 numerical_list.append(crt_elem)
+                # tuple used as a marker for numerical values
                 conv_v.append(tuple([crt_elem]))
             else :
                 if not equiv_val in shadow_dict :
-                   shadow_dict[in_v[crt_idx]] = shadow_id
+                   shadow_dict[crt_elem] = shadow_id
                    shadrev_dict[shadow_id] = equiv_val
                    conv_v.append(shadow_id)
                    shadow_id += 1
@@ -701,7 +699,6 @@ class CasetDeodel:
             idx = idx + 1
 
         out_list.sort(key=itemgetter(1), reverse=True)
-
         return out_list
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
