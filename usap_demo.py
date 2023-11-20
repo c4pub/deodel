@@ -14,6 +14,7 @@ deodel - demo
 import datetime
 import random
 import deodel
+import deodel2
 
 # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -205,13 +206,16 @@ def Demo() :
     x_data = data_set.data
     y_target = data_set.target
 
-    iter_no = 50
+    iter_no = 30
     random_seed = 42
     random.seed(random_seed)
 
-    classifier_lst = [  neighbors.KNeighborsClassifier(),
+    classifier_lst = [  
+                        neighbors.KNeighborsClassifier(),
                         tree.DecisionTreeClassifier(),
-                        deodel.DeodataDelangaClassifier() ]
+                        deodel.DeodataDelangaClassifier(),
+                        deodel2.DeodelSecond(),
+                     ]
 
     for crt_classif in classifier_lst : 
         accuracy = AccuracyEval(x_data, y_target, crt_classif, iterations=iter_no, random_seed=random_seed)

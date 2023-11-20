@@ -2,6 +2,9 @@
 # deodel
 
 
+### Update: improved accuracy with **deodel2**
+
+
 ## Predictive Algorithm for Very Mixed Data
 
 A predictive algorithm with a unique combination of features:
@@ -65,10 +68,21 @@ Occasionally, deodel outperforms more established algorithms like RandomForest, 
 Deodel is coded in Python and is compact, fitting in one file/module.
 
 
+## Deodel2 update (Nov 20, 2023)
+
+Deodel2 is an update of the algorithm that substantially improves accuracy. 
+The difference in operation appears in the processing of numerical attribute values. The original version simply discretized the values and compared them as if they were categorical. This didn't take into account the distance separating the two compared values. Whether adjacent or at the extreme of their range, they would be categorized only as a mismatch.
+Deodel2 takes this into account and substantially improves accuracy for datasets containing many continuous attribute values. If the dataset consists only of categorical attributes, the accuracy will be identical for the two versions. 
+As most datasets do contain lots of numerical attributes, the accuracy increases substantially and approaches that of ensemble classifiers like Random Forest.
+
+
 ## modules
 
   * deodel.py
     - It contains all that is needed for the operation of the classifier.
+
+  * deodel2.py
+    - Updated version with better processing of numerical attributes
 
   * main.py
     - Module that serves as a starting point / launchpad for use applications.
@@ -81,6 +95,9 @@ Deodel is coded in Python and is compact, fitting in one file/module.
 
   * usap_utest.py
     - Module that implements a non-systematic set of sanity/unit tests.
+
+  * usap_utest2.py
+    - Unit testing for deodel2.
 
   * usap_cmp_binning.py
     - Module that compares accuracy of the two modes of discretization: eq_freq vs eq_width.
