@@ -57,7 +57,7 @@ Deodel will generate a prediction in either case.
 
 The "Deodata Delanga" algorithm is a variation of the nearest neighbor type of supervised classifiers. It doesn't seek a fixed number of neighbors, but rather a nearest neighborhood with a variable number of neighbours. Unlike k-NN, that was used on data with continuous numerical attributes, the "Deodata Delanga" algorithm was intended to deal with discrete attributes; much like the ID3 decision tree. The deodel classifier can be viewed as a flattened/collapsed ID3 decision tree. Each branch of the flattened tree corresponds to a unique combination of attribute values, rather than just a single one, as is the case with conventional decision trees.
 
-Deodel starts from a categorical data classiffier and adapts it to continuous/numerical attributes by discretizing them. So, unlike many other algorithms that convert discrete data into numerical ones (like one hot encoding), deodel discretizes the continuous data. Obviously, this entails a loss of information. However, this loss doesn't seem to be severe, and provides surprisingly good results in many settings.
+Deodel starts from a categorical data classifier and adapts it to continuous/numerical attributes by discretizing them. So, unlike many other algorithms that convert discrete data into numerical ones (like one hot encoding), deodel discretizes the continuous data. Obviously, this entails a loss of information. However, this loss doesn't seem to be severe, and provides surprisingly good results in many settings.
 
 Deodel is essentially non-parametric. However, there are configuration adjustments that can be tuned through an optional dictionary structure specified at initialization. The main adjustment is the number of bins used to discretize numerical attributes. By default, it is set to three. It is also possible to choose the discretization method: "equal-width" vs "equal-frequency". Also, the automatic usage of regression can be overridden.
 
@@ -70,7 +70,7 @@ Deodel is coded in Python and is compact, fitting in one file/module.
 
 ## Deodel2 update (Nov 20, 2023)
 
-Deodel2 is an update of the algorithm that substantially improves accuracy. 
+Deodel2 is a new iteration of the algorithm that substantially improves accuracy. 
 The difference in operation appears in the processing of numerical attribute values. The original version simply discretized the values and compared them as if they were categorical. This didn't take into account the distance separating the two compared values. Whether adjacent or at the extreme of their range, they would be categorized only as a mismatch.
 Deodel2 takes this into account and substantially improves accuracy for datasets containing many continuous attribute values. If the dataset consists only of categorical attributes, the accuracy will be identical for the two versions. 
 As most datasets do contain lots of numerical attributes, the accuracy increases substantially and approaches that of ensemble classifiers like Random Forest.
@@ -79,10 +79,10 @@ As most datasets do contain lots of numerical attributes, the accuracy increases
 ## modules
 
   * deodel.py
-    - It contains all that is needed for the operation of the classifier.
+    - It contains all that is needed for the operation of the classifier/regressor.
 
   * deodel2.py
-    - Updated version with better processing of numerical attributes
+    - A new iteration of the algorithm with better processing of numerical attributes.
 
   * main.py
     - Module that serves as a starting point / launchpad for use applications.
