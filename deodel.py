@@ -59,7 +59,7 @@ class DeodataDelangaClassifier:
         else :
             self.aux_param = aux_param
 
-    version = 2.01
+    version = 2.11
 
     def __repr__(self):
         '''Returns representation of the object'''
@@ -143,7 +143,13 @@ class Working:
         else :
             predict_mode = 'auto'
 
-        ret_item = Working.DicretizeTable( data_X, num_split, split_mode )
+        if 'int_is_num' in object.aux_param :
+            int_is_num = object.aux_param['int_is_num']
+        else :
+            int_is_num = True
+        object.attr_int_is_num = int_is_num
+
+        ret_item = Working.DicretizeTable( data_X, num_split, split_mode, int_is_num )
         (ret_tbl, ret_attr_num_thresh, ret_attr_dict_list) = ret_item
 
         object.attr_X = np.array(ret_tbl, dtype='int')
@@ -151,7 +157,7 @@ class Working:
         object.attr_dict_list = ret_attr_dict_list
 
         if predict_mode == 'auto' :
-            regress_flag = Working.NumParse(data_y)
+            regress_flag = Working.NumParse(data_y, int_is_num)
         elif predict_mode == 'regress' :
             regress_flag = True
         else :
@@ -163,7 +169,7 @@ class Working:
 
 # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     @staticmethod
-    def DicretizeTable(in_tbl, in_split_no, in_split_mode):
+    def DicretizeTable(in_tbl, in_split_no, in_split_mode, in_int_is_num):
 
         data_tbl = in_tbl
         entry_no = len(data_tbl)
@@ -184,7 +190,7 @@ class Working:
         for crt_idx in range(attr_no) :
 
             crt_col = Working.GetCol( data_tbl, crt_idx )
-            ret_tuple = Working.ProcessVector(crt_col)
+            ret_tuple = Working.ProcessVector(crt_col, in_int_is_num)
             (conv_v, shadow_dict, shadrev_dict, numerical_list) = ret_tuple
 
             # create numerical thresholds if numerical elements are present
@@ -240,6 +246,7 @@ class Working:
         attr_entry = in_attr_list
         attr_no = len(attr_entry)
         translated_query = []
+        int_is_num = object.attr_int_is_num
         for crt_idx in range(attr_no) :
             crt_attr = attr_entry[crt_idx]
             crt_num_interval = object.attr_num_thresh[crt_idx]
@@ -248,7 +255,7 @@ class Working:
                 # None is considered to represent missing attribute values, will be ignored.
                 new_id = -1
             else :
-                ret_tuple = Working.NumericalCheck(crt_attr, opmode_intisnum)
+                ret_tuple = Working.NumericalCheck(crt_attr, int_is_num)
                 is_numerical, translate_value = ret_tuple
                 if is_numerical :
                     # numerical attribute, discretize with interval
@@ -270,6 +277,7 @@ class Working:
         # prediction for one query
         query_len = len(in_query)
         train_len = len(object.attr_X[0])
+        int_is_num = object.attr_int_is_num
         if query_len == train_len :
             adjusted_query = in_query[:]
         elif query_len > train_len :
@@ -292,7 +300,7 @@ class Working:
                 compare_vect = (np.equal(crt_train_attr, query_req)).astype(int)
                 entry_match_score = int(np.count_nonzero(compare_vect))
                 crt_targ_elem = object.targ_y[crt_idx]
-                ret_tuple = Working.NumericalCheck(crt_targ_elem, opmode_intisnum)
+                ret_tuple = Working.NumericalCheck(crt_targ_elem, int_is_num)
                 is_numerical, translate_value = ret_tuple
                 if is_numerical :
                     match_score_list[entry_match_score].append(0.00)
@@ -414,7 +422,7 @@ class Working:
 
 # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     @staticmethod
-    def ProcessVector( in_v ) :
+    def ProcessVector( in_v, in_int_is_num ) :
         vect_size = len(in_v)
         shadow_id = 1
         shadow_dict = {}
@@ -423,7 +431,7 @@ class Working:
         conv_v = []
         for crt_idx in range(vect_size) :
             crt_elem = in_v[crt_idx]
-            is_num_flag, equiv_val = Working.NumericalCheck(crt_elem, opmode_intisnum)
+            is_num_flag, equiv_val = Working.NumericalCheck(crt_elem, in_int_is_num)
             if is_num_flag :
                 numerical_list.append(crt_elem)
                 # tuple used as a marker for numerical values
@@ -626,7 +634,7 @@ class Working:
 
 # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     @staticmethod
-    def NumParse( in_vect ) :
+    def NumParse( in_vect, in_int_is_num ) :
         """
             Parse vector and check if vector has valid regress numerical elements.
             Also computes the average of the numerical elements.
@@ -635,7 +643,7 @@ class Working:
         regress_flag = False
         num_list = []
         for crt_elem in in_vect :
-            is_numerical, translate_value = Working.NumericalCheck(crt_elem, opmode_intisnum)
+            is_numerical, translate_value = Working.NumericalCheck(crt_elem, in_int_is_num)
             if is_numerical :
                 num_list.append(crt_elem)
         if not num_list == [] :

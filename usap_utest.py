@@ -48,6 +48,7 @@ def UnitTestDeodel():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("test GetElemIdxInOrderList - 001")
 
     utest_fail_counter = 0
     utest_test_no = 0
@@ -80,6 +81,7 @@ def UnitTestDeodel():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("test GetElemIdxInOrderList - 002")
 
     test_elem = 0
     test_result = deodel.Working.GetElemIdxInOrderList(test_elem, test_thresh_list)
@@ -103,6 +105,7 @@ def UnitTestDeodel():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("test GetElemIdxInOrderList - 003")
 
     test_elem = 1
     test_result = deodel.Working.GetElemIdxInOrderList(test_elem, test_thresh_list)
@@ -127,6 +130,7 @@ def UnitTestDeodel():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("test GetElemIdxInOrderList - 004")
 
     test_elem = 1.0
     test_result = deodel.Working.GetElemIdxInOrderList(test_elem, test_thresh_list)
@@ -151,6 +155,7 @@ def UnitTestDeodel():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("test GetElemIdxInOrderList - 005")
 
     test_elem = 1.5
     test_result = deodel.Working.GetElemIdxInOrderList(test_elem, test_thresh_list)
@@ -175,6 +180,7 @@ def UnitTestDeodel():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("test GetElemIdxInOrderList - 006")
 
     test_elem = 2
     test_result = deodel.Working.GetElemIdxInOrderList(test_elem, test_thresh_list)
@@ -199,6 +205,7 @@ def UnitTestDeodel():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("test GetElemIdxInOrderList - 007")
 
     test_elem = 2.1
     test_result = deodel.Working.GetElemIdxInOrderList(test_elem, test_thresh_list)
@@ -223,6 +230,7 @@ def UnitTestDeodel():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("test GetElemIdxInOrderList - 008")
 
     test_elem = 1.5
     test_result = deodel.Working.GetElemIdxInOrderList(test_elem, test_thresh_list)
@@ -247,6 +255,7 @@ def UnitTestDeodel():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("test GetElemIdxInOrderList - 009")
 
     test_elem = 2.0
     test_result = deodel.Working.GetElemIdxInOrderList(test_elem, test_thresh_list)
@@ -271,6 +280,7 @@ def UnitTestDeodel():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("test GetElemIdxInOrderList - 010")
 
     test_elem = 3.0
     test_result = deodel.Working.GetElemIdxInOrderList(test_elem, test_thresh_list)
@@ -295,6 +305,7 @@ def UnitTestDeodel():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("test GetElemIdxInOrderList - 011")
 
     test_thresh_list = [3.01, 4.005]
     test_elem = 3
@@ -320,6 +331,7 @@ def UnitTestDeodel():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("test GetElemIdxInOrderList - 012")
 
     test_thresh_list = [3.01, 4.005]
     test_elem = 3.01
@@ -345,6 +357,7 @@ def UnitTestDeodel():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("test GetElemIdxInOrderList - 013")
 
     test_elem = 3.5
     test_result = deodel.Working.GetElemIdxInOrderList(test_elem, test_thresh_list)
@@ -369,6 +382,7 @@ def UnitTestDeodel():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("test GetElemIdxInOrderList - 014")
 
     test_elem = 5
     test_result = deodel.Working.GetElemIdxInOrderList(test_elem, test_thresh_list)
@@ -393,6 +407,85 @@ def UnitTestDeodel():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("test GetElemIdxInOrderList - 016")
+
+    test_thresh_list = [3]
+    test_elem = 3
+    test_result = deodel.Working.GetElemIdxInOrderList(test_elem, test_thresh_list)
+
+    test_expect = 1
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("test GetElemIdxInOrderList - 017")
+
+    test_thresh_list = [3]
+    test_elem = 4
+    test_result = deodel.Working.GetElemIdxInOrderList(test_elem, test_thresh_list)
+
+    test_expect = 1
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("test GetElemIdxInOrderList - 018")
+
+    test_thresh_list = [3]
+    test_elem = 2
+    test_result = deodel.Working.GetElemIdxInOrderList(test_elem, test_thresh_list)
+
+    test_expect = 0
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("test list convert")
 
     tt1 = [['a',    1.01,   2.02,   'e'],
            ['b',    2,      3.01,   'd'],
@@ -433,6 +526,7 @@ def UnitTestDeodel():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("test MatrixTranspose - 1")
 
     ty1 = ['one', 2, 3, "one"]
     iprnt ("- - - - ty1: ", ty1)
@@ -471,6 +565,7 @@ def UnitTestDeodel():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("test MatrixTranspose - 2")
 
     iprnt ("- - - - ty1: ", ty1)
     ty1b = deodel.Working.MatrixTranspose(ty1)
@@ -503,6 +598,7 @@ def UnitTestDeodel():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("test MatrixTranspose - 3")
 
     ttu = [['o']]
     iprnt ()
@@ -537,6 +633,7 @@ def UnitTestDeodel():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("test MatrixTranspose - 4")
 
     ttu = [ ['o'],
             ['b'],
@@ -573,6 +670,7 @@ def UnitTestDeodel():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("test MatrixTranspose - 5")
 
     ttu = [ ['o'], [9], ['e']]
     iprnt ()
@@ -615,13 +713,10 @@ def UnitTestDeodel():
 
     tv1 = ['e',    1,      3.01,   'h',     11,     None]
 
-    # backup global state
-    bkp_opmode_intisnum = deodel.opmode_intisnum
-    iprnt ("- - - - bkp_opmode_intisnum:", bkp_opmode_intisnum)
-    deodel.opmode_intisnum = True
-    iprnt ("- - - - deodel.opmode_intisnum:", deodel.opmode_intisnum)
+    int_isnum = True
+    iprnt ("- - - - int_isnum:", int_isnum)
     iprnt ("- - - - tv1", tv1)
-    ret_1 = deodel.Working.ProcessVector(tv1)
+    ret_1 = deodel.Working.ProcessVector(tv1, int_isnum)
     iprnt ("- - - - ret_1", ret_1)
     tv2 = deodel.Working.RevertVector(ret_1[0], ret_1[2])
     iprnt ("- - - - tv2", tv2)
@@ -650,8 +745,11 @@ def UnitTestDeodel():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     iprnt ("ProcessVector and RevertVector test - int is num - 2")
 
-    ret_1 = deodel.Working.ProcessVector(tv1)
-    iprnt ("- - - - deodel.opmode_intisnum:", deodel.opmode_intisnum)
+    # int_isnum = True
+    iprnt ("- - - - int_isnum:", int_isnum)
+    iprnt ("- - - - tv1", tv1)
+    ret_1 = deodel.Working.ProcessVector(tv1, int_isnum)
+
     iprnt ("- - - - ret_1", ret_1)
     tv3 = deodel.Working.RevertVector(ret_1[0], ret_1[2])
     iprnt ("- - - - tv3", tv3)
@@ -682,10 +780,10 @@ def UnitTestDeodel():
 
     tv1 = ['e',    1,      3.01,   'h',     11,     None]
 
-    deodel.opmode_intisnum = False
-    iprnt ("- - - - deodel.opmode_intisnum:", deodel.opmode_intisnum)
+    int_isnum = False
+    iprnt ("- - - - int_isnum:", int_isnum)
     iprnt ("- - - - tv1", tv1)
-    ret_1 = deodel.Working.ProcessVector(tv1)
+    ret_1 = deodel.Working.ProcessVector(tv1, int_isnum)
     iprnt ("- - - - ret_1", ret_1)
     tv2 = deodel.Working.RevertVector(ret_1[0], ret_1[2])
     iprnt ("- - - - tv2", tv2)
@@ -714,18 +812,16 @@ def UnitTestDeodel():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     iprnt ("ProcessVector and RevertVector test - int not num - 4")
 
-    ret_1 = deodel.Working.ProcessVector(tv1)
-    iprnt ("- - - - deodel.opmode_intisnum:", deodel.opmode_intisnum)
+    # int_isnum = False
+    iprnt ("- - - - int_isnum:", int_isnum)
+    iprnt ("- - - - tv1", tv1)
+    ret_1 = deodel.Working.ProcessVector(tv1, int_isnum)
     iprnt ("- - - - ret_1", ret_1)
     tv3 = deodel.Working.RevertVector(ret_1[0], ret_1[2])
     iprnt ("- - - - tv3", tv3)
 
     test_result = tv1
     test_expect = tv3
-
-    # restore global state
-    deodel.opmode_intisnum = bkp_opmode_intisnum
-    iprnt ("- - - - restored deodel.opmode_intisnum:", deodel.opmode_intisnum)
 
     iprnt ("- - - - test_result:", test_result)
     iprnt ("- - - - test_expect:", test_expect)
@@ -2212,12 +2308,7 @@ def UnitTestDeodel():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     iprnt ("deodel fit test - 1")
 
-    # backup global state
-    bkp_opmode_intisnum = deodel.opmode_intisnum
-    iprnt ("- - - - bkp_opmode_intisnum:", bkp_opmode_intisnum)
-
-    deodel.opmode_intisnum = True
-    iprnt ("- - - - deodel.opmode_intisnum:", deodel.opmode_intisnum)
+    int_isnum = True
 
     tt_X = [['a',   1.01,   'az',   'e'],
             ['b',   "3.01", 3.01,   'd'],
@@ -2239,9 +2330,12 @@ def UnitTestDeodel():
 
     tt_transp_X = deodel.Working.MatrixTranspose(tt_X)
     iprnt ("- - - -        tt_transp_X:", tt_transp_X)
+    aux_param = {'split_mode': 'eq_freq', 'int_is_num': int_isnum}
 
-    # o1 = deodel.deodel.DeodataDelangaClassifier()
-    tt_o = deodel.DeodataDelangaClassifier({'split_mode': 'eq_freq'})
+    iprnt ("- - - - aux_param:", aux_param)
+    iprnt ()
+
+    tt_o = deodel.DeodataDelangaClassifier(aux_param)
     tt_o.fit(tt_X, tt_y)
     iprnt ()
 
@@ -2283,8 +2377,7 @@ def UnitTestDeodel():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     iprnt ("deodel fit test - 2")
 
-    deodel.opmode_intisnum = False
-    iprnt ("- - - - deodel.opmode_intisnum:", deodel.opmode_intisnum)
+    int_isnum = False
 
     tt_X = [['a',   101.01,   'az',   'e'],
             [77,    "3.01",   3.01,   'd'],
@@ -2307,8 +2400,12 @@ def UnitTestDeodel():
     tt_transp_X = deodel.Working.MatrixTranspose(tt_X)
     iprnt ("- - - -        tt_transp_X:", tt_transp_X)
 
-    # o1 = deodel.deodel.DeodataDelangaClassifier()
-    tt_o = deodel.DeodataDelangaClassifier({'split_mode': 'eq_freq'})
+    aux_param = {'split_mode': 'eq_freq', 'int_is_num': int_isnum}
+
+    iprnt ("- - - - aux_param:", aux_param)
+    iprnt ()
+
+    tt_o = deodel.DeodataDelangaClassifier(aux_param)
     tt_o.fit(tt_X, tt_y)
     iprnt ()
 
@@ -2322,9 +2419,6 @@ def UnitTestDeodel():
     iprnt ()
 
     test_expect = deodel.Working.MatrixTranspose(ref_item)
-
-    deodel.opmode_intisnum = bkp_opmode_intisnum
-    iprnt ("- - - - restored deodel.opmode_intisnum:", deodel.opmode_intisnum)
 
     iprnt ("- - - - tt_o.__dict__ :", tt_o.__dict__ )
     iprnt ()
@@ -2352,7 +2446,7 @@ def UnitTestDeodel():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    iprnt ("predict test")
+    iprnt ("predict test - 1 (continuation)")
 
     tt_test = tt_X[:]
     tt_predict = tt_o.predict(tt_test)
@@ -2380,7 +2474,7 @@ def UnitTestDeodel():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    iprnt ("predict test")
+    iprnt ("predict test - 2")
     iprnt ()
     tt_X = [['a',   1.01,   'az',   'e'],
             ['b',   "3.01", 3.01,   'd'],
@@ -2494,7 +2588,7 @@ def UnitTestDeodel():
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    iprnt ("behaviour when no tie break")
+    iprnt ("behaviour when no tie break - 1")
     iprnt ()
     tt_X = [['a',   1.01,   'az',   'e'],
             ['b',   "3.01", 3.01,   'd'],
@@ -2524,10 +2618,14 @@ def UnitTestDeodel():
            ]
 
     aux_param = {'tbreak_depth': 1}
+
+    iprnt ("- - - - aux_param:", aux_param)
+    iprnt ()
+
     tt_o = deodel.DeodataDelangaClassifier(aux_param)
     tt_o.fit(tt_X, tt_y)
+
     tt_predict = tt_o.predict(tt_test)
-    iprnt ()
 
     test_result = tt_predict
     test_expect = tt_exp
@@ -2551,15 +2649,15 @@ def UnitTestDeodel():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    iprnt ("integer mix in prediction - opmode_intisnum: true")
+    iprnt ("integer mix in prediction - int_is_num: true")
     iprnt ()
 
-    bkp_opmode_intisnum = deodel.opmode_intisnum
-    iprnt ("- - - - bkp_opmode_intisnum:", bkp_opmode_intisnum)
-    deodel.opmode_intisnum = True
-    iprnt ("- - - - deodel.opmode_intisnum:", deodel.opmode_intisnum)
+    int_isnum = True
+    aux_param = {'int_is_num': int_isnum}
 
+    iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
+
     tt_X = [['a',   1.01,   'az',   'e'],
             ['b',   "3.01", 3.01,   'd'],
             ['d',   "4",    5,      'd'],
@@ -2587,7 +2685,7 @@ def UnitTestDeodel():
             'A',
            ]
 
-    tt_o = deodel.DeodataDelangaClassifier()
+    tt_o = deodel.DeodataDelangaClassifier(aux_param)
     tt_o.fit(tt_X, tt_y)
     tt_predict = tt_o.predict(tt_test)
     iprnt ()
@@ -2614,13 +2712,11 @@ def UnitTestDeodel():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    iprnt ("integer mix in prediction - opmode_intisnum: false")
+    iprnt ("integer mix in prediction - int_is_num: false")
     iprnt ()
 
-    deodel.opmode_intisnum = False
-    iprnt ("- - - - deodel.opmode_intisnum:", deodel.opmode_intisnum)
+    int_isnum = False
 
-    iprnt ()
     tt_X = [['a',   1.01,   'az',   'e'],
             ['b',   "3.01", 3.01,   'd'],
             ['d',   "4",    5.0,    'd'],
@@ -2648,7 +2744,12 @@ def UnitTestDeodel():
             'A',
            ]
 
-    tt_o = deodel.DeodataDelangaClassifier()
+    aux_param = {'int_is_num': int_isnum}
+
+    iprnt ("- - - - aux_param:", aux_param)
+    iprnt ()
+
+    tt_o = deodel.DeodataDelangaClassifier(aux_param)
     tt_o.fit(tt_X, tt_y)
     tt_predict = tt_o.predict(tt_test)
     iprnt ()
@@ -2676,7 +2777,7 @@ def UnitTestDeodel():
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    iprnt ("integer mix in dealing with missing attributes - opmode_intisnum: false")
+    iprnt ("integer mix in dealing with missing attributes - int_is_num: false - a")
     iprnt ()
     tt_X = [['a',   1.01,   'az',   'e'],
             ['b',   "3.01", 3.01,   'd'],
@@ -2705,7 +2806,13 @@ def UnitTestDeodel():
             'A',
            ]
 
-    tt_o = deodel.DeodataDelangaClassifier()
+    # int_isnum = False
+    aux_param = {'int_is_num': int_isnum}
+
+    iprnt ("- - - - aux_param:", aux_param)
+    iprnt ()
+
+    tt_o = deodel.DeodataDelangaClassifier(aux_param)
     tt_o.fit(tt_X, tt_y)
     tt_predict = tt_o.predict(tt_test)
     iprnt ()
@@ -2733,7 +2840,7 @@ def UnitTestDeodel():
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    iprnt ("integer mix in no tie break - opmode_intisnum: false")
+    iprnt ("integer mix in no tie break - int_is_num: false")
     iprnt ()
     tt_X = [['a',   1.01,   'az',   'e'],
             ['b',   "3.01", 3.01,   'd'],
@@ -2762,7 +2869,13 @@ def UnitTestDeodel():
             'A',
            ]
 
-    aux_param = {'tbreak_depth': 1}
+    # int_isnum = False
+
+    aux_param = {'tbreak_depth': 1, 'int_is_num': int_isnum}
+
+    iprnt ("- - - - aux_param:", aux_param)
+    iprnt ()
+
     tt_o = deodel.DeodataDelangaClassifier(aux_param)
     tt_o.fit(tt_X, tt_y)
     tt_predict = tt_o.predict(tt_test)
@@ -2770,9 +2883,6 @@ def UnitTestDeodel():
 
     test_result = tt_predict
     test_expect = tt_exp
-
-    deodel.opmode_intisnum = bkp_opmode_intisnum
-    iprnt ("- - - - restored deodel.opmode_intisnum:", deodel.opmode_intisnum)
 
     iprnt ("- - - - test_result:", test_result)
     iprnt ("- - - - test_expect:", test_expect)
@@ -2794,7 +2904,7 @@ def UnitTestDeodel():
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    iprnt ("behaviour when no tie break")
+    iprnt ("behaviour when no tie break - 2")
     iprnt ()
 
     tt_X = [['a',   None,  'a'],
@@ -2823,6 +2933,10 @@ def UnitTestDeodel():
            ]
 
     aux_param = {'tbreak_depth': 1}
+
+    iprnt ("- - - - aux_param:", aux_param)
+    iprnt ()
+
     tt_o = deodel.DeodataDelangaClassifier(aux_param)
     tt_o.fit(tt_X, tt_y)
     tt_predict = tt_o.predict(tt_test)
@@ -2891,6 +3005,10 @@ def UnitTestDeodel():
     iprnt ("- - - - tt_exp:", tt_exp)
 
     aux_param = {'tbreak_depth': 1}
+
+    iprnt ("- - - - aux_param:", aux_param)
+    iprnt ()
+
     tt_o = deodel.DeodataDelangaClassifier(aux_param)
     tt_o.fit(tt_X, tt_y)
     tt_predict = tt_o.predict(tt_test)
@@ -2956,6 +3074,10 @@ def UnitTestDeodel():
     iprnt ("- - - - tt_exp:", tt_exp)
 
     aux_param = {'tbreak_depth': 1}
+
+    iprnt ("- - - - aux_param:", aux_param)
+    iprnt ()
+
     tt_o = deodel.DeodataDelangaClassifier(aux_param)
     tt_o.fit(tt_X, tt_y)
     tt_predict = tt_o.predict(tt_test)
@@ -3019,6 +3141,10 @@ def UnitTestDeodel():
     iprnt ("- - - - tt_exp:", tt_exp)
 
     aux_param = {'tbreak_depth': 1}
+
+    iprnt ("- - - - aux_param:", aux_param)
+    iprnt ()
+
     tt_o = deodel.DeodataDelangaClassifier(aux_param)
     tt_o.fit(tt_X, tt_y)
     tt_predict = tt_o.predict(tt_test)
@@ -3088,6 +3214,10 @@ def UnitTestDeodel():
     iprnt ("- - - - tt_exp:", tt_exp)
 
     aux_param = {'tbreak_depth': 1}
+
+    iprnt ("- - - - aux_param:", aux_param)
+    iprnt ()
+
     tt_o = deodel.DeodataDelangaClassifier(aux_param)
     tt_o.fit(tt_X, tt_y)
     tt_predict = tt_o.predict(tt_test)
@@ -3148,6 +3278,10 @@ def UnitTestDeodel():
     iprnt ("- - - - tt_exp:", tt_exp)
 
     aux_param = {'tbreak_depth': 1}
+
+    iprnt ("- - - - aux_param:", aux_param)
+    iprnt ()
+
     tt_o = deodel.DeodataDelangaClassifier(aux_param)
     tt_o.fit(tt_X, tt_y)
     tt_predict = tt_o.predict(tt_test)
@@ -3211,6 +3345,10 @@ def UnitTestDeodel():
     iprnt ("- - - - tt_exp:", tt_exp)
 
     aux_param = {'tbreak_depth': 1}
+
+    iprnt ("- - - - aux_param:", aux_param)
+    iprnt ()
+
     tt_o = deodel.DeodataDelangaClassifier(aux_param)
     tt_o.fit(tt_X, tt_y)
     tt_predict = tt_o.predict(tt_test)
@@ -3277,6 +3415,10 @@ def UnitTestDeodel():
     iprnt ("- - - - tt_test:", tt_test)
 
     aux_param = {'tbreak_depth': 1}
+
+    iprnt ("- - - - aux_param:", aux_param)
+    iprnt ()
+
     tt_o = deodel.DeodataDelangaClassifier(aux_param)
     tt_o.fit(tt_X, tt_y)
     tt_predict = tt_o.predict(tt_test)
@@ -3343,6 +3485,10 @@ def UnitTestDeodel():
     iprnt ("- - - - tt_test:", tt_test)
 
     aux_param = {'tbreak_depth': 1}
+
+    iprnt ("- - - - aux_param:", aux_param)
+    iprnt ()
+
     tt_o = deodel.DeodataDelangaClassifier(aux_param)
     tt_o.fit(tt_X, tt_y)
     tt_predict = tt_o.predict(tt_test)
@@ -3414,6 +3560,10 @@ def UnitTestDeodel():
     iprnt ("- - - - tt_test:", tt_test)
 
     aux_param = {'tbreak_depth': 1}
+
+    iprnt ("- - - - aux_param:", aux_param)
+    iprnt ()
+
     tt_o = deodel.DeodataDelangaClassifier(aux_param)
     tt_o.fit(tt_X, tt_y)
     tt_predict = tt_o.predict(tt_test)
@@ -3485,6 +3635,10 @@ def UnitTestDeodel():
     iprnt ("- - - - tt_test:", tt_test)
 
     aux_param = {'tbreak_depth': 1}
+
+    iprnt ("- - - - aux_param:", aux_param)
+    iprnt ()
+
     tt_o = deodel.DeodataDelangaClassifier(aux_param)
     tt_o.fit(tt_X, tt_y)
     tt_predict = tt_o.predict(tt_test)
@@ -3555,6 +3709,10 @@ def UnitTestDeodel():
     iprnt ("- - - - tt_test:", tt_test)
 
     aux_param = {'tbreak_depth': 1}
+
+    iprnt ("- - - - aux_param:", aux_param)
+    iprnt ()
+
     tt_o = deodel.DeodataDelangaClassifier(aux_param)
     tt_o.fit(tt_X, tt_y)
     tt_predict = tt_o.predict(tt_test)
@@ -3625,6 +3783,10 @@ def UnitTestDeodel():
     iprnt ("- - - - tt_test:", tt_test)
 
     aux_param = {'tbreak_depth': 1}
+
+    iprnt ("- - - - aux_param:", aux_param)
+    iprnt ()
+
     tt_o = deodel.DeodataDelangaClassifier(aux_param)
     tt_o.fit(tt_X, tt_y)
     tt_predict = tt_o.predict(tt_test)
@@ -3695,6 +3857,10 @@ def UnitTestDeodel():
     iprnt ("- - - - tt_test:", tt_test)
 
     aux_param = {'tbreak_depth': 1}
+
+    iprnt ("- - - - aux_param:", aux_param)
+    iprnt ()
+
     tt_o = deodel.DeodataDelangaClassifier(aux_param)
     tt_o.fit(tt_X, tt_y)
     tt_predict = tt_o.predict(tt_test)
@@ -3770,6 +3936,10 @@ def UnitTestDeodel():
     iprnt ("- - - - tt_test:", tt_test)
 
     aux_param = {'tbreak_depth': 1}
+
+    iprnt ("- - - - aux_param:", aux_param)
+    iprnt ()
+
     tt_o = deodel.DeodataDelangaClassifier(aux_param)
     tt_o.fit(tt_X, tt_y)
     tt_predict = tt_o.predict(tt_test)
@@ -3846,6 +4016,10 @@ def UnitTestDeodel():
     iprnt ("- - - - tt_test:", tt_test)
 
     aux_param = {'tbreak_depth': 1}
+
+    iprnt ("- - - - aux_param:", aux_param)
+    iprnt ()
+
     tt_o = deodel.DeodataDelangaClassifier(aux_param)
     tt_o.fit(tt_X, tt_y)
     tt_predict = tt_o.predict(tt_test)
@@ -3922,6 +4096,10 @@ def UnitTestDeodel():
     iprnt ("- - - - tt_test:", tt_test)
 
     aux_param = {'tbreak_depth': 1}
+
+    iprnt ("- - - - aux_param:", aux_param)
+    iprnt ()
+
     tt_o = deodel.DeodataDelangaClassifier(aux_param)
     tt_o.fit(tt_X, tt_y)
     tt_predict = tt_o.predict(tt_test)
@@ -3992,6 +4170,10 @@ def UnitTestDeodel():
     iprnt ("- - - - tt_test:", tt_test)
 
     aux_param = {'tbreak_depth': 1}
+
+    iprnt ("- - - - aux_param:", aux_param)
+    iprnt ()
+
     tt_o = deodel.DeodataDelangaClassifier(aux_param)
     tt_o.fit(tt_X, tt_y)
     tt_predict = tt_o.predict(tt_test)
@@ -4355,7 +4537,8 @@ def UnitTestDeodel():
     # test_expect = 1.65
     # test_expect = 1.75
     # test_expect = 1.77
-    test_expect = 2.01
+    # test_expect = 2.01
+    test_expect = 2.11
 
     iprnt ("- - - - test_result:", test_result)
     iprnt ("- - - - test_expect:", test_expect)
@@ -4410,6 +4593,10 @@ def UnitTestDeodel():
            ]
 
     aux_param = {'tbreak_depth': 1}
+
+    iprnt ("- - - - aux_param:", aux_param)
+    iprnt ()
+
     tt_o = deodel.DeodataDelangaClassifier(aux_param)
     tt_o.fit(tt_pd_X, tt_pd_y)
     tt_predict = tt_o.predict(tt_pd_test)
@@ -4500,6 +4687,10 @@ def UnitTestDeodel():
     # deodel_regress = deodel.DeodataDelangaClassifier()
     # deodel_regress = deodel.DeodataDelangaClassifier({'split_no': 5, 'split_mode': 'eq_freq'})
     deodel_regress = deodel.DeodataDelangaClassifier({'split_no': 10, 'split_mode': 'eq_width'})
+
+    iprnt ("- - - - aux_param:", aux_param)
+    iprnt ()
+
 
     deodel_regress.fit(X_train,y_train)
     # ret_data = deodel_regress.tweak()
@@ -4597,6 +4788,10 @@ def UnitTestDeodel():
 
     deodel_regress = deodel.DeodataDelangaClassifier({'split_no': 4, 'split_mode': 'eq_width'})
 
+
+    iprnt ("- - - - aux_param:", aux_param)
+    iprnt ()
+
     deodel_regress.fit(X_train,y_train)
     y_pred = deodel_regress.predict(X_test)
     t_pred = y_pred
@@ -4690,7 +4885,12 @@ def UnitTestDeodel():
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    deodel_regress = deodel.DeodataDelangaClassifier({'predict_mode': 'regress', 'split_no': 4, 'split_mode': 'eq_width'})
+    aux_param = {'predict_mode': 'regress', 'split_no': 4, 'split_mode': 'eq_width'}
+
+    iprnt ("- - - - aux_param:", aux_param)
+    iprnt ()
+
+    deodel_regress = deodel.DeodataDelangaClassifier(aux_param)
 
     deodel_regress.fit(X_train,y_train)
     y_pred = deodel_regress.predict(X_test)

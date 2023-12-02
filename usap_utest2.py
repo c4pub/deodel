@@ -715,8 +715,10 @@ def UnitTestDeodel():
 
     tv1 = ['e',    1,      3.01,   'h',     11,     None]
 
+    int_isnum = False
+    iprnt ("- - - - int_isnum:", int_isnum)
     iprnt ("- - - - tv1", tv1)
-    ret_1 = deodel2.Working.ProcessVector(tv1, False)
+    ret_1 = deodel2.Working.ProcessVector(tv1, int_isnum)
     iprnt ("- - - - ret_1", ret_1)
     tv2 = deodel2.Working.RevertVector(ret_1[0], ret_1[4], ret_1[1])
     iprnt ("- - - - tv2", tv2)
@@ -745,7 +747,10 @@ def UnitTestDeodel():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     iprnt ("ProcessVector and RevertVector test - int is num - 2")
 
-    ret_1 = deodel2.Working.ProcessVector(tv1, True)
+    int_isnum = True
+    iprnt ("- - - - int_isnum:", int_isnum)
+    iprnt ("- - - - tv1", tv1)
+    ret_1 = deodel2.Working.ProcessVector(tv1, int_isnum)
     iprnt ("- - - - ret_1", ret_1)
     tv3 = deodel2.Working.RevertVector(ret_1[0], ret_1[4], ret_1[1])
     iprnt ("- - - - tv3", tv3)
@@ -776,8 +781,10 @@ def UnitTestDeodel():
 
     tv1 = ['e',    1,      3.01,   'h',     11,     None]
 
+    int_isnum = True
+    iprnt ("- - - - int_isnum:", int_isnum)
     iprnt ("- - - - tv1", tv1)
-    ret_1 = deodel2.Working.ProcessVector(tv1, True)
+    ret_1 = deodel2.Working.ProcessVector(tv1, int_isnum)
     iprnt ("- - - - ret_1", ret_1)
     tv2 = deodel2.Working.RevertVector(ret_1[0], ret_1[4], ret_1[1])
     iprnt ("- - - - tv2", tv2)
@@ -806,7 +813,10 @@ def UnitTestDeodel():
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     iprnt ("ProcessVector and RevertVector test - int not num - 4")
 
-    ret_1 = deodel2.Working.ProcessVector(tv1, True)
+    int_isnum = True
+    iprnt ("- - - - int_isnum:", int_isnum)
+    iprnt ("- - - - tv1", tv1)
+    ret_1 = deodel2.Working.ProcessVector(tv1, int_isnum)
     iprnt ("- - - - ret_1", ret_1)
     tv3 = deodel2.Working.RevertVector(ret_1[0], ret_1[4], ret_1[1])
     iprnt ("- - - - tv3", tv3)
@@ -1672,7 +1682,7 @@ def UnitTestDeodel():
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    iprnt ("behaviour when no tie break")
+    iprnt ("behaviour when no tie break - 1")
     iprnt ()
     tt_X = [['a',   1.01,   'az',   'e'],
             ['b',   "3.01", 3.01,   'd'],
@@ -2273,7 +2283,8 @@ def UnitTestDeodel():
             'A',
            ]
 
-    aux_param = {'tbreak_depth': 1, 'split_no': 10, 'back_compat': False, 'int_is_num': False}
+    int_isnum = False
+    aux_param = {'tbreak_depth': 1, 'split_no': 10, 'back_compat': False, 'int_is_num': int_isnum}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -2306,7 +2317,7 @@ def UnitTestDeodel():
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    iprnt ("behaviour when no tie break")
+    iprnt ("behaviour when no tie break - 2")
     iprnt ()
 
     tt_X = [['a',   None,  'a'],
@@ -4675,7 +4686,8 @@ def UnitTestDeodel():
     # test_expect = 1.75
     # test_expect = 1.77
     # test_expect = 2.01
-    test_expect = 2.11
+    # test_expect = 2.11
+    test_expect = 2.13
 
     iprnt ("- - - - test_result:", test_result)
     iprnt ("- - - - test_expect:", test_expect)

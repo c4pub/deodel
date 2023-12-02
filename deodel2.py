@@ -78,7 +78,7 @@ class DeodelSecond :
                     cfg_param[crt_elem] = default_aux[crt_elem]
             self.cfg_param = cfg_param
 
-    version = 2.11
+    version = 2.13
 
     def __repr__(self):
         '''Returns representation of the object'''
@@ -397,7 +397,7 @@ class Working:
                 ret_tuple = Working.NumericalCheck(crt_targ_elem, int_is_num)
                 is_numerical, translate_value = ret_tuple
                 if is_numerical :
-                    match_score_list[entry_agg_match_score].append(((0.00)))
+                    match_score_list[entry_agg_match_score].append((None, 0))
                     shadow_score_list[entry_agg_match_score].append(object.targ_y[crt_idx])
                 else :
                     match_score_list[entry_agg_match_score].append(object.targ_y[crt_idx])
@@ -414,7 +414,7 @@ class Working:
         champ_sel = ret_tuple[2]
         
         if object.regress_flag :
-            if champ_sel == ((0.00)) :
+            if champ_sel == (None, 0) :
                 # This indicates that the predicted outcome is numerical. 
                 # Find top numerical entry.
                 # Top score is last non-empty entry
