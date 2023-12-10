@@ -287,6 +287,7 @@ class Working:
         attr_no = query_len
         query_req = Working.TranslateAttrEntry(object, adjusted_query)
 
+        # list comprehension
         match_score_list = [[] for i in range(attr_no + 1)]
         shadow_score_list = [[] for i in range(attr_no + 1)]
     
@@ -461,7 +462,8 @@ class Working:
             if no_dupl_flag :
                 threshold_list = [in_num_list[0]]
             else :
-                threshold_list = [in_num_list[0]] * (in_split_no - 1)
+                # list comprehension
+                threshold_list = [in_num_list[0] for i in range(in_split_no - 1)]
             return threshold_list
         if in_split_mode == 'eq_freq' :
             ret_item = Working.NumSplitFreq( in_num_list, in_split_no, no_dupl_flag )
@@ -483,7 +485,8 @@ class Working:
             if no_dupl_flag :
                 threshold_list = [in_num_list[0]]
             else :
-                threshold_list = [in_num_list[0]] * (in_split_no - 1)
+                # list comprehension
+                threshold_list = [in_num_list[0] for i in range(in_split_no - 1)]
             return threshold_list
         ord_num_list = sorted(in_num_list)
         max_split_factor = 2
@@ -572,7 +575,8 @@ class Working:
             if no_dupl_flag :
                 threshold_list = [in_num_list[0]]
             else :
-                threshold_list = [in_num_list[0]] * (in_split_no - 1)
+                # list comprehension
+                threshold_list = [in_num_list[0] for i in range(in_split_no - 1)]
             return threshold_list
         if num_len <= 1 :
             return []
@@ -584,7 +588,8 @@ class Working:
             if no_dupl_flag :
                 threshold_list = [num_min]
             else :
-                threshold_list = [num_min] * (in_split_no - 1)
+                # list comprehension
+                threshold_list = [num_min for i in range(in_split_no - 1)]
         else :
             threshold_list = []
             crt_thresh = num_min
