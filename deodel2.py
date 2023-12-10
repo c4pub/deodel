@@ -214,6 +214,8 @@ class Working:
                         crt_attr_thresh = [False, []]
                     else :
                         crt_attr_thresh = [True, [ord_num_list[0], ord_num_list[-1]]]
+                elif in_split_mode == 'eq_legacy_width' :
+                    crt_attr_thresh = Working.NumSplit(numerical_list, in_split_no, in_split_mode)
                 else :
                     crt_attr_thresh = Working.NumSplit(numerical_list, in_split_no, in_split_mode)
             else :
@@ -288,6 +290,10 @@ class Working:
             else :
                 if in_split_mode == 'eq_width' :
                     proc_val = Working.EqualWidthDiscretize(crt_num_elem, crt_thresh_list, in_split_no)
+                elif in_split_mode == 'eq_legacy_width' :
+                    thresh_div = len(crt_thresh_list)
+                    upper_idx = Working.GetElemIdxInOrderList(crt_num_elem, crt_thresh_list)
+                    proc_val = upper_idx / (1.0 * thresh_div)
                 else :
                     thresh_div = len(crt_thresh_list)
                     upper_idx = Working.GetElemIdxInOrderList(crt_num_elem, crt_thresh_list)
@@ -355,12 +361,13 @@ class Working:
         elif query_len > train_len :
             adjusted_query = in_query[:train_len]
         else :
-            # adjusted_query = in_query + [None]*(train_len - query_len)
+            # list comprehension
             adjusted_query = in_query + [None for i in range(train_len - query_len)]
 
         attr_no = query_len
         query_cat_req, query_num_req, query_mask_req = Working.TranslateAttrEntry(object, adjusted_query)
 
+        # list comprehension
         # match_score_list = [[] for i in range(attr_no + 1)]
         match_score_list = [[] for i in range(attr_no * object.attr_score_factor + 1)]
         # shadow_score_list = [[] for i in range(attr_no + 1)]
@@ -603,6 +610,8 @@ class Working:
             threshold_list = Working.NumSplitFreq( in_num_list, in_split_no, no_dupl_flag )
         elif in_split_mode == 'eq_width' :
             threshold_list = Working.NumSplitWidth( in_num_list, in_split_no, no_dupl_flag )
+        elif in_split_mode == 'eq_legacy_width' :
+            threshold_list = Working.NumLegacySplitWidth( in_num_list, in_split_no, no_dupl_flag )
         else :
             # invalid
             return [False, threshold_list]
@@ -723,6 +732,31 @@ class Working:
             for crt_idx in range(in_split_no - 1) :
                 threshold_list.append(crt_thresh)
                 crt_thresh += width
+        return threshold_list
+
+# >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    @staticmethod
+    def NumLegacySplitWidth( in_num_list, in_split_no = 2, no_dupl_flag = True ) :
+        threshold_list = []
+        num_len = len(in_num_list)
+        if num_len == 0 :
+            return threshold_list
+        ord_num_list = sorted(in_num_list)
+        num_min = ord_num_list[0]
+        num_max = ord_num_list[-1]
+        width = (num_max - num_min)/(in_split_no * 1.0)
+        if width == 0 :
+            if no_dupl_flag :
+                threshold_list = [num_min]
+            else :
+                # list comprehension
+                threshold_list = [num_min for i in range(in_split_no - 1)]
+        else :
+            threshold_list = []
+            crt_thresh = num_min
+            for crt_idx in range(in_split_no - 1) :
+                crt_thresh += width
+                threshold_list.append(crt_thresh)
         return threshold_list
 
 # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

@@ -5644,6 +5644,334 @@ def UnitTestDeodel():
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+    iprnt ("regression test 1-e")
+    iprnt ()
+
+    regr_fn_coeff = [1, 0, 1]
+
+    def RegressFn(in_attr_list, in_fn_coeff = None) :
+        if in_fn_coeff == None :
+            in_fn_coeff = [1.0, 2.0, -0.5]
+        coeff_len = len(in_fn_coeff)
+        attr_len = len(in_attr_list)
+        use_len = min(coeff_len, attr_len)
+        ret_val = 0
+        for crt_idx in range(use_len) :
+            ret_val += in_attr_list[crt_idx] * in_fn_coeff[crt_idx]
+        return ret_val
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    data_attr_col_no = 2
+    data_train_row_no = 10
+    data_test_row_no = data_train_row_no
+    data_tot_row_no = data_train_row_no + data_test_row_no
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    data_attr_tbl = []
+    data_y_vect = []
+
+    for crt_idx_row in range(data_tot_row_no) :
+        crt_row = []
+        for crt_idx_col in range(data_attr_col_no) :
+            crt_row.append(((crt_idx_row)/(data_tot_row_no)))
+        data_attr_tbl.append(crt_row)
+        y_fn = RegressFn(crt_row, regr_fn_coeff)
+        data_y_vect.append(y_fn)
+
+    data_attr_train_tbl = []
+    data_attr_test_tbl = []
+    data_y_train_vect = []
+    data_y_test_vect = []
+
+    for crt_idx_row in range(data_tot_row_no) :
+        crt_row = data_attr_tbl[crt_idx_row][:]
+        if crt_idx_row % 2 == 0 :
+            data_attr_train_tbl.append(crt_row[:])
+            data_y_train_vect.append(data_y_vect[crt_idx_row])
+        else :
+            data_attr_test_tbl.append(crt_row[:])
+            data_y_test_vect.append(data_y_vect[crt_idx_row])
+
+    X_train = data_attr_train_tbl
+    y_train = data_y_train_vect
+
+    X_test = data_attr_test_tbl
+    y_test = data_y_test_vect
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    aux_param = {'split_mode': 'eq_width', 'split_no': 5, 'back_compat': False}
+
+    iprnt ("- - - - aux_param:", aux_param)
+    iprnt ()
+
+    deodel_regress = deodel2.DeodelSecond(aux_param)
+
+    deodel_regress.fit(X_train,y_train)
+    y_pred = deodel_regress.predict(X_test)
+    t_pred = y_pred
+
+    from sklearn import metrics
+    t_mae = metrics.mean_absolute_error(y_test, y_pred)
+    t_mse = metrics.mean_squared_error(y_test, y_pred)
+    t_R2 = metrics.r2_score(y_test, y_pred)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("- - - - X_train:", X_train)
+    iprnt ("- - - - X_test:", X_test)
+    iprnt ()
+    iprnt ("- - - - y_train:", y_train)
+    iprnt ("- - - - y_test:", y_test)
+    iprnt ()
+
+    e_pred = [0.05, 0.25, 0.25, 0.45, 0.45, 0.45, 0.6499999999999999, 0.6499999999999999, 0.8500000000000001, 0.8500000000000001]
+    e_mae = 0.050000000000000024
+    e_mse = 0.005000000000000001
+    e_R2 = 0.9393939393939393
+
+    test_result = (t_pred, t_mae, t_mse, t_R2)
+    test_expect = (e_pred, e_mae, e_mse, e_R2)
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("regression test 1-f")
+    iprnt ()
+
+    regr_fn_coeff = [1, 0, 1]
+
+    def RegressFn(in_attr_list, in_fn_coeff = None) :
+        if in_fn_coeff == None :
+            in_fn_coeff = [1.0, 2.0, -0.5]
+        coeff_len = len(in_fn_coeff)
+        attr_len = len(in_attr_list)
+        use_len = min(coeff_len, attr_len)
+        ret_val = 0
+        for crt_idx in range(use_len) :
+            ret_val += in_attr_list[crt_idx] * in_fn_coeff[crt_idx]
+        return ret_val
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    data_attr_col_no = 2
+    data_train_row_no = 10
+    data_test_row_no = data_train_row_no
+    data_tot_row_no = data_train_row_no + data_test_row_no
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    data_attr_tbl = []
+    data_y_vect = []
+
+    for crt_idx_row in range(data_tot_row_no) :
+        crt_row = []
+        for crt_idx_col in range(data_attr_col_no) :
+            crt_row.append(((crt_idx_row)/(data_tot_row_no)))
+        data_attr_tbl.append(crt_row)
+        y_fn = RegressFn(crt_row, regr_fn_coeff)
+        data_y_vect.append(y_fn)
+
+    data_attr_train_tbl = []
+    data_attr_test_tbl = []
+    data_y_train_vect = []
+    data_y_test_vect = []
+
+    for crt_idx_row in range(data_tot_row_no) :
+        crt_row = data_attr_tbl[crt_idx_row][:]
+        if crt_idx_row % 2 == 0 :
+            data_attr_train_tbl.append(crt_row[:])
+            data_y_train_vect.append(data_y_vect[crt_idx_row])
+        else :
+            data_attr_test_tbl.append(crt_row[:])
+            data_y_test_vect.append(data_y_vect[crt_idx_row])
+
+    X_train = data_attr_train_tbl
+    y_train = data_y_train_vect
+
+    X_test = data_attr_test_tbl
+    y_test = data_y_test_vect
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    aux_param = {'split_mode': 'eq_legacy_width', 'split_no': 5, 'back_compat': False}
+
+    iprnt ("- - - - aux_param:", aux_param)
+    iprnt ()
+
+    deodel_regress = deodel2.DeodelSecond(aux_param)
+
+    deodel_regress.fit(X_train,y_train)
+    y_pred = deodel_regress.predict(X_test)
+    t_pred = y_pred
+
+    from sklearn import metrics
+    t_mae = metrics.mean_absolute_error(y_test, y_pred)
+    t_mse = metrics.mean_squared_error(y_test, y_pred)
+    t_R2 = metrics.r2_score(y_test, y_pred)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("- - - - X_train:", X_train)
+    iprnt ("- - - - X_test:", X_test)
+    iprnt ()
+    iprnt ("- - - - y_train:", y_train)
+    iprnt ("- - - - y_test:", y_test)
+    iprnt ()
+
+    e_pred = [0.05, 0.05, 0.25, 0.25, 0.45, 0.6499999999999999, 0.6499999999999999, 0.8500000000000001, 0.8500000000000001, 0.8500000000000001]
+    e_mae = 0.05
+    e_mse = 0.004999999999999996
+    e_R2 = 0.9393939393939394
+
+    test_result = (t_pred, t_mae, t_mse, t_R2)
+    test_expect = (e_pred, e_mae, e_mse, e_R2)
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("regression test 1-g")
+    iprnt ()
+
+    regr_fn_coeff = [1, 0, 1]
+
+    def RegressFn(in_attr_list, in_fn_coeff = None) :
+        if in_fn_coeff == None :
+            in_fn_coeff = [1.0, 2.0, -0.5]
+        coeff_len = len(in_fn_coeff)
+        attr_len = len(in_attr_list)
+        use_len = min(coeff_len, attr_len)
+        ret_val = 0
+        for crt_idx in range(use_len) :
+            ret_val += in_attr_list[crt_idx] * in_fn_coeff[crt_idx]
+        return ret_val
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    data_attr_col_no = 2
+    data_train_row_no = 10
+    data_test_row_no = data_train_row_no
+    data_tot_row_no = data_train_row_no + data_test_row_no
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    data_attr_tbl = []
+    data_y_vect = []
+
+    for crt_idx_row in range(data_tot_row_no) :
+        crt_row = []
+        for crt_idx_col in range(data_attr_col_no) :
+            crt_row.append(((crt_idx_row)/(data_tot_row_no)))
+        data_attr_tbl.append(crt_row)
+        y_fn = RegressFn(crt_row, regr_fn_coeff)
+        data_y_vect.append(y_fn)
+
+    data_attr_train_tbl = []
+    data_attr_test_tbl = []
+    data_y_train_vect = []
+    data_y_test_vect = []
+
+    for crt_idx_row in range(data_tot_row_no) :
+        crt_row = data_attr_tbl[crt_idx_row][:]
+        if crt_idx_row % 2 == 0 :
+            data_attr_train_tbl.append(crt_row[:])
+            data_y_train_vect.append(data_y_vect[crt_idx_row])
+        else :
+            data_attr_test_tbl.append(crt_row[:])
+            data_y_test_vect.append(data_y_vect[crt_idx_row])
+
+    X_train = data_attr_train_tbl
+    y_train = data_y_train_vect
+
+    X_test = data_attr_test_tbl
+    y_test = data_y_test_vect
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    aux_param = {'split_mode': 'eq_freq', 'split_no': 5, 'back_compat': False}
+
+    iprnt ("- - - - aux_param:", aux_param)
+    iprnt ()
+
+    deodel_regress = deodel2.DeodelSecond(aux_param)
+
+    deodel_regress.fit(X_train,y_train)
+    y_pred = deodel_regress.predict(X_test)
+    t_pred = y_pred
+
+    from sklearn import metrics
+    t_mae = metrics.mean_absolute_error(y_test, y_pred)
+    t_mse = metrics.mean_squared_error(y_test, y_pred)
+    t_R2 = metrics.r2_score(y_test, y_pred)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("- - - - X_train:", X_train)
+    iprnt ("- - - - X_test:", X_test)
+    iprnt ()
+    iprnt ("- - - - y_train:", y_train)
+    iprnt ("- - - - y_test:", y_test)
+    iprnt ()
+
+    e_pred = [0.05, 0.05, 0.25, 0.45, 0.45, 0.6499999999999999, 0.6499999999999999, 0.8500000000000001, 0.8500000000000001, 0.8500000000000001]
+    e_mae = 0.05
+    e_mse = 0.004999999999999997
+    e_R2 = 0.9393939393939394
+
+
+    test_result = (t_pred, t_mae, t_mse, t_R2)
+    test_expect = (e_pred, e_mae, e_mse, e_R2)
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
     iprnt ("regression test 2")
     iprnt ()
 
@@ -8661,7 +8989,8 @@ def UnitTestUseApp():
     avg_accuracy, rnd_accuracy = ret_tuple
 
     test_result = (avg_accuracy, rnd_accuracy)
-    test_expect = (0.9400749063670412, 0.250936329588015)
+    # test_expect = (0.9400749063670412, 0.250936329588015)
+    test_expect = (0.9063670411985019, 0.250936329588015)
 
     iprnt ("- - - - test_result:", test_result)
     iprnt ("- - - - test_expect:", test_expect)
@@ -8686,7 +9015,6 @@ def UnitTestUseApp():
     iprnt ("test sklearn dataset 1-b")
     iprnt ()
 
-    import deodel2
     from sklearn import datasets
 
     data_set = datasets.load_wine()
@@ -8701,7 +9029,7 @@ def UnitTestUseApp():
 
     if display_flag: print("- - - - - - - - - - - - - - - - ")
 
-    aux_param = {'split_no': 10, 'back_compat': False}
+    aux_param = {'split_mode': 'eq_width', 'split_no': 3, 'back_compat': False}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -8716,7 +9044,339 @@ def UnitTestUseApp():
     avg_accuracy, rnd_accuracy = ret_tuple
 
     test_result = (avg_accuracy, rnd_accuracy)
-    test_expect = (0.9775280898876405, 0.250936329588015)
+    # test_expect = (0.9063670411985019, 0.250936329588015)
+    test_expect = (0.895131086142322, 0.250936329588015)
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("test sklearn dataset 1-c")
+    iprnt ()
+
+    from sklearn import datasets
+
+    data_set = datasets.load_iris()
+    display_flag = True
+
+    data_digi_x = data_set.data
+    data_target_y = data_set.target
+    train_ratio = 0.5
+    in_iter_no = 3
+    in_rand_seed = 42
+    aux_data = None
+
+    if display_flag: print("- - - - - - - - - - - - - - - - ")
+
+    aux_param = {'split_no': 6, 'back_compat': True}
+
+    iprnt ("- - - - aux_param:", aux_param)
+    iprnt ()
+
+    crt_classif = deodel2.DeodelSecond(aux_param)
+
+    ret_tuple = usap_common.AccuracyEval(data_digi_x, data_target_y, crt_classif, 
+                                        in_iter_no, train_ratio, 
+                                        in_rand_seed, aux_data, 
+                                        display_flag = display_flag)
+
+    avg_accuracy, rnd_accuracy = ret_tuple
+
+    test_result = (avg_accuracy, rnd_accuracy)
+    # test_expect = (0.9775280898876405, 0.250936329588015)
+    # test_expect = (0.9662921348314607, 0.250936329588015)
+    test_expect = (0.9511111111111111, 0.3333333333333333)
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("test sklearn dataset 1-d")
+    iprnt ()
+
+    from sklearn import datasets
+
+    data_set = datasets.load_iris()
+    display_flag = True
+
+    data_digi_x = data_set.data
+    data_target_y = data_set.target
+    train_ratio = 0.5
+    in_iter_no = 3
+    in_rand_seed = 42
+    aux_data = None
+
+    if display_flag: print("- - - - - - - - - - - - - - - - ")
+
+    aux_param = {'split_no': 6, 'back_compat': False}
+
+    iprnt ("- - - - aux_param:", aux_param)
+    iprnt ()
+
+    crt_classif = deodel2.DeodelSecond(aux_param)
+
+    ret_tuple = usap_common.AccuracyEval(data_digi_x, data_target_y, crt_classif, 
+                                        in_iter_no, train_ratio, 
+                                        in_rand_seed, aux_data, 
+                                        display_flag = display_flag)
+
+    avg_accuracy, rnd_accuracy = ret_tuple
+
+    test_result = (avg_accuracy, rnd_accuracy)
+    # test_expect = (0.9511111111111111, 0.3333333333333333)
+    test_expect = (0.9466666666666667, 0.3333333333333333)
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("test sklearn dataset 1-e")
+    iprnt ()
+
+    from sklearn import datasets
+
+    data_set = datasets.load_iris()
+    display_flag = True
+
+    data_digi_x = data_set.data
+    data_target_y = data_set.target
+    train_ratio = 0.5
+    in_iter_no = 3
+    in_rand_seed = 42
+    aux_data = None
+
+    if display_flag: print("- - - - - - - - - - - - - - - - ")
+
+    aux_param = {'split_mode': 'eq_legacy_width', 'split_no': 6, 'back_compat': False}
+
+    iprnt ("- - - - aux_param:", aux_param)
+    iprnt ()
+
+    crt_classif = deodel2.DeodelSecond(aux_param)
+
+    ret_tuple = usap_common.AccuracyEval(data_digi_x, data_target_y, crt_classif, 
+                                        in_iter_no, train_ratio, 
+                                        in_rand_seed, aux_data, 
+                                        display_flag = display_flag)
+
+    avg_accuracy, rnd_accuracy = ret_tuple
+
+    test_result = (avg_accuracy, rnd_accuracy)
+    test_expect = (0.9555555555555556, 0.3333333333333333)
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("test sklearn dataset 1-f")
+    iprnt ()
+
+    from sklearn import datasets
+
+    data_set = datasets.load_iris()
+    display_flag = True
+
+    data_digi_x = data_set.data
+    data_target_y = data_set.target
+    train_ratio = 0.5
+    in_iter_no = 3
+    in_rand_seed = 42
+    aux_data = None
+
+    if display_flag: print("- - - - - - - - - - - - - - - - ")
+
+    aux_param = {'split_mode': 'eq_legacy_width', 'split_no': 6, 'back_compat': True}
+
+    iprnt ("- - - - aux_param:", aux_param)
+    iprnt ()
+
+    crt_classif = deodel2.DeodelSecond(aux_param)
+
+    ret_tuple = usap_common.AccuracyEval(data_digi_x, data_target_y, crt_classif, 
+                                        in_iter_no, train_ratio, 
+                                        in_rand_seed, aux_data, 
+                                        display_flag = display_flag)
+
+    avg_accuracy, rnd_accuracy = ret_tuple
+
+    test_result = (avg_accuracy, rnd_accuracy)
+    # test_expect = (0.9555555555555556, 0.3333333333333333)
+    test_expect = (0.9511111111111111, 0.3333333333333333)
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("test sklearn dataset 1-g")
+    iprnt ()
+
+    import deodel
+    from sklearn import datasets
+
+    data_set = datasets.load_iris()
+    display_flag = True
+
+    data_digi_x = data_set.data
+    data_target_y = data_set.target
+    train_ratio = 0.5
+    in_iter_no = 3
+    in_rand_seed = 42
+    aux_data = None
+
+    if display_flag: print("- - - - - - - - - - - - - - - - ")
+
+    aux_param = {'split_mode': 'eq_width', 'split_no': 6}
+
+    iprnt ("- - - - aux_param:", aux_param)
+    iprnt ()
+
+    crt_classif = deodel.DeodataDelangaClassifier(aux_param)
+
+    ret_tuple = usap_common.AccuracyEval(data_digi_x, data_target_y, crt_classif, 
+                                        in_iter_no, train_ratio, 
+                                        in_rand_seed, aux_data, 
+                                        display_flag = display_flag)
+
+    avg_accuracy, rnd_accuracy = ret_tuple
+
+    test_result = (avg_accuracy, rnd_accuracy)
+    test_expect = (0.9511111111111111, 0.3333333333333333)
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("test sklearn dataset 1-h")
+    iprnt ()
+
+    import deodel
+    from sklearn import datasets
+
+    data_set = datasets.load_iris()
+    display_flag = True
+
+    data_digi_x = data_set.data
+    data_target_y = data_set.target
+    train_ratio = 0.5
+    in_iter_no = 3
+    in_rand_seed = 42
+    aux_data = None
+
+    if display_flag: print("- - - - - - - - - - - - - - - - ")
+
+    aux_param = {'split_mode': 'eq_width', 'split_no': 6}
+    aux_param = {'split_mode': 'eq_width', 'split_no': 6, 'back_compat': True}
+
+    iprnt ("- - - - aux_param:", aux_param)
+    iprnt ()
+
+    crt_classif = deodel.DeodataDelangaClassifier(aux_param)
+
+    ret_tuple = usap_common.AccuracyEval(data_digi_x, data_target_y, crt_classif, 
+                                        in_iter_no, train_ratio, 
+                                        in_rand_seed, aux_data, 
+                                        display_flag = display_flag)
+
+    avg_accuracy, rnd_accuracy = ret_tuple
+
+    test_result = (avg_accuracy, rnd_accuracy)
+    test_expect = (0.9511111111111111, 0.3333333333333333)
 
     iprnt ("- - - - test_result:", test_result)
     iprnt ("- - - - test_expect:", test_expect)
@@ -8787,6 +9447,61 @@ def UnitTestUseApp():
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+    iprnt ("test sklearn dataset 3")
+    iprnt ()
+
+    from sklearn import datasets
+
+    data_set = datasets.load_wine()
+    display_flag = True
+
+    data_digi_x = data_set.data
+    data_target_y = data_set.target
+    train_ratio = 0.5
+    in_iter_no = 3
+    in_rand_seed = 42
+    aux_data = None
+
+    if display_flag: print("- - - - - - - - - - - - - - - - ")
+
+    aux_param = {'split_no': 10, 'back_compat': False}
+
+    iprnt ("- - - - aux_param:", aux_param)
+    iprnt ()
+
+    crt_classif = deodel2.DeodelSecond(aux_param)
+
+    ret_tuple = usap_common.AccuracyEval(data_digi_x, data_target_y, crt_classif, 
+                                        in_iter_no, train_ratio, 
+                                        in_rand_seed, aux_data, 
+                                        display_flag = display_flag)
+
+    avg_accuracy, rnd_accuracy = ret_tuple
+
+    test_result = (avg_accuracy, rnd_accuracy)
+    # test_expect = (0.9775280898876405, 0.250936329588015)
+    test_expect = (0.9662921348314607, 0.250936329588015)
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
     #'''#
     
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -8814,13 +9529,15 @@ def UnitTest():
 
     utest_fail_counter = 0
 
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     ret_data = UnitTestDeodel()
     utest_fail_counter += ret_data
     iprnt ("- - - ")
 
-    # ret_data = UnitTestUseApp()
-    # utest_fail_counter += ret_data
-    # iprnt ("- - - ")
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    ret_data = UnitTestUseApp()
+    utest_fail_counter += ret_data
+    iprnt ("- - - ")
 
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
