@@ -43,6 +43,7 @@ def UnitTestDeodel():
     import numpy as np
     import pandas as pd
 
+    import deodel
     import deodel2
 
 
@@ -1352,7 +1353,7 @@ def UnitTestDeodel():
     iprnt ("- - - -        tt_transp_X:", tt_transp_X)
 
 
-    aux_param = {'split_mode': 'eq_freq', 'split_no': 10, 'back_compat': False, 'int_is_num': True}
+    aux_param = {'split_mode': 'eq_freq', 'split_no': 10, 'legacy_match': False, 'int_is_num': True}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -1421,7 +1422,7 @@ def UnitTestDeodel():
     tt_transp_X = deodel2.Working.MatrixTranspose(tt_X)
     iprnt ("- - - -        tt_transp_X:", tt_transp_X)
 
-    aux_param = {'split_mode': 'eq_freq', 'split_no': 10, 'back_compat': False, 'int_is_num': False}
+    aux_param = {'split_mode': 'eq_freq', 'split_no': 10, 'legacy_match': False, 'int_is_num': False}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -1525,7 +1526,7 @@ def UnitTestDeodel():
             'A',
            ]
 
-    aux_param = {'split_no': 10, 'back_compat': False}
+    aux_param = {'split_no': 10, 'legacy_match': False}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -1587,7 +1588,7 @@ def UnitTestDeodel():
             'A',
            ]
 
-    aux_param = {'split_no': 10, 'back_compat': False}
+    aux_param = {'split_no': 10, 'legacy_match': False}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -1649,7 +1650,7 @@ def UnitTestDeodel():
             'A',
            ]
 
-    aux_param = {'split_no': 10, 'back_compat': False}
+    aux_param = {'split_no': 10, 'legacy_match': False}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -1711,7 +1712,7 @@ def UnitTestDeodel():
             'A',
            ]
 
-    aux_param = {'tbreak_depth': 1, 'split_no': 10, 'back_compat': False}
+    aux_param = {'tbreak_depth': 1, 'split_no': 10, 'legacy_match': False}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -1782,7 +1783,7 @@ def UnitTestDeodel():
 
     tt_exp = ['A', 'A', 'A', 'A', 'A', 'C', 'C']
 
-    aux_param = {'split_no': 10, 'back_compat': False, 'int_is_num': True}
+    aux_param = {'split_no': 10, 'legacy_match': False, 'int_is_num': True}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -1849,7 +1850,7 @@ def UnitTestDeodel():
 
     tt_exp = ['A', 'A', 'A', 'B', 'B', 'C', 'C']
 
-    aux_param = {'split_no': 10, 'back_compat': False, 'int_is_num': False}
+    aux_param = {'split_no': 10, 'legacy_match': False, 'int_is_num': False}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -1911,7 +1912,7 @@ def UnitTestDeodel():
             'A',
            ]
 
-    aux_param = {'split_no': 10, 'back_compat': False, 'int_is_num': False}
+    aux_param = {'split_no': 10, 'legacy_match': False, 'int_is_num': False}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -1973,7 +1974,7 @@ def UnitTestDeodel():
             'A',
            ]
 
-    aux_param = {'split_no': 10, 'back_compat': False, 'int_is_num': False}
+    aux_param = {'split_no': 10, 'legacy_match': False, 'int_is_num': False}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -2035,7 +2036,7 @@ def UnitTestDeodel():
             'A',
            ]
 
-    aux_param = {'split_no': 10, 'back_compat': True, 'int_is_num': False}
+    aux_param = {'split_no': 10, 'legacy_match': True, 'int_is_num': False}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -2097,7 +2098,7 @@ def UnitTestDeodel():
             'A',
            ]
 
-    aux_param = {'split_no': 10, 'back_compat': True, 'int_is_num': False}
+    aux_param = {'split_no': 10, 'legacy_match': True, 'int_is_num': False}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -2159,7 +2160,7 @@ def UnitTestDeodel():
             'B',
            ]
 
-    aux_param = {'split_no': 10, 'back_compat': True, 'int_is_num': False}
+    aux_param = {'split_no': 10, 'legacy_match': True, 'int_is_num': False}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -2221,7 +2222,7 @@ def UnitTestDeodel():
             'B',
            ]
 
-    aux_param = {'split_no': 10, 'back_compat': False, 'int_is_num': False}
+    aux_param = {'split_no': 10, 'legacy_match': False, 'int_is_num': False}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -2284,7 +2285,7 @@ def UnitTestDeodel():
            ]
 
     int_isnum = False
-    aux_param = {'tbreak_depth': 1, 'split_no': 10, 'back_compat': False, 'int_is_num': int_isnum}
+    aux_param = {'tbreak_depth': 1, 'split_no': 10, 'legacy_match': False, 'int_is_num': int_isnum}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -2345,7 +2346,7 @@ def UnitTestDeodel():
             'Y',
            ]
 
-    aux_param = {'tbreak_depth': 1, 'split_no': 10, 'back_compat': False}
+    aux_param = {'tbreak_depth': 1, 'split_no': 10, 'legacy_match': False}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -2416,7 +2417,7 @@ def UnitTestDeodel():
 
     iprnt ("- - - - tt_exp:", tt_exp)
 
-    aux_param = {'tbreak_depth': 1, 'split_no': 10, 'back_compat': False}
+    aux_param = {'tbreak_depth': 1, 'split_no': 10, 'legacy_match': False}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -2485,7 +2486,7 @@ def UnitTestDeodel():
 
     iprnt ("- - - - tt_exp:", tt_exp)
 
-    aux_param = {'tbreak_depth': 1, 'split_no': 10, 'back_compat': False}
+    aux_param = {'tbreak_depth': 1, 'split_no': 10, 'legacy_match': False}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -2552,7 +2553,7 @@ def UnitTestDeodel():
 
     iprnt ("- - - - tt_exp:", tt_exp)
 
-    aux_param = {'tbreak_depth': 1, 'split_no': 10, 'back_compat': False}
+    aux_param = {'tbreak_depth': 1, 'split_no': 10, 'legacy_match': False}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -2625,7 +2626,7 @@ def UnitTestDeodel():
 
     iprnt ("- - - - tt_exp:", tt_exp)
 
-    aux_param = {'tbreak_depth': 1, 'split_no': 10, 'back_compat': False}
+    aux_param = {'tbreak_depth': 1, 'split_no': 10, 'legacy_match': False}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -2689,7 +2690,7 @@ def UnitTestDeodel():
 
     iprnt ("- - - - tt_exp:", tt_exp)
 
-    aux_param = {'tbreak_depth': 1, 'split_no': 10, 'back_compat': False}
+    aux_param = {'tbreak_depth': 1, 'split_no': 10, 'legacy_match': False}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -2756,7 +2757,7 @@ def UnitTestDeodel():
 
     iprnt ("- - - - tt_exp:", tt_exp)
 
-    aux_param = {'tbreak_depth': 1, 'split_no': 10, 'back_compat': False}
+    aux_param = {'tbreak_depth': 1, 'split_no': 10, 'legacy_match': False}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -2826,7 +2827,7 @@ def UnitTestDeodel():
     iprnt ("- - - - tt_y:", tt_y)
     iprnt ("- - - - tt_test:", tt_test)
 
-    aux_param = {'tbreak_depth': 1, 'split_no': 10, 'back_compat': True}
+    aux_param = {'tbreak_depth': 1, 'split_no': 10, 'legacy_match': True}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -2896,7 +2897,7 @@ def UnitTestDeodel():
     iprnt ("- - - - tt_y:", tt_y)
     iprnt ("- - - - tt_test:", tt_test)
 
-    aux_param = {'tbreak_depth': 1, 'split_no': 10, 'back_compat': True}
+    aux_param = {'tbreak_depth': 1, 'split_no': 10, 'legacy_match': True}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -2972,7 +2973,7 @@ def UnitTestDeodel():
     iprnt ("- - - - tt_y:", tt_y)
     iprnt ("- - - - tt_test:", tt_test)
 
-    aux_param = {'tbreak_depth': 1, 'split_no': 10, 'back_compat': True}
+    aux_param = {'tbreak_depth': 1, 'split_no': 10, 'legacy_match': True}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -3048,7 +3049,7 @@ def UnitTestDeodel():
     iprnt ("- - - - tt_y:", tt_y)
     iprnt ("- - - - tt_test:", tt_test)
 
-    aux_param = {'tbreak_depth': 1, 'split_no': 10, 'back_compat': True}
+    aux_param = {'tbreak_depth': 1, 'split_no': 10, 'legacy_match': True}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -3122,7 +3123,7 @@ def UnitTestDeodel():
     iprnt ("- - - - tt_y:", tt_y)
     iprnt ("- - - - tt_test:", tt_test)
 
-    aux_param = {'tbreak_depth': 1, 'split_no': 10, 'back_compat': True}
+    aux_param = {'tbreak_depth': 1, 'split_no': 10, 'legacy_match': True}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -3196,7 +3197,7 @@ def UnitTestDeodel():
     iprnt ("- - - - tt_y:", tt_y)
     iprnt ("- - - - tt_test:", tt_test)
 
-    aux_param = {'tbreak_depth': 1, 'split_no': 10, 'back_compat': True}
+    aux_param = {'tbreak_depth': 1, 'split_no': 10, 'legacy_match': True}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -3270,7 +3271,7 @@ def UnitTestDeodel():
     iprnt ("- - - - tt_y:", tt_y)
     iprnt ("- - - - tt_test:", tt_test)
 
-    aux_param = {'tbreak_depth': 1, 'split_no': 10, 'back_compat': True}
+    aux_param = {'tbreak_depth': 1, 'split_no': 10, 'legacy_match': True}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -3345,7 +3346,7 @@ def UnitTestDeodel():
     iprnt ("- - - - tt_y:", tt_y)
     iprnt ("- - - - tt_test:", tt_test)
 
-    aux_param = {'tbreak_depth': 1, 'split_no': 10, 'back_compat': True}
+    aux_param = {'tbreak_depth': 1, 'split_no': 10, 'legacy_match': True}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -3419,7 +3420,7 @@ def UnitTestDeodel():
     iprnt ("- - - - tt_y:", tt_y)
     iprnt ("- - - - tt_test:", tt_test)
 
-    aux_param = {'tbreak_depth': 1, 'split_no': 10, 'back_compat': True}
+    aux_param = {'tbreak_depth': 1, 'split_no': 10, 'legacy_match': True}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -3493,7 +3494,7 @@ def UnitTestDeodel():
     iprnt ("- - - - tt_y:", tt_y)
     iprnt ("- - - - tt_test:", tt_test)
 
-    aux_param = {'tbreak_depth': 1, 'split_no': 10, 'back_compat': False}
+    aux_param = {'tbreak_depth': 1, 'split_no': 10, 'legacy_match': False}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -3563,7 +3564,7 @@ def UnitTestDeodel():
     iprnt ("- - - - tt_y:", tt_y)
     iprnt ("- - - - tt_test:", tt_test)
 
-    aux_param = {'tbreak_depth': 1, 'split_no': 10, 'back_compat': False}
+    aux_param = {'tbreak_depth': 1, 'split_no': 10, 'legacy_match': False}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -3639,7 +3640,7 @@ def UnitTestDeodel():
     iprnt ("- - - - tt_y:", tt_y)
     iprnt ("- - - - tt_test:", tt_test)
 
-    aux_param = {'tbreak_depth': 1, 'split_no': 10, 'back_compat': False}
+    aux_param = {'tbreak_depth': 1, 'split_no': 10, 'legacy_match': False}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -3715,7 +3716,7 @@ def UnitTestDeodel():
     iprnt ("- - - - tt_y:", tt_y)
     iprnt ("- - - - tt_test:", tt_test)
 
-    aux_param = {'tbreak_depth': 1, 'split_no': 10, 'back_compat': False}
+    aux_param = {'tbreak_depth': 1, 'split_no': 10, 'legacy_match': False}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -3790,7 +3791,7 @@ def UnitTestDeodel():
     iprnt ("- - - - tt_y:", tt_y)
     iprnt ("- - - - tt_test:", tt_test)
 
-    aux_param = {'tbreak_depth': 1, 'split_no': 10, 'back_compat': False}
+    aux_param = {'tbreak_depth': 1, 'split_no': 10, 'legacy_match': False}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -3864,7 +3865,7 @@ def UnitTestDeodel():
     iprnt ("- - - - tt_y:", tt_y)
     iprnt ("- - - - tt_test:", tt_test)
 
-    aux_param = {'tbreak_depth': 1, 'split_no': 10, 'back_compat': False}
+    aux_param = {'tbreak_depth': 1, 'split_no': 10, 'legacy_match': False}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -3938,7 +3939,7 @@ def UnitTestDeodel():
     iprnt ("- - - - tt_y:", tt_y)
     iprnt ("- - - - tt_test:", tt_test)
 
-    aux_param = {'tbreak_depth': 1, 'split_no': 10, 'back_compat': False}
+    aux_param = {'tbreak_depth': 1, 'split_no': 10, 'legacy_match': False}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -4013,7 +4014,7 @@ def UnitTestDeodel():
     iprnt ("- - - - tt_y:", tt_y)
     iprnt ("- - - - tt_test:", tt_test)
 
-    aux_param = {'tbreak_depth': 1, 'split_no': 10, 'back_compat': False}
+    aux_param = {'tbreak_depth': 1, 'split_no': 10, 'legacy_match': False}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -4087,7 +4088,7 @@ def UnitTestDeodel():
     iprnt ("- - - - tt_y:", tt_y)
     iprnt ("- - - - tt_test:", tt_test)
 
-    aux_param = {'tbreak_depth': 1, 'split_no': 10, 'back_compat': False}
+    aux_param = {'tbreak_depth': 1, 'split_no': 10, 'legacy_match': False}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -4165,7 +4166,7 @@ def UnitTestDeodel():
     iprnt ("- - - - tt_y:", tt_y)
     iprnt ("- - - - tt_test:", tt_test)
 
-    aux_param = {'tbreak_depth': 1, 'split_no': 10, 'back_compat': False}
+    aux_param = {'tbreak_depth': 1, 'split_no': 10, 'legacy_match': False}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -4239,7 +4240,7 @@ def UnitTestDeodel():
     iprnt ("- - - - tt_y:", tt_y)
     iprnt ("- - - - tt_test:", tt_test)
 
-    aux_param = {'tbreak_depth': 1, 'split_no': 10, 'back_compat': False}
+    aux_param = {'tbreak_depth': 1, 'split_no': 10, 'legacy_match': False}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -4313,7 +4314,7 @@ def UnitTestDeodel():
     iprnt ("- - - - tt_y:", tt_y)
     iprnt ("- - - - tt_test:", tt_test)
 
-    aux_param = {'tbreak_depth': 1, 'split_no': 10, 'back_compat': False}
+    aux_param = {'tbreak_depth': 1, 'split_no': 10, 'legacy_match': False}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -4746,7 +4747,7 @@ def UnitTestDeodel():
                     'tbreak_depth': None,
                     'predict_mode': 'auto',
                     'score_factor': 2,
-                    'back_compat':  False,
+                    'legacy_match':  False,
                     'int_is_num':   True,
                   }
 
@@ -4802,8 +4803,8 @@ def UnitTestDeodel():
             'Y',
            ]
 
-    aux_param = {'split_no': 3, 'back_compat': False}
-    # aux_param = {'split_no': 0, 'back_compat': False}
+    aux_param = {'split_no': 3, 'legacy_match': False}
+    # aux_param = {'split_no': 0, 'legacy_match': False}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -4814,9 +4815,9 @@ def UnitTestDeodel():
     tt_internal = tt_o.__dict__
 
     tt_expect = {
-        'aux_param': {'split_no': 3, 'back_compat': False}, 
+        'aux_param': {'split_no': 3, 'legacy_match': False}, 
         'cfg_param': {'split_no': 3, 'split_mode': 'eq_width', 'tbreak_depth': None, 
-        'predict_mode': 'auto', 'score_factor': 2, 'back_compat': False, 'int_is_num': True}, 
+        'predict_mode': 'auto', 'score_factor': 2, 'legacy_match': False, 'int_is_num': True}, 
         'attr_cat_X': np.array([[ 1, -2, -2],
         [ 2, -2, -2],
         [ 3, -2,  1],
@@ -4828,7 +4829,7 @@ def UnitTestDeodel():
         [0, 1, 0],
         [0, 1, 0]]), 'attr_num_cfg': [[False, []], [True, [7702, 7904]], [True, [8102, 8203]]], 'attr_dict_list': [{'a': 1, 'b': 2,
         'c': 3, 'd': 4}, {}, {None: 1, 'm': 2}], 'attr_split_no': 3,
-        'attr_split_mode': 'eq_width', 'attr_score_factor': 2, 'attr_int_is_num': True, 'attr_back_compat': False, 'regress_flag': False, 'targ_y': ['V', 'X', 'Y', 'Z']
+        'attr_split_mode': 'eq_width', 'attr_score_factor': 2, 'attr_int_is_num': True, 'attr_legacy_match': False, 'regress_flag': False, 'targ_y': ['V', 'X', 'Y', 'Z']
     }
 
     test_result = tt_internal
@@ -4890,7 +4891,7 @@ def UnitTestDeodel():
             'Y',
            ]
 
-    aux_param = {'tbreak_depth': 1, 'split_no': 10, 'back_compat': False}
+    aux_param = {'tbreak_depth': 1, 'split_no': 10, 'legacy_match': False}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -4978,7 +4979,7 @@ def UnitTestDeodel():
 
     y_expect = ['y00', 'y01', 'y01', 'y02', 'y02', 'y03', 'y03', 'y04', 'y04', 'y05', 'y05', 'y06', 'y06', 'y07', 'y07', 'y08', 'y08', 'y09', 'y09', 'y10', 'y10', 'y10']
 
-    aux_param = {'split_no': 11, 'score_factor': 10, 'back_compat': False}
+    aux_param = {'split_no': 11, 'score_factor': 10, 'legacy_match': False}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -5069,8 +5070,8 @@ def UnitTestDeodel():
     # y_expect = ['y00', 'y01', 'y01', 'y02', 'y02', 'y03', 'y03', 'y04', 'y04', 'y05', 'y05', 'y06', 'y06', 'y07', 'y07', 'y08', 'y08', 'y09', 'y09', 'y10', 'y10', 'y10']
     y_expect =   ['y00', 'y00', 'y01', 'y01', 'y01', 'y01', 'y03', 'y03', 'y03', 'y03', 'y05', 'y05', 'y05', 'y05', 'y07', 'y07', 'y07', 'y07', 'y09', 'y09', 'y09', 'y09']
 
-    # aux_param = {'split_no': 11, 'score_factor': 10, 'back_compat': False}
-    aux_param = {'split_no': 6, 'score_factor': 10, 'back_compat': False}
+    # aux_param = {'split_no': 11, 'score_factor': 10, 'legacy_match': False}
+    aux_param = {'split_no': 6, 'score_factor': 10, 'legacy_match': False}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -5160,7 +5161,7 @@ def UnitTestDeodel():
 
     y_expect = ['y00', 'y01', 'y01', 'y02', 'y02', 'y03', 'y03', 'y04', 'y04', 'y05', 'y05', 'y06', 'y06', 'y07', 'y07', 'y08', 'y08', 'y09', 'y09', 'y10', 'y10', 'y10']
 
-    aux_param = {'split_no': 0, 'score_factor': 10, 'back_compat': False}
+    aux_param = {'split_no': 0, 'score_factor': 10, 'legacy_match': False}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -5257,7 +5258,7 @@ def UnitTestDeodel():
     # deodel_regress = deodel2.DeodelSecond()
     # deodel_regress = deodel2.DeodelSecond({'split_no': 5, 'split_mode': 'eq_freq'})
 
-    aux_param = {'split_mode': 'eq_width', 'split_no': 10, 'back_compat': True}
+    aux_param = {'split_mode': 'eq_width', 'split_no': 10, 'legacy_match': True}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -5373,7 +5374,7 @@ def UnitTestDeodel():
     # deodel_regress = deodel2.DeodelSecond()
     # deodel_regress = deodel2.DeodelSecond({'split_no': 5, 'split_mode': 'eq_freq'})
 
-    aux_param = {'split_mode': 'eq_width', 'split_no': 10, 'back_compat': False}
+    aux_param = {'split_mode': 'eq_width', 'split_no': 10, 'legacy_match': False}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -5483,7 +5484,7 @@ def UnitTestDeodel():
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    aux_param = {'split_mode': 'eq_width', 'split_no': 100, 'back_compat': False}
+    aux_param = {'split_mode': 'eq_width', 'split_no': 100, 'legacy_match': False}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -5591,7 +5592,7 @@ def UnitTestDeodel():
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    aux_param = {'split_mode': 'eq_width', 'split_no': 0, 'back_compat': False}
+    aux_param = {'split_mode': 'eq_width', 'split_no': 0, 'legacy_match': False}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -5700,7 +5701,7 @@ def UnitTestDeodel():
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    aux_param = {'split_mode': 'eq_width', 'split_no': 5, 'back_compat': False}
+    aux_param = {'split_mode': 'eq_width', 'split_no': 5, 'legacy_match': False}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -5808,7 +5809,7 @@ def UnitTestDeodel():
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    aux_param = {'split_mode': 'eq_legacy_width', 'split_no': 5, 'back_compat': False}
+    aux_param = {'split_mode': 'eq_legacy_width', 'split_no': 5, 'legacy_match': False}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -5917,7 +5918,7 @@ def UnitTestDeodel():
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    aux_param = {'split_mode': 'eq_freq', 'split_no': 5, 'back_compat': False}
+    aux_param = {'split_mode': 'eq_freq', 'split_no': 5, 'legacy_match': False}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -6019,7 +6020,7 @@ def UnitTestDeodel():
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    aux_param = {'split_mode': 'eq_width', 'split_no': 4, 'back_compat': False}
+    aux_param = {'split_mode': 'eq_width', 'split_no': 4, 'legacy_match': False}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -6118,7 +6119,7 @@ def UnitTestDeodel():
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    aux_param = {'predict_mode': 'regress', 'split_mode': 'eq_width', 'split_no': 4, 'back_compat': False}
+    aux_param = {'predict_mode': 'regress', 'split_mode': 'eq_width', 'split_no': 4, 'legacy_match': False}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -6126,7 +6127,7 @@ def UnitTestDeodel():
     deodel_regress = deodel2.DeodelSecond(aux_param)
 
 
-    deodel_regress = deodel2.DeodelSecond({'predict_mode': 'regress', 'split_mode': 'eq_width', 'split_no': 4, 'back_compat': False})
+    deodel_regress = deodel2.DeodelSecond({'predict_mode': 'regress', 'split_mode': 'eq_width', 'split_no': 4, 'legacy_match': False})
 
     deodel_regress.fit(X_train,y_train)
     y_pred = deodel_regress.predict(X_test)
@@ -6220,14 +6221,14 @@ def UnitTestDeodel():
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    aux_param = {'predict_mode': 'classif', 'split_mode': 'eq_width', 'split_no': 4, 'back_compat': False}
+    aux_param = {'predict_mode': 'classif', 'split_mode': 'eq_width', 'split_no': 4, 'legacy_match': False}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
 
     deodel_regress = deodel2.DeodelSecond(aux_param)
 
-    deodel_regress = deodel2.DeodelSecond({'predict_mode': 'classif', 'split_mode': 'eq_width', 'split_no': 4, 'back_compat': False})
+    deodel_regress = deodel2.DeodelSecond({'predict_mode': 'classif', 'split_mode': 'eq_width', 'split_no': 4, 'legacy_match': False})
 
     deodel_regress.fit(X_train,y_train)
     y_pred = deodel_regress.predict(X_test)
@@ -6306,7 +6307,7 @@ def UnitTestDeodel():
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    aux_param = {'split_mode': 'eq_width', 'split_no': 10, 'back_compat': True}
+    aux_param = {'split_mode': 'eq_width', 'split_no': 10, 'legacy_match': True}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -6365,7 +6366,7 @@ def UnitTestDeodel():
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    aux_param = {'split_mode': 'eq_width', 'split_no': 10, 'back_compat': False}
+    aux_param = {'split_mode': 'eq_width', 'split_no': 10, 'legacy_match': False}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -6423,7 +6424,7 @@ def UnitTestDeodel():
               [0.55, 'b'], [0.65, 'b'], [0.75, 'b'], [0.85, 'b'], [0.95, 'b']]
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    aux_param = {'split_mode': 'eq_width', 'split_no': 10, 'back_compat': True}
+    aux_param = {'split_mode': 'eq_width', 'split_no': 10, 'legacy_match': True}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -6481,7 +6482,7 @@ def UnitTestDeodel():
               [0.55, 'b'], [0.65, 'b'], [0.75, 'b'], [0.85, 'b'], [0.95, 'b']]
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    aux_param = {'split_mode': 'eq_width', 'split_no': 5, 'back_compat': False}
+    aux_param = {'split_mode': 'eq_width', 'split_no': 5, 'legacy_match': False}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -6541,7 +6542,7 @@ def UnitTestDeodel():
               [0.55, 'b'], [0.65, 'b'], [0.75, 'b'], [0.85, 'b'], [0.95, 'b']]
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    aux_param = {'split_mode': 'eq_width', 'split_no': 10, 'back_compat': False}
+    aux_param = {'split_mode': 'eq_width', 'split_no': 10, 'legacy_match': False}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -6599,7 +6600,7 @@ def UnitTestDeodel():
               [0.55, 'b'], [0.65, 'b'], [0.75, 'b'], [0.85, 'b'], [0.95, 'b']]
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    aux_param = {'split_mode': 'eq_width', 'split_no': 0, 'back_compat': False}
+    aux_param = {'split_mode': 'eq_width', 'split_no': 0, 'legacy_match': False}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -6659,7 +6660,7 @@ def UnitTestDeodel():
               [0.55, 'b'], [0.65, 'b'], [0.75, 'b'], [0.85, 'b'], [0.95, 'b']]
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    aux_param = {'split_mode': 'eq_width', 'split_no': 10, 'back_compat': False}
+    aux_param = {'split_mode': 'eq_width', 'split_no': 10, 'legacy_match': False}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -6734,7 +6735,7 @@ def UnitTestDeodel():
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    aux_param = {'split_mode': 'eq_width', 'split_no': 2, 'back_compat': False}
+    aux_param = {'split_mode': 'eq_width', 'split_no': 2, 'legacy_match': False}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -6809,7 +6810,7 @@ def UnitTestDeodel():
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    aux_param = {'predict_mode': 'classif', 'split_mode': 'eq_width', 'split_no': 2, 'back_compat': False}
+    aux_param = {'predict_mode': 'classif', 'split_mode': 'eq_width', 'split_no': 2, 'legacy_match': False}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -6892,7 +6893,7 @@ def UnitTestDeodel():
                ]
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    aux_param = {'predict_mode': 'regress', 'split_mode': 'eq_width', 'split_no': 2, 'back_compat': False}
+    aux_param = {'predict_mode': 'regress', 'split_mode': 'eq_width', 'split_no': 2, 'legacy_match': False}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -6979,7 +6980,7 @@ def UnitTestDeodel():
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    aux_param = {'predict_mode': 'classif', 'split_mode': 'eq_width', 'split_no': 2, 'back_compat': False}
+    aux_param = {'predict_mode': 'classif', 'split_mode': 'eq_width', 'split_no': 2, 'legacy_match': False}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -7074,7 +7075,7 @@ def UnitTestDeodel():
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    aux_param = {'split_mode': 'eq_width', 'split_no': 2, 'back_compat': False}
+    aux_param = {'split_mode': 'eq_width', 'split_no': 2, 'legacy_match': False}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -7169,7 +7170,7 @@ def UnitTestDeodel():
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    aux_param = {'predict_mode': 'classif', 'split_mode': 'eq_width', 'split_no': 2, 'back_compat': False}
+    aux_param = {'predict_mode': 'classif', 'split_mode': 'eq_width', 'split_no': 2, 'legacy_match': False}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -7261,7 +7262,7 @@ def UnitTestDeodel():
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    aux_param = {'split_no': 10, 'back_compat': False}
+    aux_param = {'split_no': 10, 'legacy_match': False}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -7353,7 +7354,7 @@ def UnitTestDeodel():
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    aux_param = {'split_no': 10, 'back_compat': False}
+    aux_param = {'split_no': 10, 'legacy_match': False}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -7445,7 +7446,7 @@ def UnitTestDeodel():
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    aux_param = {'split_no': 10, 'back_compat': False}
+    aux_param = {'split_no': 10, 'legacy_match': False}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -7537,7 +7538,7 @@ def UnitTestDeodel():
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    aux_param = {'split_no': 10, 'back_compat': False}
+    aux_param = {'split_no': 10, 'legacy_match': False}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -7619,6 +7620,8 @@ def UnitTestUseApp():
     import sys
 
     import usap_csv_eval
+    import deodel
+    import deodel2
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     SepLine()
@@ -8956,13 +8959,18 @@ def UnitTestUseApp():
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+    from sklearn import datasets
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+
     iprnt ("test sklearn dataset 1-a")
     iprnt ()
 
-    import deodel2
-    from sklearn import datasets
-
     data_set = datasets.load_wine()
+    iprnt ("- - - - data_set:", data_set['DESCR'][:19])
     display_flag = True
 
     data_digi_x = data_set.data
@@ -8974,7 +8982,7 @@ def UnitTestUseApp():
 
     if display_flag: print("- - - - - - - - - - - - - - - - ")
 
-    aux_param = {'split_mode': 'eq_width', 'split_no': 3, 'back_compat': True}
+    aux_param = {'split_mode': 'eq_width', 'split_no': 3, 'legacy_match': True}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -9015,9 +9023,8 @@ def UnitTestUseApp():
     iprnt ("test sklearn dataset 1-b")
     iprnt ()
 
-    from sklearn import datasets
-
     data_set = datasets.load_wine()
+    iprnt ("- - - - data_set:", data_set['DESCR'][:19])
     display_flag = True
 
     data_digi_x = data_set.data
@@ -9029,7 +9036,7 @@ def UnitTestUseApp():
 
     if display_flag: print("- - - - - - - - - - - - - - - - ")
 
-    aux_param = {'split_mode': 'eq_width', 'split_no': 3, 'back_compat': False}
+    aux_param = {'split_mode': 'eq_width', 'split_no': 3, 'legacy_match': False}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -9070,9 +9077,8 @@ def UnitTestUseApp():
     iprnt ("test sklearn dataset 1-c")
     iprnt ()
 
-    from sklearn import datasets
-
     data_set = datasets.load_iris()
+    iprnt ("- - - - data_set:", data_set['DESCR'][:19])
     display_flag = True
 
     data_digi_x = data_set.data
@@ -9084,7 +9090,7 @@ def UnitTestUseApp():
 
     if display_flag: print("- - - - - - - - - - - - - - - - ")
 
-    aux_param = {'split_no': 6, 'back_compat': True}
+    aux_param = {'split_no': 6, 'legacy_match': True}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -9126,9 +9132,8 @@ def UnitTestUseApp():
     iprnt ("test sklearn dataset 1-d")
     iprnt ()
 
-    from sklearn import datasets
-
     data_set = datasets.load_iris()
+    iprnt ("- - - - data_set:", data_set['DESCR'][:19])
     display_flag = True
 
     data_digi_x = data_set.data
@@ -9140,7 +9145,7 @@ def UnitTestUseApp():
 
     if display_flag: print("- - - - - - - - - - - - - - - - ")
 
-    aux_param = {'split_no': 6, 'back_compat': False}
+    aux_param = {'split_no': 6, 'legacy_match': False}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -9181,9 +9186,8 @@ def UnitTestUseApp():
     iprnt ("test sklearn dataset 1-e")
     iprnt ()
 
-    from sklearn import datasets
-
     data_set = datasets.load_iris()
+    iprnt ("- - - - data_set:", data_set['DESCR'][:19])
     display_flag = True
 
     data_digi_x = data_set.data
@@ -9195,7 +9199,7 @@ def UnitTestUseApp():
 
     if display_flag: print("- - - - - - - - - - - - - - - - ")
 
-    aux_param = {'split_mode': 'eq_legacy_width', 'split_no': 6, 'back_compat': False}
+    aux_param = {'split_mode': 'eq_legacy_width', 'split_no': 6, 'legacy_match': False}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -9235,9 +9239,8 @@ def UnitTestUseApp():
     iprnt ("test sklearn dataset 1-f")
     iprnt ()
 
-    from sklearn import datasets
-
     data_set = datasets.load_iris()
+    iprnt ("- - - - data_set:", data_set['DESCR'][:19])
     display_flag = True
 
     data_digi_x = data_set.data
@@ -9249,7 +9252,7 @@ def UnitTestUseApp():
 
     if display_flag: print("- - - - - - - - - - - - - - - - ")
 
-    aux_param = {'split_mode': 'eq_legacy_width', 'split_no': 6, 'back_compat': True}
+    aux_param = {'split_mode': 'eq_legacy_width', 'split_no': 6, 'legacy_match': True}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -9290,10 +9293,8 @@ def UnitTestUseApp():
     iprnt ("test sklearn dataset 1-g")
     iprnt ()
 
-    import deodel
-    from sklearn import datasets
-
     data_set = datasets.load_iris()
+    iprnt ("- - - - data_set:", data_set['DESCR'][:19])
     display_flag = True
 
     data_digi_x = data_set.data
@@ -9345,10 +9346,8 @@ def UnitTestUseApp():
     iprnt ("test sklearn dataset 1-h")
     iprnt ()
 
-    import deodel
-    from sklearn import datasets
-
     data_set = datasets.load_iris()
+    iprnt ("- - - - data_set:", data_set['DESCR'][:19])
     display_flag = True
 
     data_digi_x = data_set.data
@@ -9360,8 +9359,7 @@ def UnitTestUseApp():
 
     if display_flag: print("- - - - - - - - - - - - - - - - ")
 
-    aux_param = {'split_mode': 'eq_width', 'split_no': 6}
-    aux_param = {'split_mode': 'eq_width', 'split_no': 6, 'back_compat': True}
+    aux_param = {'split_mode': 'eq_width', 'split_no': 6, 'legacy_match': True}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -9401,10 +9399,8 @@ def UnitTestUseApp():
     iprnt ("test sklearn dataset 2")
     iprnt ()
 
-    import deodel2
-    from sklearn import datasets
-
     data_set = datasets.load_wine()
+    iprnt ("- - - - data_set:", data_set['DESCR'][:19])
     display_flag = True
 
     data_digi_x = data_set.data
@@ -9450,9 +9446,8 @@ def UnitTestUseApp():
     iprnt ("test sklearn dataset 3")
     iprnt ()
 
-    from sklearn import datasets
-
     data_set = datasets.load_wine()
+    iprnt ("- - - - data_set:", data_set['DESCR'][:19])
     display_flag = True
 
     data_digi_x = data_set.data
@@ -9464,7 +9459,7 @@ def UnitTestUseApp():
 
     if display_flag: print("- - - - - - - - - - - - - - - - ")
 
-    aux_param = {'split_no': 10, 'back_compat': False}
+    aux_param = {'split_no': 10, 'legacy_match': False}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -9481,6 +9476,599 @@ def UnitTestUseApp():
     test_result = (avg_accuracy, rnd_accuracy)
     # test_expect = (0.9775280898876405, 0.250936329588015)
     test_expect = (0.9662921348314607, 0.250936329588015)
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("test sklearn dataset 4-a")
+    iprnt ()
+
+    data_set = datasets.load_wine()
+    iprnt ("- - - - data_set:", data_set['DESCR'][:19])
+    display_flag = True
+
+    data_digi_x = data_set.data
+    data_target_y = data_set.target
+    train_ratio = 0.5
+    in_iter_no = 3
+    in_rand_seed = 42
+    aux_data = None
+
+    if display_flag: print("- - - - - - - - - - - - - - - - ")
+
+    aux_param = {'split_mode': 'eq_freq', 'split_no': 7}
+
+    iprnt ("- - - - aux_param:", aux_param)
+    iprnt ()
+
+    # crt_classif = deodel2.DeodelSecond(aux_param)
+    crt_classif = deodel.DeodataDelangaClassifier(aux_param)
+
+    ret_tuple = usap_common.AccuracyEval(data_digi_x, data_target_y, crt_classif, 
+                                        in_iter_no, train_ratio, 
+                                        in_rand_seed, aux_data, 
+                                        display_flag = display_flag)
+
+    avg_accuracy, rnd_accuracy = ret_tuple
+
+    test_result = (avg_accuracy, rnd_accuracy)
+    test_expect = (0.9325842696629213, 0.250936329588015)
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("test sklearn dataset 4-b")
+    iprnt ()
+
+    data_set = datasets.load_wine()
+    iprnt ("- - - - data_set:", data_set['DESCR'][:19])
+    display_flag = True
+
+    data_digi_x = data_set.data
+    data_target_y = data_set.target
+    train_ratio = 0.5
+    in_iter_no = 3
+    in_rand_seed = 42
+    aux_data = None
+
+    if display_flag: print("- - - - - - - - - - - - - - - - ")
+
+    aux_param = {'split_mode': 'eq_freq', 'split_no': 7, 'legacy_match': True, 'score_factor': 1}
+
+    iprnt ("- - - - aux_param:", aux_param)
+    iprnt ()
+
+    # crt_classif = deodel.DeodataDelangaClassifier(aux_param)
+    crt_classif = deodel2.DeodelSecond(aux_param)
+    iprnt ("- - - - aux_param:", aux_param)
+
+    ret_tuple = usap_common.AccuracyEval(data_digi_x, data_target_y, crt_classif, 
+                                        in_iter_no, train_ratio, 
+                                        in_rand_seed, aux_data, 
+                                        display_flag = display_flag)
+
+    avg_accuracy, rnd_accuracy = ret_tuple
+
+    test_result = (avg_accuracy, rnd_accuracy)
+    test_expect = (0.9325842696629213, 0.250936329588015)
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("test sklearn dataset 4-c")
+    iprnt ()
+
+    data_set = datasets.load_wine()
+    iprnt ("- - - - data_set:", data_set['DESCR'][:19])
+    display_flag = True
+
+    data_digi_x = data_set.data
+    data_target_y = data_set.target
+    train_ratio = 0.5
+    in_iter_no = 3
+    in_rand_seed = 42
+    aux_data = None
+
+    if display_flag: print("- - - - - - - - - - - - - - - - ")
+
+    aux_param = {'split_mode': 'eq_freq', 'split_no': 7, 'legacy_match': True, 'score_factor': 5}
+
+    iprnt ("- - - - aux_param:", aux_param)
+    iprnt ()
+
+    crt_classif = deodel2.DeodelSecond(aux_param)
+
+    ret_tuple = usap_common.AccuracyEval(data_digi_x, data_target_y, crt_classif, 
+                                        in_iter_no, train_ratio, 
+                                        in_rand_seed, aux_data, 
+                                        display_flag = display_flag)
+
+    avg_accuracy, rnd_accuracy = ret_tuple
+
+    test_result = (avg_accuracy, rnd_accuracy)
+    test_expect = (0.9325842696629213, 0.250936329588015)
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("test sklearn dataset 4-d")
+    iprnt ()
+
+    data_set = datasets.load_wine()
+    iprnt ("- - - - data_set:", data_set['DESCR'][:19])
+    display_flag = True
+
+    data_digi_x = data_set.data
+    data_target_y = data_set.target
+    train_ratio = 0.5
+    in_iter_no = 3
+    in_rand_seed = 42
+    aux_data = None
+
+    if display_flag: print("- - - - - - - - - - - - - - - - ")
+
+    aux_param = {'split_mode': 'eq_freq', 'split_no': 7, 'legacy_match': False, 'score_factor': 5}
+
+    iprnt ("- - - - aux_param:", aux_param)
+    iprnt ()
+
+    crt_classif = deodel2.DeodelSecond(aux_param)
+
+    ret_tuple = usap_common.AccuracyEval(data_digi_x, data_target_y, crt_classif, 
+                                        in_iter_no, train_ratio, 
+                                        in_rand_seed, aux_data, 
+                                        display_flag = display_flag)
+
+    avg_accuracy, rnd_accuracy = ret_tuple
+
+    test_result = (avg_accuracy, rnd_accuracy)
+    test_expect = (0.9250936329588014, 0.250936329588015)
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("test sklearn dataset 4-e")
+    iprnt ()
+
+    data_set = datasets.load_wine()
+    iprnt ("- - - - data_set:", data_set['DESCR'][:19])
+    display_flag = True
+
+    data_digi_x = data_set.data
+    data_target_y = data_set.target
+    train_ratio = 0.5
+    in_iter_no = 3
+    in_rand_seed = 42
+    aux_data = None
+
+    if display_flag: print("- - - - - - - - - - - - - - - - ")
+
+    aux_param = {'split_mode': 'eq_width', 'split_no': 7}
+
+    iprnt ("- - - - aux_param:", aux_param)
+    iprnt ()
+
+    # crt_classif = deodel2.DeodelSecond(aux_param)
+    crt_classif = deodel.DeodataDelangaClassifier(aux_param)
+
+    ret_tuple = usap_common.AccuracyEval(data_digi_x, data_target_y, crt_classif, 
+                                        in_iter_no, train_ratio, 
+                                        in_rand_seed, aux_data, 
+                                        display_flag = display_flag)
+
+    avg_accuracy, rnd_accuracy = ret_tuple
+
+    test_result = (avg_accuracy, rnd_accuracy)
+    test_expect = (0.9400749063670412, 0.250936329588015)
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("test sklearn dataset 4-f")
+    iprnt ()
+
+    data_set = datasets.load_wine()
+    iprnt ("- - - - data_set:", data_set['DESCR'][:19])
+    display_flag = True
+
+    data_digi_x = data_set.data
+    data_target_y = data_set.target
+    train_ratio = 0.5
+    in_iter_no = 3
+    in_rand_seed = 42
+    aux_data = None
+
+    if display_flag: print("- - - - - - - - - - - - - - - - ")
+
+    aux_param = {'split_mode': 'eq_legacy_width', 'split_no': 7, 'legacy_match': True, 'score_factor': 1}
+
+    iprnt ("- - - - aux_param:", aux_param)
+    iprnt ()
+
+    # crt_classif = deodel.DeodataDelangaClassifier(aux_param)
+    crt_classif = deodel2.DeodelSecond(aux_param)
+    iprnt ("- - - - aux_param:", aux_param)
+
+    ret_tuple = usap_common.AccuracyEval(data_digi_x, data_target_y, crt_classif, 
+                                        in_iter_no, train_ratio, 
+                                        in_rand_seed, aux_data, 
+                                        display_flag = display_flag)
+
+    avg_accuracy, rnd_accuracy = ret_tuple
+
+    test_result = (avg_accuracy, rnd_accuracy)
+    test_expect = (0.9400749063670412, 0.250936329588015)
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("test sklearn dataset 4-g")
+    iprnt ()
+
+    data_set = datasets.load_wine()
+    iprnt ("- - - - data_set:", data_set['DESCR'][:19])
+    display_flag = True
+
+    data_digi_x = data_set.data
+    data_target_y = data_set.target
+    train_ratio = 0.5
+    in_iter_no = 3
+    in_rand_seed = 42
+    aux_data = None
+
+    if display_flag: print("- - - - - - - - - - - - - - - - ")
+
+    aux_param = {'split_mode': 'eq_legacy_width', 'split_no': 7, 'legacy_match': True, 'score_factor': 5}
+
+    iprnt ("- - - - aux_param:", aux_param)
+    iprnt ()
+
+    crt_classif = deodel2.DeodelSecond(aux_param)
+
+    ret_tuple = usap_common.AccuracyEval(data_digi_x, data_target_y, crt_classif, 
+                                        in_iter_no, train_ratio, 
+                                        in_rand_seed, aux_data, 
+                                        display_flag = display_flag)
+
+    avg_accuracy, rnd_accuracy = ret_tuple
+
+    test_result = (avg_accuracy, rnd_accuracy)
+    test_expect = (0.9400749063670412, 0.250936329588015)
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("test sklearn dataset 4-h")
+    iprnt ()
+
+    data_set = datasets.load_wine()
+    iprnt ("- - - - data_set:", data_set['DESCR'][:19])
+    display_flag = True
+
+    data_digi_x = data_set.data
+    data_target_y = data_set.target
+    train_ratio = 0.5
+    in_iter_no = 3
+    in_rand_seed = 42
+    aux_data = None
+
+    if display_flag: print("- - - - - - - - - - - - - - - - ")
+
+    aux_param = {'split_mode': 'eq_width', 'split_no': 7, 'legacy_match': True, 'score_factor': 5}
+
+    iprnt ("- - - - aux_param:", aux_param)
+    iprnt ()
+
+    crt_classif = deodel2.DeodelSecond(aux_param)
+
+    ret_tuple = usap_common.AccuracyEval(data_digi_x, data_target_y, crt_classif, 
+                                        in_iter_no, train_ratio, 
+                                        in_rand_seed, aux_data, 
+                                        display_flag = display_flag)
+
+    avg_accuracy, rnd_accuracy = ret_tuple
+
+    test_result = (avg_accuracy, rnd_accuracy)
+    test_expect = (0.9213483146067415, 0.250936329588015)
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("test sklearn dataset 4-i")
+    iprnt ()
+
+    data_set = datasets.load_wine()
+    iprnt ("- - - - data_set:", data_set['DESCR'][:19])
+    display_flag = True
+
+    data_digi_x = data_set.data
+    data_target_y = data_set.target
+    train_ratio = 0.5
+    in_iter_no = 3
+    in_rand_seed = 42
+    aux_data = None
+
+    if display_flag: print("- - - - - - - - - - - - - - - - ")
+
+    aux_param = {'split_mode': 'eq_width', 'split_no': 7, 'legacy_match': True, 'score_factor': 1}
+
+    iprnt ("- - - - aux_param:", aux_param)
+    iprnt ()
+
+    crt_classif = deodel2.DeodelSecond(aux_param)
+
+    ret_tuple = usap_common.AccuracyEval(data_digi_x, data_target_y, crt_classif, 
+                                        in_iter_no, train_ratio, 
+                                        in_rand_seed, aux_data, 
+                                        display_flag = display_flag)
+
+    avg_accuracy, rnd_accuracy = ret_tuple
+
+    test_result = (avg_accuracy, rnd_accuracy)
+    test_expect = (0.9213483146067415, 0.250936329588015)
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("test sklearn dataset 4-j")
+    iprnt ()
+
+    data_set = datasets.load_wine()
+    iprnt ("- - - - data_set:", data_set['DESCR'][:19])
+    display_flag = True
+
+    data_digi_x = data_set.data
+    data_target_y = data_set.target
+    train_ratio = 0.5
+    in_iter_no = 3
+    in_rand_seed = 42
+    aux_data = None
+
+    if display_flag: print("- - - - - - - - - - - - - - - - ")
+
+    aux_param = {'split_mode': 'eq_width', 'split_no': 7, 'legacy_match': False, 'score_factor': 1}
+
+    iprnt ("- - - - aux_param:", aux_param)
+    iprnt ()
+
+    crt_classif = deodel2.DeodelSecond(aux_param)
+
+    ret_tuple = usap_common.AccuracyEval(data_digi_x, data_target_y, crt_classif, 
+                                        in_iter_no, train_ratio, 
+                                        in_rand_seed, aux_data, 
+                                        display_flag = display_flag)
+
+    avg_accuracy, rnd_accuracy = ret_tuple
+
+    test_result = (avg_accuracy, rnd_accuracy)
+    test_expect = (0.9700374531835205, 0.250936329588015)
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    iprnt ("test sklearn dataset 4-k")
+    iprnt ()
+
+    data_set = datasets.load_wine()
+    iprnt ("- - - - data_set:", data_set['DESCR'][:19])
+    display_flag = True
+
+    data_digi_x = data_set.data
+    data_target_y = data_set.target
+    train_ratio = 0.5
+    in_iter_no = 3
+    in_rand_seed = 42
+    aux_data = None
+
+    if display_flag: print("- - - - - - - - - - - - - - - - ")
+
+    aux_param = {'split_mode': 'eq_width', 'split_no': 7, 'legacy_match': False, 'score_factor': 5}
+
+    iprnt ("- - - - aux_param:", aux_param)
+    iprnt ()
+
+    crt_classif = deodel2.DeodelSecond(aux_param)
+
+    ret_tuple = usap_common.AccuracyEval(data_digi_x, data_target_y, crt_classif, 
+                                        in_iter_no, train_ratio, 
+                                        in_rand_seed, aux_data, 
+                                        display_flag = display_flag)
+
+    avg_accuracy, rnd_accuracy = ret_tuple
+
+    test_result = (avg_accuracy, rnd_accuracy)
+    test_expect = (0.9700374531835205, 0.250936329588015)
 
     iprnt ("- - - - test_result:", test_result)
     iprnt ("- - - - test_expect:", test_expect)

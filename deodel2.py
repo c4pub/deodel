@@ -61,7 +61,7 @@ class DeodelSecond :
                         'tbreak_depth': None,
                         'predict_mode': 'auto',
                         'score_factor': 2,
-                        'back_compat':  False,
+                        'legacy_match':  False,
                         'int_is_num':   True,
                       }
 
@@ -150,7 +150,7 @@ class Working:
         predict_mode = object.cfg_param['predict_mode']
         score_factor = object.cfg_param['score_factor']
         int_is_num = object.cfg_param['int_is_num']
-        back_compat = object.cfg_param['back_compat']
+        legacy_match = object.cfg_param['legacy_match']
 
         ret_item = Working.DicretizeTable( data_X, split_no, split_mode, int_is_num )
         (ret_cat_tbl, ret_num_tbl, ret_mask_tbl, ret_attr_num_cfg, ret_attr_dict_list) = ret_item
@@ -165,7 +165,7 @@ class Working:
         object.attr_score_factor = score_factor
         object.attr_int_is_num = int_is_num
 
-        object.attr_back_compat = back_compat
+        object.attr_legacy_match = legacy_match
 
         if predict_mode == 'auto' :
             regress_flag = Working.NumParse(data_y, int_is_num)
@@ -392,7 +392,7 @@ class Working:
             compare_num_vect *= crt_train_mask_attr
             compare_num_vect *= query_mask_req
 
-            if object.attr_back_compat :
+            if object.attr_legacy_match :
                 tmp_vector = compare_num_vect.astype(int)
                 compare_num_vect = np.where(tmp_vector == 1, 1, 0)
 
