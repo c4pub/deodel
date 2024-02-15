@@ -6,7 +6,7 @@ Deodata Delanga Unit Test
         Tested with Winpython64-3.10.5.0
 """
 
-#   c4pub@git 2023
+#   c4pub@git 2023 - 2024
 #
 # Latest version available at: https://github.com/c4pub/deodel
 #
@@ -43,7 +43,6 @@ def UnitTestDeodel():
     import numpy as np
     import pandas as pd
 
-    import deodel
     import deodel2
 
 
@@ -688,6 +687,194 @@ def UnitTestDeodel():
 
     test_result = ttu
     test_expect = ttuc
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("test RegressParse - 1")
+
+    ttu1 = [ 10, 20, 30, 40, 50, 60, 70, 80, 90, 20 ]
+    ttu2 = [ 0 ] * 10 + [ 1 ] *  2
+    tt_in = ttu1 + ttu2
+    int_is_num = True
+
+    iprnt ()
+    iprnt ("- - - - tt_in:", tt_in)
+    iprnt ("- - - - int_is_num:", int_is_num)
+    iprnt ()
+
+    regress_flag = deodel2.Working.RegressParse(tt_in, int_is_num)
+
+    iprnt ("- - - - regress_flag:", regress_flag)
+
+    test_result = regress_flag
+    test_expect = False
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("test RegressParse - 2")
+
+    ttu1 = [ 10, 20, 30, 40, 50, 60, 70, 80, 90, 20 ]
+    ttu2 = ttu1[:]
+    tt_in = ttu1 + ttu2
+    int_is_num = True
+
+    iprnt ()
+    iprnt ("- - - - tt_in:", tt_in)
+    iprnt ("- - - - int_is_num:", int_is_num)
+    iprnt ()
+
+    regress_flag = deodel2.Working.RegressParse(tt_in, int_is_num)
+
+    iprnt ("- - - - regress_flag:", regress_flag)
+
+    test_result = regress_flag
+    test_expect = False
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("test RegressParse - 3")
+
+    ttu1 = [ 10, 20, 30, 40, 50, 60, 70, 80, 90, 20 ]
+    ttu2 = [ 0 ] * 9
+    tt_in = ttu1 + ttu2
+    int_is_num = True
+
+    iprnt ()
+    iprnt ("- - - - tt_in:", tt_in)
+    iprnt ("- - - - int_is_num:", int_is_num)
+    iprnt ()
+
+    regress_flag = deodel2.Working.RegressParse(tt_in, int_is_num)
+
+    iprnt ("- - - - regress_flag:", regress_flag)
+
+    test_result = regress_flag
+    test_expect = False
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("test RegressParse - 4")
+
+    ttu1 = [0, 0, 0, 2, 0, 1, 0, 0, 5, 12, 12, 9, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 5]
+    tt_in = ttu1
+    int_is_num = True
+
+    iprnt ()
+    iprnt ("- - - - tt_in:", tt_in)
+    iprnt ("- - - - int_is_num:", int_is_num)
+    iprnt ()
+
+    regress_flag = deodel2.Working.RegressParse(tt_in, int_is_num)
+
+    iprnt ("- - - - regress_flag:", regress_flag)
+
+    test_result = regress_flag
+    test_expect = False
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    iprnt ("test RegressParse - 5")
+
+    ttu1 = [0, 6, 1, 0, 0, 0, 0, 12, 1, 0, 9, 0, 0, 0, 0, 10, 0, 0, 8, 0, 0, 1, 5]
+    tt_in = ttu1
+    int_is_num = True
+
+    iprnt ()
+    iprnt ("- - - - tt_in:", tt_in)
+    iprnt ("- - - - int_is_num:", int_is_num)
+    iprnt ()
+
+    regress_flag = deodel2.Working.RegressParse(tt_in, int_is_num)
+
+    iprnt ("- - - - regress_flag:", regress_flag)
+
+    test_result = regress_flag
+    test_expect = False
 
     iprnt ("- - - - test_result:", test_result)
     iprnt ("- - - - test_expect:", test_expect)
@@ -4678,6 +4865,57 @@ def UnitTestDeodel():
     SepLine()
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+    iprnt ("ListDataConvert numeric")
+    iprnt ()
+
+    tin_1 =    [
+                [101,   102.5,  103  ],
+                [201.7, 202.8,  203.9],
+                [301,   302,    303  ],
+               ]
+
+    tin_2 = np.array(tin_1)
+
+    tin_3 = []
+    for crt_row in tin_1 :
+        new_row = np.array(crt_row)
+        tin_3.append(new_row)
+
+    iprnt ("- - - - tin_1:", tin_1)
+    iprnt ("- - - - tin_2:", tin_2)
+    iprnt ("- - - - tin_3:", tin_3)
+
+    tout_1 = deodel2.CasetDeodel.ListDataConvert(tin_1)
+    tout_2 = deodel2.CasetDeodel.ListDataConvert(tin_2)
+    tout_3 = deodel2.CasetDeodel.ListDataConvert(tin_3)
+
+    iprnt ("- - - - tout_1:", tout_1)
+    iprnt ("- - - - tout_2:", tout_2)
+    iprnt ("- - - - tout_3:", tout_3)
+
+    test_result = (tout_1, tout_2, tout_3)
+    test_expect = (tin_1, tin_1, tin_1)
+
+    iprnt ("- - - - test_result:", test_result)
+    iprnt ("- - - - test_expect:", test_expect)
+
+    set_eval = ( test_result == test_expect )
+    iprnt ("- - - utest_test_no:", utest_test_no)
+    utest_test_no += 1
+    if set_eval :
+        iprnt ("- - -   test ok")
+    else :
+        iprnt ("- - -  test failed")
+        utest_fail_counter += 1
+        iprnt ("- - -  invalid test_result")
+
+        iprnt ("Unit test failure !")
+        traceback.print_stack(file=sys.stdout)
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    SepLine()
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
     iprnt ("check version")
     iprnt ()
 
@@ -4688,7 +4926,7 @@ def UnitTestDeodel():
     # test_expect = 1.77
     # test_expect = 2.01
     # test_expect = 2.11
-    test_expect = 2.13
+    test_expect = 2.17
 
     iprnt ("- - - - test_result:", test_result)
     iprnt ("- - - - test_expect:", test_expect)
@@ -5374,7 +5612,7 @@ def UnitTestDeodel():
     # deodel_regress = deodel2.DeodelSecond()
     # deodel_regress = deodel2.DeodelSecond({'split_no': 5, 'split_mode': 'eq_freq'})
 
-    aux_param = {'split_mode': 'eq_width', 'split_no': 10, 'legacy_match': False}
+    aux_param = {'predict_mode': 'regress', 'split_mode': 'eq_width', 'split_no': 10, 'legacy_match': False}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -6366,7 +6604,7 @@ def UnitTestDeodel():
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    aux_param = {'split_mode': 'eq_width', 'split_no': 10, 'legacy_match': False}
+    aux_param = {'predict_mode': 'regress', 'split_mode': 'eq_width', 'split_no': 10, 'legacy_match': False}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -6482,7 +6720,7 @@ def UnitTestDeodel():
               [0.55, 'b'], [0.65, 'b'], [0.75, 'b'], [0.85, 'b'], [0.95, 'b']]
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    aux_param = {'split_mode': 'eq_width', 'split_no': 5, 'legacy_match': False}
+    aux_param = {'predict_mode': 'regress', 'split_mode': 'eq_width', 'split_no': 5, 'legacy_match': False}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -6542,7 +6780,7 @@ def UnitTestDeodel():
               [0.55, 'b'], [0.65, 'b'], [0.75, 'b'], [0.85, 'b'], [0.95, 'b']]
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    aux_param = {'split_mode': 'eq_width', 'split_no': 10, 'legacy_match': False}
+    aux_param = {'predict_mode': 'regress', 'split_mode': 'eq_width', 'split_no': 10, 'legacy_match': False}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -6600,7 +6838,7 @@ def UnitTestDeodel():
               [0.55, 'b'], [0.65, 'b'], [0.75, 'b'], [0.85, 'b'], [0.95, 'b']]
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    aux_param = {'split_mode': 'eq_width', 'split_no': 0, 'legacy_match': False}
+    aux_param = {'predict_mode': 'regress', 'split_mode': 'eq_width', 'split_no': 0, 'legacy_match': False}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -6660,7 +6898,7 @@ def UnitTestDeodel():
               [0.55, 'b'], [0.65, 'b'], [0.75, 'b'], [0.85, 'b'], [0.95, 'b']]
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    aux_param = {'split_mode': 'eq_width', 'split_no': 10, 'legacy_match': False}
+    aux_param = {'predict_mode': 'regress', 'split_mode': 'eq_width', 'split_no': 10, 'legacy_match': False}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -6735,7 +6973,7 @@ def UnitTestDeodel():
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    aux_param = {'split_mode': 'eq_width', 'split_no': 2, 'legacy_match': False}
+    aux_param = {'predict_mode': 'regress', 'split_mode': 'eq_width', 'split_no': 2, 'legacy_match': False}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -7075,7 +7313,7 @@ def UnitTestDeodel():
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    aux_param = {'split_mode': 'eq_width', 'split_no': 2, 'legacy_match': False}
+    aux_param = {'predict_mode': 'regress', 'split_mode': 'eq_width', 'split_no': 2, 'legacy_match': False}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -7354,7 +7592,7 @@ def UnitTestDeodel():
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    aux_param = {'split_no': 10, 'legacy_match': False}
+    aux_param = {'predict_mode': 'regress', 'split_no': 10, 'legacy_match': False}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -7446,7 +7684,7 @@ def UnitTestDeodel():
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    aux_param = {'split_no': 10, 'legacy_match': False}
+    aux_param = {'predict_mode': 'regress', 'split_no': 10, 'legacy_match': False}
 
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
@@ -7620,7 +7858,6 @@ def UnitTestUseApp():
     import sys
 
     import usap_csv_eval
-    import deodel
     import deodel2
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -9311,7 +9548,7 @@ def UnitTestUseApp():
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
 
-    crt_classif = deodel.DeodataDelangaClassifier(aux_param)
+    crt_classif = deodel2.DeodelSecond(aux_param)
 
     ret_tuple = usap_common.AccuracyEval(data_digi_x, data_target_y, crt_classif, 
                                         in_iter_no, train_ratio, 
@@ -9321,7 +9558,7 @@ def UnitTestUseApp():
     avg_accuracy, rnd_accuracy = ret_tuple
 
     test_result = (avg_accuracy, rnd_accuracy)
-    test_expect = (0.9511111111111111, 0.3333333333333333)
+    test_expect = (0.9466666666666667, 0.3333333333333333)
 
     iprnt ("- - - - test_result:", test_result)
     iprnt ("- - - - test_expect:", test_expect)
@@ -9364,7 +9601,7 @@ def UnitTestUseApp():
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
 
-    crt_classif = deodel.DeodataDelangaClassifier(aux_param)
+    crt_classif = deodel2.DeodelSecond(aux_param)
 
     ret_tuple = usap_common.AccuracyEval(data_digi_x, data_target_y, crt_classif, 
                                         in_iter_no, train_ratio, 
@@ -9518,8 +9755,7 @@ def UnitTestUseApp():
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
 
-    # crt_classif = deodel2.DeodelSecond(aux_param)
-    crt_classif = deodel.DeodataDelangaClassifier(aux_param)
+    crt_classif = deodel2.DeodelSecond(aux_param)
 
     ret_tuple = usap_common.AccuracyEval(data_digi_x, data_target_y, crt_classif, 
                                         in_iter_no, train_ratio, 
@@ -9572,7 +9808,6 @@ def UnitTestUseApp():
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
 
-    # crt_classif = deodel.DeodataDelangaClassifier(aux_param)
     crt_classif = deodel2.DeodelSecond(aux_param)
     iprnt ("- - - - aux_param:", aux_param)
 
@@ -9736,8 +9971,7 @@ def UnitTestUseApp():
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
 
-    # crt_classif = deodel2.DeodelSecond(aux_param)
-    crt_classif = deodel.DeodataDelangaClassifier(aux_param)
+    crt_classif = deodel2.DeodelSecond(aux_param)
 
     ret_tuple = usap_common.AccuracyEval(data_digi_x, data_target_y, crt_classif, 
                                         in_iter_no, train_ratio, 
@@ -9747,7 +9981,7 @@ def UnitTestUseApp():
     avg_accuracy, rnd_accuracy = ret_tuple
 
     test_result = (avg_accuracy, rnd_accuracy)
-    test_expect = (0.9400749063670412, 0.250936329588015)
+    test_expect = (0.9737827715355806, 0.250936329588015)
 
     iprnt ("- - - - test_result:", test_result)
     iprnt ("- - - - test_expect:", test_expect)
@@ -9790,7 +10024,6 @@ def UnitTestUseApp():
     iprnt ("- - - - aux_param:", aux_param)
     iprnt ()
 
-    # crt_classif = deodel.DeodataDelangaClassifier(aux_param)
     crt_classif = deodel2.DeodelSecond(aux_param)
     iprnt ("- - - - aux_param:", aux_param)
 

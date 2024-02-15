@@ -1,6 +1,6 @@
 """Deodata Delanga Classification"""
 
-#   c4pub@git 2023
+#   c4pub@git 2023 - 2024
 #
 # Latest version available at: https://github.com/c4pub/deodel
 #
@@ -59,7 +59,7 @@ class DeodataDelangaClassifier:
         else :
             self.aux_param = aux_param
 
-    version = 2.11
+    version = 2.15
 
     def __repr__(self):
         '''Returns representation of the object'''
@@ -157,7 +157,7 @@ class Working:
         object.attr_dict_list = ret_attr_dict_list
 
         if predict_mode == 'auto' :
-            regress_flag = Working.NumParse(data_y, int_is_num)
+            regress_flag = Working.RegressParse(data_y, int_is_num)
         elif predict_mode == 'regress' :
             regress_flag = True
         else :
@@ -639,10 +639,9 @@ class Working:
 
 # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     @staticmethod
-    def NumParse( in_vect, in_int_is_num ) :
+    def RegressParse( in_vect, in_int_is_num ) :
         """
             Parse vector and check if vector has valid regress numerical elements.
-            Also computes the average of the numerical elements.
             
         """
         regress_flag = False
@@ -651,15 +650,21 @@ class Working:
             is_numerical, translate_value = Working.NumericalCheck(crt_elem, in_int_is_num)
             if is_numerical :
                 num_list.append(crt_elem)
-        if not num_list == [] :
+        def_min_len = 10
+        def_min_chk = 4
+        def_check_fract = 1.0/def_min_len
+        len_num_list = len(num_list)
+        if len_num_list >= def_min_len :
             # check whether list appears to be made of continuous values
             ret_tuple = CasetDeodel.SummaryFreqCount(num_list)
             crt_types_no, crt_id_list, crt_count_list = ret_tuple
-            if crt_types_no > 4 :
-                mid_idx = int(crt_types_no/2) - 1
-                if crt_count_list[mid_idx] == 1 :
-                    # more than half of values are unique
-                    regress_flag = True
+            if(crt_types_no >= def_min_len) :
+                fract_idx = int(crt_types_no * def_check_fract)
+                chk_idx = min(fract_idx, def_min_chk)
+                if chk_idx > 0 :
+                    if crt_count_list[chk_idx] == 1 :
+                        # majority of values are unique
+                        regress_flag = True
         return regress_flag
 
 # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -928,10 +933,8 @@ class CasetDeodel:
 
     # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     @staticmethod
-    def ListDataConvert(in_data) :
-
+    def InternalListConvert(in_data) :
         if (isinstance(in_data, list)) :
-            # check whether is a one column array
             lst_data = in_data.copy()
         elif (isinstance(in_data, np.ndarray)) :
             lst_data = in_data.tolist()
@@ -942,7 +945,29 @@ class CasetDeodel:
         elif (isinstance(in_data, pd.core.series.Series)) :
             lst_data = in_data.values.tolist()
         else :
-            lst_data = None
+            lst_data = in_data
+
+        return lst_data
+
+    # >- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    @staticmethod
+    def ListDataConvert(in_data) :
+        if (isinstance(in_data, list)) :
+            # check whether rows are also lists
+            len_data = len(in_data)
+            if len_data > 0 :
+                first_row = in_data[0]
+                if (isinstance(first_row, list)) :
+                    lst_data = in_data.copy()
+                else :
+                    lst_data = []
+                    for crt_row in in_data :
+                        new_row = CasetDeodel.InternalListConvert(crt_row)
+                        lst_data.append(new_row)
+            else :
+                lst_data = []
+        else :
+            lst_data = CasetDeodel.InternalListConvert(in_data)
 
         return lst_data
 
