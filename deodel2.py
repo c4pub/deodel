@@ -5,7 +5,6 @@
 # Latest version available at: https://github.com/c4pub/deodel
 #
 
-import numpy as np
 import warnings
 import statistics
 import pandas as pd
